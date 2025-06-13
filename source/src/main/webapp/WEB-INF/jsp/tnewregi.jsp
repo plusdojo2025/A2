@@ -7,8 +7,8 @@
 <title>新規登録</title>
 </head>
 <body>
-<div>                                                                                  
-<form id="tnewregi_form" method="post" action="/webapp/NewRegiServlet">
+<div>
+<form id="tnewregi_form" method="post" action="/webapp/NewRegiServlet"> <!-- サーブレットまだない -->
     <table>
       <tr>
         <td>
@@ -85,14 +85,17 @@ formObj.onsubmit = function() {
 	    errorMessageObj.textContent = '※住所を入力してください！';
 	    return false;
 	  }
+  //ID必須
   if (!formObj.nameId.value) {
 	    errorMessageObj.textContent = '※ID(メールアドレス)を入力してください！';
 	    return false;
 	  }
+  //パスワード必須
   if (!formObj.pw.value) {
 	    errorMessageObj.textContent = '※パスワードを入力してください！';
 	    return false;
 	  }
+  //電話番号必須
   if (!formObj.uPhone.value) {
 	    errorMessageObj.textContent = '※電話番号を入力してください！';
 	    return false;

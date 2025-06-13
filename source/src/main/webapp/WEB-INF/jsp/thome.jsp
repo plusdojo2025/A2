@@ -9,7 +9,7 @@
 <body>
 <h1>カレンダー</h1>
 <h2>月間予定</h2>
-
+ <div id="weekcalendar"></div>
 
 <h1>今日のわんこ</h1>
 <c:forEach var="e" items="">
@@ -23,6 +23,11 @@
 	</div>
 </c:forEach>
 
+<script>
+
+
+
+</script>
 
 </body>
 </html>

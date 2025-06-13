@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
 	<!-- ヘッダーここから -->
@@ -15,7 +14,8 @@
 		<nav>
 			<ul>
 				<li>ようこそ　　さん</li>
-				<li>ログアウト</li>
+				<!-- ログイン中のユーザーの名前が表示されるようにする -->
+				<li>ログアウト</li><!-- ボタンにするか画像にするか要相談 -->
 			</ul>
 			<ul>
 				<li>わんこ一覧</li>

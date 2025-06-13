@@ -5,7 +5,7 @@ create table WANKO (
 		gender boolean NOT NULL,
 		state varchar(300) NOT NULL,
 		wakuchin varchar(300) NOT NULL,
-		dogId int NOT NULL AUTO_INCREMENT,
+		dogId int PRIMARY KEY AUTO_INCREMENT,
 		FOREIGN KEY (nameId) varchar(50) NOT NULL ,
 		dogPhoto varchar(300),
 		kyosei boolean NOT NULL,
@@ -23,3 +23,16 @@ create table WANKO (
 create table SCHOOL (
 		schoolId int PRIMARY KEY
 );
+
+create table USER(
+	nameId varchar(50) PRIMARY KEY,
+	ruby varchar(50) NOT NULL ,
+	birth date NOT NULL ,
+	name varchar(50) NOT NULL ,
+	pw varchar(50) NOT NULL ,
+	uPhone varchar(50) NOT NULL ,
+	uPhone2 varchar(50)  ,
+	address varchar(50) NOT NULL ,
+	--uniqueId boolean,
+	FOREIGN KEY (schoolId) int,
+) ;

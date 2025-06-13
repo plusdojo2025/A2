@@ -33,6 +33,6 @@ create table USER(
 	uPhone varchar(50) NOT NULL ,
 	uPhone2 varchar(50)  ,
 	address varchar(50) NOT NULL ,
-	--uniqueId boolean,
-	FOREIGN KEY (schoolId) int,
+	schoolId INT,
+	FOREIGN KEY (schoolId) REFERENCES SCHOOL(schoolId)
 ) ;

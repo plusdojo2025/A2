@@ -7,9 +7,7 @@
 <title>ログイン</title>
 </head>
 <body>
-<h1>うんち管理</h1>
 	<!-- ヘッダーの下ここから-->
-<h1>うんち管理</h1>	
 	<nav>
 		<ul>
 			<li>うんち管理</li>
@@ -57,5 +55,7 @@
 			<li>登録</li>
 		</ul>
 	<!-- ヘッダーの下ここまで-->
+	<form method="POST" action="/webapp/RegistServlet">
+	メモ<input type="text" name="memo"><br>
 </body>
 </html>

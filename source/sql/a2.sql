@@ -1,3 +1,5 @@
+create database a2;
+
 create table WANKO (
 		dogName varchar(50) NOT NULL,
 		dogBreed varchar(50) NOT NULL,
@@ -6,7 +8,8 @@ create table WANKO (
 		state varchar(300) NOT NULL,
 		wakuchin varchar(300) NOT NULL,
 		dogId int PRIMARY KEY AUTO_INCREMENT,
-		FOREIGN KEY (nameId) varchar(50) NOT NULL ,
+		nameId varchar(50),
+		FOREIGN KEY (nameId) REFERENCES USER(nameId) ,
 		dogPhoto varchar(300),
 		kyosei boolean NOT NULL,
 		dogRegist date,

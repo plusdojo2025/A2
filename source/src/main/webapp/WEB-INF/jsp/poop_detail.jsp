@@ -12,23 +12,29 @@
 	<!-- メイン -->
 	<form>
 
-		時間　<input type="time">
-		日付　<input type="date">
-		写真追加 <input type="text">
+		時間　<input type="time"><br>
+		日付　<input type="date"><br>
+		写真追加 <input type="text"><br>
 			<details>
-				<summary>ワンコ選択▼</summary>
-					<li></li>
+				<!-- ワンコをプルダウンで選択できるようにする -->
+				<summary>ワンコ選択</summary>
 			</details>
 			<details>
-				<summary>色▼</summary>
-					<li></li>
+				<!-- 色を選択できるようにしたい -->
+				<summary>色</summary>
 			</details>
 			<details>
-				<summary>硬さ▼</summary>
-					<li></li>
+				<summary>硬さ</summary>
+					<ul>
+						<li>硬</li>
+						<li>やや硬</li>
+						<li>普</li>
+						<li>やや柔</li>
+						<li>柔</li>
+					</ul>
 			</details>
-		異常　<input type="submit" value="あり"> <input type="submit" value="なし">
-		メモ　<input type="text">
+		異常　<input type="submit" value="あり"> <input type="submit" value="なし"><br>
+		メモ　<input type="text"><br>
 		<input type="submit" value="更新"> <input type="submit" value="削除">
 	</form>
 	<!-- メインここまで -->

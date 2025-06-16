@@ -18,6 +18,8 @@ create table USER(
 		schoolId INT,
 		FOREIGN KEY (schoolId) REFERENCES SCHOOL(schoolId)
 		) ;
+		
+ALTER TABLE USER ADD uniqueId boolean; --TRUE企業、FALSE飼い主
 
 		--TRUEオス、FALSEメス
 create table WANKO (
@@ -42,7 +44,7 @@ create table WANKO (
 		rabies varchar(300)
 		);
 	
-		--TRUEあり、	FALSEなし
+		--TRUEなし、	FALSEあり
 create table POOP (
 		poopId int PRIMARY KEY AUTO_INCREMENT,
 		tName varchar(50) NOT NULL,
@@ -56,26 +58,26 @@ create table POOP (
 		memo varchar(300),
 		date datetime default CURRENT_TIMESTAMP
 		);
-		
+		--ウンチと硬さの５段階制限
 		ALTER TABLE POOP
-ADD CONSTRAINT chk_color CHECK (color BETWEEN 1 AND 5);
-
+ADD CONSTRAINT chk_color CHECK (color BETWEEN 1 AND 5),
+ADD CONSTRAINT chk_hardness CHECK (hardness BETWEEN 1 AND 5);
 		
-create table CALENDAR(
+create table CALENDER(
 		carendarId int PRIMARY KEY AUTO_INCREMENT,
 		date date NOT NULL,
 		title varchar(50),
-		time date,
-		carendarMemo varchar(300),
+		time time,
+		calendarMemo varchar(300),
 		dogId int,
 		FOREIGN KEY (dogId) REFERENCES WANKO(dogId)
 		);
 
 		
-ALTER TABLE USER ADD uniqueId boolean; --TRUE企業、FALSE飼い主
 
 
-/*timeだと何時に散歩したのかintだと何分散歩したのか*/--TRUE異常あり、FALSE異常なし
+
+/*timeだと何時に散歩したのかintだと何分散歩したのか*/--T食べた　F食べてない TRUE異常なし、FALSE異常あり
 create table REPORT(
 		reportId int PRIMARY KEY AUTO_INCREMENT,
 		food boolean,
@@ -83,7 +85,7 @@ create table REPORT(
 		state boolean NOT NULL, 
 		training varchar(300) NOT NULL,
 		reportMemo varchar(300),
-		reportDate datetime,
+		reportDate date,
 		dogId int,
 		FOREIGN KEY (dogId) REFERENCES WANKO(dogId)
 		);
@@ -93,7 +95,7 @@ create table REPORT(
 		
 --schoolIDにオートインクリメントで番号入れ		
 INSERT INTO SCHOOL VALUES ();
-		
+INSERT INTO SCHOOL VALUES ();		
 		
 /*中身とりあえず１つデータ入れ*/
 INSERT INTO USER(
@@ -117,10 +119,26 @@ INSERT INTO WANKO(
 );
 
 INSERT INTO POOP(
-		tlName,photo,color,hardness,abnormal,dogId,memo,date
+		tName,photo,color,hardness,abnormal,dogId,memo
 )		VALUES(
-		'わんたトレーナー','upload/poop/unchi.png'
+		'わんたトレーナー','upload/poop/unchi.png','3','3',FALSE,'1','元気でいい子にしてました。'
 );
+
+INSERT INTO CALENDAR(
+		date,title,time,calendarMemo,dogId
+)		VALUES(
+		'2025-06-16','さんくん預かり','14:00','トレーニング内容(~)','1'
+);
+
+INSERT INTO REPORT(
+		food,walk,state,training,reportMemo,reportDate,dogId
+)		VALUES(
+		FALSE,50,TRUE,'散歩５０分、お座り覚える','ご飯をあまり食べませんでした。','2025-06-16','1'
+);
+
+
+
+
 
 
 

@@ -19,12 +19,12 @@ create table USER(
 		FOREIGN KEY (schoolId) REFERENCES SCHOOL(schoolId)
 		) ;
 
-		
+		--TRUEオス、FALSEメス
 create table WANKO (
 		dogName varchar(50) NOT NULL,
 		dogBreed varchar(50) NOT NULL,
 		dogBirth date NOT NULL,
-		gender boolean NOT NULL, --TRUEオス、FALSEメス
+		gender boolean NOT NULL, 
 		state varchar(300) NOT NULL,
 		wakuchin varchar(300) NOT NULL,
 		dogId int PRIMARY KEY AUTO_INCREMENT,
@@ -42,7 +42,7 @@ create table WANKO (
 		rabies varchar(300)
 		);
 	
-		
+		--TRUEあり、	FALSEなし
 create table POOP (
 		poopId int PRIMARY KEY AUTO_INCREMENT,
 		tName varchar(50) NOT NULL,
@@ -50,12 +50,15 @@ create table POOP (
 		photo  varchar(300),
 		color int NOT NULL,
 		hardness int NOT NULL,
-		abnormal boolean NOT NULL,--TRUEあり、	FALSEなし
+		abnormal boolean NOT NULL,
 		dogId int,
 		FOREIGN KEY (dogId) REFERENCES WANKO(dogId),
 		memo varchar(300),
 		date datetime default CURRENT_TIMESTAMP
 		);
+		
+		ALTER TABLE POOP
+ADD CONSTRAINT chk_color CHECK (color BETWEEN 1 AND 5);
 
 		
 create table CALENDAR(
@@ -72,18 +75,22 @@ create table CALENDAR(
 ALTER TABLE USER ADD uniqueId boolean; --TRUE企業、FALSE飼い主
 
 
-/*timeだと何時に散歩したのかintだと何分散歩したのか*/
+/*timeだと何時に散歩したのかintだと何分散歩したのか*/--TRUE異常あり、FALSE異常なし
 create table REPORT(
 		reportId int PRIMARY KEY AUTO_INCREMENT,
 		food boolean,
 		walk int NOT NULL,
-		state boolean NOT NULL, --TRUE異常あり、FALSE異常なし
+		state boolean NOT NULL, 
 		training varchar(300) NOT NULL,
 		reportMemo varchar(300),
 		reportDate datetime,
 		dogId int,
 		FOREIGN KEY (dogId) REFERENCES WANKO(dogId)
 		);
+		--テーブル作成ここまで
+		--中身これから
+		
+		
 --schoolIDにオートインクリメントで番号入れ		
 INSERT INTO SCHOOL VALUES ();
 		
@@ -95,6 +102,27 @@ INSERT INTO USER(
 		'sample0000.co.jp','さんぷる　たろう','2000-01-01','三分琉　太郎','0000','00000000001','',
 		'東京都新宿区','1','1'
 );
+
+
+--dogIDはAIだから指定しない　　TRUE文字列じゃないから''なし
+INSERT INTO WANKO(
+		dogName,dogBreed,dogBirth,gender,state,
+		wakuchin,nameId,dogPhoto,kyosei,dogRegist,
+		remarks1,remarks2,remarks3,remarks4,remarks5,injection,rabies
+)		VALUES(
+		'さん','コーギー','2010-10-10',TRUE,'元気いっぱい走り回っている',
+		'upload/wakuchin/ワクチン歴.png','sample0000.co.jp',
+		'upload/dogphoto/sampleわんこ.jpg',TRUE,'2015-10-10','コーギーだよ',
+		'','','','','upload/injection/sample.png',''
+);
+
+INSERT INTO POOP(
+		tlName,photo,color,hardness,abnormal,dogId,memo,date
+)		VALUES(
+		'わんたトレーナー','upload/poop/unchi.png'
+);
+
+
 
 
 

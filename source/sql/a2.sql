@@ -18,6 +18,8 @@ create table USER(
 		schoolId INT,
 		FOREIGN KEY (schoolId) REFERENCES SCHOOL(schoolId)
 		) ;
+		
+ALTER TABLE USER ADD uniqueId boolean; --TRUE企業、FALSE飼い主
 
 		--TRUEオス、FALSEメス
 create table WANKO (
@@ -56,7 +58,7 @@ create table POOP (
 		memo varchar(300),
 		date datetime default CURRENT_TIMESTAMP
 		);
-		
+		--ウンチと硬さの５段階制限
 		ALTER TABLE POOP
 ADD CONSTRAINT chk_color CHECK (color BETWEEN 1 AND 5),
 ADD CONSTRAINT chk_hardness CHECK (hardness BETWEEN 1 AND 5);
@@ -72,7 +74,7 @@ create table CALENDER(
 		);
 
 		
-ALTER TABLE USER ADD uniqueId boolean; --TRUE企業、FALSE飼い主
+
 
 
 /*timeだと何時に散歩したのかintだと何分散歩したのか*/--T食べた　F食べてない TRUE異常なし、FALSE異常あり
@@ -93,7 +95,7 @@ create table REPORT(
 		
 --schoolIDにオートインクリメントで番号入れ		
 INSERT INTO SCHOOL VALUES ();
-		
+INSERT INTO SCHOOL VALUES ();		
 		
 /*中身とりあえず１つデータ入れ*/
 INSERT INTO USER(
@@ -133,6 +135,8 @@ INSERT INTO REPORT(
 )		VALUES(
 		FALSE,50,TRUE,'散歩５０分、お座り覚える','ご飯をあまり食べませんでした。','2025-06-16','1'
 );
+
+
 
 
 

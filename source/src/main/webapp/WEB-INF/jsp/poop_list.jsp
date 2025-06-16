@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +52,8 @@
 		<a href=PoopServlet?page=${page + 1}>次へ</a>		<!-- 次へ -->
 	</c:if>
 </div>
+
+<!-- トップへ戻るボタン -->
 
 </body>
 </html>

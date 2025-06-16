@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,7 @@
 		</a>
 	</div>
 	
-	<!-- ▼ 並び順プルダウン -->
+	<!-- ▼ 並び順プルダウン --><!-- Servlet+DAO -->
     <select name="sort">
         <option value="date_desc">登録日（新しい順）</option>		<!-- 降順 -->
         <option value="breed_asc">犬種名順</option>
@@ -39,6 +40,20 @@
 			<span>${poop.date}</span>			<!-- 登録日 -->	
 	</div>
 </c:forEach>
+
+<!-- 20件ずつ表示（次のページへ、前のページへ） -->	
+<!-- Servlet+DAO -->	<!-- Servletでpageを定義する必要あり -->
+<div>
+	<c:if test="${page > 1}">								<!-- 前へ -->
+		<a href=PoopServlet?page=${page - 1}>前へ</a>
+	</c:if>
+	<span>${page}ページ目</span>								
+	<c:if test="${page < hasNext}">							<!-- 次のページがあるか？なければ「次へ」を表示しない -->
+		<a href=PoopServlet?page=${page + 1}>次へ</a>		<!-- 次へ -->
+	</c:if>
+</div>
+
+<!-- トップへ戻るボタン -->
 
 </body>
 </html>

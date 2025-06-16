@@ -4,11 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>トレーナー用ホーム画面</title>
-
+<title>ホーム画面飼い主用</title>
 </head>
 <body>
-<h1>カレンダー</h1>
+<%@ include file="header.jsp" %>
+<div>
+	<p><img src="${e.dogphoto}" alt="${e.dogName}の写真">
+	<p>${dogname}</p>
+	<p>${sessionScope.name} さん　ログイン中</p>
+</div>
+<h1>予約登録</h1>
    <div class="wrapper">
 	    <!-- xxxx年xx月を表示 -->
 	    <h1 id="header"></h1>
@@ -22,19 +27,6 @@
 	    <!-- カレンダー -->
 	    <div id="calendar"></div>
 	</div>
-<h1>今日のわんこ</h1>
-<c:forEach var="e" items="">
-	<div>
-		<ul>
-			<li>${e.dogName}</li>
-			<li><img src="${e.dogphoto}" alt="${e.dogName}の写真"></li>
-			<li>うんち記録</li>
-			<li>報告</li>
-		</ul>
-	</div>
-</c:forEach>
-
-  
 
 <script>
 const week = ["日", "月", "火", "水", "木", "金", "土"];

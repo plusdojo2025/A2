@@ -4,6 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+    <!--　box表示    -->
+    <style>
+        *{
+            outline: 1px solid #FF0000
+        }
+    </style>
+
 </head>
 <body>
 	<!-- ヘッダーここから -->
@@ -13,7 +20,7 @@
         </div>
 		<nav>
 			<ul>
-				<li>ようこそ　　さん</li>
+				<li>ようこそ${sessionScope.name}さん</li>
 				<!-- ログイン中のユーザーの名前が表示されるようにする -->
 				<li>ログアウト</li><!-- ボタンにするか画像にするか要相談 -->
 			</ul>

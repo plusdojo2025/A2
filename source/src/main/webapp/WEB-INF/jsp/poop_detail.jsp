@@ -53,13 +53,13 @@
 	</h1>
 	<form>
 
-		時間　<input type="time"><br>
-		日付　<input type="date"><br>
-		写真追加 <input type="text"><br>
-			<details>
-				<!-- ワンコをプルダウンで選択できるようにする -->
-				<summary>ワンコ選択</summary>
-			</details>
+		時間 <input type="time"><br>
+		日付 <input type="date"><br>
+		写真追加 <input type="file" name="photo" accept="image/*"><br>
+			<select name="dogName">
+			<!-- ワンコ名をプルダウンで選択できるようにする -->
+			<option value="" selected>ワンコ選択</option>
+			</select>
 			<details>
 				<!-- 色を選択できるようにしたい -->
 				<summary>色</summary>
@@ -91,11 +91,11 @@
 			<details>
 				<summary>硬さ</summary>
 					<form>
-						<input type="submit" value="硬">
-						<input type="submit" value="やや硬">
-						<input type="submit" value="普">
-						<input type="submit" value="やや柔">
-						<input type="submit" value="柔">
+						<input type="radio" name="hardness" value="硬">硬
+						<input type="radio" name="hardness" value="やや硬">やや硬
+						<input type="radio" name="hardness" value="普">普
+						<input type="radio" name="hardness" value="やや柔">やや柔
+						<input type="radio" name="hardness" value="柔">柔
 					</form>
 			</details>
 		異常　<input type="submit" value="あり"> <input type="submit" value="なし"><br>

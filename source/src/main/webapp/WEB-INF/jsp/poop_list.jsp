@@ -5,21 +5,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>うんち一覧</title>
+<style>
+
+
+	.back_button {
+		width: 40px;
+	}
+	
+	.back_text {
+		font-size: 10px;
+	}
+ </style>
 </head>
 <body>
 	<!-- ↓↓横並びにする！ -->
 	<div>
 		<h1>うんち一覧</h1>
-		<a href="poop_regi.jsp">新規登録</a>					<!--  -->
+		<a href="poop_regi.jsp">新規登録</a>					
 		<!-- 検索↓ -->
-			<input type="text" name="">				<!-- 全項目から検索する(DAO) -->
+			<input type="text" name="keyword">				<!-- 全項目から検索する(DAO) -->
 			<input type="submit" name="search" value="検索">		
-		<!-- 検索↑ -->
-		<a href="javascript:history.back();">
-			<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
-			<img src="images/back.png" alt="戻る">		<!-- 戻る画像ボタン -->
-		</a>
+
+		<!-- 戻る画像ボタン -->
+		<div>
+			<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
+			<a href="javascript:history.back();">
+ 				<img src="images/back.png" alt="戻る" class="back_button">
+			</a>	
+		</div>
 	</div>
 	
 	<!-- ▼ 並び順プルダウン --><!-- Servlet+DAO -->
@@ -39,21 +53,21 @@
 			<span>${poop.color}</span>			<!-- 色 -->	
 			<span>${poop.date}</span>			<!-- 登録日 -->	
 	</div>
-</c:forEach>
-
-<!-- 20件ずつ表示（次のページへ、前のページへ） -->	
-<!-- Servlet+DAO -->	<!-- Servletでpageを定義する必要あり -->
-<div>
-	<c:if test="${page > 1}">								<!-- 前へ -->
-		<a href=PoopServlet?page=${page - 1}>前へ</a>
-	</c:if>
-	<span>${page}ページ目</span>								
-	<c:if test="${page < hasNext}">							<!-- 次のページがあるか？なければ「次へ」を表示しない -->
-		<a href=PoopServlet?page=${page + 1}>次へ</a>		<!-- 次へ -->
-	</c:if>
-</div>
-
-<!-- トップへ戻るボタン -->
+	</c:forEach>
+	
+	<!-- 20件ずつ表示（次のページへ、前のページへ） -->	
+	<!-- Servlet+DAO -->	<!-- Servletでpageを定義する必要あり -->
+	<div>
+		<c:if test="${page > 1}">								<!-- 前へ -->
+			<a href=PoopServlet?page=${page - 1}>前へ</a>
+		</c:if>
+		<span>${page}ページ目</span>								
+		<c:if test="${page < hasNext}">							<!-- 次のページがあるか？なければ「次へ」を表示しない -->
+			<a href=PoopServlet?page=${page + 1}>次へ</a>		<!-- 次へ -->
+		</c:if>
+	</div>
+	
+	<!-- トップへ戻るボタン -->
 
 </body>
 </html>

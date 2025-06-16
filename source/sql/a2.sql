@@ -42,7 +42,7 @@ create table WANKO (
 		rabies varchar(300)
 		);
 	
-		--TRUEあり、	FALSEなし
+		--TRUEなし、	FALSEあり
 create table POOP (
 		poopId int PRIMARY KEY AUTO_INCREMENT,
 		tName varchar(50) NOT NULL,
@@ -58,15 +58,15 @@ create table POOP (
 		);
 		
 		ALTER TABLE POOP
-ADD CONSTRAINT chk_color CHECK (color BETWEEN 1 AND 5);
-
+ADD CONSTRAINT chk_color CHECK (color BETWEEN 1 AND 5),
+ADD CONSTRAINT chk_hardness CHECK (hardness BETWEEN 1 AND 5);
 		
-create table CALENDAR(
+create table CALENDER(
 		carendarId int PRIMARY KEY AUTO_INCREMENT,
 		date date NOT NULL,
 		title varchar(50),
-		time date,
-		carendarMemo varchar(300),
+		time time,
+		calendarMemo varchar(300),
 		dogId int,
 		FOREIGN KEY (dogId) REFERENCES WANKO(dogId)
 		);
@@ -75,7 +75,7 @@ create table CALENDAR(
 ALTER TABLE USER ADD uniqueId boolean; --TRUE企業、FALSE飼い主
 
 
-/*timeだと何時に散歩したのかintだと何分散歩したのか*/--TRUE異常あり、FALSE異常なし
+/*timeだと何時に散歩したのかintだと何分散歩したのか*/--T食べた　F食べてない TRUE異常なし、FALSE異常あり
 create table REPORT(
 		reportId int PRIMARY KEY AUTO_INCREMENT,
 		food boolean,
@@ -83,7 +83,7 @@ create table REPORT(
 		state boolean NOT NULL, 
 		training varchar(300) NOT NULL,
 		reportMemo varchar(300),
-		reportDate datetime,
+		reportDate date,
 		dogId int,
 		FOREIGN KEY (dogId) REFERENCES WANKO(dogId)
 		);
@@ -117,10 +117,24 @@ INSERT INTO WANKO(
 );
 
 INSERT INTO POOP(
-		tlName,photo,color,hardness,abnormal,dogId,memo,date
+		tName,photo,color,hardness,abnormal,dogId,memo
 )		VALUES(
-		'わんたトレーナー','upload/poop/unchi.png'
+		'わんたトレーナー','upload/poop/unchi.png','3','3',FALSE,'1','元気でいい子にしてました。'
 );
+
+INSERT INTO CALENDAR(
+		date,title,time,calendarMemo,dogId
+)		VALUES(
+		'2025-06-16','さんくん預かり','14:00','トレーニング内容(~)','1'
+);
+
+INSERT INTO REPORT(
+		food,walk,state,training,reportMemo,reportDate,dogId
+)		VALUES(
+		FALSE,50,TRUE,'散歩５０分、お座り覚える','ご飯をあまり食べませんでした。','2025-06-16','1'
+);
+
+
 
 
 

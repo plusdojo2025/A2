@@ -2,7 +2,7 @@ create database a2;
 
 
 create table SCHOOL (
-		schoolId int PRIMARY KEY
+		schoolId int AUTO_INCREMENT PRIMARY KEY
 );
 
 
@@ -24,7 +24,7 @@ create table WANKO (
 		dogName varchar(50) NOT NULL,
 		dogBreed varchar(50) NOT NULL,
 		dogBirth date NOT NULL,
-		gender boolean NOT NULL,
+		gender boolean NOT NULL, --TRUEオス、FALSEメス
 		state varchar(300) NOT NULL,
 		wakuchin varchar(300) NOT NULL,
 		dogId int PRIMARY KEY AUTO_INCREMENT,
@@ -50,7 +50,7 @@ create table POOP (
 		photo  varchar(300),
 		color int NOT NULL,
 		hardness int NOT NULL,
-		abnormal boolean NOT NULL,
+		abnormal boolean NOT NULL,--TRUEあり、	FALSEなし
 		dogId int,
 		FOREIGN KEY (dogId) REFERENCES WANKO(dogId),
 		memo varchar(300),
@@ -69,7 +69,7 @@ create table CALENDAR(
 		);
 
 		
-ALTER TABLE USER ADD uniqueId boolean;
+ALTER TABLE USER ADD uniqueId boolean; --TRUE企業、FALSE飼い主
 
 
 /*timeだと何時に散歩したのかintだと何分散歩したのか*/
@@ -77,14 +77,25 @@ create table REPORT(
 		reportId int PRIMARY KEY AUTO_INCREMENT,
 		food boolean,
 		walk int NOT NULL,
-		state boolean NOT NULL,
+		state boolean NOT NULL, --TRUE異常あり、FALSE異常なし
 		training varchar(300) NOT NULL,
 		reportMemo varchar(300),
 		reportDate datetime,
 		dogId int,
 		FOREIGN KEY (dogId) REFERENCES WANKO(dogId)
 		);
-
-
+--schoolIDにオートインクリメントで番号入れ		
+INSERT INTO SCHOOL VALUES ();
 		
 		
+/*中身とりあえず１つデータ入れ*/
+INSERT INTO USER(
+		nameId,ruby,birth,name,pw,uPhone,uPhone2,address,uniqueId,schoolId
+)		VALUE(
+		'sample0000.co.jp','さんぷる　たろう','2000-01-01','三分琉　太郎','0000','00000000001','',
+		'東京都新宿区','1','1'
+);
+
+
+
+

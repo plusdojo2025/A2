@@ -25,11 +25,13 @@
 			</details>
 			<details>
 				<summary>硬さ</summary>
-					<li>硬</li>
-					<li>やや硬</li>
-					<li>普</li>
-					<li>やや柔</li>
-					<li>柔</li>
+					<ul>
+						<li>硬</li>
+						<li>やや硬</li>
+						<li>普</li>
+						<li>やや柔</li>
+						<li>柔</li>
+					</ul>
 			</details>
 		異常　<input type="submit" value="あり"> <input type="submit" value="なし"><br>
 		メモ　<input type="text"><br>

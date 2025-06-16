@@ -26,22 +26,31 @@
   }
 
   /* 色ごとの背景 */
-  .color-red { background-color: red; }
-  .color-blue { background-color: blue; }
-  .color-green { background-color: green; }
-  .color-orange { background-color: orange; }
-  .color-purple { background-color: purple; }
+  .color-black { background-color: #444443; }
+  .color-yellow { background-color: #EBD469; }
+  .color-brown { background-color: #AD795B; }
+  .color-brownred { background-color: #A44F30; }
+  .color-red { background-color: #A52A2A; }
 
   /* 選択されたときの枠線 */
   input[type="radio"]:checked + .color-label {
-    border-color: white;
+    border-color: #FFA500;
   }
 </style>
 </head>
 <body>
 	<!-- 登録者の名前も後で表示させる -->
-	<h1>うんち詳細　（名前）さん</h1>
-	<!-- メイン -->
+	<h1>
+		<div style="display: flex; justify-content: space-between;">
+  			<div style="text-align: left;">うんち詳細　（名前）さん</div>
+        	<div style="text-align: right;">
+        		<a href="javascript:history.back();">
+				<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
+				<img src="/webapp/img/back.png" alt="戻る">		<!-- 戻る画像ボタン -->
+		    	</a>
+        	</div>
+		</div>
+	</h1>
 	<form>
 
 		時間　<input type="time"><br>
@@ -57,24 +66,24 @@
 					<form>
 						<div class="color-option">
 							<label>
-		      					<input type="radio" name="color" value="red">
-		      					<span class="color-label color-red"></span>
+		      					<input type="radio" name="color" value="black" >
+		      					<span class="color-label color-black"></span>
 		    				</label>
 							<label>
-								<input type="radio" name="color" value="blue">
-								<span class="color-label color-blue"></span>
+								<input type="radio" name="color" value="yellow">
+								<span class="color-label color-yellow"></span>
 							</label>
 							<label>
-								<input type="radio" name="color" value="green">
-								<span class="color-label color-green"></span>
+								<input type="radio" name="color" value="brown">
+								<span class="color-label color-brown"></span>
 							</label>
 							<label>
-								<input type="radio" name="color" value="orange">
-								<span class="color-label color-orange"></span>
+								<input type="radio" name="color" value="brownred">
+								<span class="color-label color-brownred"></span>
 							</label>
 							<label>
-								<input type="radio" name="color" value="purple">
-								<span class="color-label color-purple"></span>
+								<input type="radio" name="color" value="red">
+								<span class="color-label color-red"></span>
 							</label>
 						</div>
 					</form>

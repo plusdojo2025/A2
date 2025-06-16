@@ -10,8 +10,12 @@
 	<!-- ↓↓横並びにする！ -->
 	<div>
 		<h1>うんち一覧</h1>
-		<a href="poop.jsp">新規登録</a>		<!--  -->
-		<text=		<!-- 全項目から検索するから -->
+		<a href="poop_regi.jsp">新規登録</a>					<!--  -->
+		<input type="text" name="company">					<!-- 全項目から検索する(DAO) -->
+		<input type="submit" name="search" value="検索">		<!-- submitボタン -->
+		<button onclick="history/back():">
+			<img src="/webapp/img/back.png" alt="戻る">		<!-- 戻る画像ボタン -->
+		</button>
 	</div>
 	<!-- 拡張For文と思っていい -->
 		<div>

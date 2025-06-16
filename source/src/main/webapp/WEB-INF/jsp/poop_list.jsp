@@ -11,23 +11,32 @@
 	<div>
 		<h1>うんち一覧</h1>
 		<a href="poop_regi.jsp">新規登録</a>					<!--  -->
-		<input type="text" name="company">					<!-- 全項目から検索する(DAO) -->
-		<input type="submit" name="search" value="検索">		<!-- submitボタン -->
+		<!-- 検索↓ -->
+			<input type="text" name="">				<!-- 全項目から検索する(DAO) -->
+			<input type="submit" name="search" value="検索">		
+		<!-- 検索↑ -->
 		<a href="javascript:history.back();">
 			<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
-			<img src="/webapp/img/back.png" alt="戻る">		<!-- 戻る画像ボタン -->
+			<img src="images/back.png" alt="戻る">		<!-- 戻る画像ボタン -->
 		</a>
 	</div>
 	
+	<!-- ▼ 並び順プルダウン -->
+    <select name="sort">
+        <option value="date_desc">登録日（新しい順）</option>		<!-- 降順 -->
+        <option value="breed_asc">犬種名順</option>
+        <option value="strage_asc">預かり日順</option>
+    </select>
+	
 	<!-- うんち一覧 -->
-	<c:forEach var="e" items="">
+	<c:forEach var="poop" items="">							<!-- itemsをサーブレットに合わせる。（サーブレットでリストを作る） -->
 	<div>
-		<ul>
-			<li>${e.dogName}</li>
-			<li><img src="${e.dogphoto}" alt="${e.dogName}の写真"></li>
-			<li>うんち記録</li>
-			<li>報告</li>
-		</ul>
+			<span><img src="${poop.dogphoto}" alt="${e.dogName}の写真"></span>
+			<span>${poop.dogName}</span>		<!-- わんこの名前 -->	
+			<span>${poop.name}</span>			<!-- 飼い主様 -->	
+			<span>${poop.hardness}</span>			<!-- 硬さ -->	
+			<span>${poop.color}</span>			<!-- 色 -->	
+			<span>${poop.date}</span>			<!-- 登録日 -->	
 	</div>
 </c:forEach>
 

@@ -11,7 +11,9 @@
 	<!-- ワンコ選択 -->
 <!-- エラー表示 -->
 
-<form onsubmit = "return checkForm()">
+<form id="report_form" action="<c:url value='/ReportServlet'/>" method="post" onsubmit = "return checkForm()">
+
+
 	<label>・ ごはん<br>
 		<input type="radio" name="food" value="true">食べた
 		<input type="radio" name="food" value="false">食べてない

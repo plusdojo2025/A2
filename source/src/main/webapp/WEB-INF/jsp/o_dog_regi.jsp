@@ -29,7 +29,7 @@
 		<tr>
 			<td>
 				<label>飼い主ID<br>
-				<input type="text" name="name">
+				<a>${sessionScope.nameId}</a>
 				</label>
 			</td>
 		</tr>
@@ -173,5 +173,3 @@ function renumberBikou() {
 </script>
 </body>
 </html>
-
-

@@ -51,58 +51,21 @@
         	</div>
 		</div>
 	</h1>
-	<form>
-
-		時間 <input type="time"><br>
-		日付 <input type="date"><br>
-		写真追加 <input type="file" name="photo" accept="image/*"><br>
-			<select name="dogName">
-			<!-- ワンコ名をプルダウンで選択できるようにする -->
-			<option value="" selected>ワンコ選択</option>
-			</select>
-			<details>
-				<!-- 色を選択できるようにしたい -->
-				<summary>色</summary>
-					<form>
-						<div class="color-option">
-							<label>
-		      					<input type="radio" name="color" value="black" >
-		      					<span class="color-label color-black"></span>
-		    				</label>
-							<label>
-								<input type="radio" name="color" value="yellow">
-								<span class="color-label color-yellow"></span>
-							</label>
-							<label>
-								<input type="radio" name="color" value="brown">
-								<span class="color-label color-brown"></span>
-							</label>
-							<label>
-								<input type="radio" name="color" value="brownred">
-								<span class="color-label color-brownred"></span>
-							</label>
-							<label>
-								<input type="radio" name="color" value="red">
-								<span class="color-label color-red"></span>
-							</label>
-						</div>
-					</form>
-			</details>
-			<details>
-				<summary>硬さ</summary>
-					<form>
-						<input type="radio" name="hardness" value="硬">硬
-						<input type="radio" name="hardness" value="やや硬">やや硬
-						<input type="radio" name="hardness" value="普">普
-						<input type="radio" name="hardness" value="やや柔">やや柔
-						<input type="radio" name="hardness" value="柔">柔
-					</form>
-			</details>
-		異常　<input type="submit" value="あり"> <input type="submit" value="なし"><br>
-		メモ　<input type="text"><br>
-		<input type="submit" value="更新"> <input type="submit" value="削除">
+	
+	<c:forEach var="e" items="" >
+	<form method="POST" action="">
+		時間<input type="time" name="nowTime" value="${e.nowTime}"><br>
+		日付<input type="date" name="date" value="${e.date}"><br>
+		写真追加<input type="file" name="photo" value="${e.photo}"><br>
+		ワンコ選択<input type="text" name="name" value="${e.name}"><br>
+		色<input type="radio" name="color" value="${e.color}">
+		硬さ<input type="radio" name="hardness" value="${e.hardness}"><br>
+		異常<input type="submit" name="abnormal" value="${e.abnormal}"><br>
+		メモ<input type="text" name="memo" value="${e.memo}"><br>
+		<input type="submit" value="更新">　<input type="submit" value="削除"><br>
 	</form>
-	<!-- メインここまで -->
+	</c:forEach>
+	
 	<!--  フッターここから -->
 	<footer>
 	</footer>

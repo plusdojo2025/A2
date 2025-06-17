@@ -33,7 +33,7 @@
 	
 	<!-- ↓↓横並びにする！ -->
 	<div>
-		<a href="/webapp/PoopServlet">新規登録</a>	
+		<a href="/A2/PoopServlet">新規登録</a>	
 		<form>				
 			<!-- 検索↓ -->
 				<input type="text" name="keyword">				<!-- 全項目から検索する(DAO) -->

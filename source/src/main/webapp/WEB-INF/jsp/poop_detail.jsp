@@ -66,28 +66,28 @@
 	</form>
 	</c:forEach>
 	
-<!--  フッターここから -->
-<footer>
-</footer>
-<!--  フッターここまで -->
-<!-- JavaScript（ここから） -->
-<script>
-/* submitボタンをクリックしたときの処理 */
-function submitClick() {
-  /* 確認ダイアログボックスを表示します */
-  if (!window.confirm('実行します。よろしいですか？')) {
-    return false;
-  }
-}
-
-/* HTML要素をオブジェクトとして取得する */
-let formObjs = document.getElementsByClassName('');
-
-/* 取得したすべてのオブジェクトに同じイベントを適用する */
-for (let item of formObjs) {
-  item.onsubmit = submitClick;
-}
-</script>
-<!-- JavaScript（ここまで） -->
+	<!--  フッターここから -->
+	<footer>
+	</footer>
+	<!--  フッターここまで -->
+	<!-- JavaScript（ここから） -->
+	<script>
+	/* submitボタンをクリックしたときの処理 */
+	function submitClick() {
+	  /* 確認ダイアログボックスを表示します */
+	  if (!window.confirm('実行します。よろしいですか？')) {
+	    return false;
+	  }
+	}
+	
+	/* HTML要素をオブジェクトとして取得する */
+	let formObjs = document.getElementsByClassName('');
+	
+	/* 取得したすべてのオブジェクトに同じイベントを適用する */
+	for (let item of formObjs) {
+	  item.onsubmit = submitClick;
+	}
+	</script>
+	<!-- JavaScript（ここまで） -->
 </body>
 </html>

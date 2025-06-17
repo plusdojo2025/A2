@@ -70,22 +70,25 @@
 				</label>
 			</td>
 		</tr>
-		<tbody id="remarksContainer">
-			<tr class="inputField">
-			
-			  <th><input type="text" name="remarks1" placeholder="備考"></th>
-			  <td><button type="button" class="deleteFieldBtn">入力欄を削除</button></td>
-			  <!-- 追加ボタンは JS が自動で最後の行にだけ付ける -->
-			</tr>
-		</tbody>
-		<tbody>
+		<tr>
+		<td>
+			<label>備考（最大5個まで追加可）<br>
+				<div id="bikou-container">
+					<div class="bikou-input">	
+						<input type="text" name="remarks" placeholder="備考 1">
+						<button type="button" onclick="removeBikou(this)">×</button>
+					</div>
+				</div>
+				<button type="button" onclick="addBikou()">＋追加</button>
+			</label>
+		</td>
+		</tr>
 	      	<tr>
 		        <td colspan="2">
 		          <input type="submit" id="register" name="submit" value="登録">
 		          <span id="error_message"></span>
 		        </td>
-	      	</tr>
-      	</tbody>		
+	      	</tr>		
 	</table>
 
 
@@ -121,103 +124,52 @@ function previewImage(obj){
 }
 
 
-function updateAddButtons() {
-	  const fields = document.querySelectorAll("#remarksContainer .inputField");
-	  fields.forEach((field, index) => {
-	    const existingAddBtn = field.querySelector(".addFieldBtn");
-	    if (existingAddBtn) existingAddBtn.remove();
+const maxBikou = 5;
 
-	    if (index === fields.length - 1) {
-	      // 最後の行に追加ボタンを追加
-	      const addBtnTd = document.createElement("td");
-	      addBtnTd.innerHTML = `<button type="button" class="addFieldBtn">入力欄を追加</button>`;
-	      field.appendChild(addBtnTd);
-	    }
-	  });
+function addBikou() {
+	const container = document.getElementById("bikou-container");
+	const inputs = container.getElementsByClassName("bikou-input");
+
+	if (inputs.length >= maxBikou) {
+		alert("備考は最大 " + maxBikou + " 個までです。");
+		return;
 	}
 
-	document.forms[0].addEventListener("click", function (e) {
-	  const remarksContainer = document.getElementById("remarksContainer");
+	const div = document.createElement("div");
+	div.className = "bikou-input";
 
-	  if (e.target.classList.contains("addFieldBtn")) {
-	    e.preventDefault();
+	const input = document.createElement("input");
+	input.type = "text";
+	input.name = "remarks-temp"; // 複数扱いたい場合は "remarks[]" もOK
+	input.placeholder = "備考 " + (inputs.length + 1);
 
-	    const currentFields = remarksContainer.querySelectorAll(".inputField").length;
+	const removeBtn = document.createElement("button");
+	removeBtn.type = "button";
+	removeBtn.textContent = "×";
+	removeBtn.onclick = function () {
+		removeBikou(removeBtn);
+	};
 
-	    if (currentFields >= 5) {
-	      alert("入力欄は最大5つまでです");
-	      return;
-	    }
+	div.appendChild(input);
+	div.appendChild(removeBtn);
+	container.appendChild(div);
 
-	    const nextIndex = currentFields + 1;
+	renumberBikou();
+}
 
-	    const field = document.createElement("tr");
-	    field.classList.add("inputField");
-	    field.innerHTML = `
-	      <th><input type="text" name="remarks${nextIndex}" placeholder="備考${nextIndex}"></th>
-	      <td><button type="button" class="deleteFieldBtn">入力欄を削除</button></td>
-	    `;
-	    remarksContainer.appendChild(field);
+function removeBikou(button) {
+	const container = document.getElementById("bikou-container");
+	container.removeChild(button.parentElement);
+	renumberBikou();
+}
 
-	    updateAddButtons(); // 追加ボタンを最新の行に付け直す
-	  }
-
-	  else if (e.target.classList.contains("deleteFieldBtn")) {
-	    e.preventDefault();
-
-	    const remarksContainer = document.getElementById("remarksContainer");
-	    const deleteFieldBtns = remarksContainer.querySelectorAll(".deleteFieldBtn");
-
-	    if (deleteFieldBtns.length === 1) {
-	      alert("入力欄は最低1つ必要です");
-	      return;
-	    }
-
-	    const field = e.target.closest("tr");
-	    const input = field.querySelector("input");
-
-	    if (input.value.trim() !== "") {
-	      alert("中身が入力されているため削除できません");
-	      return;
-	    }
-
-	    field.remove();
-
-	    // 名前とプレースホルダを振り直す
-	    const fields = remarksContainer.querySelectorAll(".inputField");
-	    fields.forEach((field, index) => {
-	      const input = field.querySelector("input");
-	      input.name = `remarks${index + 1}`;
-	      input.placeholder = `備考${index + 1}`;
-	    });
-
-	    updateAddButtons(); // ボタン再配置
-	  }
+function renumberBikou() {
+	const inputs = document.querySelectorAll("#bikou-container .bikou-input input");
+	inputs.forEach((input, index) => {
+		input.name = "remarks" + (index + 1);
+		input.placeholder = "備考 " + (index + 1);
 	});
-
-	document.addEventListener("keypress", function (e) {
-	  if (e.key === "Enter") {
-	    e.preventDefault();
-	  }
-	});
-
-	// 初期化時にボタン整える
-	document.addEventListener("DOMContentLoaded", updateAddButtons);
-
-
-	  // フォーム送信時に備考欄の name と value を表示
-document.forms[0].addEventListener("submit", function (e) {
-    e.preventDefault(); // ← ★ 送信を止める！
-
-    const remarksInputs = document.querySelectorAll("input[name^='remarks']");
-
-    console.log("=== 登録される備考欄 ===");
-    remarksInputs.forEach(input => {
-      console.log(`name: ${input.name}, value: ${input.value}`);
-    });
-
-    alert("備考欄の内容を確認しました（送信は行われません）");
-  });
+}
 </script>
 </body>
 </html>

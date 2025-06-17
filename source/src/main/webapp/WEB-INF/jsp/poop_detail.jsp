@@ -46,14 +46,14 @@
         	<div style="text-align: right;">
         		<a href="javascript:history.back();">
 				<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
-				<img src="/webapp/img/back.png" alt="戻る">		<!-- 戻る画像ボタン -->
+				<img src="/A2/img/back.png" alt="戻る">		<!-- 戻る画像ボタン -->
 		    	</a>
         	</div>
 		</div>
 	</h1>
 	<!-- 後でDBとひもづけてデータを取ってこれるようにする -->
 	<c:forEach var="e" items="" >
-	<form method="POST" action="">
+	<form method="POST" action="<c:url value='/PoopServlet' />">
 		時間<input type="time" name="nowTime" value="${e.nowTime}"><br>
 		日付<input type="date" name="date" value="${e.date}"><br>
 		写真追加<input type="file" name="photo" value="${e.photo}"><br>

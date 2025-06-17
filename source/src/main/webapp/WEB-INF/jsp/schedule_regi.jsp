@@ -15,22 +15,42 @@
 	<h2>登録</h2>													<!-- 登録と一覧は縦に並べて表示する -->
 	<form>
 	タイトル<input type="text" name="title"><br>
-	時間<input type = "time"><br>
+	時間<input type="time" name="nowTime" value="${e.nowTime}"><br>
 	メモ<input type="text" name="memo"><br>
 	ワンコ情報
-	<select name = "dogname">						<!-- ワンコ選択 -->
-		<option>わんこ選択▼</option>
-	</select><br>										
+	<input type="text" name="name" value="${e.name}"><br>						
 	<input type="submit" name="regist" value="登録">
 	<h2>一覧</h2>
 	タイトル<input type="text" name="title"><br>
 	時間<input type = "time"><br>
 	メモ<input type="text" name="memo"><br>
 	ワンコ情報
-	<select name = "dogname">						<!-- ワンコ選択 -->
-		<option>わんこ選択▼</option>
-	</select><br>
+	<input type="text" name="name" value="${e.name}"><br>
 	<input type="submit" name="regist" value="登録">
 	</form>	
 </body>
+<!-- JavaScript（ここから） -->
+	<script>
+	/* submitボタンをクリックしたときの処理 */
+	function submitClick() {
+	  /* 確認ダイアログボックスを表示します */
+	  if (!window.confirm('実行します。よろしいですか？')) {
+	    return false;
+	  }
+	}
+	/* 日付を必須入力項目とします */
+	  if (!formObj.time.value) {
+	    errorMessageObj.textContent = '※日付を入力してください。';
+	    return false;
+	  }
+	
+	/* HTML要素をオブジェクトとして取得する */
+	let formObjs = document.getElementsByClassName('');
+	
+	/* 取得したすべてのオブジェクトに同じイベントを適用する */
+	for (let item of formObjs) {
+	  item.onsubmit = submitClick;
+	}
+	</script>
+<!-- JavaScript（ここまで） -->
 </html>

@@ -49,14 +49,6 @@
 </c:forEach>
 </form>
 
-<h2>飼い主情報</h2>
-<c:forEach var="u" items="${nameid}">
-飼い主名前 <input type="text" name="nameid" value="${u.nameid}"><br>
-飼い主フリガナ <input type="text" name="ruby" value="${u.ruby}"><br>
-生年月日 <input type="text" name="birth" value="${u.birth}"><br>
-電話番号 <input type="text" name="uphone" value="${u.ruby}"><br>
-連絡先 <input type="text" name="uphone2" value="${u.ruby}"><br>
-</c:forEach>
 <script>
 
 
@@ -79,6 +71,7 @@ document.forms[0].addEventListener("click", function (e) {
     // クリックされた要素に、addFieldBtnが含まれていたら
     if (e.target.classList.contains("addFieldBtn")) {
         e.preventDefault();
+        
         // 現在の入力欄（.inputField）の数をカウント
         const currentFields = inputFielsContainer.querySelectorAll(".inputField").length;
 

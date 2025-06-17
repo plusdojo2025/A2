@@ -44,7 +44,7 @@ create table WANKO (
 		rabies varchar(300)
 		);
 	
-		--TRUEなし、	FALSEあり
+		--TRUEなし（１）、	FALSEあり（０）
 create table POOP (
 		poopId int PRIMARY KEY AUTO_INCREMENT,
 		tName varchar(50) NOT NULL,
@@ -100,9 +100,9 @@ INSERT INTO SCHOOL VALUES ();
 /*中身とりあえず１つデータ入れ*/
 INSERT INTO USER(
 		nameId,ruby,birth,name,pw,uPhone,uPhone2,address,uniqueId,schoolId
-)		VALUE(
+)		VALUES(
 		'sample0000.co.jp','さんぷる　たろう','2000-01-01','三分琉　太郎','0000','00000000001','',
-		'東京都新宿区','1','1'
+		'東京都新宿区',false,'1'
 );
 
 
@@ -124,7 +124,7 @@ INSERT INTO POOP(
 		'わんたトレーナー','upload/poop/unchi.png','3','3',FALSE,'1','元気でいい子にしてました。'
 );
 
-INSERT INTO CALENDAR(
+INSERT INTO CALENDER(
 		date,title,time,calendarMemo,dogId
 )		VALUES(
 		'2025-06-16','さんくん預かり','14:00','トレーニング内容(~)','1'
@@ -137,7 +137,75 @@ INSERT INTO REPORT(
 );
 
 
+INSERT INTO USER(
+		nameId,ruby,birth,name,pw,uPhone,uPhone2,address,uniqueId,schoolId
+)  VALUES(
+		'Morisou.ne.jp','もりた　そう','2015-05-05','森田　颯','morisou','050-0022-0022','',
+		'神奈川県川崎市2-22-2',FALSE,2
+);
 
+INSERT INTO USER(
+		nameId,ruby,birth,name,pw,uPhone,uPhone2,address,uniqueId,schoolId
+)  		VALUES(
+		'koufuku.co.jp','ふくもと　こうき','2003-03-25','福本　幸稀','koufuku','050-0033-0033','',
+		'東京都立川市3-33-3',FALSE,2
+);
+
+INSERT INTO WANKO(
+		dogName,dogBreed,dogBirth,gender,state,
+		wakuchin,nameId,dogPhoto,kyosei,dogRegist,
+		remarks1,remarks2,remarks3,remarks4,remarks5,injection,rabies
+)		VALUES(
+		'アンディ','トイプードル','2020-08-15',TRUE,'元気いっぱい走り回っている',
+		'upload/wakuchin/andy.waku.png','Morisou.ne.jp',
+		'upload/dogphoto/andy.jpg',TRUE,'2025-06-30','アンディだよ',
+		'','','','','','upload/rabies/andy.ra.png'
+);
+
+INSERT INTO WANKO(
+		dogName,dogBreed,dogBirth,gender,state,
+		wakuchin,nameId,dogPhoto,kyosei,dogRegist,
+		remarks1,remarks2,remarks3,remarks4,remarks5,injection,rabies
+)		VALUES(
+		'らん','シュナウザー','2015-03-22',FALSE,'甘えん坊な性格',
+		'upload/wakuchin/ran.waku.png','koufuku.co.jp',
+		'upload/dogphoto/ran.jpg',FALSE,'2025-06-25','らんだよ',
+		'','','','','','upload/rabies/ran.ra.png'
+);
+
+INSERT INTO POOP(
+		tName,photo,color,hardness,abnormal,dogId,memo
+)		VALUES(
+		'にゃんたトレーナー','upload/poop/andy.po.png','3','3',FALSE,2,'いつもどおりでした。'
+);
+
+INSERT INTO POOP(
+		tName,photo,color,hardness,abnormal,dogId,memo
+)		VALUES(
+		'にゃんたトレーナー','upload/poop/ran.po.png','1','4',TRUE,3,'少し調子が悪そうです。'
+);
+
+INSERT INTO CALENDER(
+		date,title,time,calendarMemo,dogId
+)		VALUES(
+		'2025-06-30','アンディくん預かり','11:00','トレーニング内容(~)',2
+);
+INSERT INTO CALENDER(
+		date,title,time,calendarMemo,dogId
+)		VALUES(
+		'2025-06-25','らんちゃん預かり','13:00','トレーニング内容(~)',3
+);
+
+INSERT INTO REPORT(
+		food,walk,state,training,reportMemo,reportDate,dogId
+)		VALUES(
+		TRUE,30,TRUE,'散歩３０分、お座り覚える','お座り覚えることができ、元気に過ごしていました。','2025-06-21',2
+);
+INSERT INTO REPORT(
+		food,walk,state,training,reportMemo,reportDate,dogId
+)		VALUES(
+		TRUE,50,TRUE,'散歩５０分、まて、ふせ覚える','散歩楽しんでいました。','2025-06-22',3
+);
 
 
 

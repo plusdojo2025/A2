@@ -63,7 +63,7 @@ create table POOP (
 ADD CONSTRAINT chk_color CHECK (color BETWEEN 1 AND 5),
 ADD CONSTRAINT chk_hardness CHECK (hardness BETWEEN 1 AND 5);
 		
-create table CALENDER(
+create table CALENDAR(
 		carendarId int PRIMARY KEY AUTO_INCREMENT,
 		date date NOT NULL,
 		title varchar(50),
@@ -124,7 +124,7 @@ INSERT INTO POOP(
 		'わんたトレーナー','upload/poop/unchi.png','3','3',FALSE,'1','元気でいい子にしてました。'
 );
 
-INSERT INTO CALENDER(
+INSERT INTO CALENDAR(
 		date,title,time,calendarMemo,dogId
 )		VALUES(
 		'2025-06-16','さんくん預かり','14:00','トレーニング内容(~)','1'
@@ -185,12 +185,12 @@ INSERT INTO POOP(
 		'にゃんたトレーナー','upload/poop/ran.po.png','1','4',TRUE,3,'少し調子が悪そうです。'
 );
 
-INSERT INTO CALENDER(
+INSERT INTO CALENDAR(
 		date,title,time,calendarMemo,dogId
 )		VALUES(
 		'2025-06-30','アンディくん預かり','11:00','トレーニング内容(~)',2
 );
-INSERT INTO CALENDER(
+INSERT INTO CALENDAR(
 		date,title,time,calendarMemo,dogId
 )		VALUES(
 		'2025-06-25','らんちゃん預かり','13:00','トレーニング内容(~)',3

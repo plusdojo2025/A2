@@ -29,7 +29,7 @@
 		<tr>
 			<td>
 				<label>飼い主ID<br>
-				<input type="text" name="name">
+				<a>${sessionScope.nameId}</a>
 				</label>
 			</td>
 		</tr>
@@ -72,6 +72,7 @@
 		</tr>
 		<tbody id="remarksContainer">
 			<tr class="inputField">
+			
 			  <th><input type="text" name="remarks1" placeholder="備考"></th>
 			  <td><button type="button" class="deleteFieldBtn">入力欄を削除</button></td>
 			  <!-- 追加ボタンは JS が自動で最後の行にだけ付ける -->
@@ -220,5 +221,3 @@ document.forms[0].addEventListener("submit", function (e) {
 </script>
 </body>
 </html>
-
-

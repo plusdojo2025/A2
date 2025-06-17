@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ワンコ一覧</title>
+<title>問い合わせ一覧</title>
 <style>
 	/* 戻る画像ボタン */
 	.back_button {
@@ -23,15 +23,11 @@
 </head>
 <body>
 	<!-- headerのページインクルード -->
-	<h2>ワンコ一覧</h2>
+	<h2>問い合わせ一覧</h2>
 	
 	<!-- ↓↓横並びにする！ -->
 	<div>
-<<<<<<< HEAD
-		<a href="<c:url value='/WankoServlet' />">新規登録</a>			<!-- サーブレットで識別ID条件分岐 or　条件分岐の必要がなければ直接jspに飛んでOK -->
-=======
-		<a href="/A2/WankoServlet">新規登録</a>			<!-- サーブレットで識別ID条件分岐 or　条件分岐の必要がなければ直接jspに飛んでOK -->
->>>>>>> 557d929beb715e54922dfa65efa7d106286fd28b
+		<a href="/A2/ContactServlet">新規登録</a>			<!-- サーブレットで識別ID条件分岐 or　条件分岐の必要がなければ直接jspに飛んでOK -->
 		<form>
 			<!-- ◆検索　-->
 			<input type="text" name="keyword">				<!-- 全項目から検索する(DAO) -->
@@ -47,12 +43,12 @@
 		<div>
 			<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
 			<a href="javascript:history.back();">
- 				<img src="<c:url value='/images/back.png' />" alt="戻る" class="back_button">
+ 				<img src="images/back.png" alt="戻る" class="back_button">
 			</a>	
 		</div>
 	</div>
 	
-	<!-- ワンコ一覧 -->
+	<!-- 問い合わせ一覧 -->
 	<c:forEach var="wanko" items="">			<!-- itemsをサーブレットに合わせる。（サーブレットでリストを作る） -->
 	<div>
 			<span><img src="${wanko.dogphoto}" alt="${wanko.dogName}の写真"></span>

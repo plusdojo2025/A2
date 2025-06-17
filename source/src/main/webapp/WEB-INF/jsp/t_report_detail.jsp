@@ -13,18 +13,18 @@
         	<div style="text-align: right;">
         		<a href="javascript:history.back();">
 				<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
-				<img src="/webapp/img/back.png" alt="戻る">		<!-- 戻る画像ボタン -->
+				<img src="/A2/img/back.png" alt="戻る">		<!-- 戻る画像ボタン -->
 		    	</a>
         	</div>
 		</div>
 	</h1>
 	<!-- 後でDBとひもづけてデータを取ってこれるようにする -->
 	<c:forEach var="e" items="" >
-	<form method="POST" action="">
+	<form method="POST" action="<c:url value='/ReportServlet' />">
 		<ul>
 			<select name="dogName">
 				<!-- ワンコ名をプルダウンで選択できるようにする -->
-				<option value="" selected>ワンコ選択</option>
+				<option value="${e.dogName}" selected>ワンコ選択</option>
 			</select>
 			<li>ごはん<input type="submit" name="food" value="${e.food}"></li>
 			<li>日付<input type="date" name="reportDate" value="${e.date}"></li>

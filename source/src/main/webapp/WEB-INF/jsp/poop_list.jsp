@@ -20,10 +20,14 @@
 	.page_count {
 		text-align: center;
 	}
-	/*「うんち一覧」、 */
+	/*「○○一覧」*/
 	.page-title {
 		color:#FFA500;
 		font-family: "Meiryo";
+	}
+	/*「新規登録ボタン」*/
+	.regist-link {
+		
 	}
  </style>
 </head>
@@ -33,7 +37,7 @@
 	
 	<!-- ↓↓横並びにする！ -->
 	<div>
-		<a href="/A2/PoopServlet">新規登録</a>	
+		<a href="<c:url value='/PoopServlet' />" class="regist-link">新規登録</a>	
 		<form>				
 			<!-- 検索↓ -->
 				<input type="text" name="keyword">				<!-- 全項目から検索する(DAO) -->
@@ -50,7 +54,7 @@
 		<div>
 			<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
 			<a href="javascript:history.back();">
- 				<img src="images/back.png" alt="戻る" class="back_button">
+ 				<img src="<c:url value='/images/back.png' />" alt="戻る" class="back_button">
 			</a>	
 		</div>
 	</div>

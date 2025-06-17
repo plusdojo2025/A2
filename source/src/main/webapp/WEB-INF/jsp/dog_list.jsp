@@ -6,54 +6,69 @@
 <head>
 <meta charset="UTF-8">
 <title>ワンコ一覧</title>
+<style>
+	/* 戻る画像ボタン */
+	.back_button {
+		width: 40px;
+	}
+	.back_text {
+		font-size: 10px;
+	}
+	
+	/* ○ページ目 */
+	.page_count {
+		text-align: center;
+	}
+ </style>
 </head>
 <body>
+	<!-- headerのページインクルード -->
+	<h2>ワンコ一覧</h2>
+	
 	<!-- ↓↓横並びにする！ -->
 	<div>
-		<h1>ワンコ一覧</h1>
-		<a href="/webapp/WankoServlet">新規登録</a>					<!-- Servletで識別ID分岐を書く -->
-		<!-- 検索↓ -->
+		<a href="/webapp/WankoServlet">新規登録</a>			<!-- サーブレットで識別ID条件分岐 or　条件分岐の必要がなければ直接jspに飛んでOK -->
+		<form>
+			<!-- ◆検索　-->
 			<input type="text" name="keyword">				<!-- 全項目から検索する(DAO) -->
 			<input type="submit" name="search" value="検索">		
-		<!-- 検索↑ -->
-		<a href="javascript:history.back();">
-			<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
-			<img src="images/back.png" alt="戻る">		<!-- 戻る画像ボタン -->
-		</a>
+			<!-- ▼並び順プルダウン -->
+			<select name="sort">
+		        <option value="date_desc">登録日（新しい順）</option>		<!-- 降順 -->
+		        <option value="breed_asc">犬種名順</option>
+		        <option value="strage_asc">預かり日順</option>
+	   		</select>
+	    </form>
+		<!-- 戻る画像ボタン -->
+		<div>
+			<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
+			<a href="javascript:history.back();">
+ 				<img src="images/back.png" alt="戻る" class="back_button">
+			</a>	
+		</div>
 	</div>
 	
-	<!-- ▼ 並び順プルダウン --><!-- Servlet+DAO -->
-    <select name="sort">
-        <option value="date_desc">登録日（新しい順）</option>		<!-- 降順 -->
-        <option value="breed_asc">犬種名順</option>
-        <option value="strage_asc">預かり日順</option>
-    </select>
-	
-	<!-- うんち一覧 -->
-	<c:forEach var="poop" items="">							<!-- itemsをサーブレットに合わせる。（サーブレットでリストを作る） -->
+	<!-- ワンコ一覧 -->
+	<c:forEach var="wanko" items="">			<!-- itemsをサーブレットに合わせる。（サーブレットでリストを作る） -->
 	<div>
-			<span><img src="${poop.dogphoto}" alt="${e.dogName}の写真"></span>
-			<span>${poop.dogName}</span>		<!-- わんこの名前 -->	
-			<span>${poop.name}</span>			<!-- 飼い主様 -->	
-			<span>${poop.hardness}</span>			<!-- 硬さ -->	
-			<span>${poop.color}</span>			<!-- 色 -->	
-			<span>${poop.date}</span>			<!-- 登録日 -->	
+			<span><img src="${wanko.dogphoto}" alt="${wanko.dogName}の写真"></span>
+			<span>${wanko.dogName}</span>		<!-- わんこの名前 -->	
+			<span>${wanko.name}</span>			<!-- 飼い主様 -->	
+			<span>${wanko.date}</span>			<!-- 登録日 -->	
 	</div>
-</c:forEach>
-
-<!-- 20件ずつ表示（次のページへ、前のページへ） -->	
-<!-- Servlet+DAO -->	<!-- Servletでpageを定義する必要あり -->
-<div>
-	<c:if test="${page > 1}">								<!-- 前へ -->
-		<a href=PoopServlet?page=${page - 1}>前へ</a>
-	</c:if>
-	<span>${page}ページ目</span>								
-	<c:if test="${page < hasNext}">							<!-- 次のページがあるか？なければ「次へ」を表示しない -->
-		<a href=PoopServlet?page=${page + 1}>次へ</a>		<!-- 次へ -->
-	</c:if>
-</div>
-
-<!-- トップへ戻るボタン -->
-
+	</c:forEach>
+	
+	<!-- 20件ずつ表示（次のページへ、前のページへ） -->	
+	<!-- Servlet+DAO -->	<!-- Servletでpageを定義する必要あり -->
+	<div class="page_count">
+		<c:if test="${page > 1}">								<!-- 前へ -->
+			<a href=WankoServlet?page=${page - 1}>前へ</a>
+		</c:if>
+		<span>${page}ページ目</span>								
+		<c:if test="${page < hasNext}">							<!-- 次のページがあるか？なければ「次へ」を表示しない -->
+			<a href=WankoServlet?page=${page + 1}>次へ</a>		<!-- 次へ -->
+		</c:if>
+	</div>	
+	<!-- footerのページインクルード -->
 </body>
 </html>

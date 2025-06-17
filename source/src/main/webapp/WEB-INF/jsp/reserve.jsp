@@ -41,7 +41,7 @@
 		<tr>
 			<td>
 				<label>予約希望日<br>
-				<input type="file" name="dogPhoto">
+				<input type="date" name="dogPhoto">
 				</label>
 			</td>
 		</tr>
@@ -54,7 +54,7 @@
 		</tr>
 		<tr>
 	        <td colspan="2">
-	          <input type="submit" id="register" name="submit" value="登録">
+	          <input type="submit" id="register" name="submit" value="送信">
 	          <span id="error_message"></span>
 	        </td>
       	</tr>

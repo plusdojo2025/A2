@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ワンコ一覧</title>
+<title>問い合わせ一覧</title>
 <style>
 	/* 戻る画像ボタン */
 	.back_button {
@@ -23,11 +23,11 @@
 </head>
 <body>
 	<!-- headerのページインクルード -->
-	<h2>ワンコ一覧</h2>
+	<h2>問い合わせ一覧</h2>
 	
 	<!-- ↓↓横並びにする！ -->
 	<div>
-		<a href="/A2/WankoServlet">新規登録</a>			<!-- サーブレットで識別ID条件分岐 or　条件分岐の必要がなければ直接jspに飛んでOK -->
+		<a href="/A2/ContactServlet">新規登録</a>			<!-- サーブレットで識別ID条件分岐 or　条件分岐の必要がなければ直接jspに飛んでOK -->
 		<form>
 			<!-- ◆検索　-->
 			<input type="text" name="keyword">				<!-- 全項目から検索する(DAO) -->
@@ -48,7 +48,7 @@
 		</div>
 	</div>
 	
-	<!-- ワンコ一覧 -->
+	<!-- 問い合わせ一覧 -->
 	<c:forEach var="wanko" items="">			<!-- itemsをサーブレットに合わせる。（サーブレットでリストを作る） -->
 	<div>
 			<span><img src="${wanko.dogphoto}" alt="${wanko.dogName}の写真"></span>

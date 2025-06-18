@@ -399,7 +399,7 @@ public class AllDto implements Serializable {
 		this.calendarId = calendarId;
 	}
 
-	public LocalDateTime getCalenderDate() {
+	public LocalDateTime getCalendarDate() {
 		return calendarDate;
 	}
 

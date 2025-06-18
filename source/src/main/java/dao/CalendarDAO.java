@@ -28,7 +28,7 @@ public class CalendarDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 					
 			pStmt.setInt(1, regiCalendar.getCalendarId());
-			pStmt.setDate(2, java.sql.Date.valueOf(regiCalendar.getCalendarDate()));
+			pStmt.setTimestamp(2, java.sql.Timestamp.valueOf(regiCalendar.getCalendarDate()));
 			pStmt.setString(3, regiCalendar.getTitle());
 			pStmt.setTime(4, java.sql.Time.valueOf(regiCalendar.getTime()));
 			pStmt.setInt(5, regiCalendar.getCalendarMemo());
@@ -77,7 +77,7 @@ public class CalendarDAO {
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "UPDATE tbl_Bc SET company=?, department=?, position=?, name=?,"
+				String sql = "UPDATE CALENDAR SET company=?, department=?, position=?, name=?,"
 						+ "ruby=?, zipcode=?, address=?, phone=?, fax=?, email=?, url=?, remarks=?  "
 						+ "WHERE number=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);

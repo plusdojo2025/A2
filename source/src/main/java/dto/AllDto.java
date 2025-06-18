@@ -56,7 +56,7 @@ public class AllDto implements Serializable {
 	 
 	 //カレンダー
 	 private int calendarId;			/*カレンダーID*/
-	 private LocalDateTime calenderDate;			/*日付*/
+	 private LocalDate calendarDate;			/*日付*/
 	 private String title;	/*タイトル*/
 	 private LocalTime time;			/*時間*/
 	 private int calendarMemo;				/*メモ*/
@@ -399,12 +399,12 @@ public class AllDto implements Serializable {
 		this.calendarId = calendarId;
 	}
 
-	public LocalDateTime getCalenderDate() {
-		return calenderDate;
+	public LocalDate getCalendarDate() {
+		return calendarDate;
 	}
 
-	public void setCalenderDate(LocalDateTime calenderDate) {
-		this.calenderDate = calenderDate;
+	public void setCalendarDate(LocalDate calendarDate) {
+		this.calendarDate = calendarDate;
 	}
 
 	public String getTitle() {

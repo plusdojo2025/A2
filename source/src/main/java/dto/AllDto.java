@@ -70,7 +70,7 @@ public class AllDto implements Serializable {
 	 private String training;				/*トレーニング*/
 	 private String reportMemo;			/*メモ*/
 	 private LocalDate reportDate;		/*日付*/
-	 private int reportDogId;			/*ワンコID*/
+	 private int DogId;			/*ワンコID*/
 	 
 	//ゲッターセッターの生成
 	 //ワンコテーブル用ゲッターセッターの生成
@@ -498,12 +498,12 @@ public class AllDto implements Serializable {
 		this.reportDate = reportDate;
 	}
 
-	public int getReportDogId() {
-		return reportDogId;
+	public int getDogId() {
+		return DogId;
 	}
 
-	public void setReportDogId(int reportDogId) {
-		this.reportDogId = reportDogId;
+	public void setDogId(int DogId) {
+		this.DogId = DogId;
 	}
 	
 

@@ -357,7 +357,7 @@ public class AllDto implements Serializable {
 		this.hardness = hardness;
 	}
 
-	public boolean isAbnormal() {
+	public boolean getAbnormal() {
 		return abnormal;
 	}
 

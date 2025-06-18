@@ -1,10 +1,6 @@
 create database a2;
 
 
-create table SCHOOL (
-		schoolId int AUTO_INCREMENT PRIMARY KEY
-);
-
 
 create table USER(
 		nameId varchar(50) PRIMARY KEY,
@@ -15,8 +11,7 @@ create table USER(
 		uPhone varchar(50) NOT NULL ,
 		uPhone2 varchar(50)  ,
 		address varchar(50) NOT NULL ,
-		schoolId INT,
-		FOREIGN KEY (schoolId) REFERENCES SCHOOL(schoolId)
+		schoolId INT NOT NULL,
 		) ;
 		
 ALTER TABLE USER ADD uniqueId boolean; --TRUE企業、FALSE飼い主

@@ -1,11 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>うんち登録</title>
 <style>
+/* 戻る画像ボタン */
+	.back-option {
+  position: absolute;      /* 画面上の位置を絶対指定 */
+  top: 10px;               /* 上から10px */
+  right: 10px;             /* 右から10px */
+  font-size: 12px;         /* テキストを小さく */
+  display: flex;
+  align-items: center;
+  gap: 5px;                /* 画像との間に隙間 */
+  z-index: 1000;           /* 上に表示されるようにする */
+}
+
+.back-option img {
+  width: 40px;             /* 小さめサイズに変更 */
+  height: 40px;
+}
+
+
 	  .color-option {
 	    display: flex;
 	    gap: 20px;
@@ -41,10 +60,12 @@
 </head>
 <body>
 	<!-- 1つ前へ戻る -->
+	<div class="back-option">
 	<a href = "javascript:history.back()">
 		<span>ひとつ前に戻る
-		<img src = "images/back.png" alt= "戻る">
+		<img src="<c:url value='/images/back.png'/>" alt= "戻る">
 	</span></a>
+	</div>
 	<!-- ウンチ管理の文字表示 -->
 	<h1>うんち管理</h1>
 	<!-- 登録者の名前も後で表示させる -->
@@ -52,13 +73,17 @@
 	<!-- ワンコ選択 -->
 	<!-- メイン -->
 	<form>
-	<c:forEach var="e" items="" >
+	
 	<form method="POST" action="">
+	<div class="left-section">
 		時間<input type="time" name="nowTime" value="${e.nowTime}"><br>
 		日付<input type="date" name="date" value="${e.date}"><br>
-		写真追加<input type = "file" name = "photo"><br>
+		写真追加<input type = "file" name = "photo">
+		</div>
+	<div class="right-section">
 		わんこ選択<input type="text" name="name" value="${e.name}"><br>
 			<!-- 色の選択 -->
+	
 		<p>色を選んでください：</p>
 	  	<div class="color-option">
 		<label>
@@ -109,8 +134,9 @@
 		異常<input type="checkbox" name="abnormal" value="true"><br>
 		メモ<input type="text" name="memo" value="${e.memo}"><br>
 		<input type="submit" value="登録"><br>
+		</div>
 	</form>
-	</c:forEach>
+	
 	
 	
 <!-- メインここまで -->

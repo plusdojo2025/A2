@@ -27,7 +27,8 @@
 	メモ<input type="text" name="memo"><br>
 	ワンコ情報
 	<input type="text" name="name" value="${e.name}"><br>
-	<input type="submit" name="regist" value="登録">
+	<input type="submit" name="submit" value="更新">
+	<input type="submit" name="submit" value="削除">
 	</form>	
 </body>
 <!-- JavaScript（ここから） -->

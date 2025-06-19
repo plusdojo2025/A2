@@ -41,7 +41,7 @@
     </table>
   </form>
   <div id="footer">
-  <p><a href="new_regi.jsp">新規登録はこちら</a></p>
+  <p><a href="LoginServlet?action=regi">新規登録はこちら</a></p>
   <p>ID/パスワードを忘れた方は〇〇までご連絡ください</p>
   </div>
   <script>

@@ -332,5 +332,57 @@ public class UserDAO {
 		// 結果を返す
 		return result;
 	}
-	
+	public String isLoginOK(AllDto idpw) {
+		Connection conn = null;
+		String dto=null;
+		//boolean loginResult = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+
+			// SELECT文を準備する
+			String sql = "SELECT name FROM IdPw WHERE id=? AND pw=?";
+			//String sql = "SELECT  FROM IdPw WHERE id=? AND pw=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, idpw.getUserNameId());
+			pStmt.setString(2, idpw.getPw());
+
+			// SELECT文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// ユーザーIDとパスワードが一致するユーザーがいれば結果をtrueにする
+			
+			rs.next();
+			if (rs.getString("dto") == null) {
+				dto = null;
+			}else {
+				dto=rs.getString("dto");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			dto = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			dto = null;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					dto = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return dto;
+	}
 }

@@ -357,7 +357,7 @@ public class AllDto implements Serializable {
 		this.hardness = hardness;
 	}
 
-	public boolean getAbnormal() {
+	public boolean isAbnormal() {
 		return abnormal;
 	}
 
@@ -450,7 +450,7 @@ public class AllDto implements Serializable {
 		this.reportId = reportId;
 	}
 
-	public boolean isFood() {
+	public boolean getFood() {
 		return food;
 	}
 

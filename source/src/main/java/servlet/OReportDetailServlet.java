@@ -37,5 +37,5 @@ public class OReportDetailServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
+一覧から持ってるデータと合致するやつ
 }

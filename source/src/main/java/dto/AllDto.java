@@ -450,7 +450,7 @@ public class AllDto implements Serializable {
 		this.reportId = reportId;
 	}
 
-	public boolean isFood() {
+	public boolean getFood() {
 		return food;
 	}
 

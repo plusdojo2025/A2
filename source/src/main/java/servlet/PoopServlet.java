@@ -47,7 +47,7 @@ public class PoopServlet extends HttpServlet {
 	String  nowtime=request.getParameter("nowtime");
 	String photo =request.getParameter("photo");
 	int  hardness =Integer.parseInt(request.getParameter("harness"));
-	boolean  isabnormal = request.getParameter("isabnormal");
+	String  abnormal = request.getParameter("abnormal");
 	String  poopdogid =request.getParameter("poopdogid");
 	String memo =request.getParameter("memo");
 	String  date =request.getParameter("getdate");

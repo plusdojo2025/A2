@@ -36,7 +36,7 @@ public class HomeServlet extends HttpServlet {
 		CalendarDAO cDao = new CalendarDAO();
 		AllDto cDto = new AllDto();
 		
-		cDto.setCalendarDate(calendarDate);
+		cDto.setCalendarDate(null);
 		
 		//List<AllDto> calendar = cDao.select(new AllDto(calendarId, calendarDate, title, time, calendarMemo, calendarDogId));
 		

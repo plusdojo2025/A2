@@ -27,17 +27,10 @@ public class PoopServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/webapp/LoginServlet");
-			return;
-		}
-
-		// 登録ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist.jsp");
 		dispatcher.forward(request, response);
 	}
+		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -45,12 +38,7 @@ public class PoopServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/webapp/LoginServlet");
-			return;
-		}
+		
 	
 	// リクエストパラメータを取得する
 	request.setCharacterEncoding("UTF-8");
@@ -58,8 +46,8 @@ public class PoopServlet extends HttpServlet {
 	String tlName =request.getParameter("tlname");
 	String  nowtime=request.getParameter("nowtime");
 	String photo =request.getParameter("photo");
-	String  hardness =request.getParameter("harness");
-	String  isabnormal = request.getParameter("abnormal");
+	int  hardness =Integer.parseInt(request.getParameter("harness"));
+	boolean  isabnormal = request.getParameter("isabnormal");
 	String  poopdogid =request.getParameter("poopdogid");
 	String memo =request.getParameter("memo");
 	String  date =request.getParameter("getdate");
@@ -70,15 +58,15 @@ public class PoopServlet extends HttpServlet {
 //登録処理を行う
 		PoopDAO bDao = new PoopDAO();
 		AllDto pDto = new AllDto();
-		pDto.setPoopId("poopId");
-		pDto.setTlName("tlname");
-		pDto.setNowTime("nowtime");
-		pDto.setPhoto("photo");
-		pDto.setHardness("hardness");
-		pDto.setAbnormal("abnormal");
-		pDto.setPoopDogId("poopdogid");
-		pDto.setMemo("memo");
-		pDto.setDate("getdate");
+		pDto.setPoopId(poopId);
+		pDto.setTlName(tlname);
+		pDto.setNowTime(nowtime);
+		pDto.setPhoto(photo);
+		pDto.setHardness(hardness);
+		pDto.setAbnormal(abnormal);
+		pDto.setPoopDogId(poopdogid);
+		pDto.setMemo(memo);
+		pDto.setDate(date);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/A2/jsp/poop_regi.jsp");
 		dispatcher.forward(request, response);

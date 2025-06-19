@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao
-import dto.AllDto;
-
 /**
  * Servlet implementation class OReportDetailServlet
  */
@@ -52,10 +49,12 @@ public class OReportDetailServlet extends HttpServlet {
 	
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String date = request.getParameter("birth");
-		String company = request.getParameter("company");
 		
+		String company = request.getParameter("company");
 		String date = request.getParameter("birth");
+		
+		
+		
 		
 		private int reportId;				/*報告ID*/
 		 private boolean food;		/*ごはん*/

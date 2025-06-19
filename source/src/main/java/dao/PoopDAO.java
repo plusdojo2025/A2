@@ -42,7 +42,7 @@ import dto.AllDto;
 		
 			pStmt.setInt(6, poop.getHardness());
 		
-			pStmt.setBoolean(7, poop.getAbnormal());
+			pStmt.setBoolean(7, poop.isAbnormal());
 		
 			pStmt.setInt(8, poop.getPoopDogId());
 			
@@ -75,7 +75,7 @@ import dto.AllDto;
 	}
 
 	//検索	
-	// 引数card指定された項目で検索して、取得されたデータのリストを返す
+	// 引数 poop指定された項目で検索して、取得されたデータのリストを返す
 	public List<AllDto> select(AllDto poop) {
 		Connection conn = null;
 		List<AllDto> poopList = new ArrayList<AllDto>();
@@ -159,7 +159,7 @@ import dto.AllDto;
 	}
 
 	//更新
-	// 引数cardで指定されたレコードを更新し、成功したらtrueを返す
+	// 引数poopで指定されたレコードを更新し、成功したらtrueを返す
 	public boolean update(AllDto poop) {
 		Connection conn = null;
 		boolean result = false;
@@ -177,32 +177,78 @@ import dto.AllDto;
 			String sql = "UPDATE Bc SET poopId=?, tlName=?, nowTime=?, photo=?, color=?, hardness=?, abnormal=?, dogId=?, memo=?, date=? WHERE number=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-					// SQL文を完成させる
-					
-					pStmt.setInt(1, poop.getPoopId());
+				// SQL文を完成させる
 				
-					pStmt.setString(2, poop.getTlName());
+				pStmt.setInt(1, poop.getPoopId());
+			
+				pStmt.setString(2, poop.getTlName());
+			
+				pStmt.setTimestamp(3, java.sql.Timestamp.valueOf (poop.getNowTime()));
+			
+				pStmt.setString(4, poop.getPhoto());
 				
-					pStmt.setTimestamp(3, java.sql.Timestamp.valueOf (poop.getNowTime()));
+				pStmt.setInt(5, poop.getColor());
+			
+				pStmt.setInt(6, poop.getHardness());
+			
+				pStmt.setBoolean(7, poop.isAbnormal());
+			
+				pStmt.setInt(8, poop.getPoopDogId());
 				
-					pStmt.setString(4, poop.getPhoto());
-					
-					pStmt.setInt(5, poop.getColor());
+				pStmt.setString(9, poop.getMemo());
 				
-					pStmt.setInt(6, poop.getHardness());
+				pStmt.setDate(10, java.sql.Date.valueOf (poop.getDate()));
 				
-					pStmt.setBoolean(7, poop.getAbnormal());
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} catch (ClassNotFoundException e) {
+		e.printStackTrace();
+	} finally {
+		// データベースを切断
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+		// 結果を返す
+		return result;
+	}
 				
-					pStmt.setInt(8, poop.getPoopDogId());
-					
-					pStmt.setString(9, poop.getMemo());
-					
-					pStmt.setDate(10, java.sql.Date.valueOf (poop.getDate()));
-					
-					// SQL文を実行する
-					if (pStmt.executeUpdate() == 1) {
-						result = true;
-					}
+
+	//削除
+	//引数 poopで指定された番号のレコードを削除し、成功したらtrueを返す
+	public boolean delete(AllDto poop) {
+		Connection conn = null;
+		boolean result = false;
+		
+			try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+	
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp2?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+	
+			// SQL文を準備する
+			String sql = "DELETE FROM Bc WHERE number=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			// SQL文を完成させる
+			pStmt.setInt(1, poop.getPoopId());
+			
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -218,53 +264,7 @@ import dto.AllDto;
 			}
 		}
 
-			// 結果を返す
-			return result;
-		}
-					
-
-	//削除
-	//引数cardで指定された番号のレコードを削除し、成功したらtrueを返す
-	public boolean delete(AllDto poop) {
-		Connection conn = null;
-		boolean result = false;
-		
-		try {
-		// JDBCドライバを読み込む
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		// データベースに接続する
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp2?"
-				+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-				"root", "password");
-		
-		// SQL文を準備する
-					String sql = "DELETE FROM Bc WHERE number=?";
-					PreparedStatement pStmt = conn.prepareStatement(sql);
-					
-					// SQL文を完成させる
-					pStmt.setInt(1, poop.getPoopId());
-					
-					// SQL文を実行する
-					if (pStmt.executeUpdate() == 1) {
-						result = true;
-					}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} finally {
-				// データベースを切断
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-
-				// 結果を返す
-				return result;
-			}
-		}
+		// 結果を返す
+		return result;
+	}
+}

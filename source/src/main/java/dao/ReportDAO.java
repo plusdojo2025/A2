@@ -207,7 +207,7 @@ public class ReportDAO {
 
 		
 		
-		
+		//削除のとこ
 		public boolean delete(AllDto report) {
 			Connection conn = null;
 			boolean result = false;
@@ -222,19 +222,32 @@ public class ReportDAO {
 						"root", "password");
 
 				// SQL文を準備する 
-				String sql = "DELETE FROM Report WHERE reportId";
+				String sql = "DELETE FROM AllDto WHERE reportId=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				
 				// SQL文を完成させる
-				pStmt.setBoolean(1, report.getFood());
-				pStmt.setInt(2, report.getWalk());
-				pStmt.setBoolean(3, report.isReportState());
-				pStmt.setString(4, report.getTraining());
-				pStmt.setString(5, report.getReportMemo());
-				pStmt.setDate(6, java.sql.Date.valueOf(report.getReportDate()));
-				pStmt.setInt(7, report.getReportDogId());
+				pStmt.setInt(1, report.getReportId());
+				// SQL文を実行する
+				if (pStmt.executeUpdate() == 1) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 
-	
-}
+			// 結果を返す
+			return result;
+			}
 		}
-}
+

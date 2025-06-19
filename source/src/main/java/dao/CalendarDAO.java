@@ -32,70 +32,41 @@ public class CalendarDAO {
 				// SQL文を準備する
 				String sql ="""
 						SELECT 	
-							number, 
-							company, 
-							department, 
-							position, 
-							name, 
-							ruby, 
-							zipcode, 
-							address, 
-							phone,
-							fax, 
-							email, 
-							 
-							url, 
-							remarks 
-						FROM tbl_Bc
+							calendarId, 
+							calendarDate, 
+							title, 
+							time, 
+							calendarMemo, 
+							calendarDogId, 
+						FROM AllDate
 						
-						WHERE company LIKE ? 
-						AND department LIKE ? 
-						AND position LIKE ? 
-						AND name LIKE ?
-						AND ruby LIKE ? 
-						AND address LIKE ? 
-						AND remarks LIKE ?
+						WHERE calendarId LIKE ? 
+						OR calendarDate LIKE ? 
+						OR title LIKE ? 
+						OR time LIKE ?
+						OR calendarMemo LIKE ? 
+						OR calendarDogId LIKE ? 
 						
-						ORDER BY number
+						ORDER BY calendarId
 						""";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
-				// SQL文を完成させる　//1と指定したところに一個目のはてながつながる。
-				if (card.getCompany() != "") {
-					pStmt.setString(1, "%" + card.getCompany() + "%");
+				// SQL文を完成させる　//検索はないのでここいらない？
+				if (seleCalendar.getCalendarId() != 0) {
+					pStmt.setString(1, "%" + seleCalendar.getCalendarId() + "%");
+					pStmt.setString(2, "%" + seleCalendar.getCalendarDate() + "%");
+					pStmt.setString(3, "%" + seleCalendar.getTitle() + "%");
+					pStmt.setString(4, "%" + seleCalendar.getTime() + "%");
+					pStmt.setString(5, "%" + seleCalendar.getCalendarMemo() + "%");
+					pStmt.setString(6, "%" + seleCalendar.getCalendarDogId() + "%");
+					
 				} else {
 					pStmt.setString(1, "%");
-				}
-				if (card.getDepartment() != null) {
-					pStmt.setString(2, "%" + card.getDepartment() + "%");
-				} else {
-					pStmt.setString(2, "%");
-				}
-				if (card.getPosition() != null) {
-					pStmt.setString(3, "%" + card.getPosition() + "%");
-				} else {
+					pStmt.setNull(2, java.sql.Types.DATE);
 					pStmt.setString(3, "%");
-				}
-				if (card.getName() != null) {
-					pStmt.setString(4, "%" + card.getName() + "%");
-				} else {
 					pStmt.setString(4, "%");
-				}
-				if (card.getRuby() != null) {
-					pStmt.setString(5, "%" + card.getRuby() + "%");
-				} else {
 					pStmt.setString(5, "%");
-				}
-				if (card.getAddress() != null) {
-					pStmt.setString(6, "%" + card.getAddress() + "%");
-				} else {
 					pStmt.setString(6, "%");
-				}
-				
-				if (card.getRemarks() != null) {
-					pStmt.setString(7, "%" + card.getRemarks() + "%");
-				} else {
-					pStmt.setString(7, "%");
 				}
 
 				// SQL文を実行し、結果表を取得する 
@@ -107,29 +78,23 @@ public class CalendarDAO {
 				// 結果表をコレクションにコピーする　//rs.next()は先生の板書を確認
 					//DTOを作り出している。ｒｓ.getStringで取ってきたものを、えだまめの皮に入れてセットを作っている。
 				while (rs.next()) {
-					Bc bc = new Bc(	rs.getInt("number"),
-									rs.getString("company"), 
-									rs.getString("department"),
-									rs.getString("position"),  
-									rs.getString("name"), 
-									rs.getString("ruby"), 
-									rs.getString("zipcode"), 
-									rs.getString("address"), 
-									rs.getString("phone"), 
-									rs.getString("fax"), 
-									rs.getString("email"), 
-									//rs.getString("date"),
-									rs.getString("url"),
-									rs.getString("remarks"));
+					AllDto dto=new AllDto();
+					dto.setCalendarId(rs.getInt("calendarId"));
+					dto.setCalendarDate(rs.getTimestamp("calendarDate").toLocalDateTime());
+					dto.setTitle(rs.getString("title"));
+					dto.setTime(rs.getTime("time").toLocalTime());
+					dto.setCalendarMemo(rs.getInt("calendarMemo"));
+					dto.setCalendarDogId(rs.getInt("calendarDogId"));
+					
 					//addでcardListにbcを入れている　（cardListはArrayList)
-					cardList.add(bc);
+					calendar.add(dto);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-				cardList = null;
+				calendar = null;
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
-				cardList = null;
+				calendar = null;
 			} finally {
 				// データベースを切断
 				if (conn != null) {
@@ -137,13 +102,13 @@ public class CalendarDAO {
 						conn.close();
 					} catch (SQLException e) {
 						e.printStackTrace();
-						cardList = null;
+						calendar = null;
 					}
 				}
 			}
 
 			// 結果を返す
-			return cardList;
+			return calendar;
 		}
 	
 	//登録メソッド
@@ -194,6 +159,8 @@ public class CalendarDAO {
 		// 結果を返す
 		return result;
 	}
+	
+	
 	
 	// 引数cardで指定されたレコードを更新し、成功したらtrueを返す
 		//更新のupdateメソッド
@@ -247,6 +214,52 @@ public class CalendarDAO {
 			// 結果を返す
 			return result;
 		}
+		
+		
+//削除のメソッド
+		public boolean delete(AllDto delecalendar) {
+			Connection conn = null;
+			boolean result = false;
+
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+						"root", "password");
+
+				// SQL文を準備する
+				String sql = "DELETE FROM CALENDAR WHERE calendarId=?";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+				// SQL文を完成させる
+				pStmt.setInt(1, delecalendar.getCalendarId());
+
+				// SQL文を実行する
+				if (pStmt.executeUpdate() == 1) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
+			// 結果を返す
+			return result;
+		}
+		
 
 
 }

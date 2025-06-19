@@ -43,7 +43,7 @@ public class UserDAO {
 			pStmt.setString(7, "%" + user.getuPhone2() + "%");
 			pStmt.setString(8, "%" + user.getAddress() + "%");
 			pStmt.setString(9, "%" + user.isUserUniqueId() + "%");
-			pStmt.setString(10, "%" + user.getSchoolId() + "%");
+			pStmt.setString(10, "%" + user.getUserSchoolId() + "%");
 		} else {
 			pStmt.setString(1, "%");
 			pStmt.setString(2, "%");
@@ -66,7 +66,7 @@ public class UserDAO {
 			AllDto us = new AllDto();
 			us.setUserNameId(rs.getString("userNameId"));
 			us.setRuby(rs.getString("ruby"));
-			us.setBirth(rs.getString("birth"));
+			us.setBirth(rs.getDate("birth").toLocalDate());
 			us.setName(rs.getString("name"));
 			us.setPw(rs.getString("pw"));
 			us.setuPhone(rs.getString("uPhone"));
@@ -131,7 +131,7 @@ public class UserDAO {
 				pStmt.setString(2, "");
 			}
 			if (user.getBirth() != null) {
-				pStmt.setDate(3, user.getBirth());
+				pStmt.setDate(3, java.sql.Date.valueOf(user.getBirth()));
 			} else {
 				pStmt.setString(3, "");
 			}
@@ -165,7 +165,7 @@ public class UserDAO {
 			} else {
 				pStmt.setString(9, "");
 			}
-			if (user.getUserSchoolId() != null) {
+			if (user.getUserSchoolId() != 0) {
 				pStmt.setInt(10, user.getUserSchoolId());
 			} else {
 				pStmt.setString(10, "");
@@ -191,6 +191,9 @@ public class UserDAO {
 				}
 			}
 		}	
+	
+		// 結果を返す
+		return result;
 	}		
 			
 	// 引数userで指定されたレコードを更新し、成功したらtrueを返す
@@ -223,7 +226,7 @@ public class UserDAO {
 				pStmt.setString(2, "");
 			}
 			if (user.getBirth() != null) {
-				pStmt.setDate(3, user.getBirth());
+				pStmt.setDate(3, java.sql.Date.valueOf(user.getBirth()));
 			} else {
 				pStmt.setString(3, "");
 			}
@@ -257,7 +260,7 @@ public class UserDAO {
 			} else {
 				pStmt.setString(9, "");
 			}
-			if (user.getUserSchoolId() != null) {
+			if (user.getUserSchoolId() != 0) {
 				pStmt.setInt(10, user.getUserSchoolId());
 			} else {
 				pStmt.setString(10, "");

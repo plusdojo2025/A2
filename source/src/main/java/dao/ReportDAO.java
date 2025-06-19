@@ -31,7 +31,7 @@ public class ReportDAO {
 			// SQL文を準備する
 			
 			String sql = "SELECT reportId, food, walk, state, taraining, reportMemo, reportDate, reportDogId "
-					+ "FROM AllDto WHERE  LIKE ? OR reportId LIKE ? OR food LIKE ? OR walk LIKE ? OR state LIKE ? OR training LIKE ? OR reortMemo LIKE ? OR reportDate LIKE ? OR dogId LIKE ?"
+					+ "FROM AllDto WHERE reportId LIKE ? OR food LIKE ? OR walk LIKE ? OR state LIKE ? OR training LIKE ? OR reortMemo LIKE ? OR reportDate LIKE ? OR dogId LIKE ?"
 					+ "ORDER BY number ASC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
@@ -100,7 +100,7 @@ public class ReportDAO {
 		
 		
 		
-		// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
+		// 引数で指定されたレコードを登録し、成功したらtrueを返す
 		public boolean insert(AllDto report) {
 			Connection conn = null;
 			boolean result = false;
@@ -166,7 +166,7 @@ public class ReportDAO {
 						"root", "password");
 
 				// SQL文を準備する 
-				String sql = "UPDATE Report SET food=?, walk=?, reportState=?, training=?, reportMemo=?, reportDate=?,  WHERE reportId";
+				String sql = "UPDATE Report SET food=?, walk=?, reportState=?, training=?, reportMemo=?, reportDate=?  WHERE reportId";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				
 				// SQL文を完成させる

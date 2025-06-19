@@ -298,6 +298,16 @@ public class AllDto implements Serializable {
 	public void setUserSchoolId(int userSchoolId) {
 		this.userSchoolId = userSchoolId;
 	}
+	//追加したやつ
+	public void IdPw(String userNameId, String pw) {
+		this.userNameId = userNameId;
+		this.pw = pw;
+	}
+
+	public void IdPw() {
+		this.userNameId = "";
+		this.pw = "";
+	}
 
 //スクールテーブル用ゲッターセッター生成
 	public int getSchoolId() {

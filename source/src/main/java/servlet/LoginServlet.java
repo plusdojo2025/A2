@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dao.UserDAO;
 
 
 
@@ -18,9 +21,19 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// ログインページにGO！
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-		dispatcher.forward(request, response);
+		 String action = request.getParameter("action");
+
+		    // 条件によって画面を振り分ける
+		    if ("regi".equals(action)) {
+		        // 新規登録画面へ
+		        request.getRequestDispatcher("/WEB-INF/jsp/new_regi.jsp").forward(request, response);
+		    } else {
+		        // ログイン画面へ（デフォルト）
+		        request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+		    }
+//		// ログインページにGO！
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+//		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -29,11 +42,11 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-		/*
+		
 		//DAOを実体化
-		UserDao dao = new UserDao();
+		UserDAO dao = new UserDAO();
 		//ログインできる？できなかったらdtoはnullになる
-		AllDto dto = dao.login(id,pw);
+		String dto = dao.login(id,pw);
 		
 		//ログイン成功時
 		if(dto!=null) {
@@ -51,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 			dispatcher.forward(request, response);
 		}
-		*/
+		
 	}
 }
 

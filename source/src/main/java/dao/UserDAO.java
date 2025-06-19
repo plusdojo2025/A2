@@ -332,7 +332,8 @@ public class UserDAO {
 		// 結果を返す
 		return result;
 	}
-	public String isLoginOK(AllDto idpw) {
+
+	public String login(AllDto idpw) {
 		Connection conn = null;
 		String dto=null;
 		//boolean loginResult = false;
@@ -347,8 +348,7 @@ public class UserDAO {
 					"root", "password");
 
 			// SELECT文を準備する
-			String sql = "SELECT name FROM IdPw WHERE id=? AND pw=?";
-			//String sql = "SELECT  FROM IdPw WHERE id=? AND pw=?";
+			String sql = "SELECT dto FROM IdPw WHERE id=? AND pw=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, idpw.getUserNameId());
 			pStmt.setString(2, idpw.getPw());
@@ -385,4 +385,5 @@ public class UserDAO {
 		// 結果を返す
 		return dto;
 	}
+
 }

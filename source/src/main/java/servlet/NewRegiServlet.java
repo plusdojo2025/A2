@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,8 +41,7 @@ public class NewRegiServlet extends HttpServlet {
 		 
 		String nameId = request.getParameter("nameId");
 		String ruby = request.getParameter("ruby");
-		String dateStr = request.getParameter("birth");
-		LocalDate birth = LocalDate.parse(dateStr);
+		String birth = request.getParameter("birth");
 		String name = request.getParameter("name");
 		String pw = request.getParameter("pw");
 		String uPhone = request.getParameter("uPhone");
@@ -55,7 +53,7 @@ public class NewRegiServlet extends HttpServlet {
 		
 		uDto.setUserNameId(nameId);
 		uDto.setRuby(ruby);
-		uDto.setbirth(birth);
+		uDto.setBirth(birth);
 		uDto.setName(name);
 		uDto.setPw(pw);
 		uDto.setuPhone(uPhone);
@@ -66,7 +64,7 @@ public class NewRegiServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/A2/LoginServlet");
 			dispatcher.forward(request, response);
 		} else { // 登録失敗
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/new_regi.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/A2/t_home.jsp");
 			dispatcher.forward(request, response);
 		}
 

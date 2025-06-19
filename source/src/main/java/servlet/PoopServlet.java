@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.PoopDAO;
+import dto.AllDto;
 
 /**
  * Servlet implementation class RegistServlet
@@ -26,17 +27,10 @@ public class PoopServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/webapp/LoginServlet");
-			return;
-		}
-
-		// 登録ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist.jsp");
 		dispatcher.forward(request, response);
 	}
+		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -44,36 +38,42 @@ public class PoopServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/webapp/LoginServlet");
-			return;
-		}
+		
 	
 	// リクエストパラメータを取得する
 	request.setCharacterEncoding("UTF-8");
-	String  poopId =request.getParameter("poopId");
+	int  poopId =Integer.parseInt(request.getParameter("poopId"));
 	String tlName =request.getParameter("tlname");
 	String  nowtime=request.getParameter("nowtime");
 	String photo =request.getParameter("photo");
-	String  hardness =request.getParameter("harness");
-	String  isabnormal = request.getParameter("abnormal");
+	int  hardness =Integer.parseInt(request.getParameter("harness"));
+	String  abnormal = request.getParameter("abnormal");
 	String  poopdogid =request.getParameter("poopdogid");
 	String memo =request.getParameter("memo");
 	String  date =request.getParameter("getdate");
-
+	
+	
+	
 
 //登録処理を行う
 		PoopDAO bDao = new PoopDAO();
-		if (bDao.insert(new Poop(0, poopId, tlName, nowtime, photo, hardness, isabnormal, poopdogid, memo, date))) { // 登録成功
-			request.setAttribute("result", new Result("登録成功！", "レコードを登録しました。", "/webapp/PoopServlet"));
-		} else { // 登録失敗
-			request.setAttribute("result", new Result("登録失敗！", "レコードを登録できませんでした。", "/webapp/PoopServlet"));
-		}
-
-		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+		AllDto pDto = new AllDto();
+		pDto.setPoopId(poopId);
+		pDto.setTlName(tlname);
+		pDto.setNowTime(nowtime);
+		pDto.setPhoto(photo);
+		pDto.setHardness(hardness);
+		pDto.setAbnormal(abnormal);
+		pDto.setPoopDogId(poopdogid);
+		pDto.setMemo(memo);
+		pDto.setDate(date);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/A2/jsp/poop_regi.jsp");
 		dispatcher.forward(request, response);
+		} else { // 登録失敗
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/regist.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
+
 }

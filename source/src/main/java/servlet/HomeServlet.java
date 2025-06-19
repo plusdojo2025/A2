@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.CalendarDAO;
-
+import dto.AllDto;
 /**
  * Servlet implementation class HomeServlet
  */
@@ -24,20 +24,19 @@ public class HomeServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/webapp/LoginServlet");
+			response.sendRedirect("A2/LoginServlet");
 			return;
 		}
 		
-		// リクエストパラメータを取得する
+		// リクエストパラメータを取得するカレンダー
+		
 		request.setCharacterEncoding("UTF-8");
-		String calendarId = request.getParameter("calendarId");
 		String calendarDate = request.getParameter("calendarDate");
-		String title = request.getParameter("title");
-		String time = request.getParameter("time");
-		String calendarMemo = request.getParameter("calendarMemo");
-		String calendarDogId = request.getParameter("calendarDogId");
 		
 		CalendarDAO cDao = new CalendarDAO();
+		AllDto cDto = new AllDto();
+		
+		cDto.setCalendarDate(null);
 		
 		//List<AllDto> calendar = cDao.select(new AllDto(calendarId, calendarDate, title, time, calendarMemo, calendarDogId));
 		

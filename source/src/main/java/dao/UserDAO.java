@@ -333,11 +333,9 @@ public class UserDAO {
 		return result;
 	}
 
-	
-	//ログイン処理
-	public AllDto login(String id, String pw) {
+	public String login(AllDto idpw) {
 		Connection conn = null;
-		AllDto dto=null;
+		String dto=null;
 		//boolean loginResult = false;
 
 		try {
@@ -350,26 +348,22 @@ public class UserDAO {
 					"root", "password");
 
 			// SELECT文を準備する
-			String sql = "SELECT * FROM USER WHERE userNameId=? AND pw=?";
+			String sql = "SELECT dto FROM IdPw WHERE id=? AND pw=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			
-			//SQL文を完成
-			pStmt.setString(1, id);
-			pStmt.setString(2, pw);
+			pStmt.setString(1, idpw.getUserNameId());
+			pStmt.setString(2, idpw.getPw());
 
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 
-			// 結果をコピー
-			while(rs.next()) {
-				dto = new AllDto();
-				dto.setUserNameId(id);
-				dto.setName(rs.getString("name"));
-				dto.setUserUniqueId(rs.getBoolean("userUniqueId"));
-				dto.setUserSchoolId(rs.getInt("userSchoolId"));
-				
+			// ユーザーIDとパスワードが一致するユーザーがいれば結果をtrueにする
+			
+			rs.next();
+			if (rs.getString("dto") == null) {
+				dto = null;
+			}else {
+				dto=rs.getString("dto");
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			dto = null;
@@ -386,7 +380,6 @@ public class UserDAO {
 					dto = null;
 				}
 			}
-			
 		}
 
 		// 結果を返す

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CalendarDAO;
 import dto.AllDto;
+
 
 /**
  * Servlet implementation class CalendarServlet
@@ -32,11 +35,19 @@ public class CalendarServlet extends HttpServlet {
 		}else {//最初のアクション（予定登録を表示）
 			//リクエストパラメータの取得
 	        String action = request.getParameter("action");
-	        String yearString = request.getParameter("year");
-	        String monthString = request.getParameter("month");
-	        String countString = request.getParameter("count");
+	        int yearString = Integer.parseInt(request.getParameter("year"));
+	        int monthString = Integer.parseInt(request.getParameter("month"));
+	        int countString = Integer.parseInt(request.getParameter("count"));
+	        //Dateになおす
 	        
-	        
+			// 検索処理を行う
+			CalendarDAO CaleDao = new CalendarDAO();
+			List<AllDto> scheList = CaleDao.select(new AllDtto(calendarDate));
+
+			// 検索結果をリクエストスコープに格納する
+			request.setAttribute("scheList", scheList);
+
+			// 結果ページにフォワードする
 		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule-regi.jsp");
 		    dispatcher.forward(request, response);
 		}

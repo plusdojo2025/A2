@@ -51,19 +51,21 @@ public class OReportDetailServlet extends HttpServlet {
 	
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		int reportId = Integer.parseInt(request.getParameter("reportId"));
+		if (request.getParameter("ぼたん").equals("nakami")) {
+			int reportId = Integer.parseInt(request.getParameter("reportId"));
 		
 		// 検索処理を行う
 		ReportDAO rDao = new ReportDAO();
-		List<AllDto> reportList = rDao.select1(new AllDto(reportId));
+		List<AllDto> rdList = rDao.select(reportId);
 
 		// 検索結果をリクエストスコープに格納する
-		request.setAttribute("oReportDetailList", reportList);
+		request.setAttribute("oReportDetailList", rdList);
 		
 		// 飼い主報告詳細ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_detail.jsp");
 		dispatcher.forward(request, response);
 	
+		}
 	}
 
 }

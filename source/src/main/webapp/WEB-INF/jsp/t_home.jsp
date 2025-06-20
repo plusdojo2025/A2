@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,6 +106,7 @@ function createProcess(year, month) {
                 } else {
 					//表示したい項目がある場合は、ここでリンクを設定する
                     calendar += "<td>" + count + "<br>"
+                    //　↓ここで遷移指定できる
                     +"<a href=''>テスト文字列"+year+"</a>"
                     +"</td>";
 

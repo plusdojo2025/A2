@@ -55,7 +55,7 @@ public class OReportDetailServlet extends HttpServlet {
 		
 		// 検索処理を行う
 		ReportDAO rDao = new ReportDAO();
-		List<AllDto> reportList = rDao.select(new AllDto(reportId));
+		List<AllDto> reportList = rDao.select1(new AllDto(reportId));
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("oReportDetailList", reportList);

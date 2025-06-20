@@ -252,7 +252,7 @@ public class ReportDAO {
 		}
 
 		// 引数report指定された項目で検索して一覧がクリックされたら報告詳細表示
-		public List<AllDto> select1(AllDto reportdetail) {
+		public List<AllDto> select(int reportId) {
 			Connection conn = null;
 			List<AllDto> rdList = new ArrayList<AllDto>();
 
@@ -270,8 +270,8 @@ public class ReportDAO {
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
-				if (reportdetail.getReportId() != 0) {
-					pStmt.setString(1, "%" + reportdetail.getReportId() + "%");
+				if (reportId != 0) {
+					pStmt.setString(1, "%" + reportId + "%");
 				} else {
 					pStmt.setString(1, "%");
 				}
@@ -283,7 +283,6 @@ public class ReportDAO {
 				while (rs.next()) {
 					AllDto dto = new AllDto();
 					dto.setReportId(rs.getInt("reportId"));
-					
 					rdList.add(dto);
 				}
 			} catch (SQLException e) {

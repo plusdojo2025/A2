@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="/webapp/css/style.css">
 </head>
 <body>
-<div class="wanko">
+
   <!-- ヘッダー（ここから） -->
   <h1 id="logo">
     <a href="/webapp/LoginServlet"><img src="/webapp/img/ぶりログ.png" width="250" height="200" alt="ぶりログ">
@@ -16,8 +17,16 @@
   </h1>
   <!-- ヘッダー（ここまで） -->
   
-   <form id="login_form" method="POST" action="/webapp/LoginServlet">
-    <table>
+   <form  method="POST" action="<c:url value='/LoginServlet'/>" >
+    ID<input type="text" name="id"><br>
+    パスワード<input type="password" name="pw"><br>
+    <input type="submit" name="logbut" value="ログイン">
+    <input type="reset" name="reset" value="リセット">
+    </form>
+    <div>
+    ${errMsg}
+    </div>
+    <!--  <table>
       <tr>
         <td>
           <label>ID<br>
@@ -39,7 +48,7 @@
         <td>
       </tr>
     </table>
-  </form>
+  </form>-->
   <div id="footer">
   <p><a href="LoginServlet?action=regi">新規登録はこちら</a></p>
   <p>ID/パスワードを忘れた方は〇〇までご連絡ください</p>

@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
+import dto.AllDto;
 
 
 
 
-@WebServlet(urlPatterns = {"/", "/LoginServlet"})
+@WebServlet(urlPatterns = "")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,22 +41,25 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// 入力データの取得（文字コードの指定も忘れずに）
 		request.setCharacterEncoding("UTF-8");
+		
+		if(request.getParameter("logbut").equals("ログイン")) {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		
 		//DAOを実体化
 		UserDAO dao = new UserDAO();
 		//ログインできる？できなかったらdtoはnullになる
-		String dto = dao.login(id,pw);
+		AllDto luser = dao.login(id,pw);
+		
 		
 		//ログイン成功時
-		if(dto!=null) {
+		if(luser!=null) {
 			//取得したユーザー情報をuserという名前でsessionに保存
 			HttpSession session = request.getSession();
-			session.setAttribute("user",dto);
+			session.setAttribute("user",luser);
 			//リダイレクトにてMenuServletに処理を移す
 			//MenuServletでトレーナーか顧客かを判別する
-			response.sendRedirect("/webappAns/MenuServlet");
+			response.sendRedirect("HomeServlet");
 		//ログイン失敗時
 		}else {
 			//エラーメッセージを次の画面で使えるようrequestにセット
@@ -64,7 +68,7 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 			dispatcher.forward(request, response);
 		}
-		
+		}
 	}
 }
 

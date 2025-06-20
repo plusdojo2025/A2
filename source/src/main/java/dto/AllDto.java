@@ -30,7 +30,7 @@ public class AllDto implements Serializable {
 	 //ユーザーテーブル
 	 private String userNameId;	/*飼い主ID*/
 	 private String ruby;		/*ふりがな*/
-	 private LocalDate birth;	/*生年月日*/
+	 private String birth;	/*生年月日*/
 	 private String name;		/*飼い主の名前*/
 	 private String pw;			/*PW*/
 	 private String uPhone;		/*電話番号*/
@@ -235,11 +235,11 @@ public class AllDto implements Serializable {
 		this.ruby = ruby;
 	}
 
-	public LocalDate getBirth() {
+	public String getBirth() {
 		return birth;
 	}
 
-	public void setBirth(LocalDate birth) {
+	public void setBirth(String birth) {
 		this.birth = birth;
 	}
 

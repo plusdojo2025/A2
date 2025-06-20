@@ -12,8 +12,8 @@ create table USER(
 		uPhone2 varchar(50)  ,
 		address varchar(50) NOT NULL ,
 		UserUniqueId boolean NOT NULL ,
-		userSchoolId INT NOT NULL,
-		) ;
+		userSchoolId INT NOT NULL
+		);
 		
 
 
@@ -45,13 +45,15 @@ create table POOP (
 		tName varchar(50) NOT NULL,
 		nowTime datetime default CURRENT_TIMESTAMP,
 		photo  varchar(300),
-		color BETWEEN 1 AND 5,
-		hardness BETWEEN 1 AND 5,
+		color INT,
+		hardness INT,
 		abnormal boolean NOT NULL,
 		PoopDogId int,
 		FOREIGN KEY (PoopDogId) REFERENCES WANKO(wankoDogId),
 		memo varchar(300),
-		date datetime default CURRENT_TIMESTAMP
+		date datetime default CURRENT_TIMESTAMP,
+		check(color BETWEEN 1 AND 5),
+		check(hardness BETWEEN 1 AND 5)
 		);
 
 
@@ -154,7 +156,7 @@ INSERT INTO WANKO(
 
 INSERT INTO WANKO(
 		dogName,dogBreed,dogBirth,gender,state,
-		wakuchin,nameId,dogPhoto,kyosei,dogRegist,
+		wakuchin,wankoNameId,dogPhoto,kyosei,dogRegist,
 		remarks1,remarks2,remarks3,remarks4,remarks5,injection,rabies
 )		VALUES(
 		'らん','シュナウザー','2015-03-22',FALSE,'甘えん坊な性格',

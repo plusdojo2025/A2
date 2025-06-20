@@ -4,13 +4,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>わんこ登録</title>
 </head>
 <body>
 
 <h1>わんこ登録</h1>
-<form method="post" action="/webapp/WankoServlet">
-	<table class="inputFields">
+<form method="post" action="<c:url value='/WankoServlet'/>">
+	
+	写真<input type="file" name="dogPhoto" accept="image/*" onchange="previewImage(this);"><br>
+	わんこの名前<input type="text" name="dogName"><br>
+	飼い主ID<input type="text" name="name"><br>
+	ワクチン歴<input type="file" name="wakuchin"><br>
+	去勢歴<input type="radio" name="kyosei" value="true">あり
+				<input type="radio" name="kyosei" value="false">なし<br>
+	性別<input type="radio" name="gender" value="true">オス
+				<input type="radio" name="gender" value="false">メス<br>
+	犬種<input type="text" name="dogBreed"><br>
+	誕生日<input type="Date" name="dogBirth"><br>
+	備考<input type="text" name="remarks" placeholder="備考 1"><br>
+	<input type="submit" name="butt" value="登録"><br>
+	
+</form>
+<div>
+${msg}
+</div>
+<!--  	<table class="inputFields">
 		<tr>
 			<td>
 				<label>写真<br>
@@ -91,11 +109,11 @@
 	      	</tr>		
 	</table>
 
+-->
 
 
 
 
-</form>
 <script>
 
 function previewImage(obj){

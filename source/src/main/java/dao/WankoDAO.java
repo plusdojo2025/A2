@@ -129,6 +129,59 @@ public class WankoDAO {
 			return wankoList;
 		}
 		
+		// わんこ新規登録　トレーナー用　　　　　↓　型と名前
+				public int insert(String dogPhoto, String dogName, String name, String wakuchin, String kyosei, String gender, String dogBreed, String dogBirth, String remarks ) {
+					Connection conn = null;
+					int ans = 0;
+					
+					try {
+						// JDBCドライバを読み込む
+						Class.forName("com.mysql.cj.jdbc.Driver");
+
+						// データベースに接続する
+						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+								+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+								"root", "password");
+						
+						// SQL文を準備する　　　　　　　　　　↓テーブル名　　　　　　↓登録する数？作る
+						String sql = "INSERT INTO WANKO VALUES (?,?,?,?,?,?,?,?,?)" ;
+						PreparedStatement pStmt = conn.prepareStatement(sql);
+						
+						//SQLを完成させる
+						pStmt.setString(1, dogPhoto);
+						pStmt.setString(2, dogName);
+						pStmt.setString(3, name);
+						pStmt.setString(4, wakuchin);
+						pStmt.setString(5, kyosei);
+						pStmt.setString(6, gender);
+						pStmt.setString(7, dogBreed);
+						pStmt.setString(8, dogBirth);
+						pStmt.setString(9, remarks);
+						
+						// SQL文を実行し、結果（int型)を取得する
+						ans = pStmt.executeUpdate();
+						
+						// SQL文を実行する
+					} catch (SQLException e) {
+						e.printStackTrace();
+						//インサートできない
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+						//根本的になんかおかしい
+					} finally {
+						// データベースを切断
+						if (conn != null) {
+							try {
+								conn.close();
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+					// 結果を返す
+								return ans;
+				}
+		
 		// 引数cardで指定されたレコードを登録し、成功したらtrueを返す
 		public boolean insert(AllDto wanko) {
 			Connection conn = null;

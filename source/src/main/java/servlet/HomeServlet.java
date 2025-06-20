@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CalendarDAO;
 import dto.AllDto;
 /**
  * Servlet implementation class HomeServlet
@@ -21,40 +20,29 @@ public class HomeServlet extends HttpServlet {
       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+			
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
+		if (session.getAttribute("user") == null) {
 			response.sendRedirect("A2/LoginServlet");
 			return;
-		}
-		
-		// リクエストパラメータを取得するカレンダー
-		
-		request.setCharacterEncoding("UTF-8");
-		String calendarDate = request.getParameter("calendarDate");
-		
-		CalendarDAO cDao = new CalendarDAO();
-		AllDto cDto = new AllDto();
-		
-		cDto.setCalendarDate(null);
-		
-		//List<AllDto> calendar = cDao.select(new AllDto(calendarId, calendarDate, title, time, calendarMemo, calendarDogId));
-		
+		}else {
+		AllDto log = (AllDto)session.getAttribute("user");
 		// メニューページにフォワードする
-		if(session.getAttribute("userUniqueId") == Boolean.TRUE) {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/t_home.jsp");
-		dispatcher.forward(request, response);
-		}else if(session.getAttribute("userUniqueId") == Boolean.FALSE){
+		if(log.isUserUniqueId() == true ) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/t_home.jsp");
+			dispatcher.forward(request, response);
+		}else if(log.isUserUniqueId() == false ) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_home.jsp");
-			dispatcher.forward(request, response);	
+			dispatcher.forward(request, response);
+		}
 		}
 		}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+
+	}
 	}
 
-}

@@ -28,10 +28,15 @@ public class HomeServlet extends HttpServlet {
 		}else {
 		AllDto log = (AllDto)session.getAttribute("user");
 		// メニューページにフォワードする
+		//トレーナー側
 		if(log.isUserUniqueId() == true ) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/t_home.jsp");
 			dispatcher.forward(request, response);
+			
+		//飼い主側
 		}else if(log.isUserUniqueId() == false ) {
+			String uId = re
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_home.jsp");
 			dispatcher.forward(request, response);
 		}

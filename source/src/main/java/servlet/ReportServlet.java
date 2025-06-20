@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 
-import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +34,7 @@ public class ReportServlet extends HttpServlet {
 		}
 	
 		// 後でやるにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/report_regi.jsp/");
 		dispatcher.forward(request, response);
 	}
 	
@@ -55,30 +54,64 @@ public class ReportServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		Boolean food = Boolean.parseBoolean(request.getParameter("food"));
-		int walk = Integer.parseInt(request.getParameter("walk"));
-		Boolean reportState = Boolean.parseBoolean(request.getParameter("reportstate"));
-		String training = request.getParameter("training");
-		String reportMemo = request.getParameter("reportmemo");
-		String reportDate = request.getParameter("reportdate");
+		String action = request.getParameter("action");
 		
+		//共通で使うID
+		String reportId = request.getParameter("reportId");
+		String reportDogId = request.getParameter("reportDogId");
 		
-		// 登録処理を行う
 		ReportDAO rDao = new ReportDAO();
 		AllDto rDto = new AllDto();
 		
-		if (rDao.insert(new Report(food, walk, reportState, training,
-				reportMemo, reportDate))) { // 登録成功
-			request.setAttribute("result", new Result("登録成功！", "レコードを登録しました。", "/A2/ReportServlet"));
-		} else { // 登録失敗
-			request.setAttribute("result", new Result("登録失敗！", "レコードを登録できませんでした。", "/A2/ReportServlet"));
+		if("insert".equals(action) || "update".equals(action)) {
+		Boolean food = Boolean.parseBoolean(request.getParameter("food"));
+		int walk = Integer.parseInt(request.getParameter("walk"));
+		Boolean reportState = Boolean.parseBoolean(request.getParameter("reportState"));
+		String training = request.getParameter("training");
+		String reportMemo = request.getParameter("reportMemo");
+		String reportDate = request.getParameter("reportDate");
+		
+		
+		rDto.setReportId(reportId);
+		rDto.setFood(food);
+		rDto.setWalk(walk);
+		rDto.setReportState(reportState);
+		rDto.setTraining(training);
+		rDto.setReportMemo(reportMemo);
+		rDto.setReportDate(reportDate);
+		rDto.setReportDogId(reportDogId);
 		}
-
-		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
-		dispatcher.forward(request, response);
-	}
-}
+		
+		if("insert".equals(action)) {
+			if (rDao.insert(rDto)) {
+				request.setAttribute("message", "レポートの登録に成功しました。");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_list.jsp");
+				dispatcher.forward(request, response);
+			} else { 
+				request.setAttribute("error", "レポートの登録に失敗しました。");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/report_regi.jsp");
+				dispatcher.forward(request, response);
+			}
+		}else if ("update".equals(action)) {
+			if (rDao.update(rDto)) {
+				request.setAttribute("message", "レポートの更新に成功しました。");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_list.jsp");
+				dispatcher.forward(request, response);
+			} else { 
+				request.setAttribute("error", "レポートの更新に失敗しました。");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/report_regi.jsp");
+				dispatcher.forward(request, response);
+			}
+		}else if ("delete".equals(action)) {
+			if (rDao.delete(reportId)) {
+				request.setAttribute("message", "レポートの削除に成功しました。");
+				
+			} else { 
+				request.setAttribute("error", "レポートの削除に失敗しました。");
+		}
+		}}}
+	
+	
 	
 	
 	

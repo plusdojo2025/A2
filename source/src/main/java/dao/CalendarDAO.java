@@ -260,6 +260,104 @@ public class CalendarDAO {
 			return result;
 		}
 		
+		
+		//schedule_regiの一覧表示
+				public List<AllDto> select(AllDto seleCalendar) {
+					//どこのデータベースにつなぐかを入れるConn
+					Connection conn = null;
+					List<AllDto> calendar = new ArrayList<AllDto>();
+
+					try {
+						// JDBCドライバを読み込む
+						Class.forName("com.mysql.cj.jdbc.Driver");
+
+						// データベースに接続する ([webapp2] [root] [password]がいじるところ)
+						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+								+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+								"root", "password");
+
+						// SQL文を準備する
+						String sql ="""
+								SELECT 	
+									calendarId, 
+									calendarDate, 
+									title, 
+									time, 
+									calendarMemo, 
+									calendarDogId, 
+								FROM AllDate
+								
+								WHERE calendarId LIKE ? 
+								OR calendarDate LIKE ? 
+								OR title LIKE ? 
+								OR time LIKE ?
+								OR calendarMemo LIKE ? 
+								OR calendarDogId LIKE ? 
+								
+								ORDER BY calendarId
+								""";
+						PreparedStatement pStmt = conn.prepareStatement(sql);
+
+						// SQL文を完成させる　//検索はないのでここいらない？
+						if (seleCalendar.getCalendarId() != 0) {
+							pStmt.setString(1, "%" + seleCalendar.getCalendarId() + "%");
+							pStmt.setString(2, "%" + seleCalendar.getCalendarDate() + "%");
+							pStmt.setString(3, "%" + seleCalendar.getTitle() + "%");
+							pStmt.setString(4, "%" + seleCalendar.getTime() + "%");
+							pStmt.setString(5, "%" + seleCalendar.getCalendarMemo() + "%");
+							pStmt.setString(6, "%" + seleCalendar.getCalendarDogId() + "%");
+							
+						} else {
+							pStmt.setString(1, "%");
+							pStmt.setNull(2, java.sql.Types.DATE);
+							pStmt.setString(3, "%");
+							pStmt.setString(4, "%");
+							pStmt.setString(5, "%");
+							pStmt.setString(6, "%");
+						}
+
+						// SQL文を実行し、結果表を取得する 
+						//ResultSet型は何でも入れることができる。DAOの中じゃないと使えない。
+						//コネクションと密接な関係があり、コネクションが消えたときに消えちゃう。
+						//なのでArrayListに入れ替えておく必要がある
+						ResultSet rs = pStmt.executeQuery();
+
+						// 結果表をコレクションにコピーする　//rs.next()は先生の板書を確認
+							//DTOを作り出している。ｒｓ.getStringで取ってきたものを、えだまめの皮に入れてセットを作っている。
+						while (rs.next()) {
+							AllDto dto=new AllDto();
+							dto.setCalendarId(rs.getInt("calendarId"));
+							dto.setCalendarDate(rs.getTimestamp("calendarDate").toLocalDateTime());
+							dto.setTitle(rs.getString("title"));
+							dto.setTime(rs.getTime("time").toLocalTime());
+							dto.setCalendarMemo(rs.getInt("calendarMemo"));
+							dto.setCalendarDogId(rs.getInt("calendarDogId"));
+							
+							//addでcardListにbcを入れている　（cardListはArrayList)
+							calendar.add(dto);
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+						calendar = null;
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+						calendar = null;
+					} finally {
+						// データベースを切断
+						if (conn != null) {
+							try {
+								conn.close();
+							} catch (SQLException e) {
+								e.printStackTrace();
+								calendar = null;
+							}
+						}
+					}
+
+					// 結果を返す
+					return calendar;
+				}
+		
 
 
 }

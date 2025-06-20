@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,7 +36,7 @@ public class ReportServlet extends HttpServlet {
 		}
 	
 		// 後でやるにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/report_regi.jsp/");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/report_regi.jsp");
 		dispatcher.forward(request, response);
 	}
 	
@@ -57,11 +59,13 @@ public class ReportServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		//共通で使うID
-		String reportId = request.getParameter("reportId");
-		String reportDogId = request.getParameter("reportDogId");
+		int reportId = Integer.parseInt(request.getParameter("reportId"));
+		int reportDogId = Integer.parseInt(request.getParameter("reportDogId"));
 		
 		ReportDAO rDao = new ReportDAO();
 		AllDto rDto = new AllDto();
+		rDto.setReportId(reportId);
+		rDto.setReportDogId(reportDogId);
 		
 		if("insert".equals(action) || "update".equals(action)) {
 		Boolean food = Boolean.parseBoolean(request.getParameter("food"));
@@ -69,17 +73,17 @@ public class ReportServlet extends HttpServlet {
 		Boolean reportState = Boolean.parseBoolean(request.getParameter("reportState"));
 		String training = request.getParameter("training");
 		String reportMemo = request.getParameter("reportMemo");
-		String reportDate = request.getParameter("reportDate");
+		LocalDate reportDate = LocalDate.parse(request.getParameter("reportDate"));
 		
 		
-		rDto.setReportId(reportId);
+		
 		rDto.setFood(food);
 		rDto.setWalk(walk);
 		rDto.setReportState(reportState);
 		rDto.setTraining(training);
 		rDto.setReportMemo(reportMemo);
 		rDto.setReportDate(reportDate);
-		rDto.setReportDogId(reportDogId);
+		
 		}
 		
 		if("insert".equals(action)) {
@@ -103,13 +107,22 @@ public class ReportServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		}else if ("delete".equals(action)) {
-			if (rDao.delete(reportId)) {
+			if (rDao.delete(rDto)) {
 				request.setAttribute("message", "レポートの削除に成功しました。");
-				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_list.jsp");
+				dispatcher.forward(request, response);
 			} else { 
 				request.setAttribute("error", "レポートの削除に失敗しました。");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/report_regi.jsp");
+				dispatcher.forward(request, response);
+			}
+		}else if ("search".equals(action)) {
+			List<AllDto>list = rDao.search(rDto);
 		}
-		}}}
+	
+	
+	
+	}}
 	
 	
 	

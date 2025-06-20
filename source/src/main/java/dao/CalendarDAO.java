@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -262,10 +263,10 @@ public class CalendarDAO {
 		
 		
 		//schedule_regiの一覧表示
-				public List<AllDto> select(AllDto seleCalendar) {
+				public List<AllDto> selectAll(LocalDate date){
 					//どこのデータベースにつなぐかを入れるConn
 					Connection conn = null;
-					List<AllDto> calendar = new ArrayList<AllDto>();
+					List<AllDto> scheList = new ArrayList<AllDto>();
 
 					try {
 						// JDBCドライバを読み込む
@@ -279,42 +280,32 @@ public class CalendarDAO {
 						// SQL文を準備する
 						String sql ="""
 								SELECT 	
-									calendarId, 
 									calendarDate, 
-									title, 
-									time, 
-									calendarMemo, 
-									calendarDogId, 
-								FROM AllDate
+									WANKO.dogName,
+									carendarId,
+									title,
+									time,
+									calendarMemo,
+									calendarDogId,
+									userUniqueId,
+									userSchoolId
+								FROM CALENDAR
+								JOIN WANKO
+								ON CALENDAR.calendarDogId=WANKO.wankoDogId
+								JOIN USER
+								ON WANKO.wankoDogId=USER.userNameId
 								
-								WHERE calendarId LIKE ? 
-								OR calendarDate LIKE ? 
-								OR title LIKE ? 
-								OR time LIKE ?
-								OR calendarMemo LIKE ? 
-								OR calendarDogId LIKE ? 
-								
-								ORDER BY calendarId
+								WHERE calendarDate = ? 
+									userSchoolId = ?
+								ORDER BY carendarId
 								""";
 						PreparedStatement pStmt = conn.prepareStatement(sql);
 
 						// SQL文を完成させる　//検索はないのでここいらない？
-						if (seleCalendar.getCalendarId() != 0) {
-							pStmt.setString(1, "%" + seleCalendar.getCalendarId() + "%");
-							pStmt.setString(2, "%" + seleCalendar.getCalendarDate() + "%");
-							pStmt.setString(3, "%" + seleCalendar.getTitle() + "%");
-							pStmt.setString(4, "%" + seleCalendar.getTime() + "%");
-							pStmt.setString(5, "%" + seleCalendar.getCalendarMemo() + "%");
-							pStmt.setString(6, "%" + seleCalendar.getCalendarDogId() + "%");
+							System.out.println(date+"渡ってきたdateだよ");
+							pStmt.setObject(1, date);
 							
-						} else {
-							pStmt.setString(1, "%");
-							pStmt.setNull(2, java.sql.Types.DATE);
-							pStmt.setString(3, "%");
-							pStmt.setString(4, "%");
-							pStmt.setString(5, "%");
-							pStmt.setString(6, "%");
-						}
+						
 
 						// SQL文を実行し、結果表を取得する 
 						//ResultSet型は何でも入れることができる。DAOの中じゃないと使えない。
@@ -334,14 +325,14 @@ public class CalendarDAO {
 							dto.setCalendarDogId(rs.getInt("calendarDogId"));
 							
 							//addでcardListにbcを入れている　（cardListはArrayList)
-							calendar.add(dto);
+							scheList.add(dto);
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
-						calendar = null;
+						scheList = null;
 					} catch (ClassNotFoundException e) {
 						e.printStackTrace();
-						calendar = null;
+						scheList = null;
 					} finally {
 						// データベースを切断
 						if (conn != null) {
@@ -349,13 +340,13 @@ public class CalendarDAO {
 								conn.close();
 							} catch (SQLException e) {
 								e.printStackTrace();
-								calendar = null;
+								scheList = null;
 							}
 						}
 					}
 
 					// 結果を返す
-					return calendar;
+					return scheList;
 				}
 		
 

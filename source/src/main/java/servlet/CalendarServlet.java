@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -35,14 +36,15 @@ public class CalendarServlet extends HttpServlet {
 		}else {//最初のアクション（予定登録を表示）
 			//リクエストパラメータの取得
 	        String action = request.getParameter("action");
-	        int yearString = Integer.parseInt(request.getParameter("year"));
-	        int monthString = Integer.parseInt(request.getParameter("month"));
-	        int countString = Integer.parseInt(request.getParameter("count"));
+	        int year = Integer.parseInt(request.getParameter("year"));
+	        int month = Integer.parseInt(request.getParameter("month"));
+	        int count = Integer.parseInt(request.getParameter("count"));
 	        //Dateになおす
+	        LocalDate date = LocalDate.of(year, month, count);
 	        
 			// 検索処理を行う
 			CalendarDAO CaleDao = new CalendarDAO();
-			List<AllDto> scheList = CaleDao.select(new AllDtto(calendarDate));
+			List<AllDto> scheList = CaleDao.selectAll(date);
 
 			// 検索結果をリクエストスコープに格納する
 			request.setAttribute("scheList", scheList);

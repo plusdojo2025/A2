@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dto.AllDto;
+
 /**
  * Servlet implementation class CalendarServlet
  */
@@ -20,21 +22,25 @@ public class CalendarServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
+		//セッションからログイン者情報を取得
+		AllDto log = (AllDto)session.getAttribute("user");
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		if (session.getAttribute("id") == null) {
 			response.sendRedirect("/A2/LoginServlet");
 			return;
-		}else {
+		}else {//最初のアクション（予定登録を表示）
+			//リクエストパラメータの取得
+	        String action = request.getParameter("action");
+	        String yearString = request.getParameter("year");
+	        String monthString = request.getParameter("month");
+	        String countString = request.getParameter("count");
+	        
+	        
 		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule-regi.jsp");
 		    dispatcher.forward(request, response);
 		}
-		
-		//最初のアクション（予定登録を表示）
-		String action = request.getParameter("action");
-		if(action == null ) {
-			
-		}
+
 	}
 	
 	

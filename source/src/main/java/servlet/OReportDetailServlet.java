@@ -35,7 +35,6 @@ public class OReportDetailServlet extends HttpServlet {
 	
 	}
 	
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -49,24 +48,14 @@ public class OReportDetailServlet extends HttpServlet {
 	
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		
-		String company = request.getParameter("company");
-		String date = request.getParameter("birth");
-		
-		
-		
-		
-		private int reportId;				/*報告ID*/
-		 private boolean food;		/*ごはん*/
-		 private int walk;				/*散歩*/
-		 private boolean reportState;		/*様子*/
-		 private String training;				/*トレーニング*/
-		 private String reportMemo;			/*メモ*/
-		 private LocalDate reportDate;		/*日付*/
-		 private int reportDogId;	
-		String company = request.getParameter("company");
-		String name = request.getParameter("name");
-		String address = request.getParameter("address");
+		int reportId = Integer.parseInt(request.getParameter("reportId"));
+		boolean food = Boolean.parseBoolean(request.getParameter("food"));
+		int walk = Integer.parseInt(request.getParameter("walk"));
+		boolean reportState = Boolean.parseBoolean(request.getParameter("reportState"));
+		String training = request.getParameter("training");
+		String reportMemo = request.getParameter("food");
+		LocalDate reportDate =LocalDate.parse(request.getParameter("repoertDate"));
+		int reportDogId = Integer.parseInt(request.getParameter("reportDogId"));
 		
 		
 		

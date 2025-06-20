@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.AllDto;
-import dto.Bc;
 
 
 
@@ -252,67 +251,47 @@ public class ReportDAO {
 	
 		}
 
-		// 引数report指定された項目で検索して、取得されたデータのリストを返す
-		public List<AllDto> select(AllDto report) {
+		// 引数report指定された項目で検索して一覧がクリックされたら報告詳細表示
+		public List<AllDto> select1(AllDto reportdetail) {
 			Connection conn = null;
-			List<Bc> cardList = new ArrayList<Bc>();
+			List<AllDto> rdList = new ArrayList<AllDto>();
 
 			try {
 				// JDBCドライバを読み込む
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp2?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "SELECT number, company, department, position, name, zipcode, address, phone, fax, email, remarks FROM Bc WHERE company LIKE ? AND name LIKE ? AND address LIKE ? ORDER BY number";
+				String sql = "SELECT reportId FROM AllDto WHERE reportId LIKE ? ORDER BY number";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
-				if (card.getCompany() != null) {
-					pStmt.setString(1, "%" + card.getCompany() + "%");
+				if (reportdetail.getReportId() != 0) {
+					pStmt.setString(1, "%" + reportdetail.getReportId() + "%");
 				} else {
 					pStmt.setString(1, "%");
 				}
-//				if (card.getName() != null) {
-//					pStmt.setString(2, "%" + card.getName() + "%");
-//				} else {
-//					pStmt.setString(2, "%");
-//				}
-//				if (card.getAddress() != null) {
-//					pStmt.setString(3, "%" + card.getAddress() + "%");
-//				} else {
-//					pStmt.setString(3, "%");
-//				}
-				
 
 				// SQL文を実行し、結果表を取得する
 				ResultSet rs = pStmt.executeQuery();
 
 				// 結果表をコレクションにコピーする
 				while (rs.next()) {
-					Bc bc = new Bc(rs.getInt("number"),
-								   rs.getString("company"),
-								   rs.getString("department"),
-								   rs.getString("position"),
-								   rs.getString("name"),
-								   rs.getString("zipcode"),
-								   rs.getString("address"),
-								   rs.getString("phone"),
-								   rs.getString("fax"),
-								   rs.getString("email"),
-								   rs.getString("remarks"));
-					// bc.setNumber(rs.getInt("number"));とかでも書ける
-					cardList.add(bc);
+					AllDto dto = new AllDto();
+					dto.setReportId(rs.getInt("reportId"));
+					
+					rdList.add(dto);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-				cardList = null;
+				rdList = null;
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
-				cardList = null;
+				rdList = null;
 			} finally {
 				// データベースを切断
 				if (conn != null) {
@@ -320,13 +299,13 @@ public class ReportDAO {
 						conn.close();
 					} catch (SQLException e) {
 						e.printStackTrace();
-						cardList = null;
+						rdList = null;
 					}
 				}
 			}
 
 			// 結果を返す
-			return cardList;
+			return rdList;
 		}
 
 }

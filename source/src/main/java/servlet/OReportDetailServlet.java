@@ -1,7 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import dao.ReportDAO;
+import dto.AllDto;
 
 /**
  * Servlet implementation class OReportDetailServlet
@@ -48,21 +51,21 @@ public class OReportDetailServlet extends HttpServlet {
 	
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		int reportId = Integer.parseInt(request.getParameter("reportId"));
-		boolean food = Boolean.parseBoolean(request.getParameter("food"));
-		int walk = Integer.parseInt(request.getParameter("walk"));
-		boolean reportState = Boolean.parseBoolean(request.getParameter("reportState"));
-		String training = request.getParameter("training");
-		String reportMemo = request.getParameter("food");
-		LocalDate reportDate =LocalDate.parse(request.getParameter("repoertDate"));
-		int reportDogId = Integer.parseInt(request.getParameter("reportDogId"));
+		if (request.getParameter("ぼたん").equals("nakami")) {
+			int reportId = Integer.parseInt(request.getParameter("reportId"));
 		
-		
+		// 検索処理を行う
+		ReportDAO rDao = new ReportDAO();
+		List<AllDto> rdList = rDao.select(reportId);
+
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("oReportDetailList", rdList);
 		
 		// 飼い主報告詳細ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_detail.jsp");
 		dispatcher.forward(request, response);
 	
+		}
 	}
 
 }

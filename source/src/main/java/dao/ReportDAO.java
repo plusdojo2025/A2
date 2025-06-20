@@ -248,6 +248,64 @@ public class ReportDAO {
 
 			// 結果を返す
 			return result;
-			}
+	
 		}
+
+		// 引数report指定された項目で検索して一覧がクリックされたら報告詳細表示
+		public List<AllDto> select(int reportId) {
+			Connection conn = null;
+			List<AllDto> rdList = new ArrayList<AllDto>();
+
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+						"root", "password");
+
+				// SQL文を準備する
+				String sql = "SELECT reportId FROM AllDto WHERE reportId LIKE ? ORDER BY number";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+
+				// SQL文を完成させる
+				if (reportId != 0) {
+					pStmt.setString(1, "%" + reportId + "%");
+				} else {
+					pStmt.setString(1, "%");
+				}
+
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+
+				// 結果表をコレクションにコピーする
+				while (rs.next()) {
+					AllDto dto = new AllDto();
+					dto.setReportId(rs.getInt("reportId"));
+					rdList.add(dto);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				rdList = null;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				rdList = null;
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						rdList = null;
+					}
+				}
+			}
+
+			// 結果を返す
+			return rdList;
+		}
+
+}
 

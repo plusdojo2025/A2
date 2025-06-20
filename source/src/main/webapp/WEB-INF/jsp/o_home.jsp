@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +10,8 @@
 <body>
 <%@ include file="header.jsp" %>
 <div>
-	<p><img src="${e.dogphoto}" alt="${e.dogName}の写真">
-	<p>${dogname}</p>
-	<p>${sessionScope.name} さん　ログイン中</p>
+	<p><img src="${dogphoto}" alt="${dogName}の写真">
+	<p><c:out value="${sessionScope.user.name}"/>さん　ログイン中</p>
 </div>
 <h1>予約登録</h1>
    <div class="wrapper">

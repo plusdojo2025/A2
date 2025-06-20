@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <!--　box表示   
+    <!--　box表示    
     <style>
         *{
             outline: 1px solid #FF0000
         }
     </style>
---> 
+-->
 
 <style>
 
@@ -98,7 +98,7 @@ header {
 
   <div class="header-right">
     <div class="user-info">
-      <span class="welcome">ようこそさん</span>
+      <span class="welcome">ようこそ<c:out value="${sessionScope.user.name}"/>さん</span>
       <button class="logout-btn">ログアウト</button>
     </div>
 

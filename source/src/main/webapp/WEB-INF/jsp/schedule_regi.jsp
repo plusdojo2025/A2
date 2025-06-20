@@ -22,7 +22,7 @@
 	<input type="text" name="name" value="${e.name}"><br>						
 	<input type="submit" name="regist" value="登録">
 	<h2>一覧</h2>
-	タイトル<input type="text" name="title"><br>
+	タイトル<span>${}</span><br>
 	時間<input type = "time"><br>
 	メモ<input type="text" name="memo"><br>
 	ワンコ情報

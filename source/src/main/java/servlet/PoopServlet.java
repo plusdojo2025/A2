@@ -3,32 +3,31 @@ package servlet;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 
 import dao.PoopDAO;
 import dto.AllDto;
+import dto.Bc;
 
 
 /**
  * Servlet implementation class RegistServlet
  */
-@WebServlet("/RegistServlet")
+@WebServlet("/PServlet")
 public class PoopServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//ただの画面遷移
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -40,16 +39,16 @@ public class PoopServlet extends HttpServlet {
 		// リクエストパラメータを取得する
 		
 	request.setCharacterEncoding("UTF-8");
+	
 	int  poopId =Integer.parseInt(request.getParameter("poopId"));
 	String tlName =request.getParameter("tlname");
 	LocalDateTime  nowtime=LocalDateTime.parse(request.getParameter("nowtime"));
 	String photo =request.getParameter("photo");
-	int  hardness =Integer.parseInt(request.getParameter("harness"));
+	int  hardness =Integer.parseInt(request.getParameter("hardness"));
 	boolean  abnormal = Boolean.parseBoolean(request.getParameter("abnormal"));
 	int  poopdogid =Integer.parseInt(request.getParameter("poopdogid"));
 	String memo =request.getParameter("memo");
 	LocalDate date =LocalDate.parse(request.getParameter("date"));
-	
 	
 	
 
@@ -66,7 +65,8 @@ public class PoopServlet extends HttpServlet {
 		pDto.setMemo(memo);
 		pDto.setDate(date);
 		
-		int ans = bDao.insert(poopId, tlName, nowtime, photo, hardness, abnormal, poopdogid, memo, date);
+		
+		int ans = bDao.insert(pDto);
 		
 		if( ans == 1) {
 			request.setAttribute("msg","登録完了");
@@ -79,14 +79,35 @@ public class PoopServlet extends HttpServlet {
 	
 		//検索
 			// 検索処理を行う
-			PoopDAO bDao = new PoopDAO();
-			List<AllDto> poopList = bDao.select(new AllDto(poopId, tlName, nowtime,  poopdogid, memo, date));
+			
+			List<AllDto> poopList = bDao.select(pDto);
 
 			// 検索結果をリクエストスコープに格納する
 			request.setAttribute("poopList", poopList);
 
 			// 結果ページにフォワードする
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/search_result.jsp");
+			dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
+			dispatcher.forward(request, response);
+			
+			
+			
+			// 更新または削除を行う
+			if (request.getParameter("submit").equals("更新")) {
+				if (bDao.update(new Bc(number, company, position, name, zipcode, address, phone, email, remarks))) { // 更新成功
+					request.setAttribute("result", new Result("更新成功！", "レコードを更新しました。", "/webapp/MenuServlet"));
+				} else { // 更新失敗
+					request.setAttribute("result", new Result("更新失敗！", "レコードを更新できませんでした。", "/webapp/MenuServlet"));
+				}
+			} else {
+				if (bDao.delete(new Bc(number, company, position, name, zipcode, address, phone, email, remarks))) { // 削除成功
+					request.setAttribute("result", new Result("削除成功！", "レコードを削除しました。", "/webapp/MenuServlet"));
+				} else { // 削除失敗
+					request.setAttribute("result", new Result("削除失敗！", "レコードを削除できませんでした。", "/webapp/MenuServlet"));
+				}
+			}
+			// 結果ページにフォワードする
+			dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
+}

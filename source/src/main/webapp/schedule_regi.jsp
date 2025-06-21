@@ -13,23 +13,30 @@
 		<span>ひとつ前に戻る
 		<img src = "claeimages/back.png" alt= "戻る">
 	</span></a>
+	
 	<h2>登録</h2>													<!-- 登録と一覧は縦に並べて表示する -->
-	<form>
-	タイトル<input type="text" name="title"><br>
-	時間<input type="time" name="nowTime" value="${e.nowTime}"><br>
-	メモ<input type="text" name="memo"><br>
-	ワンコ情報
-	<input type="text" name="name" value="${e.name}"><br>						
-	<input type="submit" name="regist" value="登録">
-	<h2>一覧</h2>
-	タイトル<input type="text" name="title"><br>
-	時間<input type = "time"><br>
-	メモ<input type="text" name="memo"><br>
-	ワンコ情報
-	<input type="text" name="name" value="${e.name}"><br>
-	<input type="submit" name="submit" value="更新">
-	<input type="submit" name="submit" value="削除">
+	<form method="POST" action="<c:url value='A2/CalendarServlet' />">
+		タイトル<input type="text" name="title"><br>
+		時間<input type="time" name="nowTime" value="${e.nowTime}"><br>
+		メモ<input type="text" name="memo"><br>
+		ワンコ情報 <!-- プルダウンが必要？ -->
+		<input type="text" name="name" value="${e.name}"><br>						
+		<input type="submit" name="regist" value="登録">
 	</form>	
+	
+	<h2>一覧</h2>
+	<c:forEach var="e" items="${scheList}">
+		<form method="POST" action="<c:url value='A2/CalendarServlet' />">
+			タイトル<span>${e.title}</span><br>
+			時間<span>${e.time}</span><br>
+			メモ<span>${e.memo}</span><br>
+			ワンコ情報 <!-- プルダウンが必要？ -->
+			<input type="text" name="name" value="${e.name}"><br>
+			<input type="submit" name="update" value="更新">
+			<input type="submit" name="delete" value="削除">
+		</form>	
+	</c:forEach>
+	
 </body>
 <!-- JavaScript（ここから） -->
 	<script>

@@ -266,7 +266,7 @@ public class CalendarDAO {
 				public List<AllDto> selectAll(LocalDate date){
 					//どこのデータベースにつなぐかを入れるConn
 					Connection conn = null;
-					List<AllDto> scheList = new ArrayList<AllDto>();
+					List<AllDto> resultList = new ArrayList<AllDto>();
 
 					try {
 						// JDBCドライバを読み込む
@@ -301,20 +301,14 @@ public class CalendarDAO {
 								""";
 						PreparedStatement pStmt = conn.prepareStatement(sql);
 
-						// SQL文を完成させる　//検索はないのでここいらない？
+						// SQL文を完成させる　
 							System.out.println(date+"渡ってきたdateだよ");
 							pStmt.setObject(1, date);
 							
-						
-
 						// SQL文を実行し、結果表を取得する 
-						//ResultSet型は何でも入れることができる。DAOの中じゃないと使えない。
-						//コネクションと密接な関係があり、コネクションが消えたときに消えちゃう。
-						//なのでArrayListに入れ替えておく必要がある
 						ResultSet rs = pStmt.executeQuery();
 
-						// 結果表をコレクションにコピーする　//rs.next()は先生の板書を確認
-							//DTOを作り出している。ｒｓ.getStringで取ってきたものを、えだまめの皮に入れてセットを作っている。
+						// 結果表をコレクションにコピーする　
 						while (rs.next()) {
 							AllDto dto=new AllDto();
 							dto.setCalendarId(rs.getInt("calendarId"));
@@ -325,14 +319,14 @@ public class CalendarDAO {
 							dto.setCalendarDogId(rs.getInt("calendarDogId"));
 							
 							//addでcardListにbcを入れている　（cardListはArrayList)
-							scheList.add(dto);
+							resultList.add(dto);
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
-						scheList = null;
+						resultList = null;
 					} catch (ClassNotFoundException e) {
 						e.printStackTrace();
-						scheList = null;
+						resultList = null;
 					} finally {
 						// データベースを切断
 						if (conn != null) {
@@ -340,13 +334,13 @@ public class CalendarDAO {
 								conn.close();
 							} catch (SQLException e) {
 								e.printStackTrace();
-								scheList = null;
+								resultList = null;
 							}
 						}
 					}
 
 					// 結果を返す
-					return scheList;
+					return resultList;
 				}
 		
 

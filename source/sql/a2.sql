@@ -59,7 +59,7 @@ create table POOP (
 
 		
 create table CALENDAR(
-		carendarId int PRIMARY KEY AUTO_INCREMENT,
+		calendarId int PRIMARY KEY AUTO_INCREMENT,
 		calendarDate date NOT NULL,
 		title varchar(50),
 		time time,

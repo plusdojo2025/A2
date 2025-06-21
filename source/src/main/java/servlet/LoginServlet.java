@@ -57,6 +57,8 @@ public class LoginServlet extends HttpServlet {
 			//取得したユーザー情報をuserという名前でsessionに保存
 			HttpSession session = request.getSession();
 			session.setAttribute("user",luser);
+			
+
 			//リダイレクトにてMenuServletに処理を移す
 			//MenuServletでトレーナーか顧客かを判別する
 			response.sendRedirect("HomeServlet");

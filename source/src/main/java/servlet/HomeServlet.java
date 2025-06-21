@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.WankoDAO;
 import dto.AllDto;
 /**
  * Servlet implementation class HomeServlet
@@ -35,7 +36,15 @@ public class HomeServlet extends HttpServlet {
 			
 		//飼い主側
 		}else if(log.isUserUniqueId() == false ) {
-			String uId = re
+			
+
+			//ログインわんこの表示
+			AllDto user = (AllDto) session.getAttribute("user");
+			String userNameId = user.getUserNameId();
+			WankoDAO wdao = new WankoDAO();
+			AllDto uDog = wdao.logdog(userNameId);
+			//ログインわんこをセッションスコープに入れとく
+			session.setAttribute("logdog",uDog);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_home.jsp");
 			dispatcher.forward(request, response);

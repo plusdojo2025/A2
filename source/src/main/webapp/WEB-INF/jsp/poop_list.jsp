@@ -4,10 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 
  <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/>
  <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
-  -->
  <script>
     jQuery(function($){
     	 // デフォルトの設定を変更（日本語化）--------------------
@@ -23,8 +21,9 @@
  </script>
 <meta charset="UTF-8">
 <title>うんち一覧</title>
+
 <style>
-/* 戻る画像ボタン */
+/* 戻る画像ボタンのCSS */
 	.back_button {
 		width: 40px;
 	}
@@ -37,68 +36,56 @@
 	.page_count {
 		text-align: center;
 	}
-	/*「○○一覧」*/
+	/*「○○一覧」のCSS*/
 	.page-title {
 		color:#FFA500;
-		font-family: "Meiryo";
+/* 		font-family: "Meiryo"; */
 	}
-	/*「新規登録ボタン」*/
+	/*「新規登録ボタン」のCSS*/
 	.regist-link {
 		
 	}
  </style>
 </head>
 <body>
-	<!-- headerのページインクルード -->
-	<h2 class=page-title>うんち一覧</h2>
-	
-	<!-- ↓↓横並びにする！ -->
+	<h1 class=page-title>うんち一覧</h1>
+	<a href="/A2/PoopServlet">新規登録</a>
+	<!-- 戻る画像ボタン -->
 	<div>
-		<a href="<c:url value='/PoopServlet' />" class="regist-link">新規登録</a>	
-		<form>				
-			<!-- 検索↓ -->
-				<input type="text" name="keyword">				<!-- 全項目から検索する(DAO) -->
-				<input type="submit" name="search" value="検索">		
-		
-			<!-- ▼ 並び順プルダウン --><!-- Servlet+DAO -->
-		    <select name="sort">
-		        <option value="date_desc">登録日（新しい順）</option>		<!-- 降順 -->
-		        <option value="breed_asc">犬種名順</option>
-		        <option value="strage_asc">預かり日順</option>
-		    </select>
-	    </form>
-		<!-- 戻る画像ボタン -->
-		<div>
-			<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
-			<a href="javascript:history.back();">
- 				<img src="<c:url value='/images/back.png' />" alt="戻る" class="back_button">
-			</a>	
-		</div>
+		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
+		<a href="javascript:history.back();">
+ 			<img src="<c:url value='/images/back.png' />" alt="戻る" class="back_button">
+		</a>	
 	</div>
 	
-	<!-- うんち一覧 -->
-	<c:forEach var="poop" items="">							<!-- itemsをサーブレットに合わせる。（サーブレットでリストを作る） -->
-	<div>
-			<span><img src="${poop.dogphoto}" alt="${poop.dogName}の写真"></span>
-			<span>${poop.dogName}</span>		<!-- わんこの名前 -->	
-			<span>${poop.name}</span>			<!-- 飼い主様 -->	
-			<span>${poop.hardness}</span>			<!-- 硬さ -->	
-			<span>${poop.color}</span>			<!-- 色 -->	
-			<span>${poop.date}</span>			<!-- 登録日 -->	
-	</div>
-	</c:forEach>
-	
-	<!-- 20件ずつ表示（次のページへ、前のページへ） -->	
-	<!-- Servlet+DAO -->	<!-- Servletでpageを定義する必要あり -->
-	<div class="page_count">
-		<c:if test="${page > 1}">								<!-- 前へ -->
-			<a href=PoopServlet?page=${page - 1}>前へ</a>
-		</c:if>
-		<span>${page}ページ目</span>								
-		<c:if test="${page < hasNext}">							<!-- 次のページがあるか？なければ「次へ」を表示しない -->
-			<a href=PoopServlet?page=${page + 1}>次へ</a>		<!-- 次へ -->
-		</c:if>
-	</div>
-	<!-- footerのページインクルード -->
+	<table border="1" id="foo-table" class="table table-bordered">
+		<thead>
+			<tr>
+				<th>お写真</th>
+				<th>ワンコのお名前</th>
+				<th>飼い主様</th>
+				<th>硬さ</th>
+				<th>色</th>
+				<th>登録日</th>
+		</thead>
+		<tbody>
+			<!-- うんち一覧 -->
+			<c:forEach var="e" items="" varStatus="status">
+				<tr>
+					<td><img src="${e.dogphoto}" alt="${e.dogName}の写真"></td>
+					<td>${e.dogName}</td>
+					<td>${e.name}</td>
+					<td>${e.hardness}</td>
+					<td>${e.color}</td>
+					<td>${e.date}</td>
+					<td>	<!-- 詳細に飛ぶボタン -->
+					  <a href="PoopServlet?id=${e.poopId}">
+					    <button type="button">詳細</button>
+					  </a>
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </body>
 </html>

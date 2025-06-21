@@ -12,27 +12,29 @@
 <!-- エラー表示 -->
 
 <form id="report_form" action="<c:url value='/ReportServlet'/>" method="post" onsubmit = "return checkForm()">
-
+	<input type="hidden" name="action" value="insert">
+	<input type="hidden" name="reportId" value=0>
+	<input type="hidden" name="reportDogId" value="${reportDog.id}">
 
 	<label>・ ごはん<br>
 		<input type="radio" name="food" value="true">食べた
 		<input type="radio" name="food" value="false">食べてない
 	</label><br>
 	<label>・ 日付
-		<input type="datetime" name="reportDate">
+		<input type="datetime-local" name="reportDate">
 	</label><br>
 	<label>・ 散歩
 		<input type="time" name="walk">
 	</label><br>
 	<label>・ 様子
-		<input type="radio" name="state" value="true">異常なし
-		<input type="radio" name="state" value="false">異常あり
+		<input type="radio" name="reportState" value="true">異常なし
+		<input type="radio" name="reportState" value="false">異常あり
 	</label><br>
 	<label>・ トレーニング
 		<input type="text" name="training">
 	</label><br>
 	<label>・ メモ
-		<input type="text" name="memo">
+		<input type="text" name="reportMemo">
 	</label><br>
 	
 	<input type="submit" value="登録">
@@ -46,7 +48,7 @@
 		//取得する
 		let food = document.querySelector('input[name="food"]:checked');
 		let walk = document.querySelector('input[name="walk"]').value.trim();
-		let state = document.querySelector('input[name="state"]:checked');
+		let state = document.querySelector('input[name="reportState"]:checked');
 		let training = document.querySelector('input[name="training"]').value.trim();
 		//一つでも未入力ならエラー
 		if(!food || walk ==="" || !state || training ==="") {

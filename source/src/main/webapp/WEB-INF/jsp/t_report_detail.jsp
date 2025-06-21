@@ -23,6 +23,7 @@
 	<c:forEach var="e" items="" >
 	<form method="POST" action="<c:url value='/ReportServlet' />">
 		<ul>
+			<input type="hidden" name="action" id="action" value="update">
 			<select name="dogName">
 				<!-- ワンコ名をプルダウンで選択できるようにする -->
 				<option value="${e.dogName}" selected>ワンコ選択</option>
@@ -33,7 +34,7 @@
 			<li>様子<input type="submit" name="state" value="${e.state}"></li>
 			<li>トレーニング<input type="text" name="training" value="${e.training}"></li>
 			<li>メモ<input type="text" name="reportMemo" value="${e.reportMemo}"></li>
-			<input type="submit" value="更新"> <input type="submit" value="削除">
+			<input type="submit" value="更新" onclick="document.getElementById('action').value='update'"> <input type="submit" value="削除" onclick="document.getElementById('action').value='delete'">
 		</ul>
 	</form>
 	</c:forEach>

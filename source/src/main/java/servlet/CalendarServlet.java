@@ -30,7 +30,7 @@ public class CalendarServlet extends HttpServlet {
 		//セッションからログイン者情報を取得
 		AllDto log = (AllDto)session.getAttribute("user");
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		if (session.getAttribute("id") == null) {
+		if (log == null) {
 			response.sendRedirect("/A2/LoginServlet");
 			return;
 		}else {//最初のアクション（予定登録を表示）
@@ -42,7 +42,7 @@ public class CalendarServlet extends HttpServlet {
 	        //Dateになおす
 	        LocalDate date = LocalDate.of(year, month, count);
 	        
-			// 検索処理を行う
+			// 検索処理を行う //カレンダーDAOで作ったpublicList
 			CalendarDAO CaleDao = new CalendarDAO();
 			List<AllDto> scheList = CaleDao.selectAll(date);
 

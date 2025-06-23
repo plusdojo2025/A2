@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
- <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/>
- <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+ <link rel="stylesheet" href="<c:url value="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css" />"/>
+ <script src="<c:url value="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js" />"></script>
  <script>
     jQuery(function($){
     	 // デフォルトの設定を変更（日本語化）--------------------
@@ -38,11 +38,11 @@
 </head>
 <body>
 	<h1 class=page-title>ワンコ一覧</h1>
-	<a href="WankoServlet?action=list">新規登録</a>
+	<a href="<c:url value='/WankoServlet?action=list'/>">新規登録</a>
 	<!-- 戻る画像ボタン -->
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
-		<a href="javascript:history.back();">
+		<a href="<c:url value="javascript:history.back();"/>" >
  			<img src="<c:url value='/images/back.png' />" alt="戻る" class="back_button">
 		</a>	
 	</div>
@@ -58,12 +58,12 @@
 			<!-- ワンコ一覧 -->
 			<c:forEach var="e" items="" varStatus="status">
 				<tr>
-					<td><img src="${e.dogphoto}" alt="${e.dogName}の写真"></td>
+					<td><img src="<c:url value="${e.dogphoto}" />" alt="${e.dogName}の写真"></td>
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
 					<td>${e.date}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->
-					  <a href="PoopServlet?id=${e.poopId}">
+					  <a href="<c:url value='/PoopServlet?id=${e.poopId}' />">
 					    <button type="button">詳細</button>
 					  </a>
 					</td>

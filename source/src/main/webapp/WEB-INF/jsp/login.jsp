@@ -12,7 +12,7 @@
 
   <!-- ヘッダー（ここから） -->
   <h1 id="logo">
-    <a href="<c:url value='/LoginServlet'/> "><img src="<c:url value='/img/ぶりログ.png'/> " width="250" height="200" alt="ぶりログ">
+    <a href="<c:url value='/LoginServlet'/> "><img src="<c:url value='/images/ぶりログ.png'/> "  height="200" alt="ぶりログ">
     </a>
   </h1>
   <!-- ヘッダー（ここまで） -->

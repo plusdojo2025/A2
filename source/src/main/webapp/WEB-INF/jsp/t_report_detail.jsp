@@ -14,7 +14,7 @@
         	<div style="text-align: right;">
         		<a href="javascript:history.back();">
 				<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
-				<img src="/A2/img/back.png" alt="戻る">		<!-- 戻る画像ボタン -->
+				<img src="<c:url value='/img/back.png" alt="戻る'/> ">		<!-- 戻る画像ボタン -->
 		    	</a>
         	</div>
 		</div>

@@ -24,7 +24,7 @@ public class HomeServlet extends HttpServlet {
 			
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") == null) {
-			response.sendRedirect("/LoginServlet");
+			response.sendRedirect(request.getContextPath() +"/LoginServlet");
 			return;
 		}else {
 		AllDto log = (AllDto)session.getAttribute("user");

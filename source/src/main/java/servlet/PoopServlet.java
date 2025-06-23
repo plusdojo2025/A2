@@ -21,7 +21,7 @@ import dto.AllDto;
 /**
  * Servlet implementation class RegistServlet
  */
-@WebServlet("/PServlet")
+@WebServlet("/PoopServlet")
 public class PoopServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

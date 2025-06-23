@@ -36,12 +36,12 @@ public class ReserveServlet extends HttpServlet {
 		 
 		String name = request.getParameter("name");
 		String dogName = request.getParameter("dogName");
-		String usernameid = request.getParameter("userNameId");
+		String userNameId = request.getParameter("userNameId");
 		String uphon = request.getParameter("uphon");
 		String pw = request.getParameter("pw");
 		
 		
-		int result = insertUser(name, dogName, userNameId, gender);
+		int result = insertUser(name, dogName, userNameId, uphon,pw);
 
 		if (result > 0) {
 		    request.setAttribute("message", "登録完了！");
@@ -62,6 +62,11 @@ public class ReserveServlet extends HttpServlet {
 //		uR.setuPhone(uphon);
 //		uR.setPw(pw);
 //		
+	}
+
+	private int insertUser(String name, String dogName, String userNameId, String uphon, String pw) {
+		
+		return 0;
 	}
 
 }

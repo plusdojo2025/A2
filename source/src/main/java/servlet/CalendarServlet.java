@@ -47,7 +47,8 @@ public class CalendarServlet extends HttpServlet {
 	        
 			// 検索処理を行う //カレンダーDAOで作ったscheList
 			CalendarDAO CaleDao = new CalendarDAO();
-			List<AllDto> scheList = CaleDao.selectAll(date);
+			int schoolId = log.getSchoolId();
+			List<AllDto> scheList = CaleDao.selectAll(date,schoolId);
 			// 検索結果をリクエストスコープに格納する
 			request.setAttribute("scheList", scheList);
 			// 結果ページにフォワードする
@@ -58,8 +59,10 @@ public class CalendarServlet extends HttpServlet {
 		    int userSchoolId = log.getUserSchoolId();
 		    List<AllDto> wankoList = CaleDao.selectWanko(userSchoolId);
 		    request.setAttribute("wankoList",wankoList);
-		    
-		   System.out.println("wankoList: "+wankoList); 
+		    for(AllDto dto : wankoList) {
+		    	System.out.println(dto.getDogName()+"aaaaa");
+		    }
+		   //System.out.println("wankoList: "+wankoList); 
 		   
 		    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
 		    rd.forward(request, response);

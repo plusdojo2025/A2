@@ -263,7 +263,7 @@ public class CalendarDAO {
 		
 		
 		//schedule_regiの一覧表示
-				public List<AllDto> selectAll(LocalDate date){
+				public List<AllDto> selectAll(LocalDate date, int schoolId){
 					//どこのデータベースにつなぐかを入れるConn
 					Connection conn = null;
 					List<AllDto> resultList = new ArrayList<AllDto>();
@@ -305,6 +305,7 @@ public class CalendarDAO {
 						// SQL文を完成させる　
 							System.out.println(date+"渡ってきたdateだよ");
 							pStmt.setObject(1, date);
+							pStmt.setInt(2, schoolId);
 							
 						// SQL文を実行し、結果表を取得する 
 						ResultSet rs = pStmt.executeQuery();

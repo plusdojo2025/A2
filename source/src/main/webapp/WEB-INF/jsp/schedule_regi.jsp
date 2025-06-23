@@ -20,6 +20,7 @@
 		時間<input type="time" name="nowTime" value="${e.nowTime}"><br>
 		メモ<input type="text" name="memo"><br>
 		ワンコ情報 
+		
 		<select name="selewanko">
   			<c:forEach var="dog" items="${wankoList}">
     			<option value="${dog.wankoDogId}">${dog.dogName}</option>

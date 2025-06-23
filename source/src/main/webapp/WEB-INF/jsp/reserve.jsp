@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>予約希望</h1>
-<form method="post" action="/webapp/WankoServlet">
+<form method="post" action="<c:url value='/WankoServlet' />">
 	<table>
 		<tr>
 			<td>

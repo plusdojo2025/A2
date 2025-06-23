@@ -47,7 +47,7 @@ public class WankoServlet extends HttpServlet {
 		//値の取得
 		request.setCharacterEncoding("UTF-8");
 		// "butt" が押されたときその中身が "登録" なら実行
-		if(request.getParameter("butt").equals("登録")) {
+		if("登録".equals(request.getParameter("butt"))) {
 			
 			//
 			String dogPhoto = request.getParameter("dogPhoto");
@@ -74,6 +74,11 @@ public class WankoServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/t_dog_regi.jsp");
 				dispatcher.forward(request, response);
 			}
+				
+			}else {
+				request.setAttribute("msg","登録失敗");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/t_dog_regi.jsp");
+				dispatcher.forward(request, response);
 		}
 		
 	}

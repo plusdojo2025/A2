@@ -19,6 +19,7 @@ public class WankoDAO {
 		public AllDto logdog(String userNameId) {
 			Connection conn = null;
 			AllDto logdogdto = null;
+			
 			try {
 				// JDBCドライバを読み込む
 				Class.forName("com.mysql.cj.jdbc.Driver");
@@ -29,8 +30,10 @@ public class WankoDAO {
 				
 				// SQL文を準備する　USER　テーブルに　WANKO　テーブルジョイン
 				String sql = "SELECT userNameId, dogPhoto, dogName, wankoNameId "
-						+ "FROM USER JOIN WANKO ON userNameId = wankoNameId"
-						+ "WHERE userNameId=";
+						+ "FROM USER JOIN WANKO "
+						+ "ON USER.userNameId = WANKO.wankoNameId "
+						+ "WHERE USER.userNameId=? "
+						+ "ORDER BY USER.userNameId ";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				
 				// SQL文を完成させる

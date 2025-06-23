@@ -27,7 +27,7 @@
 	
 	<!-- ↓↓横並びにする！ -->
 	<div>
-		<a href="/A2/ContactServlet">新規登録</a>			<!-- サーブレットで識別ID条件分岐 or　条件分岐の必要がなければ直接jspに飛んでOK -->
+		<a href="<c:url value='/A2/ContactServlet' />">新規登録</a>			<!-- サーブレットで識別ID条件分岐 or　条件分岐の必要がなければ直接jspに飛んでOK -->
 		<form>
 			<!-- ◆検索　-->
 			<input type="text" name="keyword">				<!-- 全項目から検索する(DAO) -->
@@ -42,8 +42,8 @@
 		<!-- 戻る画像ボタン -->
 		<div>
 			<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
-			<a href="javascript:history.back();">
- 				<img src="images/back.png" alt="戻る" class="back_button">
+			<a href="<c:url value='/javascript:history.back();'/>　">
+ 				<img src="<c:url value='images/back.png'/> " alt="戻る" class="back_button">
 			</a>	
 		</div>
 	</div>

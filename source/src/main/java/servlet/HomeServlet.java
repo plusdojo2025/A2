@@ -43,6 +43,7 @@ public class HomeServlet extends HttpServlet {
 			String userNameId = user.getUserNameId();
 			WankoDAO wdao = new WankoDAO();
 			AllDto uDog = wdao.logdog(userNameId);
+			System.out.println("uDog: " + uDog);
 			//ログインわんこをセッションスコープに入れとく
 			session.setAttribute("logdog",uDog);
 			

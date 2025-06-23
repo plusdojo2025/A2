@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.PoopDAO;
 import dto.AllDto;
@@ -25,16 +26,34 @@ public class PoopServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+				HttpSession session = request.getSession();
+				if (session.getAttribute("user") == null) {
+					response.sendRedirect(request.getContextPath()+"/LoginServlet");
+					return;
+				}
+				
+				String action = request.getParameter("action");
+				
+				if("poopregi".equals(action)) {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
+					dispatcher.forward(request, response);
+				}
+				
 		//ウンチ登録に画面遷移
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
 		dispatcher.forward(request, response);
 	}
 	 
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+				HttpSession session = request.getSession();
+				if (session.getAttribute("user") == null) {
+					response.sendRedirect(request.getContextPath()+"/LoginServlet");
+					return;
+				}
 		//登録ボタンが押されたら	
 	
 		
@@ -73,11 +92,11 @@ public class PoopServlet extends HttpServlet {
 		
 		if( ans == 1) {
 			request.setAttribute("msg","登録完了");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
 			dispatcher.forward(request, response);
 		}else {
 			request.setAttribute("msg","登録できなかったよ");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
 			dispatcher.forward(request, response);
 		}
 		
@@ -92,7 +111,7 @@ public class PoopServlet extends HttpServlet {
 
 			// 結果ページにフォワードする
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
 			dispatcher.forward(request, response);
 			
 			//更新・削除

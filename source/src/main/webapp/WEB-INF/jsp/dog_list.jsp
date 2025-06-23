@@ -42,7 +42,7 @@
 	<!-- 戻る画像ボタン -->
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
-		<a href="<c:url value="javascript:history.back();"/>" >
+		<a href="<c:url value='javascript:history.back();'/>" >
  			<img src="<c:url value='/images/back.png' />" alt="戻る" class="back_button">
 		</a>	
 	</div>

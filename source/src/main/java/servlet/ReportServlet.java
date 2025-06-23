@@ -58,6 +58,7 @@ public class ReportServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 		
+		
 		//共通で使うID
 		int reportId = Integer.parseInt(request.getParameter("reportId"));
 		int reportDogId = Integer.parseInt(request.getParameter("reportDogId"));
@@ -116,12 +117,20 @@ public class ReportServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/report_regi.jsp");
 				dispatcher.forward(request, response);
 			}
-		}else if ("search".equals(action)) {
-			List<AllDto>list = rDao.search(rDto);
+		}else if (request.getParameter("ぼたん").equals("nakami")) {
+			
+		
+		// 検索処理を行う
+		List<AllDto> rdList = rDao.select(reportId);
+
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("oReportDetailList", rdList);
+		
+		// 飼い主報告詳細ページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_detail.jsp");
+		dispatcher.forward(request, response);
+	
 		}
-	
-	
-	
 	}}
 	
 	

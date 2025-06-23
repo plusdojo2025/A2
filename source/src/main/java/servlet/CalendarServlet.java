@@ -35,7 +35,7 @@ public class CalendarServlet extends HttpServlet {
 			return;
 		}else {//最初のアクション（予定登録を表示）
 			//リクエストパラメータの取得
-	        String action = request.getParameter("action");
+	        //String action = request.getParameter("action");
 	        int year = Integer.parseInt(request.getParameter("year"));
 	        int month = Integer.parseInt(request.getParameter("month"));
 	        int count = Integer.parseInt(request.getParameter("count"));
@@ -48,7 +48,7 @@ public class CalendarServlet extends HttpServlet {
 			// 検索結果をリクエストスコープに格納する
 			request.setAttribute("scheList", scheList);
 			// 結果ページにフォワードする
-		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule-regi.jsp");
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
 		    dispatcher.forward(request, response);
 		}
 

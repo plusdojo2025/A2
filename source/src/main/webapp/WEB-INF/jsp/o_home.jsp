@@ -56,12 +56,13 @@ function showProcess(date) {
     var month = date.getMonth();
     document.querySelector('#header').innerHTML = year + "年 " + (month + 1) + "月";
 
-    var calendar = createProcess(year, month);
+    var calendar = createProcess(year, month+1);
     document.querySelector('#calendar').innerHTML = calendar;
 }
 
 // カレンダー作成
 function createProcess(year, month) {
+	const baseUrl = "${pageContext.request.contextPath}";
     // 曜日
     var calendar = "<table><tr class='dayOfWeek'>";
     for (var i = 0; i < week.length; i++) {
@@ -96,9 +97,11 @@ function createProcess(year, month) {
                     calendar += "<td class='today'>" + count + "</td>";
                 } else {
 					//表示したい項目がある場合は、ここでリンクを設定する
-                    calendar += "<td>" + count + "<br>"
-                    +"<a href=''>テスト文字列"+year+"</a>"
-                    +"</td>";
+                	calendar += "<td>" + count + "<br>"
+                    + "<a href='" + baseUrl + "/CalendarServlet?year=" + year
+                    + "&month=" + month
+                    + "&count=" + count + "'>"
+                    + "テスト文字列" + year + "</a></td>";
 
                 }
             }

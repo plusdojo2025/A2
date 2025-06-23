@@ -342,6 +342,82 @@ public class CalendarDAO {
 					// 結果を返す
 					return resultList;
 				}
+				
+				
+				//schedule_regiの一覧表示
+				public List<AllDto> Wanko(String userNameId){
+					//どこのデータベースにつなぐかを入れるConn
+					Connection conn = null;
+					List<AllDto> wankoList = new ArrayList<AllDto>();
+					
+					try {
+						// JDBCドライバを読み込む
+						Class.forName("com.mysql.cj.jdbc.Driver");
+
+						// データベースに接続する ([webapp2] [root] [password]がいじるところ)
+						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+								+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+								"root", "password");
+
+						// SQL文を準備する
+						String sql ="""
+								SELECT 	
+									USER.NameId, 
+									WANKO.dogName,
+									WANKO.dogId
+								FROM USER
+								JOIN WANKO
+								ON CALENDAR.calendarDogId=WANKO.wankoDogId
+								JOIN USER
+								ON WANKO.wankoDogId=USER.userNameId
+								
+								WHERE calendarDate = ? 
+									userSchoolId = ?
+								ORDER BY calendarId
+								""";
+						PreparedStatement pStmt = conn.prepareStatement(sql);
+
+						// SQL文を完成させる　
+							System.out.println(date+"渡ってきたdateだよ");
+							pStmt.setObject(1, date);
+							
+						// SQL文を実行し、結果表を取得する 
+						ResultSet rs = pStmt.executeQuery();
+
+						// 結果表をコレクションにコピーする　
+						while (rs.next()) {
+							AllDto dto=new AllDto();
+							dto.setCalendarId(rs.getInt("calendarId"));
+							dto.setCalendarDate(rs.getTimestamp("calendarDate").toLocalDateTime());
+							dto.setTitle(rs.getString("title"));
+							dto.setTime(rs.getTime("time").toLocalTime());
+							dto.setCalendarMemo(rs.getInt("calendarMemo"));
+							dto.setCalendarDogId(rs.getInt("calendarDogId"));
+							
+							//addでcardListにbcを入れている　（cardListはArrayList)
+							resultList.add(dto);
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+						resultList = null;
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+						resultList = null;
+					} finally {
+						// データベースを切断
+						if (conn != null) {
+							try {
+								conn.close();
+							} catch (SQLException e) {
+								e.printStackTrace();
+								resultList = null;
+							}
+						}
+					}
+
+					// 結果を返す
+					return resultList;
+				}
 		
 				
 

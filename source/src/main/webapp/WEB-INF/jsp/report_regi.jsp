@@ -9,6 +9,16 @@
 <body>
 	<h1>報告登録</h1>
 	<!-- ワンコ選択 -->
+	<select name="dogName">
+		<!-- ワンコ名をプルダウンで選択できるようにする -->
+		<option value="${e.dogName}" selected>ワンコ選択</option>
+	</select>
+	<div>
+		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
+		<a href="<c:url value="javascript:history.back();"/>" >
+ 			<img src="<c:url value='/images/back.png' />" alt="戻る" class="back_button">
+		</a>	
+	</div>
 <!-- エラー表示 -->
 
 <form id="report_form" action="<c:url value='/ReportServlet'/>" method="post" onsubmit = "return checkForm()">

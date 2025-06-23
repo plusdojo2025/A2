@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +10,9 @@
 <body>
 
 <h1>わんこ登録</h1>
-<form method="post" action="<c:url value='/WankoServlet'/>">
+<form method="post" action="<c:url value='/WankoServlet'/> ">
 	<table class="inputFields">
-		<tr>
+		<tr> 
 			<td>
 				<label>写真<br>
 				<input type="file" name="dogPhoto" accept="image/*" onchange="previewImage(this);"><br>
@@ -29,7 +30,7 @@
 		<tr>
 			<td>
 				<label>飼い主ID<br>
-				<a>${sessionScope.nameId}</a>
+				<a>${user.userNameId}</a>
 				</label>
 			</td>
 		</tr>

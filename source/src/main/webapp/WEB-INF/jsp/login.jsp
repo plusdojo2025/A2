@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ログイン</title>
-<!-- <link rel="stylesheet" type="text/css" href="/webapp/css/style.css"> -->
+<link rel="stylesheet"  href="<c:url value='/css/NewFile.css' />">
 </head>
 <body>
 
@@ -18,8 +18,8 @@
   <!-- ヘッダー（ここまで） -->
   
    <form  method="POST" action="<c:url value='/LoginServlet'/>" >
-    ID<input type="text" name="id"><br>
-    パスワード<input type="password" name="pw"><br>
+    <label class="label">ID</label><input type="text" name="id"><br>
+    <label class="label">パスワード</label><input type="password" name="pw"><br>
     <input type="submit" name="logbut" value="ログイン">
     <input type="reset" name="reset" value="リセット">
     </form>

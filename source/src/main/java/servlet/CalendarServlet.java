@@ -31,7 +31,7 @@ public class CalendarServlet extends HttpServlet {
 		AllDto log = (AllDto)session.getAttribute("user");
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		if (log == null) {
-			response.sendRedirect("/A2/LoginServlet");
+			response.sendRedirect("/LoginServlet");
 			return;
 		}else {//最初のアクション（予定登録を表示）
 			//リクエストパラメータの取得

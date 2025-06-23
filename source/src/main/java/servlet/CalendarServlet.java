@@ -39,6 +39,9 @@ public class CalendarServlet extends HttpServlet {
 	        int year = Integer.parseInt(request.getParameter("year"));
 	        int month = Integer.parseInt(request.getParameter("month"));
 	        int count = Integer.parseInt(request.getParameter("count"));
+	        //リクエストパラメーター２
+	        request.setCharacterEncoding("UTF-8");
+	        String dogName = request.getParameter("dogName");
 	        //Dateになおす
 	        LocalDate date = LocalDate.of(year, month, count);
 	        
@@ -50,6 +53,16 @@ public class CalendarServlet extends HttpServlet {
 			// 結果ページにフォワードする
 		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
 		    dispatcher.forward(request, response);
+		    
+		 // ワンコ一覧を取得
+		    int userSchoolId = log.getUserSchoolId();
+		    List<AllDto> wankoList = CaleDao.selectWanko(userSchoolId);
+		    request.setAttribute("wankoList",wankoList);
+		    
+		   System.out.println("wankoList: "+wankoList); 
+		   
+		    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
+		    rd.forward(request, response);
 		}
 
 	}

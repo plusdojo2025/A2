@@ -19,7 +19,12 @@
 		タイトル<input type="text" name="title"><br>
 		時間<input type="time" name="nowTime" value="${e.nowTime}"><br>
 		メモ<input type="text" name="memo"><br>
-		ワンコ情報 <!-- プルダウンが必要？ ログイン情報から犬の名前（複数いる場合があるので飼い主IDから？）を取得し、犬情報プルダウンに入れる。-->						
+		ワンコ情報 
+		<select name="selewanko">
+  			<c:forEach var="dog" items="${wankoList}">
+    			<option value="${dog.wankoDogId}">${dog.dogName}</option>
+  			</c:forEach>
+		</select>					
 		<input type="submit" name="regist" value="登録">
 	</form>	
 	
@@ -29,7 +34,12 @@
 			タイトル<span>${e.title}</span><br>
 			時間<span>${e.time}</span><br>
 			メモ<span>${e.memo}</span><br>
-			ワンコ情報 <!-- プルダウンが必要？ ログイン情報から犬の名前を取得し、犬情報プルダウンに入れる。-->
+			ワンコ情報 
+			<select name="selewanko">
+  				<c:forEach var="dog" items="${wankoList}">
+    				<option value="${dog.wankoDogId}">${dog.dogName}</option>
+  				</c:forEach>
+			</select>	
 			<input type="submit" name="update" value="更新">
 			<input type="submit" name="delete" value="削除">
 		</form>	

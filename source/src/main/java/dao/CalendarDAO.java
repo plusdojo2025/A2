@@ -281,7 +281,7 @@ public class CalendarDAO {
 						String sql ="""
 								SELECT 	
 									calendarDate, 
-									WANKO.dogName,
+									WANKO.wankoDogId,
 									calendarId,
 									title,
 									time,
@@ -296,7 +296,8 @@ public class CalendarDAO {
 								ON WANKO.wankoDogId=USER.userNameId
 								
 								WHERE calendarDate = ? 
-									userSchoolId = ?
+								AND userSchoolId = ?
+								
 								ORDER BY calendarId
 								""";
 						PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -344,8 +345,8 @@ public class CalendarDAO {
 				}
 				
 				
-				//schedule_regiの一覧表示
-				public List<AllDto> Wanko(String userNameId){
+				//schedule_regiのわんこ名選択用プルダウン(スクール側)
+				public List<AllDto> selectWanko(int userSchoolId){
 					//どこのデータベースにつなぐかを入れるConn
 					Connection conn = null;
 					List<AllDto> wankoList = new ArrayList<AllDto>();
@@ -360,26 +361,14 @@ public class CalendarDAO {
 								"root", "password");
 
 						// SQL文を準備する
-						String sql ="""
-								SELECT 	
-									USER.NameId, 
-									WANKO.dogName,
-									WANKO.dogId
-								FROM USER
-								JOIN WANKO
-								ON CALENDAR.calendarDogId=WANKO.wankoDogId
-								JOIN USER
-								ON WANKO.wankoDogId=USER.userNameId
-								
-								WHERE calendarDate = ? 
-									userSchoolId = ?
-								ORDER BY calendarId
-								""";
+						String sql ="SELECT userNameId,dogName,wankoDogId "
+								+ "FROM USER JOIN WANKO ON USER.userNameId=WANKO.wankoNameId "
+								+ "WHERE USER.userSchoolId = ? ORDER BY dogName";
 						PreparedStatement pStmt = conn.prepareStatement(sql);
 
 						// SQL文を完成させる　
-							System.out.println(date+"渡ってきたdateだよ");
-							pStmt.setObject(1, date);
+							System.out.println(userSchoolId+"渡ってきたSchoolIdだよ");
+							pStmt.setObject(1, userSchoolId);
 							
 						// SQL文を実行し、結果表を取得する 
 						ResultSet rs = pStmt.executeQuery();
@@ -387,22 +376,17 @@ public class CalendarDAO {
 						// 結果表をコレクションにコピーする　
 						while (rs.next()) {
 							AllDto dto=new AllDto();
-							dto.setCalendarId(rs.getInt("calendarId"));
-							dto.setCalendarDate(rs.getTimestamp("calendarDate").toLocalDateTime());
-							dto.setTitle(rs.getString("title"));
-							dto.setTime(rs.getTime("time").toLocalTime());
-							dto.setCalendarMemo(rs.getInt("calendarMemo"));
-							dto.setCalendarDogId(rs.getInt("calendarDogId"));
-							
-							//addでcardListにbcを入れている　（cardListはArrayList)
-							resultList.add(dto);
+							dto.setDogName(rs.getString("dogName"));
+							dto.setWankoDogId(rs.getInt("WankoDogId"));
+							//addでcardListにbcを入れている　
+							wankoList.add(dto);
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
-						resultList = null;
+						wankoList = null;
 					} catch (ClassNotFoundException e) {
 						e.printStackTrace();
-						resultList = null;
+						wankoList = null;
 					} finally {
 						// データベースを切断
 						if (conn != null) {
@@ -410,13 +394,13 @@ public class CalendarDAO {
 								conn.close();
 							} catch (SQLException e) {
 								e.printStackTrace();
-								resultList = null;
+								wankoList = null;
 							}
 						}
 					}
 
 					// 結果を返す
-					return resultList;
+					return wankoList;
 				}
 		
 				

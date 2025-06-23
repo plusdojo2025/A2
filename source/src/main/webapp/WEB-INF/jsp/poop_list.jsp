@@ -49,7 +49,7 @@
 </head>
 <body>
 	<h1 class=page-title>うんち一覧</h1>
-	<a href="/A2/PoopServlet">新規登録</a>
+	<a href="<c:url value='/PoopServlet' />">新規登録</a>
 	<!-- 戻る画像ボタン -->
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
@@ -79,7 +79,7 @@
 					<td>${e.color}</td>
 					<td>${e.date}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->
-					  <a href="PoopServlet?id=${e.poopId}">
+					  <a href="<c:url value='/PoopServlet?id=${e.poopId}' /> ">
 					    <button type="button">詳細</button>
 					  </a>
 					</td>

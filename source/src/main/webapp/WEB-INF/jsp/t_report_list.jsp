@@ -63,7 +63,7 @@
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->
-					  <a href="PoopServlet?id=${e.poopId}">
+					  <a href="<c:url value='PoopServlet?id=${e.poopId}'/>">
 					    <button type="button">詳細</button>
 					  </a>
 					</td>

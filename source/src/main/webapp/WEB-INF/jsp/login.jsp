@@ -12,7 +12,7 @@
 
   <!-- ヘッダー（ここから） -->
   <h1 id="logo">
-    <a href="/webapp/LoginServlet"><img src="/webapp/img/ぶりログ.png" width="250" height="200" alt="ぶりログ">
+    <a href="<c:url value='/LoginServlet'/> "><img src="<c:url value='/images/ぶりログ.png'/> "  height="200" alt="ぶりログ">
     </a>
   </h1>
   <!-- ヘッダー（ここまで） -->
@@ -48,9 +48,9 @@
         <td>
       </tr>
     </table>
-  </form>-->
+  </form> -->
   <div id="footer">
-  <p><a href="LoginServlet?action=regi">新規登録はこちら</a></p>
+  <p><a href="<c:url value='LoginServlet?action=regi'/> ">新規登録はこちら</a></p>
   <p>ID/パスワードを忘れた方は〇〇までご連絡ください</p>
   </div>
   <script>

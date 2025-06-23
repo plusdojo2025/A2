@@ -38,12 +38,12 @@
 </head>
 <body>
 	<h1 class=page-title>ワンコ一覧</h1>
-	<a href="/A2/ReportServlet">新規登録</a>
+	<a href="<c:url value='/ReportServlet'/> ">新規登録</a>
 	<!-- 戻る画像ボタン -->
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
 		<a href="javascript:history.back();">
- 			<img src="<c:url value='/images/back.png' />" alt="戻る" class="back_button">
+ 			<img src="<c:url value='/images/back.png' /> " alt="戻る" class="back_button">
 		</a>	
 	</div>
 	<table border="1" id="foo-table" class="table table-bordered">
@@ -63,7 +63,7 @@
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->
-					  <a href="PoopServlet?id=${e.poopId}">
+					  <a href="<c:url value='/PoopServlet?id=${e.poopId}' /> ">
 					    <button type="button">詳細</button>
 					  </a>
 					</td>

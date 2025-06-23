@@ -11,9 +11,9 @@ import dto.AllDto;
 
 	public class PoopDAO{
 	//登録//
-	public boolean insert(AllDto poop) {
+	public int insert(AllDto poop) {
 		Connection conn = null;
-		boolean result = false;
+		int ans = 0;
 	
 		try {
 			// JDBCドライバを読み込む
@@ -52,9 +52,8 @@ import dto.AllDto;
 			
 		
 			// SQL文を実行する
-			if (pStmt.executeUpdate() == 1) {
-				result = true;
-			}
+			
+			ans = pStmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -71,7 +70,7 @@ import dto.AllDto;
 		}
 
 		// 結果を返す
-		return result;
+		return ans;
 	}
 
 	//検索	

@@ -14,7 +14,7 @@
         	<div style="text-align: right;">
         		<a href="javascript:history.back();">
 				<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
-				<img src="/A2/img/back.png" alt="戻る">		<!-- 戻る画像ボタン -->
+				<img src="<c:url value='/images/back.png' />" alt="戻る">		<!-- 戻る画像ボタン -->
 		    	</a>
         	</div>
 		</div>
@@ -23,7 +23,7 @@
 写真追加 <input type="text"><br>
  <p class="dog_deta">
 	<c:forEach var="e" items="${dogid}" >
-    	<form method="POST" action="<c:url value='/'/>" class="dog_datail"><!-- A2の後に何サーブレットを指定するか -->
+    	<form method="POST" action="<c:url value='/WankoServlet'/>" class="dog_datail"> <!-- A2の後に何サーブレットを指定するか -->
      
 		名前<input type="text" name="name" value="${e.name}"><br>
 		性別<input type="submit" name="gender" value="${e.gender}"><br>

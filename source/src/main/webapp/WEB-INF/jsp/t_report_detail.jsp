@@ -14,7 +14,7 @@
         	<div style="text-align: right;">
         		<a href="javascript:history.back();">
 				<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
-				<img src="<c:url value='/img/back.png" alt="戻る'/> ">		<!-- 戻る画像ボタン -->
+				<img src="<c:url value='/images/back.png' />" alt="戻る"/> 		<!-- 戻る画像ボタン -->
 		    	</a>
         	</div>
 		</div>
@@ -22,20 +22,22 @@
 	<!-- 後でDBとひもづけてデータを取ってこれるようにする -->
 	<c:forEach var="e" items="" >
 	<form method="POST" action="<c:url value='/ReportServlet' />">
-		<ul>
-			<input type="hidden" name="action" id="action" value="update">
+	<input type="hidden" name="action" id="action" value="update">
 			<select name="dogName">
 				<!-- ワンコ名をプルダウンで選択できるようにする -->
 				<option value="${e.dogName}" selected>ワンコ選択</option>
 			</select>
+		<ul>
+			
 			<li>ごはん<input type="submit" name="food" value="${e.food}"></li>
 			<li>日付<input type="date" name="reportDate" value="${e.date}"></li>
 			<li>散歩<input type="number" name="walk" value="${e.walk}">分</li>
 			<li>様子<input type="submit" name="state" value="${e.state}"></li>
 			<li>トレーニング<input type="text" name="training" value="${e.training}"></li>
 			<li>メモ<input type="text" name="reportMemo" value="${e.reportMemo}"></li>
-			<input type="submit" value="更新" onclick="document.getElementById('action').value='update'"> <input type="submit" value="削除" onclick="document.getElementById('action').value='delete'">
+			
 		</ul>
+		<input type="submit" value="更新" onclick="document.getElementById('action').value='update'"> <input type="submit" value="削除" onclick="document.getElementById('action').value='delete'">
 	</form>
 	</c:forEach>
 

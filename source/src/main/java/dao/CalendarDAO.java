@@ -282,7 +282,7 @@ public class CalendarDAO {
 								SELECT 	
 									calendarDate, 
 									WANKO.dogName,
-									carendarId,
+									calendarId,
 									title,
 									time,
 									calendarMemo,
@@ -297,7 +297,7 @@ public class CalendarDAO {
 								
 								WHERE calendarDate = ? 
 									userSchoolId = ?
-								ORDER BY carendarId
+								ORDER BY calendarId
 								""";
 						PreparedStatement pStmt = conn.prepareStatement(sql);
 

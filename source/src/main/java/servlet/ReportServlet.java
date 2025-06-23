@@ -85,7 +85,6 @@ public class ReportServlet extends HttpServlet {
 		LocalDate reportDate = LocalDate.parse(request.getParameter("reportDate"));
 		
 		
-		
 		rDto.setFood(food);
 		rDto.setWalk(walk);
 		rDto.setReportState(reportState);

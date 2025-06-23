@@ -33,14 +33,22 @@ public class ReportServlet extends HttpServlet {
 		if (session.getAttribute("user") == null) {
 			response.sendRedirect(request.getContextPath() +"/LoginServlet");
 			return;
+		} else {
+			AllDto log = (AllDto)session.getAttribute("user");
+			//トレーナー側と飼い主側それぞれ別ページにフォワードする
+			//トレーナー側
+			if(log.isUserUniqueId() == true ) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/report_regi.jsp");
+				dispatcher.forward(request, response);
+				
+			//飼い主側
+			}else if(log.isUserUniqueId() == false ) {
+				// 後でやるにフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_list.jsp");
+				dispatcher.forward(request, response);
+			}
 		}
-	
-		// 後でやるにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/report_regi.jsp");
-		dispatcher.forward(request, response);
-	}
-	
-	
+		}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -133,10 +141,6 @@ public class ReportServlet extends HttpServlet {
 		}
 	}}
 	
-	
-	
-	
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -160,5 +164,3 @@ public class ReportServlet extends HttpServlet {
 //		// TODO Auto-generated method stub
 //		doGet(request, response);
 //	}
-
-

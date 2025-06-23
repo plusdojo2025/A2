@@ -97,7 +97,7 @@ function createProcess(year, month) {
                 } else {
 					//表示したい項目がある場合は、ここでリンクを設定する
                     calendar += "<td>" + count + "<br>"
-                    +"<a href="<c:url value='/CalendarServlet' />">テスト文字列"+year+"</a>"
+                    +"<a href=''>テスト文字列"+year+"</a>"
                     +"</td>";
 
                 }

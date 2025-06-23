@@ -38,7 +38,7 @@
 </head>
 <body>
 	<h1 class=page-title>ワンコ一覧</h1>
-	<a href="/A2/WankoServlet">新規登録</a>
+	<a href="WankoServlet?action=list">新規登録</a>
 	<!-- 戻る画像ボタン -->
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->

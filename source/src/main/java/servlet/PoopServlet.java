@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.PoopDAO;
 import dto.AllDto;
-import dto.Bc;
+
 
 
 /**
@@ -86,23 +86,23 @@ public class PoopServlet extends HttpServlet {
 			request.setAttribute("poopList", poopList);
 
 			// 結果ページにフォワードする
-			dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
+			dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
 			dispatcher.forward(request, response);
 			
 			
 			
 			// 更新または削除を行う
 			if (request.getParameter("submit").equals("更新")) {
-				if (bDao.update(new Bc(number, company, position, name, zipcode, address, phone, email, remarks))) { // 更新成功
-					request.setAttribute("result", new Result("更新成功！", "レコードを更新しました。", "/webapp/MenuServlet"));
+				if (bDao.update(new AllDto())) { // 更新成功
+					request.setAttribute("result", new Result("更新成功！", "レコードを更新しました。", "/servlet/PoopServlet"));
 				} else { // 更新失敗
-					request.setAttribute("result", new Result("更新失敗！", "レコードを更新できませんでした。", "/webapp/MenuServlet"));
+					request.setAttribute("result", new Result("更新失敗！", "レコードを更新できませんでした。", "/servlet/PoopServlet"));
 				}
 			} else {
-				if (bDao.delete(new Bc(number, company, position, name, zipcode, address, phone, email, remarks))) { // 削除成功
-					request.setAttribute("result", new Result("削除成功！", "レコードを削除しました。", "/webapp/MenuServlet"));
+				if (bDao.delete(new AllDto())) { // 削除成功
+					request.setAttribute("result", new Result("削除成功！", "レコードを削除しました。", "/servlet/PoopServlet"));
 				} else { // 削除失敗
-					request.setAttribute("result", new Result("削除失敗！", "レコードを削除できませんでした。", "/webapp/MenuServlet"));
+					request.setAttribute("result", new Result("削除失敗！", "レコードを削除できませんでした。", "/servlet/PoopServlet"));
 				}
 			}
 			// 結果ページにフォワードする

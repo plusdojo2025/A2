@@ -104,10 +104,10 @@ header {
 
     <nav>
       <ul class="main-nav">
-        <li><img src="<c:url value='/images/犬のフリーアイコン.png' />" alt="" class="icon">一覧</li>
-        <li><img src="<c:url value='/images/うんち.png' />" alt="" class="icon">記録</li>
-        <li>報告</li>
-        <li>問い合わせ</li>
+        <li><a href="WankoServlet?action=home"><img src="<c:url value='/images/犬のフリーアイコン.png' />" alt="" class="icon">一覧</a></li>
+        <li><a href="PoopServlet"><img src="<c:url value='/images/うんち.png' />" alt="" class="icon">記録</a></li>
+        <li><a href="ReportServlet">報告</a></li>
+        <li><a href="ChatServlet">問い合わせ</a></li>
       </ul>
     </nav>
   </div>

@@ -38,6 +38,19 @@ public class ContactServlet extends HttpServlet {
 		// 結果
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/contact_list.jsp");
 					dispatcher.forward(request, response);
+					
+					int page = 1; //1ページ目
+					
+					//ページが整数か確認して、整数ならページ番号を付与する
+					String pageParam = request.getParameter("page");
+					if (pageParam != null && pageParam.matches("\\d+")) {
+					    page = Integer.parseInt(pageParam);
+					}
+					int pageSize = 20; //一ページに格納できる件数
+					//指定されたページ番号から、そのページに表示すべき情報を持ってくる
+					int offset = (page - 1) * pageSize;
+					
+					
 	}
 
 }

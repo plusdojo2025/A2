@@ -71,6 +71,63 @@ public class WankoDAO {
 		return logdogdto;
 		}
 		//ログインわんこ処理ここまで
+		
+		//わんこリスト作る
+		public List<AllDto> olistSelect(String userNameId){
+			Connection conn = null;
+			List<AllDto> wankoList = new ArrayList<AllDto>();
+			
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+						"root", "password");
+				// SQL文を準備する
+				String sql = "SELECT userNameId, userName, dogPhoto, dogRegist "
+						+ "FROM USER JOIN WANKO "
+						+ "ON USER.userNameId = WANKO.wankoNameId "
+						+ "WHERE USER.userNameId=? "
+						+ "ORDER BY USER.userNameId ";
+				
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				
+				// SQL文を完成させる
+				pStmt.setString(1, userNameId);
+				
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+				
+				// 結果表をコレクションにコピーする　犬写真と犬名前保存
+				while (rs.next()) {
+					wankoList = new  AllDto();
+					wankoList.setDogPhoto(rs.getString("dogPhoto"));
+					wankoList.setDogName(rs.getString("dogName"));
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				wankoList = null;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				wankoList = null;
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						wankoList = null;
+						
+						
+				}
+			}
+		}
+			return wankoList;
+		}
 
 		// 引数card指定された項目で検索して、取得されたデータのリストを返す
 		public List<AllDto> select(AllDto wanko) {

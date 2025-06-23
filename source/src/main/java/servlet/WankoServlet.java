@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,8 +26,22 @@ public class WankoServlet extends HttpServlet {
 		
 		// 条件によって画面を振り分ける
 		if("home".equals(action)) {
+			HttpSession session = request.getSession();
+			AllDto log = (AllDto)session.getAttribute("user");
+			
+			if(log.isUserUniqueId() == true ) {
+				
+			}else if(log.isUserUniqueId() == false ) {
+			//飼い主用の遷移
+			AllDto user = (AllDto) session.getAttribute("user");
+			String userNameId = user.getUserNameId();
+			WankoDAO wdao = new WankoDAO();
+			List<AllDto> list = wdao.olistSelect(userNameId);
+			request.setAttribute("list", list);
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/dog_list.jsp");
 			dispatcher.forward(request, response);
+			}
 		}else if("list".equals(action)) {
 			HttpSession session = request.getSession();
 			AllDto log = (AllDto)session.getAttribute("user");

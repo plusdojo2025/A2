@@ -103,7 +103,38 @@ INSERT INTO USER(
 		userNameId,ruby,birth,name,pw,uPhone,uPhone2,address,userUniqueId,userSchoolId
 )		VALUES(
 		'sample0000.co.jp','さんぷる　たろう','2000-01-01','三分琉　太郎','0000','00000000001','',
-		'東京都新宿区',false,'1'
+		'東京都新宿区',false,1
+);
+INSERT INTO USER(
+		userNameId,ruby,birth,name,pw,uPhone,uPhone2,address,userUniqueId,userSchoolId
+)  VALUES(
+		'Morisou.ne.jp','もりた　そう','2015-05-05','森田　颯','morisou','050-0022-0022','',
+		'神奈川県川崎市2-22-2',FALSE,2
+);
+
+INSERT INTO USER(
+		userNameId,ruby,birth,name,pw,uPhone,uPhone2,address,userUniqueId,userSchoolId
+)  		VALUES(
+		'koufuku.co.jp','ふくもと　こうき','2003-03-25','福本　幸稀','koufuku','050-0033-0033','',
+		'東京都立川市3-33-3',FALSE,2
+);
+INSERT INTO USER(
+		userNameId,ruby,birth,name,pw,uPhone,uPhone2,address,userUniqueId,userSchoolId
+)  		VALUES(
+		'dojouser1@plusdojo.jp','SEプラス1','','SEplus1','#SEplus2025SEplus','000-1111-2222','',
+		'東京都千代田区',TRUE,1
+);
+INSERT INTO USER(
+		userNameId,ruby,birth,name,pw,uPhone,uPhone2,address,userUniqueId,userSchoolId
+)  		VALUES(
+		'dojouser2@plusdojo.jp','SEプラス2','','SEplus2','#SEplus2025SEplus','000-2222-3333','',
+		'東京都千代田区',TRUE,2
+);
+INSERT INTO USER(
+		userNameId,ruby,birth,name,pw,uPhone,uPhone2,address,userUniqueId,userSchoolId
+)  		VALUES(
+		'dojouser3@plusdojo.jp','SEプラス3','','SEplus3','#SEplus2025SEplus','000-3333-4444','',
+		'東京都千代田区',FALSE,1
 );
 
 
@@ -118,40 +149,6 @@ INSERT INTO WANKO(
 		'upload/dogphoto/sampleわんこ.jpg',TRUE,'2015-10-10','コーギーだよ',
 		'','','','','upload/injection/sample.png',''
 );
-
-INSERT INTO POOP(
-		tName,photo,color,hardness,abnormal,PoopDogId,memo
-)		VALUES(
-		'わんたトレーナー','upload/poop/unchi.png','3','3',FALSE,'1','元気でいい子にしてました。'
-);
-
-INSERT INTO CALENDAR(
-		calendarDate,title,time,calendarMemo,calendarDogId
-)		VALUES(
-		'2025-06-16','さんくん預かり','14:00','トレーニング内容(~)','1'
-);
-
-INSERT INTO REPORT(
-		food,walk,reportState,training,reportMemo,reportDate,reportDogId
-)		VALUES(
-		FALSE,50,TRUE,'散歩５０分、お座り覚える','ご飯をあまり食べませんでした。','2025-06-16','1'
-);
-
-
-INSERT INTO USER(
-		userNameId,ruby,birth,name,pw,uPhone,uPhone2,address,userUniqueId,userSchoolId
-)  VALUES(
-		'Morisou.ne.jp','もりた　そう','2015-05-05','森田　颯','morisou','050-0022-0022','',
-		'神奈川県川崎市2-22-2',FALSE,2
-);
-
-INSERT INTO USER(
-		userNameId,ruby,birth,name,pw,uPhone,uPhone2,address,userUniqueId,userSchoolId
-)  		VALUES(
-		'koufuku.co.jp','ふくもと　こうき','2003-03-25','福本　幸稀','koufuku','050-0033-0033','',
-		'東京都立川市3-33-3',FALSE,2
-);
-
 INSERT INTO WANKO(
 		dogName,dogBreed,dogBirth,gender,state,
 		wakuchin,wankoNameId,dogPhoto,kyosei,dogRegist,
@@ -177,6 +174,11 @@ INSERT INTO WANKO(
 INSERT INTO POOP(
 		tName,photo,color,hardness,abnormal,PoopDogId,memo
 )		VALUES(
+		'わんたトレーナー','upload/poop/unchi.png','3','3',FALSE,1,'元気でいい子にしてました。'
+);
+INSERT INTO POOP(
+		tName,photo,color,hardness,abnormal,PoopDogId,memo
+)		VALUES(
 		'にゃんたトレーナー','upload/poop/andy.po.png','3','3',FALSE,2,'いつもどおりでした。'
 );
 
@@ -186,6 +188,11 @@ INSERT INTO POOP(
 		'にゃんたトレーナー','upload/poop/ran.po.png','1','4',TRUE,3,'少し調子が悪そうです。'
 );
 
+INSERT INTO CALENDAR(
+		calendarDate,title,time,calendarMemo,calendarDogId
+)		VALUES(
+		'2025-06-16','さんくん預かり','14:00','トレーニング内容(~)',1
+);
 INSERT INTO CALENDAR(
 		calendarDate,title,time,calendarMemo,calendarDogId
 )		VALUES(
@@ -200,6 +207,11 @@ INSERT INTO CALENDAR(
 INSERT INTO REPORT(
 		food,walk,reportState,training,reportMemo,reportDate,reportDogId
 )		VALUES(
+		FALSE,50,TRUE,'散歩５０分、お座り覚える','ご飯をあまり食べませんでした。','2025-06-16',1
+);
+INSERT INTO REPORT(
+		food,walk,reportState,training,reportMemo,reportDate,reportDogId
+)		VALUES(
 		TRUE,30,TRUE,'散歩３０分、お座り覚える','お座り覚えることができ、元気に過ごしていました。','2025-06-21',2
 );
 INSERT INTO REPORT(
@@ -207,6 +219,17 @@ INSERT INTO REPORT(
 )		VALUES(
 		TRUE,50,TRUE,'散歩５０分、まて、ふせ覚える','散歩楽しんでいました。','2025-06-22',3
 );
+
+
+
+
+
+
+
+
+
+
+
 
 
 

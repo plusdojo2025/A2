@@ -30,7 +30,7 @@ public class ReportServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-		if (session.getAttribute("id") == null) {
+		if (session.getAttribute("user") == null) {
 			response.sendRedirect(request.getContextPath() +"/LoginServlet");
 			return;
 		}

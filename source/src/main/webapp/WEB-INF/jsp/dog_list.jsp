@@ -53,12 +53,13 @@
 				<th>ワンコのお名前</th>
 				<th>飼い主様</th>
 				<th>登録日</th>
+			</tr>
 		</thead>
 		<tbody>
 			<!-- ワンコ一覧 -->
 			<c:forEach var="e" items="" varStatus="status">
 				<tr>
-					<td><img src="<c:url value="${e.dogphoto}" />" alt="${e.dogName}の写真"></td>
+					<td><img src="<c:url value='${e.dogphoto}' />" alt="${e.dogName}の写真"></td>
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
 					<td>${e.date}</td>

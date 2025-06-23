@@ -11,11 +11,11 @@
 	<h1>〇月〇日</h1>                                        <!-- 日付を表示 -->
 	<a href = "javascript:history.back()">
 		<span>ひとつ前に戻る
-		<img src = "claeimages/back.png" alt= "戻る">
+		<img src = "<c:url value='/images/back.png' />" alt= "戻る">
 	</span></a>
 	
 	<h2>登録</h2>													<!-- 登録と一覧は縦に並べて表示する -->
-	<form method="POST" action="<c:url value='A2/CalendarServlet' />">
+	<form method="POST" action="<c:url value='/CalendarServlet' />">
 		タイトル<input type="text" name="title"><br>
 		時間<input type="time" name="nowTime" value="${e.nowTime}"><br>
 		メモ<input type="text" name="memo"><br>
@@ -25,7 +25,7 @@
 	
 	<h2>一覧</h2>
 	<c:forEach var="e" items="${scheList}">
-		<form method="POST" action="<c:url value='A2/CalendarServlet' />">
+		<form method="POST" action="<c:url value='/CalendarServlet' />">
 			タイトル<span>${e.title}</span><br>
 			時間<span>${e.time}</span><br>
 			メモ<span>${e.memo}</span><br>

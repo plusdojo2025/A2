@@ -8,7 +8,7 @@
 </head>
 <body>
 <div>
-<form id="tnewregi_form" method="post" action="/webapp/NewRegiServlet"> <!-- サーブレットまだない -->
+<form id="tnewregi_form" method="post" action="<c:url value='/NewRegiServlet'/> "> <!-- サーブレットまだない -->
     <table>
       <tr>
         <td>

@@ -9,7 +9,7 @@
 <body>
 	<div style="text-align: center;">
 		<span>トップへ</span><br>
-		<img src="images/うんち.png" alt="トップへ戻る" style= "width: 50px;" id="GoTop">			<!-- id定義済みGoTop -->
+		<img src="<c:url value='images/うんち.png'/> " alt="トップへ戻る" style= "width: 50px;" id="GoTop">			<!-- id定義済みGoTop -->
 	</div>
 </body>
 <script>

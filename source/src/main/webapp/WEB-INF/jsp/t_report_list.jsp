@@ -5,7 +5,7 @@
 <html>
 <head>
  <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/>
- <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+ <script src="<c:url value='https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js' /> "></script>
  <script>
     jQuery(function($){
     	 // デフォルトの設定を変更（日本語化）--------------------
@@ -38,7 +38,7 @@
 </head>
 <body>
 	<h1 class=page-title>ワンコ一覧</h1>
-	<a href="/A2/ReportServlet">新規登録</a>
+	<a href="<c:url value='/ReportServlet' />">新規登録</a>
 	<!-- 戻る画像ボタン -->
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->

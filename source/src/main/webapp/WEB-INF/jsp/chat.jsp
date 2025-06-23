@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Chat Application</title>
-<link rel="stylesheet" href="/etcProject/css/chat.css">
+<link rel="stylesheet" href="<c:url value='/etcProject/css/chat.css'/>">
 
 </head>
 <body onload="connect()">

@@ -42,13 +42,11 @@ public class CalendarServlet extends HttpServlet {
 	        //Dateになおす
 	        LocalDate date = LocalDate.of(year, month, count);
 	        
-			// 検索処理を行う //カレンダーDAOで作ったpublicList
+			// 検索処理を行う //カレンダーDAOで作ったscheList
 			CalendarDAO CaleDao = new CalendarDAO();
 			List<AllDto> scheList = CaleDao.selectAll(date);
-
 			// 検索結果をリクエストスコープに格納する
 			request.setAttribute("scheList", scheList);
-
 			// 結果ページにフォワードする
 		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule-regi.jsp");
 		    dispatcher.forward(request, response);

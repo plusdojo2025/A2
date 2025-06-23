@@ -28,7 +28,7 @@ public class OReportDetailServlet extends HttpServlet {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/webapp/LoginServlet");
+			response.sendRedirect("/A2/LoginServlet");
 			return;
 		}
 	
@@ -45,7 +45,7 @@ public class OReportDetailServlet extends HttpServlet {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
-			response.sendRedirect("/webapp/LoginServlet");
+			response.sendRedirect("/A2/LoginServlet");
 			return;
 		}
 	

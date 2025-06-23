@@ -47,7 +47,7 @@ public class WankoServlet extends HttpServlet {
 		//値の取得
 		request.setCharacterEncoding("UTF-8");
 		// "butt" が押されたときその中身が "登録" なら実行
-		if(request.getParameter("submit").equals("登録")) {
+		if(request.getParameter("butt").equals("登録")) {
 			
 			//
 			String dogPhoto = request.getParameter("dogPhoto");

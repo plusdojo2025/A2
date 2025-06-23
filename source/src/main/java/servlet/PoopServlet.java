@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,19 +25,23 @@ public class PoopServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//ただの画面遷移
+		
+		//ウンチ登録に画面遷移
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
 		dispatcher.forward(request, response);
 	}
+	 
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		//登録ボタンが押されたら	
 	
+		
 		// リクエストパラメータを取得する
 		
 	request.setCharacterEncoding("UTF-8");
+	String action = request.getParameter("action");
 	
 	int  poopId =Integer.parseInt(request.getParameter("poopId"));
 	String tlName =request.getParameter("tlname");
@@ -70,12 +73,14 @@ public class PoopServlet extends HttpServlet {
 		
 		if( ans == 1) {
 			request.setAttribute("msg","登録完了");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/insert.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
 			dispatcher.forward(request, response);
 		}else {
 			request.setAttribute("msg","登録できなかったよ");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/insert.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
 			dispatcher.forward(request, response);
+		}
+		
 	
 		//検索
 			// 検索処理を行う
@@ -86,11 +91,36 @@ public class PoopServlet extends HttpServlet {
 			request.setAttribute("poopList", poopList);
 
 			// 結果ページにフォワードする
-			dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
 			dispatcher.forward(request, response);
 			
+			//更新・削除
+			if("uppdate".equals(action)) {
+				if (bDao.update(pDto)) {
+					request.setAttribute("message", "レポートの更新に成功しました。");
+					dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
+					dispatcher.forward(request, response);	
+				
+			} else { 
+				request.setAttribute("error", "レポートの更新に失敗しました。");
+				dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
+				dispatcher.forward(request, response);
+			}
 			
-			
+		}else  if("delete".equals(action)) {
+			if (bDao.delete(pDto)) {
+				request.setAttribute("message", "レポートの削除に成功しました。");
+				 dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
+				dispatcher.forward(request, response);
+			} else { 
+				request.setAttribute("error", "レポートの削除に失敗しました。");
+				dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
+				dispatcher.forward(request, response);
+				
+			}
+		
+			/*
 			// 更新または削除を行う
 			if (request.getParameter("submit").equals("更新")) {
 				if (bDao.update(new AllDto())) { // 更新成功
@@ -104,7 +134,7 @@ public class PoopServlet extends HttpServlet {
 				} else { // 削除失敗
 					request.setAttribute("result", new Result("削除失敗！", "レコードを削除できませんでした。", "/servlet/PoopServlet"));
 				}
-			}
+			}*/
 			// 結果ページにフォワードする
 			dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
 			dispatcher.forward(request, response);

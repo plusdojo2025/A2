@@ -33,6 +33,13 @@ public class PoopServlet extends HttpServlet {
 					return;
 				}
 				
+				String action = request.getParameter("action");
+				
+				if("poopregi".equals(action)) {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
+					dispatcher.forward(request, response);
+				}
+				
 		//ウンチ登録に画面遷移
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
 		dispatcher.forward(request, response);

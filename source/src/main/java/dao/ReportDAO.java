@@ -31,8 +31,8 @@ public class ReportDAO {
 			// SQL文を準備する
 			
 			String sql = "SELECT reportId, food, walk, state, taraining, reportMemo, reportDate, reportDogId "
-					+ "FROM AllDto WHERE reportId LIKE ? OR food LIKE ? OR walk LIKE ? OR state LIKE ? OR training LIKE ? OR reortMemo LIKE ? OR reportDate LIKE ? OR dogId LIKE ?"
-					+ "ORDER BY number ASC";
+					+ "FROM AllDto WHERE reportId LIKE ? OR food LIKE ? OR walk LIKE ? OR state LIKE ? OR training LIKE ? OR reortMemo LIKE ? OR reportDate LIKE ? OR dogId LIKE ? "
+					+ "ORDER BY number ASC ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を完成させる
@@ -110,8 +110,8 @@ public class ReportDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
-						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2? "
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true ",
 						"root", "password");
 
 				// SQL文を準備する
@@ -161,8 +161,8 @@ public class ReportDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
-						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2? "
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true ",
 						"root", "password");
 
 				// SQL文を準備する 
@@ -217,7 +217,7 @@ public class ReportDAO {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2? "
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 

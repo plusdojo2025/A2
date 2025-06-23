@@ -9,7 +9,7 @@
 <body>
 
 <h1>わんこ登録</h1>
-<form method="post" action="WankoServlet">
+<form method="post" action="<c:url value='/WankoServlet'/>">
 	<table class="inputFields">
 		<tr>
 			<td>

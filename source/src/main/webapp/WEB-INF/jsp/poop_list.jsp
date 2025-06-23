@@ -49,7 +49,8 @@
 </head>
 <body>
 	<h1 class=page-title>うんち一覧</h1>
-	<a href="<c:url value='/PoopServlet' />">新規登録</a>
+	
+	<a href="<c:url value='/PoopServlet?action=poopregi' />">新規登録</a>
 	<!-- 戻る画像ボタン -->
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->

@@ -34,7 +34,7 @@ public class ReportDAO {
 					+ "FROM USER JOIN WANKO "
 					+ "ON USER.userNameId = WANKO.wankoNameId "
 					+ "WHERE WANKO.wankoNameId=? "
-					+ "ORDER BY USER.userNameId" ;
+					+ "ORDER BY USER.userNameId " ;
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を完成させる
@@ -71,8 +71,8 @@ public class ReportDAO {
 					alldto.setReportMemo(rs.getString("reportMemo"));
 					alldto.setReportDate(rs.getDate("reportDate").toLocalDate());
 					alldto.setReportDogId(rs.getInt("reportDogId"));
-
-				reportList.add(report);
+					System.out.println("repot" + alldto);		
+				reportList.add(alldto);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -96,11 +96,6 @@ public class ReportDAO {
 		return reportList;
 	}
 
-
-		
-		
-		
-		
 		
 		// 引数で指定されたレコードを登録し、成功したらtrueを返す
 		public boolean insert(AllDto report) {
@@ -268,7 +263,7 @@ public class ReportDAO {
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "SELECT reportId FROM AllDto WHERE reportId LIKE ? ORDER BY number";
+				String sql = "SELECT reportId FROM report WHERE reportId LIKE ?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる

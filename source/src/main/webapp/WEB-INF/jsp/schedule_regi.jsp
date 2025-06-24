@@ -19,13 +19,19 @@
 		タイトル<input type="text" name="title"><br>
 		時間<input type="time" name="nowTime" value="${e.nowTime}"><br>
 		メモ<input type="text" name="memo"><br>
-		ワンコ情報 
+		ワンコID <input type="text" name="calendarDogId">
+		<input type="hidden" name="calendarDate" value="${selectedDate}">
 		
-		<select name="selewanko">
+		<%-- <select name="selewanko">
   			<c:forEach var="dog" items="${wankoList}">
     			<option value="${dog.wankoDogId}">${dog.dogName}</option>
   			</c:forEach>
-		</select>					
+		</select>					 --%>
+		<input type="hidden" name="action" value="regist">
+		<input type="hidden" name="year" value="${param.year }">
+		<input type="hidden" name="month" value="${param.month }">
+		<input type="hidden" name="count" value="${param.count }">
+		
 		<input type="submit" name="regist" value="登録">
 	</form>	
 	
@@ -35,13 +41,15 @@
 			タイトル<span>${e.title}</span><br>
 			時間<span>${e.time}</span><br>
 			メモ<span>${e.memo}</span><br>
-			ワンコ情報 
+			ワンコID <span>${e.calendarDogId}</span><br>
 			<select name="selewanko">
   				<c:forEach var="dog" items="${wankoList}">
     				<option value="${dog.wankoDogId}">${dog.dogName}</option>
   				</c:forEach>
 			</select>	
+			<input type="hidden" name="action" value="update">
 			<input type="submit" name="update" value="更新">
+			<input type="hidden" name="action" value="delete">
 			<input type="submit" name="delete" value="削除">
 		</form>	
 	</c:forEach>

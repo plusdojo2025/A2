@@ -53,7 +53,7 @@ public class NewRegiServlet extends HttpServlet {
 		
 		uDto.setUserNameId(nameId);
 		uDto.setRuby(ruby);
-		uDto.setBirth(birth);
+		//uDto.setBirth(birth);
 		uDto.setName(name);
 		uDto.setPw(pw);
 		uDto.setuPhone(uPhone);

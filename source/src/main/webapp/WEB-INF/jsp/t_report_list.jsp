@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
  <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/>
  <script src="<c:url value='https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js' /> "></script>
  <script>
@@ -37,6 +38,7 @@
  </style>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 	<h1 class=page-title>ワンコ一覧</h1>
 	<a href="<c:url value='/ReportServlet' />">新規登録</a>
 	<!-- 戻る画像ボタン -->
@@ -58,7 +60,7 @@
 			<!-- ワンコ一覧 -->
 			<c:forEach var="e" items="" varStatus="status">
 				<tr>
-					<td><img src="${e.dogphoto}" alt="${e.dogName}の写真"></td>
+					<td><img src="${e.dogphoto}"width="200" height="200 alt="${e.dogName}の写真"></td>
 					<td>${e.date}</td>
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>

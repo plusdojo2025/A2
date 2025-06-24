@@ -34,7 +34,7 @@ public class ReportDAO {
 					+ "FROM USER JOIN WANKO "
 					+ "ON USER.userNameId = WANKO.wankoNameId "
 					+ "WHERE WANKO.wankoNameId=? "
-					+ "ORDER BY USER.userNameIds" ;
+					+ "ORDER BY USER.userNameId" ;
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を完成させる

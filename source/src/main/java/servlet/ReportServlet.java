@@ -44,7 +44,7 @@ public class ReportServlet extends HttpServlet {
 			//飼い主側
 			}else if(log.isUserUniqueId() == false) {
 				// レポート一覧を表示
-				int reportId = log.getReportId();
+				int dogId = log.getDogId();
 				ReportDAO rdao = new ReportDAO();
 				List<AllDto> reportList = rdao.select(reportId);
 				request.setAttribute("reportList", reportList);

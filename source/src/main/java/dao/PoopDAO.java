@@ -87,10 +87,11 @@ import dto.AllDto;
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 			// SQL文を準備する
-			String sql = "SELECT schoolId, nameId, poopId, tlName, nowTime, photo, color, hardness, abnormal, dogId,"
-					+ " memo , date FROM POOP JOIN WANKO ON POOP.dogId=WANKO.dogId "
-			+"WHERE POOP.dogId=? "
-			+"ORDER BY Poop.dogId";
+			String sql = "SELECT poopId, nowTime, photo, color, hardness, PoopDogId, date, wankoDogId, dogName, wankoNameId, name, userNameId, userSchoolId " 
+					+ "FROM WANKO JOIN POOP ON POOP.PoopDogId = WANKO.wankoDogId "
+					+ "JOIN USER ON WANKO.wankoNameId = USER.userNameId "
+					+ "WHERE userNameId=? "
+					+ "ORDER BY Poop.PoopDogId";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を完成させる
@@ -101,16 +102,15 @@ import dto.AllDto;
 			
 			// 結果表をコレクションにコピーする　うんち写真と犬名前保存
 			while (rs.next()) {
-				AllDto poop = new  AllDto();
 				AllDto unchi= new AllDto();
 				unchi.setPhoto(rs.getString("photo"));
-				unchi.setTlName(rs.getString("dogId"));
-				unchi.setTlName(rs.getString("tlName"));
+				unchi.setTlName(rs.getString("dogName"));
+				unchi.setTlName(rs.getString("name"));
 				unchi.setHardness(rs.getInt("hardness"));
 				unchi.setColor(rs.getInt("color"));
 				unchi.setTlName(rs.getString("date"));
 				
-				poopList.add(poop);
+				poopList.add(unchi);
 			}
 		
 			

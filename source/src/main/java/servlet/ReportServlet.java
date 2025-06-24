@@ -46,7 +46,7 @@ public class ReportServlet extends HttpServlet {
 				// レポート一覧を表示
 				int reportId = log.getReportId();
 				ReportDAO rdao = new ReportDAO();
-				List<AllDto> reportList = rdao.oreportSelect(reportId);
+				List<AllDto> reportList = rdao.select(reportId);
 				request.setAttribute("reportList", reportList);
 				// 後でやるにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_list.jsp");

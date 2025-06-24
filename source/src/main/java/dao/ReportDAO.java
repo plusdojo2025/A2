@@ -31,8 +31,10 @@ public class ReportDAO {
 			// SQL文を準備する
 			
 			String sql = "SELECT dogPhoto, reportDate, dogName, name"
-					+ "FROM AllDto WHERE reportId LIKE ? OR food LIKE ? OR walk LIKE ? OR state LIKE ? OR training LIKE ? OR reortMemo LIKE ? OR reportDate LIKE ? OR dogId LIKE ? "
-					+ "ORDER BY number ASC ";
+					+ "FROM USER JOIN WANKO "
+					+ "ON USER.userNameId = WANKO.wankoNameId "
+					+ "WHERE WANKO.wankoNameId=? "
+					+ "ORDER BY USER.userNameId " ;
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を完成させる

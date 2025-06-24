@@ -52,26 +52,29 @@ public class CalendarServlet extends HttpServlet {
 	        
 			// 検索処理を行う //カレンダーDAOで作ったscheList
 			CalendarDAO CaleDao = new CalendarDAO();
-			int schoolId = log.getSchoolId();
+			int schoolId = log.getUserSchoolId();
+			System.out.println(date+"kkkkk"+schoolId +"aaaaa");
 			List<AllDto> scheList = CaleDao.selectAll(date,schoolId);
 			// 検索結果をリクエストスコープに格納する
 			request.setAttribute("scheList", scheList);
+			System.out.println(scheList.size()+"bbbbbbbbb");
 			// 結果ページにフォワードする
 		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
 		    dispatcher.forward(request, response);
 		    
-			/*
-			 * // ワンコ一覧を取得 int userSchoolId = log.getUserSchoolId(); List<AllDto> wankoList
-			 * = CaleDao.selectWanko(userSchoolId);
-			 * request.setAttribute("wankoList",wankoList); for(AllDto dto : wankoList) {
-			 * System.out.println(dto.getDogName()+"aaaaa"); }
-			 */		   //System.out.println("wankoList: "+wankoList); 
+			
+			 // ワンコ一覧を取得 
+		    int userSchoolId = log.getUserSchoolId();
+		    List<AllDto> wankoList= CaleDao.selectWanko(userSchoolId);
+			request.setAttribute("wankoList",wankoList); for(AllDto dto : wankoList) {
+			System.out.println(dto.getDogName()+"aaaaa"); }
+					   //System.out.println("wankoList: "+wankoList); 
 		   
-			/*
-			 * RequestDispatcher rd =
-			 * request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
-			 * rd.forward(request, response);
-			 */		}
+			
+			 RequestDispatcher rd =
+			 request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
+			 rd.forward(request, response);
+					}
 
 	}
 	
@@ -100,7 +103,7 @@ public class CalendarServlet extends HttpServlet {
 			String title = request.getParameter("title");
 			LocalTime nowTime = LocalTime.parse(request.getParameter("nowTime"));
 			System.out.println("aiueo"+nowTime);
-			String calendarMemo = request.getParameter("calendarMemo");
+			String memo = request.getParameter("memo");
 			String dogIdString = request.getParameter("calendarDogId");
 				int calendarDogId = 0;
 				//dogIdのNullチェック
@@ -116,13 +119,18 @@ public class CalendarServlet extends HttpServlet {
 				    // エラー処理（またはデフォルトのまま処理を続ける）
 				}
 				
-			LocalDate selectedDate = (LocalDate) session.getAttribute("selectedDate");
+			//LocalDate selectedDate = (LocalDate) session.getAttribute("selectedDate");
+			int year = Integer.parseInt(request.getParameter("year"));
+	        int month = Integer.parseInt(request.getParameter("month"));
+	        int count = Integer.parseInt(request.getParameter("count"));
+	        
+	        //Dateになおす
+	        LocalDate date = LocalDate.of(year, month, count);
 				
-				
-			cDto.setCalendarDate(selectedDate);
+			cDto.setCalendarDate(date);
 			cDto.setTitle(title);
 			cDto.setTime(nowTime);
-			cDto.setCalendarMemo(calendarMemo);
+			cDto.setCalendarMemo(memo);
 			cDto.setCalendarDogId(calendarDogId);
 			//cDto.setCalendarDogId(calendarDogId);
 	}
@@ -161,4 +169,4 @@ public class CalendarServlet extends HttpServlet {
 			
 	}	
 	}
-}
+

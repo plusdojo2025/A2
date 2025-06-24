@@ -101,10 +101,25 @@ public class CalendarServlet extends HttpServlet {
 			LocalTime nowTime = LocalTime.parse(request.getParameter("nowTime"));
 			System.out.println("aiueo"+nowTime);
 			String calendarMemo = request.getParameter("calendarMemo");
-			int calendarDogId = Integer.parseInt(request.getParameter("calendarDogId"));
-			
-			
-			//cDto.setCalendarDate(calendarDate);
+			String dogIdString = request.getParameter("calendarDogId");
+				int calendarDogId = 0;
+				//dogIdのNullチェック
+				if (dogIdString != null && !dogIdString.isEmpty()) {
+				    try {
+				        calendarDogId = Integer.parseInt(dogIdString);
+				    } catch (NumberFormatException e) {
+				        System.out.println("calendarDogIdが数字ではありません: " + dogIdString);
+				        // エラー処理（必要なら）
+				    }
+				} else {
+				    System.out.println("calendarDogIdがnullまたは空文字です");
+				    // エラー処理（またはデフォルトのまま処理を続ける）
+				}
+				
+			LocalDate selectedDate = (LocalDate) session.getAttribute("selectedDate");
+				
+				
+			cDto.setCalendarDate(selectedDate);
 			cDto.setTitle(title);
 			cDto.setTime(nowTime);
 			cDto.setCalendarMemo(calendarMemo);
@@ -141,6 +156,8 @@ public class CalendarServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
 				dispatcher.forward(request, response);
 			}
+		
+		}
 			
 	}	
 	}

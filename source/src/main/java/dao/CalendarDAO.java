@@ -84,7 +84,7 @@ public class CalendarDAO {
 					dto.setCalendarDate(rs.getTimestamp("calendarDate").toLocalDateTime());
 					dto.setTitle(rs.getString("title"));
 					dto.setTime(rs.getTime("time").toLocalTime());
-					dto.setCalendarMemo(rs.getInt("calendarMemo"));
+					dto.setCalendarMemo(rs.getString("calendarMemo"));
 					dto.setCalendarDogId(rs.getInt("calendarDogId"));
 					
 					//addでcardListにbcを入れている　（cardListはArrayList)
@@ -134,7 +134,7 @@ public class CalendarDAO {
 			pStmt.setTimestamp(1, java.sql.Timestamp.valueOf(regiCalendar.getCalendarDate()));
 			pStmt.setString(2, regiCalendar.getTitle());
 			pStmt.setTime(3, java.sql.Time.valueOf(regiCalendar.getTime()));
-			pStmt.setInt(4, regiCalendar.getCalendarMemo());
+			pStmt.setString(4, regiCalendar.getCalendarMemo());
 			pStmt.setInt(5, regiCalendar.getCalendarDogId());
 			
 			// SQL文を実行する
@@ -188,7 +188,7 @@ public class CalendarDAO {
 				pStmt.setTimestamp(1, java.sql.Timestamp.valueOf(upCalendar.getCalendarDate()));
 				pStmt.setString(2, upCalendar.getTitle());
 				pStmt.setTime(3, java.sql.Time.valueOf(upCalendar.getTime()));
-				pStmt.setInt(4, upCalendar.getCalendarMemo());
+				pStmt.setString(4, upCalendar.getCalendarMemo());
 				pStmt.setInt(5, upCalendar.getCalendarDogId());
 				
 				
@@ -317,7 +317,7 @@ public class CalendarDAO {
 							dto.setCalendarDate(rs.getTimestamp("calendarDate").toLocalDateTime());
 							dto.setTitle(rs.getString("title"));
 							dto.setTime(rs.getTime("time").toLocalTime());
-							dto.setCalendarMemo(rs.getInt("calendarMemo"));
+							dto.setCalendarMemo(rs.getString("calendarMemo"));
 							dto.setCalendarDogId(rs.getInt("calendarDogId"));
 							
 							//addでcardListにbcを入れている　（cardListはArrayList)

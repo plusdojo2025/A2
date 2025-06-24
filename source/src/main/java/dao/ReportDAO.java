@@ -89,7 +89,7 @@ public class ReportDAO {
 				}
 			}
 		}
-
+		System.out.println("レポート" + reportList);
 		// 結果を返す
 		return reportList;
 	}

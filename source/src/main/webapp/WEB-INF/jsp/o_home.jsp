@@ -10,7 +10,7 @@
 <body>
 <%@ include file="header.jsp" %>
 <div>
-	<p><img src="${logdog.dogPhoto}" alt="${logdog.dogName}の写真">
+	<p class="dogphoto"><img src="${logdog.dogPhoto}"width="400"  alt="${logdog.dogName}の写真">
 	<p><c:out value="${user.name}"/>さん　ログイン中</p>
 </div>
 <h1>予約登録</h1>

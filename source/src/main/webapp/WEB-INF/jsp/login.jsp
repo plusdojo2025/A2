@@ -6,13 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>ログイン</title>
-<link rel="stylesheet"  href="<c:url value='/css/NewFile.css' />">
+<link rel="stylesheet"  href="<c:url value='/css/login.css' />">
 </head>
 <body>
 
   <!-- ヘッダー（ここから） -->
   <h1 id="logo">
-    <a href="<c:url value='/LoginServlet'/> "><img src="<c:url value='/images/ぶりログ.png'/> "  height="200" alt="ぶりログ">
+    <a href="<c:url value='/LoginServlet'/> "><img src="<c:url value='/images/ぶりログ.png'/> "  height="150" alt="ぶりログ">
     </a>
   </h1>
   <!-- ヘッダー（ここまで） -->
@@ -20,10 +20,12 @@
    <form  method="POST" action="<c:url value='/LoginServlet'/>" >
     <label class="label">ID</label><input type="text" name="id"><br>
     <label class="label">パスワード</label><input type="password" name="pw"><br>
-    <input type="submit" name="logbut" value="ログイン">
-    <input type="reset" name="reset" value="リセット">
+    <div class="wrapper">
+	    <input type="submit" name="logbut" value="ログイン">
+	    <input type="reset" name="reset" value="リセット">
+    </div>
     </form>
-    <div>
+    <div class="era-">
     ${errMsg}
     </div>
     <!--  <table>
@@ -50,8 +52,8 @@
     </table>
   </form> -->
   <div id="footer">
-  <p><a href="<c:url value='LoginServlet?action=regi'/> ">新規登録はこちら</a></p>
-  <p>ID/パスワードを忘れた方は〇〇までご連絡ください</p>
+	  <p><a href="<c:url value='LoginServlet?action=regi'/> ">新規登録はこちら</a></p>
+	  <p>ID/パスワードを忘れた方は〇〇までご連絡ください</p>
   </div>
   <script>
 /* HTML要素をオブジェクトとして取得する */

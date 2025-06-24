@@ -107,7 +107,7 @@ header {
         <li><a href="<c:url value='WankoServlet?action=home'/> "><img src="<c:url value='/images/犬のフリーアイコン.png' />" alt="" class="icon">一覧</a></li>
         <li><a href="<c:url value='PoopServlet'/> "><img src="<c:url value='/images/うんち.png' />" alt="" class="icon">記録</a></li>
         <li><a href="<c:url value='ReportServlet'/> ">報告</a></li>
-        <li><a href="<c:url value='ChatServlet'/> ">問い合わせ</a></li>
+        <li><a href="<c:url value='ContactServlet?action=home'/> ">問い合わせ</a></li>
       </ul>
     </nav>
   </div>

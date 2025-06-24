@@ -38,6 +38,7 @@ create table WANKO (
 		remarks5 varchar(300),
 		injection varchar(300),
 		rabies varchar(300)
+		
 		);
 	
 

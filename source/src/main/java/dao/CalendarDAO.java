@@ -81,10 +81,10 @@ public class CalendarDAO {
 				while (rs.next()) {
 					AllDto dto=new AllDto();
 					dto.setCalendarId(rs.getInt("calendarId"));
-					dto.setCalendarDate(rs.getTimestamp("calendarDate").toLocalDateTime());
+					dto.setCalendarDate(rs.getDate("calendarDate").toLocalDate());
 					dto.setTitle(rs.getString("title"));
 					dto.setTime(rs.getTime("time").toLocalTime());
-					dto.setCalendarMemo(rs.getInt("calendarMemo"));
+					dto.setCalendarMemo(rs.getString("calendarMemo"));
 					dto.setCalendarDogId(rs.getInt("calendarDogId"));
 					
 					//addでcardListにbcを入れている　（cardListはArrayList)
@@ -131,12 +131,12 @@ public class CalendarDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 					
 			//pStmt.setInt(1, regiCalendar.getCalendarId());
-			pStmt.setTimestamp(1, java.sql.Timestamp.valueOf(regiCalendar.getCalendarDate()));
+			pStmt.setDate(1, java.sql.Date.valueOf(regiCalendar.getCalendarDate()));
 			pStmt.setString(2, regiCalendar.getTitle());
 			pStmt.setTime(3, java.sql.Time.valueOf(regiCalendar.getTime()));
-			pStmt.setInt(4, regiCalendar.getCalendarMemo());
+			pStmt.setString(4, regiCalendar.getCalendarMemo());
 			pStmt.setInt(5, regiCalendar.getCalendarDogId());
-			
+			System.out.println(regiCalendar.getCalendarDogId()+"aaaaaaaa");
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
@@ -185,10 +185,10 @@ public class CalendarDAO {
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				
 				// SQL文を完成させる
-				pStmt.setTimestamp(1, java.sql.Timestamp.valueOf(upCalendar.getCalendarDate()));
+				pStmt.setDate(1, java.sql.Date.valueOf(upCalendar.getCalendarDate()));
 				pStmt.setString(2, upCalendar.getTitle());
 				pStmt.setTime(3, java.sql.Time.valueOf(upCalendar.getTime()));
-				pStmt.setInt(4, upCalendar.getCalendarMemo());
+				pStmt.setString(4, upCalendar.getCalendarMemo());
 				pStmt.setInt(5, upCalendar.getCalendarDogId());
 				
 				
@@ -293,13 +293,14 @@ public class CalendarDAO {
 								JOIN WANKO
 								ON CALENDAR.calendarDogId=WANKO.wankoDogId
 								JOIN USER
-								ON WANKO.wankoDogId=USER.userNameId
+								ON WANKO.wankoNameId=USER.userNameId
 								
 								WHERE calendarDate = ? 
 								AND userSchoolId = ?
 								
 								ORDER BY calendarId
 								""";
+						System.out.println(sql);
 						PreparedStatement pStmt = conn.prepareStatement(sql);
 
 						// SQL文を完成させる　
@@ -314,10 +315,10 @@ public class CalendarDAO {
 						while (rs.next()) {
 							AllDto dto=new AllDto();
 							dto.setCalendarId(rs.getInt("calendarId"));
-							dto.setCalendarDate(rs.getTimestamp("calendarDate").toLocalDateTime());
+							dto.setCalendarDate(rs.getDate("calendarDate").toLocalDate());
 							dto.setTitle(rs.getString("title"));
 							dto.setTime(rs.getTime("time").toLocalTime());
-							dto.setCalendarMemo(rs.getInt("calendarMemo"));
+							dto.setCalendarMemo(rs.getString("calendarMemo"));
 							dto.setCalendarDogId(rs.getInt("calendarDogId"));
 							
 							//addでcardListにbcを入れている　（cardListはArrayList)

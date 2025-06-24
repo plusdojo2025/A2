@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="header.jsp" %>
+
  <link rel="stylesheet" href="<c:url value="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css" />"/>
  <script src="<c:url value="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js" />"></script>
  <script>
@@ -38,6 +38,7 @@
  </style>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 	<h1 class=page-title>ワンコ一覧</h1>
 	<a href="<c:url value='/WankoServlet?action=list'/>">新規登録</a>
 	<!-- 戻る画像ボタン -->

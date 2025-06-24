@@ -89,7 +89,7 @@ public class ReportDAO {
 				}
 			}
 		}
-
+		System.out.println("レポート" + reportList);
 		// 結果を返す
 		return reportList;
 	}
@@ -307,78 +307,5 @@ public class ReportDAO {
 			return rdList;
 		}
 
-		
-		//報告一覧表示
-		public List<AllDto> oreportSelect(int reportId){
-			Connection conn = null;
-			List<AllDto> oreportList = new ArrayList<AllDto>();
-			
-			try {
-				// JDBCドライバを読み込む
-				Class.forName("com.mysql.cj.jdbc.Driver");
-
-				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
-						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-						"root", "password");
-				// SQL文を準備する
-				String sql = "SELECT dogPhoto, dogName, name, reportDate "
-						+ "FROM USER JOIN WANKO JOIN REPORT"
-						+ "ON USER.userNameId = WANKO.wankoNameId = REPORT.reportDogId "
-						+ "WHERE USER.userNameId=? "
-						+ "ORDER BY USER.userNameId ";
-				
-				PreparedStatement pStmt = conn.prepareStatement(sql);
-				
-				String dogPhoto = null;
-				String dogName = null;
-				String name = null;
-				String reportDate = null;
-				
-				// SQL文を完成させる
-				pStmt.setString(1, dogPhoto);
-				pStmt.setString(2, dogName);
-				pStmt.setString(3, name);
-				pStmt.setString(4, reportDate);
-				
-				// SQL文を実行し、結果表を取得する
-				ResultSet rs = pStmt.executeQuery();
-				
-				// 結果表をコレクションにコピーする　犬写真と犬名前保存
-				while (rs.next()) {
-					AllDto report = new AllDto();
-					report.setDogPhoto(rs.getString("dogPhoto"));
-					report.setDogName(rs.getString("dogName"));
-					report.setName(rs.getString("name"));
-					report.setDogRegist(rs.getDate("reportDate").toLocalDate());
-					
-					oreportList.add(report);
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-				oreportList = null;
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-				oreportList = null;
-			} finally {
-				// データベースを切断
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-						oreportList = null;
-						
-						
-				}
-			}
-		}
-			return oreportList;
-		}
-				
-		
-		
-		
 }
 

@@ -4,11 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="header.jsp" %>
+
 <meta charset="UTF-8">
 <title>報告登録</title>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 	<h1>報告登録</h1>
 	<!-- ワンコ選択 -->
 	<select name="dogName">

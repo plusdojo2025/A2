@@ -30,7 +30,7 @@ public class ReportDAO {
 
 			// SQL文を準備する
 			
-			String sql = "SELECT reportId, food, walk, state, taraining, reportMemo, reportDate, reportDogId "
+			String sql = "SELECT dogPhoto, reportDate, dogName, name"
 					+ "FROM AllDto WHERE reportId LIKE ? OR food LIKE ? OR walk LIKE ? OR state LIKE ? OR training LIKE ? OR reortMemo LIKE ? OR reportDate LIKE ? OR dogId LIKE ? "
 					+ "ORDER BY number ASC ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);

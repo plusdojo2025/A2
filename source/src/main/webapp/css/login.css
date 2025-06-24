@@ -30,13 +30,23 @@ input[type="reset"] {
 	margin: 10px auto;
  	font-size: 24px;
   	padding: 10px 20px;
+  	font-weight:bold;
   	border-radius: 8px;	
 }
 .wrapper {
 	text-align: center;
 }
-
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+	background-color: orange;
+}
 
 .era- {
 	text-align:center;
+	color:red;
+}
+#footer {
+	text-align: center;
+}
+
 }

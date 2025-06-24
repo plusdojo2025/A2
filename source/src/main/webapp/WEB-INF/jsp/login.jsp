@@ -12,7 +12,7 @@
 
   <!-- ヘッダー（ここから） -->
   <h1 id="logo">
-    <a href="<c:url value='/LoginServlet'/> "><img src="<c:url value='/images/ぶりログ.png'/> "  height="200" alt="ぶりログ">
+    <a href="<c:url value='/LoginServlet'/> "><img src="<c:url value='/images/ぶりログ.png'/> "  height="150" alt="ぶりログ">
     </a>
   </h1>
   <!-- ヘッダー（ここまで） -->
@@ -52,8 +52,8 @@
     </table>
   </form> -->
   <div id="footer">
-  <p><a href="<c:url value='LoginServlet?action=regi'/> ">新規登録はこちら</a></p>
-  <p>ID/パスワードを忘れた方は〇〇までご連絡ください</p>
+	  <p><a href="<c:url value='LoginServlet?action=regi'/> ">新規登録はこちら</a></p>
+	  <p>ID/パスワードを忘れた方は〇〇までご連絡ください</p>
   </div>
   <script>
 /* HTML要素をオブジェクトとして取得する */

@@ -9,8 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import dao.WankoDAO;
+import dao.UserDAO;
 import dto.AllDto;
 
 
@@ -18,16 +19,36 @@ import dto.AllDto;
 public class ContactServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//ただの画面遷移
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/contact_list.jsp");
-		dispatcher.forward(request, response);
+		String action = request.getParameter("action");
+		
+		// 条件によって画面を振り分ける
+		if("home".equals(action)) {
+			HttpSession session = request.getSession();
+			AllDto log = (AllDto)session.getAttribute("user");
+			
+			if(log.isUserUniqueId() == false ) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/chat.jsp");
+				dispatcher.forward(request, response);
+			}else if(log.isUserUniqueId() == true ) {
+			//飼い主用の遷移
+			AllDto user = (AllDto) session.getAttribute("user");
+			String userSchoolId = user.getUserNameId();
+			UserDAO cdao = new UserDAO();
+			List<AllDto> contactList = cdao.conlistSelect(userSchoolId);
+			request.setAttribute("contactList", contactList);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/contact_list.jsp");
+			dispatcher.forward(request, response);
+			}
+		
+		}
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//検索
-		WankoDAO conDao = new WankoDAO();
+		UserDAO conDao = new UserDAO();
 		AllDto conDto = new AllDto();
 		
 		List<AllDto> contactList = conDao.select(conDto)  ;
@@ -36,19 +57,30 @@ public class ContactServlet extends HttpServlet {
 		request.setAttribute("contactList", contactList);
 		
 		// 結果
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/contact_list.jsp");
-					dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/contact_list.jsp");
+		dispatcher.forward(request, response);
+		
+//		//1ページ20項目で表示
+//		String pageParam = request.getParameter("page");
+//		int page = 1;
+//		int pageSize = 20;
+//		if (pageParam != null && pageParam.matches("\\d+")) {
+//		    page = Integer.parseInt(pageParam);
+//		}
+//		int offset = (page - 1) * pageSize;
+//
+//		String userSchoolId = request.getParameter("userSchoolId");
+//
+//		// DAOに必要な情報だけ渡す
+//		UserDAO dao = new UserDAO();
+//		List<AllDto> clist = dao.conlistSelect(userSchoolId, pageSize, offset);
+//
+//		// 検索結果をリクエストスコープに格納する
+//		request.setAttribute("userList", clist);
+		
+	
 					
-					int page = 1; //1ページ目
-					
-					//ページが整数か確認して、整数ならページ番号を付与する
-					String pageParam = request.getParameter("page");
-					if (pageParam != null && pageParam.matches("\\d+")) {
-					    page = Integer.parseInt(pageParam);
-					}
-					int pageSize = 20; //一ページに格納できる件数
-					//指定されたページ番号から、そのページに表示すべき情報を持ってくる
-					int offset = (page - 1) * pageSize;
+			
 					
 					
 	}

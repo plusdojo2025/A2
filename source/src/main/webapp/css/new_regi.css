@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+#logo{
+	text-align: center;
+	border-bottom: 5px dashed orange;
+}
+#Nregi {
+	text-align: center;
+	color:orange;
+	font-weight:bold;
+	font-size:40px;
+}
+
+form {
+	justify-content: center;
+}
+
+
+ #newregi_form input[type=submit],input[type=reset] {
+  margin-top:10px;
+  padding: 8px 16px;
+  background-color:rgb(128, 125, 125);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+#newregi_form input[type=submit]:hover,input[type=reset]:hover {
+  background-color:orange;
+}
+#newregi_form input[name=name] {
+	
+}

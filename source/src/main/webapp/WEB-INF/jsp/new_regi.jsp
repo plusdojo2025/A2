@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"  href="<c:url value='/css/new_regi.css' />">
     <!--　box表示    
     <style>
         *{
@@ -14,6 +16,10 @@
 -->
 </head>
 <body>
+ <h1 id="logo">
+   <img src="<c:url value='/images/ぶりログ.png'/> "  height="150" alt="ぶりログ">
+  </h1>
+<h2 id=Nregi>ユーザー新規登録</h2>
 <div>
 <form id="newregi_form" method="post" action="<c:url value='/NewRegiServlet'/>"> <!-- サーブレットまだない -->
     <table>
@@ -28,6 +34,8 @@
           <input type="text" name="rudy" placeholder="必須" required>
           </label>
         </td>
+      </tr>
+      <tr>
         <td>
           <label>生年月日<br>
           <input type="date" name="birth" placeholder="必須" required>
@@ -39,7 +47,7 @@
           <input type="text" name="nameId" placeholder="必須" required>
           </label>
         </td>
-        </tr>
+      </tr>
         <tr>
         <td>
           <label>パスワード<br>
@@ -51,6 +59,8 @@
           <input type="text" name="uPhone" placeholder="必須" required>
           </label>
         </td>
+      </tr>
+      <tr>
         <td>
           <label>連絡先2<br>
           <input type="text" name="uPhone2">

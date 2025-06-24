@@ -1,7 +1,12 @@
 @charset "UTF-8";
 
+body {
+	background-image:url(../images/mikan.jpg);
+	background-size: cover;
+}
 #logo {
 	text-align: center;
+	border-bottom: 5px dashed orange;
 }
 
 .label {
@@ -15,7 +20,7 @@
 input[type="text"],
 input[type="password"] {
   display: block;
-  margin: 10px auto; /* 中央に寄せる */
+  margin: 10px auto; 
   font-size: 30px;
   width: 300px;
   height: 50px;
@@ -49,4 +54,5 @@ input[type="reset"]:hover {
 	text-align: center;
 }
 
-}
+
+

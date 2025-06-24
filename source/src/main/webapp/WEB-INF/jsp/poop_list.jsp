@@ -73,7 +73,7 @@
 		</thead>
 		<tbody>
 			<!-- うんち一覧 -->
-			<c:forEach var="e" items="" varStatus="status">
+			<c:forEach var="e" items="${poopList}" varStatus="status">
 				<tr>
 					<td><img src="${e.dogphoto}" alt="${e.dogName}の写真"></td>
 					<td>${e.dogName}</td>
@@ -82,7 +82,7 @@
 					<td>${e.color}</td>
 					<td>${e.date}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->
-					  <a href="<c:url value='/PoopServlet?id=${e.poopId}' /> ">
+					  <a href="<c:url value='/PoopServlet?id=${e.poopId}&action=dogDetail' /> ">
 					    <button type="button">詳細</button>
 					  </a>
 					</td>

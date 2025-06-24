@@ -38,13 +38,9 @@
  </style>
 </head>
 <body>
-<<<<<<< HEAD
-	<h1 class=page-title>報告一覧</h1>
-=======
 <%@ include file="header.jsp" %>
-	<h1 class=page-title>ワンコ一覧</h1>
+	<h1 class=page-title>報告一覧</h1>
 	<a href="<c:url value='/ReportServlet'/> ">新規登録</a>
->>>>>>> db9d87383a2ccfeaf4b51dddbba8fa9105d91be5
 	<!-- 戻る画像ボタン -->
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
@@ -64,13 +60,10 @@
 			<!-- 報告一覧 -->
 			<c:forEach var="e" items="${reportList}" varStatus="status">
 				<tr>
-<<<<<<< HEAD
 					<td><img src="<c:url value='${e.dogPhoto}' />" alt="${e.dogName}の写真"></td>
 					<td>${e.reportDate}</td>
-=======
 					<td><img src="${e.dogphoto}"width="200" height="200 alt="${e.dogName}の写真"></td>
 					<td>${e.date}</td>
->>>>>>> db9d87383a2ccfeaf4b51dddbba8fa9105d91be5
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->

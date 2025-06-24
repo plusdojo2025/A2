@@ -30,11 +30,11 @@ public class ReportDAO {
 
 			// SQL文を準備する
 			
-			String sql = "SELECT dogPhoto, reportDate, dogName, name"
+			String sql = "SELECT dogPhoto, reportDate, dogName, name "
 					+ "FROM USER JOIN WANKO "
 					+ "ON USER.userNameId = WANKO.wankoNameId "
 					+ "WHERE WANKO.wankoNameId=? "
-					+ "ORDER BY USER.userNameId " ;
+					+ "ORDER BY USER.userNameIds" ;
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を完成させる

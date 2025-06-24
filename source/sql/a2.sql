@@ -248,7 +248,7 @@ INSERT INTO REPORT(
 		TRUE,50,TRUE,'散歩５０分、まて、ふせ覚える','散歩楽しんでいました。','2025-06-29',4
 );
 
-select dogName, wankodogid, dogRegist from WANKO order by dogRegist desc limit 20 offset 0;
+
 
 
 

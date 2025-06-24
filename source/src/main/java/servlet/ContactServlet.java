@@ -29,8 +29,10 @@ public class ContactServlet extends HttpServlet {
 			AllDto log = (AllDto)session.getAttribute("user");
 			
 			if(log.isUserUniqueId() == false ) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/chat.jsp");
-				dispatcher.forward(request, response);
+				String userNameId = request.getParameter("userid");
+				request.setAttribute("userid", userNameId);
+				request.getRequestDispatcher("/WEB-INF/jsp/chat.jsp").forward(request, response);
+				return;
 			}else if(log.isUserUniqueId() == true ) {
 			//飼い主用の遷移
 			AllDto user = (AllDto) session.getAttribute("user");
@@ -40,6 +42,7 @@ public class ContactServlet extends HttpServlet {
 			request.setAttribute("contactList", contactList);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/contact_list.jsp");
 			dispatcher.forward(request, response);
+			return;
 			}
 		
 		}

@@ -10,7 +10,7 @@
 <body>
 	<h1>
 		<div style="display: flex; justify-content: space-between;">
-  			<div style="text-align: left;">ワンコ詳細　（名前）さん</div>
+  			<div style="text-align: left;">ワンコ詳細　<c:out value="${sessionScope.user.name}" />さん</div>
         	<div style="text-align: right;">
         		<a href="javascript:history.back();">
 				<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
@@ -19,17 +19,21 @@
         	</div>
 		</div>
 	</h1>
-<form>
+<form method="POST" action="<c:url value='/WankoServlet'/>" class="dog_datail">
+<c:forEach var="e" items="${oDogDet}" >
 写真追加 <input type="text"><br>
  <p class="dog_deta">
-	<c:forEach var="e" items="${dogid}" >
-    	<form method="POST" action="<c:url value='/'/>" class="dog_datail"><!-- A2の後に何サーブレットを指定するか -->
-     
-		名前<input type="text" name="name" value="${e.name}"><br>
-		性別<input type="submit" name="gender" value="${e.gender}"><br>
-		去勢歴<input type="submit" name="kyosei" value="${e.kyosei}"><br>
-		犬種<input type="text" name="dogbreed" value="${e.dogbreed}"><br>
-		誕生日<input type="text" name="dogbirth" value="${e.dogbirth}"><br>
+					
+    	<!-- A2の後に何サーブレットを指定するか -->
+        <input type="hidden" name="id" value="${e.wankoDogId}">
+		名前<input type="text" name="dogName" value="${e.dogName}"><br>
+		性別	<input type="radio" name="gender" value="1"<c:if test="${e.gender == 'true'}">checked</c:if>>オス
+			<input type="radio" name="gender" value="0"<c:if test="${e.gender == 'false'}">checked</c:if>>メス<br>
+		ワクチン歴<input type="text" name="wakuchin" value="${e.wakuchin }"><br>
+		去勢歴<input type="radio" name="kyosei" value="1"<c:if test="${e.kyosei == 'true'}">checked</c:if>>あり
+			<input type="radio" name="kyosei" value="0"<c:if test="${e.kyosei == 'false'}">checked</c:if>>なし<br><br>
+		犬種<input type="text" name="dogBreed" value="${e.dogBreed}"><br>
+		誕生日<input type="date" name="dogBirth" value="${e.dogBirth}"><br>
 		<table class="inputFields">
         <tr class="inputField">
             <th>
@@ -43,12 +47,12 @@
     <button class="addFieldBtn">入力欄を追加</button>
   
   
-		<input type="submit" name="submit" value="更新">
-		<input type="submit" name="submit" value="削除"><br>
-	</form>
+		<input type="submit" name="butt" value="更新">
+		<input type="submit" name="butt" value="削除"><br>
+	
 </c:forEach>
 </form>
-
+<p>www${msg}</p>
 <script>
 
 

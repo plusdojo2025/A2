@@ -17,7 +17,7 @@
         });
     	 //------------------------------------------------
     	//データテーブルを使用
-        $("#foo-table").DataTable();
+        $("#re-table").DataTable();
     });
  </script>
 <meta charset="UTF-8">
@@ -50,7 +50,7 @@
  			<img src="<c:url value='/images/back.png' /> " alt="戻る" class="back_button">
 		</a>	
 	</div>
-	<table border="1" id="foo-table" class="table table-bordered">
+	<table border="1" id="re-table" class="table table-bordered">
 		<thead>
 			<tr>
 				<th>お写真</th>

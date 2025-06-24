@@ -38,11 +38,43 @@ public class PoopServlet extends HttpServlet {
 				if("poopregi".equals(action)) {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
 					dispatcher.forward(request, response);
+					return;
 				}
 				
 		//ウンチ登録に画面遷移
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
 		dispatcher.forward(request, response);
+	
+		// 条件によって画面を振り分ける
+				if("home".equals(action)) {
+					HttpSession session11 = request.getSession();
+					AllDto log = (AllDto)session11.getAttribute("user");
+					
+					if(log.isUserUniqueId() == true ) {
+						
+					}else if(log.isUserUniqueId() == false ) {
+					//飼い主用の遷移
+					AllDto user = (AllDto) session11.getAttribute("user");
+					String userNameId = user.getUserNameId();
+					PoopDAO dao = new PoopDAO();
+					List<AllDto> poopList = dao.pooplistSelect(userNameId);
+					System.out.println("pooplist"+poopList);
+					request.setAttribute("poopList", poopList);
+					 dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
+					dispatcher.forward(request, response);
+					}
+				}else if("pooplist".equals(action)) {
+		HttpSession session1 = request.getSession();
+		AllDto log = (AllDto)session1.getAttribute("user");
+		
+		if(log.isUserUniqueId() == true ) {
+			 dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
+			dispatcher.forward(request, response);
+		}else if(log.isUserUniqueId() == false ) {
+			 dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
 	}
 	 
 
@@ -56,7 +88,7 @@ public class PoopServlet extends HttpServlet {
 				}
 		//登録ボタンが押されたら	
 	
-		
+		//値の取得
 		// リクエストパラメータを取得する
 		
 	request.setCharacterEncoding("UTF-8");
@@ -92,11 +124,11 @@ public class PoopServlet extends HttpServlet {
 		
 		if( ans == 1) {
 			request.setAttribute("msg","登録完了");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
 			dispatcher.forward(request, response);
 		}else {
 			request.setAttribute("msg","登録できなかったよ");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
 			dispatcher.forward(request, response);
 		}
 		

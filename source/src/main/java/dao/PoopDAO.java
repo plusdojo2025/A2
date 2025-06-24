@@ -72,6 +72,69 @@ import dto.AllDto;
 		// 結果を返す
 		return ans;
 	}
+	
+	//うんちリストを作る
+	public  List<AllDto> pooplistSelect(String userNameId){
+		Connection conn = null;
+		List<AllDto> poopList = new ArrayList<AllDto>();
+		
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+			// SQL文を準備する
+			String sql = "SELECT schoolId, nameId, poopId, tlName, nowTime, photo, color, hardness, abnormal, dogId,"
+					+ " memo , date FROM POOP JOIN WANKO ON POOP.dogId=WANKO.dogId "
+			+"WHERE POOP.dogId=? "
+			+"ORDER BY Poop.dogId";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			// SQL文を完成させる
+			pStmt.setString(1, userNameId);
+			
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+			
+			// 結果表をコレクションにコピーする　うんち写真と犬名前保存
+			while (rs.next()) {
+				AllDto poop = new  AllDto();
+				AllDto unchi= new AllDto();
+				unchi.setPhoto(rs.getString("photo"));
+				unchi.setTlName(rs.getString("dogId"));
+				unchi.setTlName(rs.getString("tlName"));
+				unchi.setHardness(rs.getInt("hardness"));
+				unchi.setColor(rs.getInt("color"));
+				unchi.setTlName(rs.getString("date"));
+				
+				poopList.add(poop);
+			}
+		
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			poopList = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			poopList = null;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					poopList = null;
+					
+					
+			}
+		}
+	}
+		return poopList;
+	}
 
 	//検索	
 	// 引数 poop指定された項目で検索して、取得されたデータのリストを返す

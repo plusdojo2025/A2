@@ -1,10 +1,9 @@
 @charset "UTF-8";
 
 body {
-	background-image:url(../images/mikan.jpg);
+	background-image:url(../images/asiato.png);
 	background-size: cover;
-	background-color:rgba(255,255,255,0.4);
-	background-blend-mode:lighten;
+	
 }
 #logo {
 	text-align: center;

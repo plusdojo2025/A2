@@ -58,7 +58,7 @@
 			<!-- ワンコ一覧 -->
 			<c:forEach var="e" items="" varStatus="status">
 				<tr>
-					<td><img src="${e.dogphoto}" alt="${e.dogName}の写真"></td>
+					<td><img src="${e.dogphoto}"width="200" height="200 alt="${e.dogName}の写真"></td>
 					<td>${e.date}</td>
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>

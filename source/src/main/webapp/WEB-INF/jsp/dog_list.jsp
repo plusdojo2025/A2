@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ include file="header.jsp" %>
  <link rel="stylesheet" href="<c:url value="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css" />"/>
  <script src="<c:url value="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js" />"></script>
  <script>
@@ -57,14 +58,14 @@
 		</thead>
 		<tbody>
 			<!-- ワンコ一覧 -->
-			<c:forEach var="e" items="" varStatus="status">
+			<c:forEach var="e" items="${owankoList}" varStatus="status">
 				<tr>
-					<td><img src="<c:url value='${e.dogphoto}' />" alt="${e.dogName}の写真"></td>
+					<td><img src="<c:url value='${e.dogPhoto}' />" alt="${e.dogName}の写真"></td>
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
 					<td>${e.date}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->
-					  <a href="<c:url value='/PoopServlet?id=${e.poopId}' />">
+					  <a href="<c:url value='/WankoServlet?id=${e.wankoDogId}&action=dogDetail' />">
 					    <button type="button">詳細</button>
 					  </a>
 					</td>

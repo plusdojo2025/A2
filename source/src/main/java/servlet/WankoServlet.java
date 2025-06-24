@@ -36,9 +36,8 @@ public class WankoServlet extends HttpServlet {
 			AllDto user = (AllDto) session.getAttribute("user");
 			String userNameId = user.getUserNameId();
 			WankoDAO wdao = new WankoDAO();
-			List<AllDto> list = wdao.olistSelect(userNameId);
-			request.setAttribute("list", list);
-			
+			List<AllDto> owankoList = wdao.olistSelect(userNameId);
+			request.setAttribute("owankoList", owankoList);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/dog_list.jsp");
 			dispatcher.forward(request, response);
 			}

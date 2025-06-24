@@ -93,7 +93,7 @@ header {
 	<!-- ヘッダーここから -->
 <header>
   <div class="header-left">
-    <img src="<c:url value='/images/ぶりログ.png' />"alt="ホームに戻る" class="logo">
+    <a href="<c:url value='HomeServlet'/> "><img src="<c:url value='/images/ぶりログ.png' />"alt="ホームに戻る" class="logo"></a>
   </div>
 
   <div class="header-right">

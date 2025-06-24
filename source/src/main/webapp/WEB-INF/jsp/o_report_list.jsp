@@ -60,10 +60,8 @@
 			<!-- 報告一覧 -->
 			<c:forEach var="e" items="${reportList}" varStatus="status">
 				<tr>
-					<td><img src="<c:url value='${e.dogPhoto}' />" alt="${e.dogName}の写真"></td>
+					<td><img src="<c:url value='${e.dogPhoto}' />" width="200" height="200 alt="${e.dogName}の写真"></td>
 					<td>${e.reportDate}</td>
-					<td><img src="${e.dogphoto}"width="200" height="200 alt="${e.dogName}の写真"></td>
-					<td>${e.date}</td>
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->

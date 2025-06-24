@@ -135,8 +135,19 @@ public class CalendarServlet extends HttpServlet {
 			if (cDao.insert(cDto)) {
 				request.setAttribute("message", "レポートの登録に成功しました。");
 				//
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
-				dispatcher.forward(request, response);
+				//リクエストパラメータの取得
+		        //String action = request.getParameter("action");
+		        int year = Integer.parseInt(request.getParameter("year"));
+		        int month = Integer.parseInt(request.getParameter("month"));
+		        int count = Integer.parseInt(request.getParameter("count"));
+		        //リダイレクトする
+		        response.sendRedirect(request.getContextPath() + "/CalendarServlet?year=" + year + "&month=" + month + "&count=" + count);
+		        return;
+				/*
+				 * //フォワード RequestDispatcher dispatcher =
+				 * request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
+				 * dispatcher.forward(request, response);
+				 */
 			} else { 
 				request.setAttribute("error", "レポートの登録に失敗しました。");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");

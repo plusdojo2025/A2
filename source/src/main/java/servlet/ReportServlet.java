@@ -44,15 +44,14 @@ public class ReportServlet extends HttpServlet {
 			//飼い主側
 			}else if(log.isUserUniqueId() == false) {
 				// レポート一覧を表示
-				int reportId = log.getReportId();
+				int wankoDogId = log.getWankoDogId();
 				ReportDAO rdao = new ReportDAO();
-				List<AllDto> reportList = rdao.select(reportId);
+				List<AllDto> reportList = rdao.select(wankoDogId);
 				request.setAttribute("reportList", reportList);
 				// 後でやるにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_list.jsp");
 				dispatcher.forward(request, response);
 				// DAOからユーザー情報とってきて、データベースをもとに報告ｉｄをとってくる
-				
 				
 					
 			}

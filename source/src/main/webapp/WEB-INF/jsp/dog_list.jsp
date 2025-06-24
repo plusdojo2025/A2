@@ -61,7 +61,7 @@
 			<!-- ワンコ一覧 -->
 			<c:forEach var="e" items="${owankoList}" varStatus="status">
 				<tr>
-					<td><img src="<c:url value='${e.dogPhoto}' />" alt="${e.dogName}の写真"></td>
+					<td><img src="<c:url value='${e.dogPhoto}' />" width="170" alt="${e.dogName}の写真"></td>
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
 					<td>${e.date}</td>

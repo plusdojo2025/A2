@@ -54,11 +54,13 @@ public class PoopServlet extends HttpServlet {
 						
 					}else if(log.isUserUniqueId() == false ) {
 					//飼い主用の遷移
-					AllDto user = (AllDto) session11.getAttribute("user");
+					AllDto user = (AllDto) session.getAttribute("user");
 					String userNameId = user.getUserNameId();
-					PoopDAO dao = new PoopDAO();
-					List<AllDto> poopList = dao.pooplistSelect(userNameId);
-					System.out.println("pooplist"+poopList);
+					
+					System.out.println("user&userNameId"+user +userNameId );
+					PoopDAO pdao = new PoopDAO();
+					List<AllDto> poopList = pdao.pooplistSelect(userNameId);
+					System.out.println("pooplist" +poopList);
 					request.setAttribute("poopList", poopList);
 					 dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
 					dispatcher.forward(request, response);

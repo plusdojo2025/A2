@@ -379,7 +379,7 @@ public class CalendarDAO {
 						while (rs.next()) {
 							AllDto dto=new AllDto();
 							dto.setDogName(rs.getString("dogName"));
-							dto.setWankoDogId(rs.getInt("WankoDogId"));
+							dto.setWankoDogId(rs.getInt("wankoDogId"));
 							//addでcardListにbcを入れている　
 							wankoList.add(dto);
 						}

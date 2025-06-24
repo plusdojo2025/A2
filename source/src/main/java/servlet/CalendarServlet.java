@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -39,11 +40,15 @@ public class CalendarServlet extends HttpServlet {
 	        int year = Integer.parseInt(request.getParameter("year"));
 	        int month = Integer.parseInt(request.getParameter("month"));
 	        int count = Integer.parseInt(request.getParameter("count"));
-	        //リクエストパラメーター２
-	        request.setCharacterEncoding("UTF-8");
-	        String dogName = request.getParameter("dogName");
+	        
 	        //Dateになおす
 	        LocalDate date = LocalDate.of(year, month, count);
+	        //
+	        request.setAttribute("selectedDate", date);
+			/*
+			 * //リクエストパラメーター２ request.setCharacterEncoding("UTF-8"); String dogName =
+			 * request.getParameter("dogName");
+			 */
 	        
 			// 検索処理を行う //カレンダーDAOで作ったscheList
 			CalendarDAO CaleDao = new CalendarDAO();
@@ -55,25 +60,88 @@ public class CalendarServlet extends HttpServlet {
 		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
 		    dispatcher.forward(request, response);
 		    
-		 // ワンコ一覧を取得
-		    int userSchoolId = log.getUserSchoolId();
-		    List<AllDto> wankoList = CaleDao.selectWanko(userSchoolId);
-		    request.setAttribute("wankoList",wankoList);
-		    for(AllDto dto : wankoList) {
-		    	System.out.println(dto.getDogName()+"aaaaa");
-		    }
-		   //System.out.println("wankoList: "+wankoList); 
+			/*
+			 * // ワンコ一覧を取得 int userSchoolId = log.getUserSchoolId(); List<AllDto> wankoList
+			 * = CaleDao.selectWanko(userSchoolId);
+			 * request.setAttribute("wankoList",wankoList); for(AllDto dto : wankoList) {
+			 * System.out.println(dto.getDogName()+"aaaaa"); }
+			 */		   //System.out.println("wankoList: "+wankoList); 
 		   
-		    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
-		    rd.forward(request, response);
-		}
+			/*
+			 * RequestDispatcher rd =
+			 * request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
+			 * rd.forward(request, response);
+			 */		}
 
 	}
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user") == null) {
+			response.sendRedirect(request.getContextPath() + "/LoginServlet");
+			return;
+		}		
+		// リクエストパラメータを取得する
+		request.setCharacterEncoding("UTF-8");
+		String action = request.getParameter("action");
+		
+		//共通で使うID
+		
+		CalendarDAO cDao = new CalendarDAO();
+		AllDto cDto = new AllDto();
+		//cDto.setCalendarId(calendarId);
+		
+		//登録・更新のゲットパラメータ
+		if("regist".equals(action) || "update".equals(action)) {
+			//int calendarId = Integer.parseInt(request.getParameter("calendarId"));
+			//LocalDateTime calendarDate = LocalDateTime.parse(request.getParameter("calendarDate"));
+			String title = request.getParameter("title");
+			LocalTime nowTime = LocalTime.parse(request.getParameter("nowTime"));
+			System.out.println("aiueo"+nowTime);
+			String calendarMemo = request.getParameter("calendarMemo");
+			int calendarDogId = Integer.parseInt(request.getParameter("calendarDogId"));
+			
+			
+			//cDto.setCalendarDate(calendarDate);
+			cDto.setTitle(title);
+			cDto.setTime(nowTime);
+			cDto.setCalendarMemo(calendarMemo);
+			cDto.setCalendarDogId(calendarDogId);
+			//cDto.setCalendarDogId(calendarDogId);
 	}
-
+		if("regist".equals(action)) {
+			if (cDao.insert(cDto)) {
+				request.setAttribute("message", "レポートの登録に成功しました。");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
+				dispatcher.forward(request, response);
+			} else { 
+				request.setAttribute("error", "レポートの登録に失敗しました。");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
+				dispatcher.forward(request, response);
+			}
+		}else if ("update".equals(action)) {
+			if (cDao.update(cDto)) {
+				request.setAttribute("message", "レポートの更新に成功しました。");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
+				dispatcher.forward(request, response);
+			} else { 
+				request.setAttribute("error", "レポートの更新に失敗しました。");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
+				dispatcher.forward(request, response);
+			}
+		}else if ("delete".equals(action)) {
+			if (cDao.delete(cDto)) {
+				request.setAttribute("message", "レポートの削除に成功しました。");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
+				dispatcher.forward(request, response);
+			} else { 
+				request.setAttribute("error", "レポートの削除に失敗しました。");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
+				dispatcher.forward(request, response);
+			}
+			
+	}	
+	}
 }

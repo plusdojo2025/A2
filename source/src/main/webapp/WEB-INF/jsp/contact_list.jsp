@@ -4,7 +4,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/>
+ <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+ <script>
+    jQuery(function($){
+    	 // デフォルトの設定を変更（日本語化）--------------------
+        $.extend( $.fn.dataTable.defaults, {
+            language: {
+                url: "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+            }
+        });
+    	 //------------------------------------------------
+    	//データテーブルを使用
+        $("#con-table").DataTable();
+    });
+ </script>
 <meta charset="UTF-8">
+
 <title>問い合わせ一覧</title>
 <style>
 	/* 戻る画像ボタン */
@@ -27,18 +43,46 @@
 	
 	<!-- ↓↓横並びにする！ -->
 	<div>
-		<a href="<c:url value='/A2/ContactServlet' />">新規登録</a>			<!-- サーブレットで識別ID条件分岐 or　条件分岐の必要がなければ直接jspに飛んでOK -->
-		<form>
-			<!-- ◆検索　-->
-			<input type="text" name="keyword">				<!-- 全項目から検索する(DAO) -->
+		<a href="<c:url value='/A2/ContactServlet?action=con' />">新規登録</a>			<!-- サーブレットで識別ID条件分岐 or　条件分岐の必要がなければ直接jspに飛んでOK -->
+		
+		<table border="1" id="con-table" class="table table-bordered">
+		<thead>
+			<tr>
+				<th>スクールID</th>
+				<th>ユーザーID</th>
+				<th>飼い主様</th>
+				<th>ふりがな</th>
+		</thead>
+		<tbody>
+			<!-- 問い合わせ一覧 -->
+			<c:forEach var="c" items="${userlist}" varStatus="status">
+				<tr>
+					<td>${c.userSchoolId}</td>
+					<td>${c.userNameId}</td>
+					<td>${c.cname}</td>
+					<td>${c.ruby}</td>
+					
+					<td>	<!-- チャットに飛ぶ -->
+					  <a href="<c:url value='/ChatServlet?id=${c.userNameId}' /> ">
+					   <!--  <button type="button">詳細</button> -->
+					  </a>
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+		
+		<!-- <form>
+			◆検索　
+			<input type="text" name="keyword">				全項目から検索する(DAO)
 			<input type="submit" name="search" value="検索">		
-			<!-- ▼並び順プルダウン -->
+			▼並び順プルダウン
 			<select name="sort">
-		        <option value="date_desc">登録日（新しい順）</option>		<!-- 降順 -->
+		        <option value="date_desc">登録日（新しい順）</option>		降順
 		        <option value="breed_asc">犬種名順</option>
 		        <option value="strage_asc">預かり日順</option>
 	   		</select>
-	    </form>
+	    </form> -->
 		<!-- 戻る画像ボタン -->
 		<div>
 			<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
@@ -48,15 +92,14 @@
 		</div>
 	</div>
 	
-	<!-- 問い合わせ一覧 -->
-	<c:forEach var="wanko" items="">			<!-- itemsをサーブレットに合わせる。（サーブレットでリストを作る） -->
+<%-- 	<!-- 問い合わせ一覧 -->
+	<c:forEach var="c" items="${userlist}">			
 	<div>
-			<span><img src="${wanko.dogphoto}" alt="${wanko.dogName}の写真"></span>
-			<span>${wanko.dogName}</span>		<!-- わんこの名前 -->	
-			<span>${wanko.name}</span>			<!-- 飼い主様 -->	
-			<span>${wanko.date}</span>			<!-- 登録日 -->	
+			<span>${c.userschoolid}</span>		<!-- 飼い主のスクールID -->	
+			<span>${c.name}</span>			<!-- 飼い主様 -->	
+			<span>${c.ruby}</span>			<!-- ふりがな -->	
 	</div>
-	</c:forEach>
+	</c:forEach> --%>
 	
 	<!-- 20件ずつ表示（次のページへ、前のページへ） -->	
 	<!-- Servlet+DAO -->	<!-- Servletでpageを定義する必要あり -->

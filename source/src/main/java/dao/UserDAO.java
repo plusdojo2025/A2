@@ -101,6 +101,67 @@ public class UserDAO {
 	
 	}
 	
+	//問い合わせ一覧
+	public List<AllDto> conlistSelect(String userSchoolId){
+		Connection conn = null;
+		List<AllDto> contactList = new ArrayList<AllDto>();
+		
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+			// SQL文を準備する
+			String sql = "SELECT userSchoolId, userNameId, Name, Ruby "
+					+ "FROM USER "
+					+ "WHERE USER.userSchoolId=? "
+					+ "ORDER BY USER.userSchoolId DESC " ;
+			
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			// SQL文を完成させる
+			pStmt.setString(1, userSchoolId);
+//			pStmt.setInt(2, pageSize);
+//			pStmt.setInt(3, offset);
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+			
+			// 結果表をコレクションにコピーする　犬写真と犬名前保存
+			while (rs.next()) {
+				AllDto toi = new  AllDto();
+				toi.setUserSchoolId(rs.getInt("userschoolid"));
+				toi.setUserNameId(rs.getString("usernameid"));
+				toi.setName(rs.getString("name"));
+				toi.setRuby(rs.getString("ruby"));
+				
+				
+				contactList.add(toi);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			contactList = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			contactList = null;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					contactList = null;
+					
+					
+			}
+		}
+	}
+		return contactList;
+	}
 	// 引数userで指定されたレコードを登録し、成功したらtrueを返す
 	public boolean insert(AllDto user) {
 	Connection conn = null;

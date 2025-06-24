@@ -8,6 +8,7 @@
 <title>ワンコ詳細</title>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 	<h1>
 		<div style="display: flex; justify-content: space-between;">
   			<div style="text-align: left;">ワンコ詳細　<c:out value="${sessionScope.user.name}" />さん</div>
@@ -19,9 +20,11 @@
         	</div>
 		</div>
 	</h1>
-<form method="POST" action="<c:url value='/WankoServlet'/>" class="dog_datail">
+<form method="POST" action="<c:url value='/WankoServlet'/>" class="dog_datail" enctype="multipart/form-data">
 <c:forEach var="e" items="${oDogDet}" >
-写真追加 <input type="text"><br>
+<input type="hidden" name="oldDogPhoto" value="${e.dogPhoto}">
+写真追加 <input type="file" name="dogPhoto"  accept="image/*"   onchange="previewImage(this);"><br>
+				<img src="${e.dogPhoto}" width="400"  alt="${e.dogName}の写真"><br>
  <p class="dog_deta">
 					
     	<!-- A2の後に何サーブレットを指定するか -->
@@ -48,11 +51,11 @@
   
   
 		<input type="submit" name="butt" value="更新">
-		<input type="submit" name="butt" value="削除"><br>
+		<input type="submit" name="butt" value="削除" ><br>
 	
 </c:forEach>
 </form>
-<p>www${msg}</p>
+<p>${msg}</p>
 <script>
 
 

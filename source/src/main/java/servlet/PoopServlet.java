@@ -1,6 +1,8 @@
 package servlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import dao.PoopDAO;
 import dto.AllDto;
@@ -26,70 +29,84 @@ public class PoopServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-				HttpSession session = request.getSession();
-				if (session.getAttribute("user") == null) {
-					response.sendRedirect(request.getContextPath()+"/LoginServlet");
-					return;
-				}
-				
-				String action = request.getParameter("action");
-				
-				if("poopregi".equals(action)) {
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
-					dispatcher.forward(request, response);
-					return;
-				}
-				
-		//ウンチ登録に画面遷移
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
-		dispatcher.forward(request, response);
-	
-		// 条件によって画面を振り分ける
-				if("home".equals(action)) {
-					HttpSession session11 = request.getSession();
-					AllDto log = (AllDto)session11.getAttribute("user");
-					
-					if(log.isUserUniqueId() == true ) {
-						
-					}else if(log.isUserUniqueId() == false ) {
-					//飼い主用の遷移
-					AllDto user = (AllDto) session.getAttribute("user");
-					String userNameId = user.getUserNameId();
-					
-					System.out.println("user&userNameId"+user +userNameId );
-					PoopDAO pdao = new PoopDAO();
-					List<AllDto> poopList = pdao.pooplistSelect(userNameId);
-					System.out.println("pooplist" +poopList);
-					request.setAttribute("poopList", poopList);
-					 dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
-					dispatcher.forward(request, response);
-					}
-				}else if("pooplist".equals(action)) {
-		HttpSession session1 = request.getSession();
-		AllDto log = (AllDto)session1.getAttribute("user");
 		
-		if(log.isUserUniqueId() == true ) {
-			 dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
+		String action = request.getParameter("action");
+		HttpSession session = request.getSession();
+		AllDto log = (AllDto)session.getAttribute("user");
+		
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		if (session.getAttribute("user") == null) {
+			response.sendRedirect(request.getContextPath()+"/LoginServlet");
+			return;
+		//ホームからリストへ
+		}else if("home".equals(action)) {
+			
+			if(log.isUserUniqueId() == true ) {
+			//トレーナー
+				
+			}else if(log.isUserUniqueId() == false ) {
+			//飼い主用の遷移
+				
+			AllDto user = (AllDto) session.getAttribute("user");
+			String userNameId = user.getUserNameId();
+			PoopDAO pdao = new PoopDAO();
+			List<AllDto> poopList = pdao.pooplistSelect(userNameId);
+			request.setAttribute("poopList", poopList);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp"); 
 			dispatcher.forward(request, response);
-		}else if(log.isUserUniqueId() == false ) {
-			 dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
+			}
+		//リストから詳細へ
+		}else if("pooplist".equals(action)) {
+			if(log.isUserUniqueId() == true ) {
+				//トレーナー
+			}else if(log.isUserUniqueId() == false){
+				//飼い主
+				request.setCharacterEncoding("UTF-8");
+				
+				String id = request.getParameter("id");	
+				PoopDAO pdao = new PoopDAO();
+				List<AllDto> pDogDet = pdao.pDogDet(id);
+				request.setAttribute("pDogDet", pDogDet);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
+				dispatcher.forward(request, response);
+			}
+		//登録へ
+		}else if("poopregi".equals(action)) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
 			dispatcher.forward(request, response);
+			return;
 		}
-	}
+		
+		
+
+				
 	}
 	 
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-				HttpSession session = request.getSession();
-				if (session.getAttribute("user") == null) {
-					response.sendRedirect(request.getContextPath()+"/LoginServlet");
-					return;
-				}
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user") == null) {
+			response.sendRedirect(request.getContextPath()+"/LoginServlet");
+			return;
+		}
 		//登録ボタンが押されたら	
-	
+		if("登録".equals(request.getParameter("pbutt")))	{
+			Part photoPart = request.getPart("photo");
+			String photo = null;
+			if (photoPart != null && photoPart.getSize() > 0) {
+			    String fileName = Paths.get(photoPart.getSubmittedFileName()).getFileName().toString();
+			    String savePath = "upload/dogphoto";
+			    String appPath = request.getServletContext().getRealPath("");
+			    String fullSavePath = appPath + File.separator + savePath;
+			    String filePath = fullSavePath + File.separator + fileName;
+			    photoPart.write(filePath);
+			    photo = savePath + "/" + fileName;
+			}
+			
+			
+		}
 		//値の取得
 		// リクエストパラメータを取得する
 		

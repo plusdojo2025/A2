@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +15,9 @@ import dto.AllDto;
 
 public class WankoDAO {
 	
-
+		
+	
+		
 		//ログインわんこ表示用
 		public AllDto logdog(String userNameId) {
 			Connection conn = null;
@@ -106,7 +109,12 @@ public class WankoDAO {
 					inu.setName(rs.getString("name"));
 					inu.setDogName(rs.getString("dogName"));
 					inu.setDogPhoto(rs.getString("dogPhoto"));
-					inu.setDogRegist(rs.getDate("dogRegist").toLocalDate());
+					Date sqlDate = rs.getDate("dogRegist");
+					if (sqlDate != null) {
+					    inu.setDogRegist(sqlDate.toLocalDate());
+					} else {
+					    inu.setDogRegist(null);  // AllDto側がnull許容なら
+					};
 					inu.setWankoDogId(rs.getInt("wankoDogId"));
 					
 					owankoList.add(inu);
@@ -126,8 +134,6 @@ public class WankoDAO {
 					} catch (SQLException e) {
 						e.printStackTrace();
 						owankoList = null;
-						
-						
 				}
 			}
 		}
@@ -395,7 +401,7 @@ public class WankoDAO {
 		}
 		
 		// わんこ新規登録　トレーナー用　　　　　↓　型と名前
-				public int insert(String dogPhoto, String dogName, String name, String wakuchin, String kyosei, String gender, String dogBreed, String dogBirth, String remarks ) {
+				public int insert(String dogPhoto, String dogName, String userNameId, String wakuchin, int kyosei, int gender, String dogBreed, String dogBirth, String remarks1, String remarks2, String remarks3, String remarks4, String remarks5 ) {
 					Connection conn = null;
 					int ans = 0;
 					
@@ -409,19 +415,24 @@ public class WankoDAO {
 								"root", "password");
 						
 						// SQL文を準備する　　　　　　　　　　↓テーブル名　　　　　　↓登録する数？作る
-						String sql = "INSERT INTO WANKO VALUES (?,?,?,?,?,?,?,?,?)" ;
+						String sql = "INSERT INTO WANKO (dogPhoto, dogName, wankoNameId, wakuchin, kyosei, gender, dogBreed, dogBirth, remarks1, remarks2, remarks3, remarks4, remarks5) "
+								+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)" ;
 						PreparedStatement pStmt = conn.prepareStatement(sql);
 						
 						//SQLを完成させる
 						pStmt.setString(1, dogPhoto);
 						pStmt.setString(2, dogName);
-						pStmt.setString(3, name);
+						pStmt.setString(3, userNameId);
 						pStmt.setString(4, wakuchin);
-						pStmt.setString(5, kyosei);
-						pStmt.setString(6, gender);
+						pStmt.setInt(5, kyosei);
+						pStmt.setInt(6, gender);
 						pStmt.setString(7, dogBreed);
 						pStmt.setString(8, dogBirth);
-						pStmt.setString(9, remarks);
+						pStmt.setString(9, remarks1);
+						pStmt.setString(10, remarks2);
+						pStmt.setString(11, remarks3);
+						pStmt.setString(12, remarks4);
+						pStmt.setString(13, remarks5);
 						
 						// SQL文を実行し、結果（int型)を取得する
 						ans = pStmt.executeUpdate();
@@ -563,9 +574,10 @@ public class WankoDAO {
 			// 結果を返す
 			return result;
 		}
+
 		
 		// 引数cardで指定された番号のレコードを削除し、成功したらtrueを返す
-		public boolean delete(AllDto wanko) {
+		public boolean delete(String id) {
 			Connection conn = null;
 			boolean result = false;
 
@@ -579,11 +591,11 @@ public class WankoDAO {
 						"root", "password");
 				
 				// SQL文を準備する
-				String sql = "DELETE FROM AllDto WHERE wankodogid=?";
+				String sql = "DELETE FROM WANKO WHERE wankoDogId=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				
 				// SQL文を完成させる
-				pStmt.setInt(1, wanko.getWankoDogId());
+				pStmt.setString(1, id);
 				
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {

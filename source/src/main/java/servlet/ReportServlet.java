@@ -53,7 +53,6 @@ public class ReportServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 				// DAOからユーザー情報とってきて、データベースをもとに報告ｉｄをとってくる
 				
-				
 					
 			}
 		}

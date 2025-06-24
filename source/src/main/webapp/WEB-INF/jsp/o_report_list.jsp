@@ -20,7 +20,7 @@
     });
  </script>
 <meta charset="UTF-8">
-<title>ワンコ一覧</title>
+<title>報告一覧飼い主用</title>
 <style>
 	/* 戻る画像ボタン */
 	.back_button {
@@ -37,12 +37,11 @@
  </style>
 </head>
 <body>
-	<h1 class=page-title>ワンコ一覧</h1>
-	<a href="<c:url value='/ReportServlet'/> ">新規登録</a>
+	<h1 class=page-title>報告一覧</h1>
 	<!-- 戻る画像ボタン -->
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
-		<a href="javascript:history.back();">
+		<a href="<c:url value='javascript:history.back();'/>" >
  			<img src="<c:url value='/images/back.png' /> " alt="戻る" class="back_button">
 		</a>	
 	</div>
@@ -55,15 +54,15 @@
 				<th>登録日</th>
 		</thead>
 		<tbody>
-			<!-- ワンコ一覧 -->
-			<c:forEach var="e" items="" varStatus="status">
+			<!-- 報告一覧 -->
+			<c:forEach var="e" items="${reportList}" varStatus="status">
 				<tr>
-					<td><img src="${e.dogphoto}" alt="${e.dogName}の写真"></td>
-					<td>${e.date}</td>
+					<td><img src="<c:url value='${e.dogPhoto}' />" alt="${e.dogName}の写真"></td>
+					<td>${e.reportDate}</td>
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->
-					  <a href="<c:url value='/PoopServlet?id=${e.poopId}' /> ">
+					  <a href="<c:url value='/ReportServlet?id=${e.reportId}&action=reportDetail' /> ">
 					    <button type="button">詳細</button>
 					  </a>
 					</td>

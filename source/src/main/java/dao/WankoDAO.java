@@ -86,7 +86,7 @@ public class WankoDAO {
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 				// SQL文を準備する
-				String sql = "SELECT userNameId, Name, dogName, dogPhoto, dogRegist "
+				String sql = "SELECT userNameId, Name, dogName, dogPhoto, dogRegist ,wankoDogId "
 						+ "FROM USER JOIN WANKO "
 						+ "ON USER.userNameId = WANKO.wankoNameId "
 						+ "WHERE USER.userNameId=? "
@@ -107,6 +107,7 @@ public class WankoDAO {
 					inu.setDogName(rs.getString("dogName"));
 					inu.setDogPhoto(rs.getString("dogPhoto"));
 					inu.setDogRegist(rs.getDate("dogRegist").toLocalDate());
+					inu.setWankoDogId(rs.getInt("wankoDogId"));
 					
 					owankoList.add(inu);
 				}
@@ -134,7 +135,152 @@ public class WankoDAO {
 		}
 		//飼い主のわんこ一覧完成
 		
+		//わんこ詳細
+		public List<AllDto> oDogDet(String id){
+			Connection conn = null;
+			List<AllDto> oDogDet = new ArrayList<AllDto>();
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("com.mysql.cj.jdbc.Driver");
 
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+						"root", "password");
+				// SQL文を準備する
+				String sql = "SELECT wankoDogId, dogPhoto ,dogName, gender, wakuchin, kyosei, dogBreed, dogBirth, remarks1, remarks2, remarks3, remarks4, remarks5 "
+						+ "FROM USER JOIN WANKO "
+						+ "ON USER.userNameId = WANKO.wankoNameId "
+						+ "WHERE WANKO.wankoDogId=? "
+						+ "ORDER BY WANKO.wankoDogId ";
+				
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				
+				// SQL文を完成させる
+				pStmt.setString(1, id);
+				
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+				
+				// 結果表をコレクションにコピーする　犬写真と犬名前保存
+				while (rs.next()) {
+					AllDto inu = new  AllDto();
+					inu.setWankoDogId(rs.getInt("wankoDogId"));
+					inu.setDogPhoto(rs.getString("dogPhoto"));
+					inu.setDogName(rs.getString("dogName"));
+					inu.setGender(rs.getBoolean("gender"));
+					inu.setWakuchin(rs.getString("wakuchin"));
+					inu.setKyosei(rs.getBoolean("kyosei"));
+					inu.setDogBreed(rs.getString("dogBreed"));
+					inu.setDogBirth(rs.getDate("dogBirth").toLocalDate());
+					inu.setRemarks1(rs.getString("remarks1"));
+					inu.setRemarks2(rs.getString("remarks2"));
+					inu.setRemarks3(rs.getString("remarks3"));
+					inu.setRemarks4(rs.getString("remarks4"));
+					inu.setRemarks5(rs.getString("remarks5"));
+					
+					System.out.println("aa" +inu);
+					
+					oDogDet.add(inu);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				oDogDet = null;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				oDogDet = null;
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						oDogDet = null;	
+				}
+			}
+		}
+			
+			
+			
+			
+			return oDogDet;
+		}
+		
+		//わんこ更新
+		public Boolean odogUp(String id, String dogPhoto, String dogName, String gender, String wakuchin, String kyosei,
+				String dogBreed, String dogBirth, String remarks1, String remarks2, String remarks3, String remarks4,
+				String remarks5) {
+			Connection conn = null;
+			boolean result = false;
+			
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+						"root", "password");
+				
+				// SQL文を準備する
+				String sql = "UPDATE WANKO "
+						+ "SET dogPhoto=? ,dogName=?, gender=?, wakuchin=?, kyosei=?, dogBreed=?, dogBirth=?, remarks1=?, remarks2=?, remarks3=?, remarks4=?, remarks5=? "					
+						+ "WHERE wankoDogId=?";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				
+				pStmt.setString(1, dogPhoto);
+				pStmt.setString(2, dogName);
+				pStmt.setString(3, gender);
+				pStmt.setString(4, wakuchin);
+				pStmt.setString(5, kyosei);
+				pStmt.setString(6, dogBreed);
+				pStmt.setString(7, dogBirth);
+				pStmt.setString(8, remarks1);
+				pStmt.setString(9, remarks2);
+				pStmt.setString(10, remarks3);
+				pStmt.setString(11, remarks4);
+				pStmt.setString(12, remarks5);
+				pStmt.setString(13, id);
+				
+				
+
+				
+				// SQL文を実行する
+				if (pStmt.executeUpdate() == 1) {
+					result = true;
+				}
+				int updateCount = pStmt.executeUpdate();
+				System.out.println("更新件数：" + updateCount);
+				if (updateCount > 0) {
+				    result = true;
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+			}
+		}
+			
+			
+			return result; 
+		}
+		
+		
+		
+		
+		
+		
 		// 引数card指定された項目で検索して、取得されたデータのリストを返す
 		public List<AllDto> select(AllDto wanko) {
 			Connection conn = null;

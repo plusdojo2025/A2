@@ -11,26 +11,42 @@
 	font-size:40px;
 }
 
-
-#newregi_form {
-  max-width: 450px;
-  margin: 0 auto;
-}
-#newregi_form table {
+.form-table {
   width: 100%;
-  border-spacing: 15px;
+  font-size: 18px; /* 全体の文字サイズ */
+  border-collapse: separate;
+  border-spacing: 15px 10px;
 }
 
-
- #newregi_form input[type=submit],input[type=reset] {
-  margin-top:10px;
-  padding: 8px 16px;
-  background-color:rgb(128, 125, 125);
-  color: #ffffff;
-  font-weight: 600;
+.form-table td {
+  padding: 10px;
 }
 
-#newregi_form input[type=submit]:hover,input[type=reset]:hover {
-  background-color:orange;
+.form-table label {
+  font-size: 18px;
+  font-weight: bold;
 }
 
+.form-table input[type="text"],
+.form-table input[type="date"] {
+  font-size: 18px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.submit-btn {
+  font-size: 20px;
+  padding: 10px 30px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+}

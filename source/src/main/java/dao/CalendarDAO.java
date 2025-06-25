@@ -39,6 +39,7 @@ public class CalendarDAO {
 							time, 
 							calendarMemo, 
 							calendarDogId, 
+							dogName
 						FROM AllDate
 						
 						WHERE calendarId LIKE ? 
@@ -86,6 +87,7 @@ public class CalendarDAO {
 					dto.setTime(rs.getTime("time").toLocalTime());
 					dto.setCalendarMemo(rs.getString("calendarMemo"));
 					dto.setCalendarDogId(rs.getInt("calendarDogId"));
+					dto.setDogName(rs.getString("dogName"));
 					
 					//addでcardListにbcを入れている　（cardListはArrayList)
 					calendar.add(dto);
@@ -236,7 +238,7 @@ public class CalendarDAO {
 				// SQL文を準備する
 				String sql = "DELETE FROM CALENDAR WHERE calendarId=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
-
+				System.out.println(delecalendar.getCalendarId());
 				// SQL文を完成させる
 				pStmt.setInt(1, delecalendar.getCalendarId());
 
@@ -244,6 +246,7 @@ public class CalendarDAO {
 				if (pStmt.executeUpdate() == 1) {
 					result = true;
 				}
+				System.out.println("kotae:"+result);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {

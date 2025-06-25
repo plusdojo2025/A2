@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>トレーナー用ホーム画面</title>
-
+<link rel="stylesheet"  href="<c:url value='/css/t_home.css' />">
 </head>
 <body>
 <%@ include file="header.jsp" %>

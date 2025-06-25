@@ -93,13 +93,15 @@ public class CalendarServlet extends HttpServlet {
 		AllDto cDto = new AllDto();
 		//cDto.setCalendarId(calendarId);
 		
-		//登録・更新のゲットパラメータ
-		if("regist".equals(action) || "update".equals(action)) {
+		//登録のゲットパラメータ
+		if("regist".equals(action) ) {
+			
 			//int calendarId = Integer.parseInt(request.getParameter("calendarId"));
 			//LocalDateTime calendarDate = LocalDateTime.parse(request.getParameter("calendarDate"));
+			
 			String title = request.getParameter("title");
 			LocalTime nowTime = LocalTime.parse(request.getParameter("nowTime"));
-			System.out.println("aiueo"+nowTime);
+			//System.out.println("aiueo"+nowTime);
 			String memo = request.getParameter("memo");
 			String dogIdString = request.getParameter("calendarDogId");
 				int calendarDogId = 0;
@@ -133,10 +135,95 @@ public class CalendarServlet extends HttpServlet {
 			cDto.setCalendarMemo(memo);
 			cDto.setCalendarDogId(calendarDogId);
 			//cDto.setCalendarDogId(calendarDogId);
-	}
+			
+		//更新のゲットパラメータ―とか
+		}else if("update".equals(action)) {
+			
+			//int calendarId = Integer.parseInt(request.getParameter("calendarId"));
+			//LocalDateTime calendarDate = LocalDateTime.parse(request.getParameter("calendarDate"));
+			
+			String calendarIdStr = request.getParameter("calendarId");
+			String title = request.getParameter("title");
+			LocalTime nowTime = LocalTime.parse(request.getParameter("nowTime"));
+			//System.out.println("aiueo"+nowTime);
+			String memo = request.getParameter("memo");
+			String dogIdStr = request.getParameter("calendarDogId");
+			
+			/*
+			 * int calendarDogId = 0; //dogIdのNullチェック if (dogIdString != null &&
+			 * !dogIdString.isEmpty()) { try { calendarDogId =
+			 * Integer.parseInt(dogIdString); } catch (NumberFormatException e) {
+			 * System.out.println("calendarDogIdが数字ではありません: " + dogIdString); // エラー処理（必要なら）
+			 * } } else { System.out.println("calendarDogIdがnullまたは空文字です"); //
+			 * エラー処理（またはデフォルトのまま処理を続ける） }
+			 */
+				
+			//LocalDate selectedDate = (LocalDate) session.getAttribute("selectedDate");
+			int year = Integer.parseInt(request.getParameter("year"));
+	        int month = Integer.parseInt(request.getParameter("month"));
+	        int count = Integer.parseInt(request.getParameter("count"));
+	        
+	        //Dateになおす
+	        LocalDate date = LocalDate.of(year, month, count);
+	        
+	        //
+	        request.setAttribute("selectedDate", date);
+	        
+	        int calendarDogId = Integer.parseInt(dogIdStr);
+	        int calendarId = Integer.parseInt(calendarIdStr);
+				
+			cDto.setCalendarDate(date);
+			cDto.setTitle(title);
+			cDto.setTime(nowTime);
+			cDto.setCalendarMemo(memo);
+			cDto.setCalendarDogId(calendarDogId);
+			cDto.setCalendarId(calendarId);
+			
+		//削除のゲットパラメータとか
+		}else if("delete".equals(action)) {
+			
+			//int calendarId = Integer.parseInt(request.getParameter("calendarId"));
+			//LocalDateTime calendarDate = LocalDateTime.parse(request.getParameter("calendarDate"));
+			
+			String calendarIdStr = request.getParameter("calendarId");
+			System.out.println("削除対象ID：" + calendarIdStr);
+			/*
+			 * String title = request.getParameter("title"); LocalTime nowTime =
+			 * LocalTime.parse(request.getParameter("nowTime"));
+			 * //System.out.println("aiueo"+nowTime); String memo =
+			 * request.getParameter("memo"); String dogIdStr =
+			 * request.getParameter("calendarDogId");
+			 */
+				
+			//LocalDate selectedDate = (LocalDate) session.getAttribute("selectedDate");
+			int year = Integer.parseInt(request.getParameter("year"));
+	        int month = Integer.parseInt(request.getParameter("month"));
+	        int count = Integer.parseInt(request.getParameter("count"));
+	        
+	        //Dateになおす
+	        LocalDate date = LocalDate.of(year, month, count);
+	        
+	        //
+	        request.setAttribute("selectedDate", date);
+	        
+			/*
+			 * int calendarDogId = Integer.parseInt(dogIdStr);*/	   
+	        int calendarId = Integer.parseInt(calendarIdStr);
+				
+			/*
+			 * cDto.setCalendarDate(date); 
+			 * cDto.setTitle(title); 
+			 * cDto.setTime(nowTime);
+			 * cDto.setCalendarMemo(memo); 
+			 * cDto.setCalendarDogId(calendarDogId);
+			 */
+			cDto.setCalendarId(calendarId);
+		}
+		
+		
 		if("regist".equals(action)) {
 			if (cDao.insert(cDto)) {
-				request.setAttribute("message", "レポートの登録に成功しました。");
+				
 				//
 				//リクエストパラメータの取得
 		        //String action = request.getParameter("action");
@@ -145,36 +232,53 @@ public class CalendarServlet extends HttpServlet {
 		        int count = Integer.parseInt(request.getParameter("count"));
 		        //リダイレクトする
 		        response.sendRedirect(request.getContextPath() + "/CalendarServlet?year=" + year + "&month=" + month + "&count=" + count);
+		        session.setAttribute("message", "登録に成功しました。");
 		        return;
+		        
+		        
 				/*
 				 * //フォワード RequestDispatcher dispatcher =
 				 * request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
 				 * dispatcher.forward(request, response);
 				 */
 			} else { 
-				request.setAttribute("error", "レポートの登録に失敗しました。");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
 				dispatcher.forward(request, response);
+				session.setAttribute("message", "登録に失敗しました。");
 			}
 		}else if ("update".equals(action)) {
 			if (cDao.update(cDto)) {
-				request.setAttribute("message", "レポートの更新に成功しました。");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
-				dispatcher.forward(request, response);
+				//リクエストパラメータの取得
+		        //String action = request.getParameter("action");
+		        int year = Integer.parseInt(request.getParameter("year"));
+		        int month = Integer.parseInt(request.getParameter("month"));
+		        int count = Integer.parseInt(request.getParameter("count"));
+		        //リダイレクトする
+		        response.sendRedirect(request.getContextPath() + "/CalendarServlet?year=" + year + "&month=" + month + "&count=" + count);
+		        session.setAttribute("message", "更新に成功しました。");
+				return;
 			} else { 
-				request.setAttribute("error", "レポートの更新に失敗しました。");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
 				dispatcher.forward(request, response);
+				session.setAttribute("message", "更新に失敗しました。");
 			}
 		}else if ("delete".equals(action)) {
+			System.out.println("delete入ったよ");
+			
 			if (cDao.delete(cDto)) {
-				request.setAttribute("message", "レポートの削除に成功しました。");
+				//リクエストパラメータの取得
+		        //String action = request.getParameter("action");
+		        int year = Integer.parseInt(request.getParameter("year"));
+		        int month = Integer.parseInt(request.getParameter("month"));
+		        int count = Integer.parseInt(request.getParameter("count"));
+		        //リダイレクトする
+		        response.sendRedirect(request.getContextPath() + "/CalendarServlet?year=" + year + "&month=" + month + "&count=" + count);
+		        session.setAttribute("message", "削除に成功しました。");
+		        return;
+			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
-				dispatcher.forward(request, response);
-			} else { 
-				request.setAttribute("error", "レポートの削除に失敗しました。");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
-				dispatcher.forward(request, response);
+				dispatcher.forward(request, response); 
+				session.setAttribute("message", "削除に失敗しました。");
 			}
 		
 		}

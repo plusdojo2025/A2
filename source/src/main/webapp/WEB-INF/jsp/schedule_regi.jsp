@@ -8,7 +8,7 @@
 <title>予定登録</title>
 </head>
 <body>
-	<h1>〇月〇日</h1>                                        <!-- 日付を表示 -->
+	<h1>${selectedDate}</h1>                                        <!-- 日付を表示 -->
 	<a href = "javascript:history.back()">
 		<span>ひとつ前に戻る
 		<img src = "<c:url value='/images/back.png' />" alt= "戻る">
@@ -16,9 +16,10 @@
 	
 	<h2>登録</h2>													<!-- 登録と一覧は縦に並べて表示する -->
 	<form method="POST" action="<c:url value='/CalendarServlet' />">
-		タイトル<input type="text" name="title"><br>
+		タイトル<input type="text" name="title"  placeholder="お名前：予定の内容"><br>
 		時間<input type="time" name="nowTime" value="${e.nowTime}" required><br>
-		メモ<input type="text" name="memo"><br>
+		<label for="memo">メモ</label><br>
+		<textarea name="memo" rows="5" cols="40"></textarea><br>
 		ワンコID <input type="text" name="calendarDogId" required>
 		<!-- ワンコ名<input type="text" name="dogName"><br> -->
 		<input type="hidden" name="calendarDate" value="${selectedDate}">
@@ -33,21 +34,34 @@
 		<input type="hidden" name="count" value="${param.count }">
 		
 		<input type="submit" name="regist" value="登録">
-	</form>	
+	</form>	<br>
+	
+	<!-- 登録完了message -->
+	<c:if test="${not empty sessionScope.message}">
+	    <p>${sessionScope.message}</p>
+	</c:if>
+	<%
+	    session.removeAttribute("message");
+	%>
 	
 	<h2>一覧</h2>
 	<c:forEach var="e" items="${scheList}">
 		<form method="POST" action="<c:url value='/CalendarServlet' />">
 			タイトル<input type="text" name="title" value="${e.title}"><br>
 			時間<input type="time" name="nowTime" value="${e.time}"><br>
-			メモ<input type="text" name="calendarMemo" value="${e.calendarMemo}"><br>
+			<label for="memo">メモ</label><br>
+			<textarea name="memo" rows="5" cols="40">${e.calendarMemo}"</textarea><br>
 			ワンコID <input type="text" name="calendarDogId" value="${e.calendarDogId}"><br>
-			ワンコ名
+			<%-- ワンコ名
 			<select name="selewanko">
   				<c:forEach var="dog" items="${wankoList}">
+  				<option value="${dog.wankoDogId}" 
+       		 		<c:if test="${dog.wankoDogId == sche.calendarDogId}">selected</c:if>>
+      				${dog.dogName}
+   				</option>
     				<option value="${dog.wankoDogId}">${dog.dogName}</option>
   				</c:forEach>
-			</select>	
+			</select>	 --%>
 			<input type="hidden" name="calendarId" value="${e.calendarId}">
 			
 			<input type="hidden" name="year" value="${param.year}">
@@ -57,7 +71,13 @@
 			<input type="hidden" name="action" value="update">
 			<input type="submit" name="update" value="更新">
 		</form>
-		<form>
+		<form method="POST" action="<c:url value='/CalendarServlet' />"><!-- 削除 -->
+		    <input type="hidden" name="action" value="delete">
+		    <input type="hidden" name="calendarId" value="${e.calendarId}">
+		    <input type="hidden" name="year" value="${param.year}">
+		    <input type="hidden" name="month" value="${param.month}">
+		    <input type="hidden" name="count" value="${param.count}">
+		    
 			<input type="hidden" name="action" value="delete">
 			<input type="submit" name="delete" value="削除">
 		</form>	

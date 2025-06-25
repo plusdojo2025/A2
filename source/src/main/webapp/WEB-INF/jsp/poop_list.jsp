@@ -6,6 +6,7 @@
 <head>
 
  <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/>
+ <link rel="stylesheet" href="<c:url value='/css/poop_list.css' />">
  <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
  <script>
     jQuery(function($){
@@ -44,7 +45,7 @@
 	}
 	/*「新規登録ボタン」のCSS*/
 	.regist-link {
-		
+		font-size: 30px;
 	}
  </style>
 </head>
@@ -52,7 +53,7 @@
 <%@ include file="header.jsp" %>
 	<h1 class=page-title>うんち一覧</h1>
 	
-	<a href="<c:url value='/PoopServlet?action=poopregi' />">新規登録</a>
+	<a href="<c:url value='/PoopServlet?action=poopregi' /> "class="regist-link">新規登録</a>
 	<!-- 戻る画像ボタン -->
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
@@ -75,7 +76,7 @@
 			<!-- うんち一覧 -->
 			<c:forEach var="e" items="${poopList}" varStatus="status">
 				<tr>
-					<td><img src="<c:url value='${e.dogPhoto}' />" alt="${e.dogName}のうんち写真"></td>
+					<td><img src="<c:url value='${e.dogPhoto}' />" class="poop-photo" alt="${e.dogName}のうんち写真"></td>
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
 					<td>${e.hardness}</td>
@@ -83,7 +84,9 @@
 					<td>${e.date}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->
 					  <a href="<c:url value='/PoopServlet?id=${e.poopId}&action=pooplist' /> ">
-					    <button type="button">詳細</button>
+					  <div class="button-wrapper">
+					    <button type="button" class="detail-button">詳細</button>
+					   </div>
 					  </a>
 					</td>
 				</tr>

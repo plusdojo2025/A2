@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CalendarDAO;
 import dao.WankoDAO;
 import dto.AllDto;
 /**
@@ -64,9 +62,9 @@ public class HomeServlet extends HttpServlet {
 		
 		int dogId = uDog.getWankoDogId();
 		
-		CalendarDAO cdao = new CalendarDAO();
-		List<AllDto> calendarList = cdao.selectByDogId(dogId);
-		request.setAttribute("calendarList", calendarList);
+//		CalendarDAO cdao = new CalendarDAO();
+//		List<AllDto> calendarList = cdao.selectByDogId(dogId);
+//		request.setAttribute("calendarList", calendarList);
 		
 		}
 		}

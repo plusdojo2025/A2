@@ -40,13 +40,17 @@
 		<form method="POST" action="<c:url value='/CalendarServlet' />">
 			タイトル<input type="text" name="title" value="${e.title}"><br>
 			時間<input type="time" name="nowTime" value="${e.time}"><br>
-			メモ<input type="text" name="calendarMemo" value="${e.calendarMemo}"><br>
+			メモ<input type="text" name="memo" value="${e.calendarMemo}"><br>
 			ワンコID <input type="text" name="calendarDogId" value="${e.calendarDogId}"><br>
 			ワンコ名
 			<select name="selewanko">
   				<c:forEach var="dog" items="${wankoList}">
-    				<option value="${dog.wankoDogId}">${dog.dogName}</option>
-  				</c:forEach>
+  				<option value="${dog.wankoDogId}" 
+       		 		<c:if test="${dog.wankoDogId == sche.calendarDogId}">selected</c:if>>
+      				${dog.dogName}
+   				</option>
+<%--     				<option value="${dog.wankoDogId}">${dog.dogName}</option>
+ --%>  				</c:forEach>
 			</select>	
 			<input type="hidden" name="calendarId" value="${e.calendarId}">
 			
@@ -57,7 +61,13 @@
 			<input type="hidden" name="action" value="update">
 			<input type="submit" name="update" value="更新">
 		</form>
-		<form>
+		<form method="POST" action="<c:url value='/CalendarServlet' />"><!-- 削除 -->
+		    <input type="hidden" name="action" value="delete">
+		    <input type="hidden" name="calendarId" value="${e.calendarId}">
+		    <input type="hidden" name="year" value="${param.year}">
+		    <input type="hidden" name="month" value="${param.month}">
+		    <input type="hidden" name="count" value="${param.count}">
+		    
 			<input type="hidden" name="action" value="delete">
 			<input type="submit" name="delete" value="削除">
 		</form>	

@@ -290,7 +290,7 @@ public class ReportDAO {
 		}
 
 		//レポート詳細
-		public List<AllDto> oReportDetail(String id){
+		public List<AllDto> oReportDetail(int wankoDogId){
 			Connection conn = null;
 			List<AllDto> ord = new ArrayList<AllDto>();
 			try {
@@ -302,7 +302,7 @@ public class ReportDAO {
 						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 						"root", "password");
 				// SQL文を準備する
-				String sql = "SELECT dogName, food, reportDate, walk, reportState, training, reportMemo "
+				String sql = "SELECT reportId, dogName, food, reportDate, walk, reportState, training, reportMemo "
 						+ "FROM REPORT JOIN WANKO "
 						+ "ON REPORT.reportDogId = WANKO.wankoDogId "
 						+ "WHERE WANKO.wankoDogId=? "
@@ -312,7 +312,8 @@ public class ReportDAO {
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				
 				// SQL文を完成させる
-				pStmt.setString(1, id);
+				pStmt.setInt(1, wankoDogId);
+
 				
 				// SQL文を実行し、結果表を取得する
 				ResultSet rs = pStmt.executeQuery();
@@ -320,6 +321,7 @@ public class ReportDAO {
 				// 結果表をコレクションにコピーする　犬写真と犬名前保存
 				while (rs.next()) {
 					AllDto rp = new  AllDto();
+					rp.setReportId(rs.getInt("reportId"));
 					rp.setDogName(rs.getString("dogName"));
 					rp.setFood(rs.getBoolean("food"));
 					rp.setReportDate(rs.getDate("reportDate").toLocalDate());

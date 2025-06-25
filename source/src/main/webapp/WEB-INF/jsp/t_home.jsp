@@ -122,6 +122,6 @@ function createProcess(year, month) {
     return calendar;
 }
 </script>
-
+<%@ include file="footer.jsp" %>
 </body>
 </html>

@@ -5,8 +5,8 @@
 <html>
 <head>
 
- <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/>
- <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+ <link rel="stylesheet" href="<c:url value="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css" />"/>
+ <script src="<c:url value="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js" />"></script>
  <script>
     jQuery(function($){
     	 // デフォルトの設定を変更（日本語化）--------------------
@@ -40,8 +40,6 @@
 <body>
 <%@ include file="header.jsp" %>
 	<h1 class=page-title>報告一覧</h1>
-	<a href="<c:url value='/ReportServlet'/> ">新規登録</a>
-
 
 	<!-- 戻る画像ボタン -->
 	<div>
@@ -62,18 +60,19 @@
 			<!-- 報告一覧 -->
 			<c:forEach var="e" items="${reportList}" varStatus="status">
 				<tr>
-					<td><img src="<c:url value='${e.dogPhoto}' />" width="200" height="200" alt="${e.dogName}の写真"></td>
+					<td><img src="<c:url value='${e.dogPhoto}' />" width="170" alt="${e.dogName}の写真"></td>
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
 					<td>${e.reportDate}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->
-					  <a href="<c:url value='/ReportServlet?id=${e.reportId}&action=reportDetail' /> ">
-					    <button type="button">詳細</button>
-					  </a>
+					  <a href="<c:url value='/ReportServlet?id=${e.reportId}&action=reportDetail' />">
+    					<button type="button">詳細</button>
+						</a>
 					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<a>${msg } </a>
 </body>
 </html>

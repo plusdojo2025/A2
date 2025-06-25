@@ -8,6 +8,7 @@
 <title>報告詳細飼い主用</title>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 	<h1>
 		<div style="display: flex; justify-content: space-between;">
   			<div style="text-align: left;">報告詳細</div>
@@ -20,17 +21,19 @@
 		</div>
 	</h1>
 	<!-- 後でDBとひもづけてデータを取ってこれるようにする -->
-	<form method="POST" action="<c:url value='/ODetailReportServlet' />">
-	<c:forEach var="e" items="" >
+	<form method="POST" action="<c:url value='/ReportServlet' />" class="dog_datail" enctype="multipart/form-data">
+	<c:forEach var="e" items="${ord}" >
 		<ul>
 			<select name="dogName">
 				<!-- ワンコ名をプルダウンで選択できるようにする -->
-				<option value="" selected>ワンコ選択</option>
+				<option value="" selected>ワンコ選択、飼い主側のはいらない</option>
 			</select>
-			<li>ごはん<input type="submit" name="food" value="${e.food}"></li>
+			<li>ごはん<input type="submit" name="food" value="1"<c:if test="${e.food == 'true'}">checked</c:if>>食べた
+			        <input type="submit" name="food" value="0"<c:if test="${e.food == 'false'}">checked</c:if>>食べてない</li>
 			<li>日付<input type="date" name="reportDate" value="${e.date}"></li>
 			<li>散歩<input type="number" name="walk" value="${e.walk}">分</li>
-			<li>様子<input type="submit" name="state" value="${e.state}"></li>
+			<li>様子<input type="submit" name="state" value="1"<c:if test="${e.state == 'true'}">checked</c:if>>異常なし</li>
+			<li>	<input type="submit" name="state" value="0"<c:if test="${e.state == 'false'}">checked</c:if>>異常あり</li>
 			<li>トレーニング<input type="text" name="training" value="${e.training}"></li>
 			<li>メモ<input type="text" name="reportMemo" value="${e.reportMemo}"></li>
 		</ul>

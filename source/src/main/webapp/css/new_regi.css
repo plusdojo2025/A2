@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+#inu-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
 #logo{
 	text-align: center;
 	border-bottom: 5px dashed orange;
@@ -12,16 +21,18 @@
 }
 
 #newregi_form {
-  max-width: 800px;
-  width: 100%;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
+	
+  	max-width: 800px;
+	width: 100%;
+	padding: 20px;
+	background: #fff;
+	border-radius: 8px;
 }
 
 #newregi_form table {
-  width: 100%;
-  border-spacing: 15px;
+	
+	  width: 100%;
+	  border-spacing: 15px;
 }
 
 input[type="text"],

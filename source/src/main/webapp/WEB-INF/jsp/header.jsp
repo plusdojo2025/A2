@@ -99,7 +99,7 @@ header {
   <div class="header-right">
     <div class="user-info">
       <span class="welcome">ようこそ<c:out value="${sessionScope.user.name}"/>さん</span>
-      <button class="logout-btn">ログアウト</button>
+      <a href="<c:url value='LoginServlet'/>" class="logout-btn">ログアウト</a>
     </div>
 
     <nav>

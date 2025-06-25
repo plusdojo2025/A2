@@ -1,9 +1,22 @@
 @charset "UTF-8";
 
 body {
-	background-image:url(../images/asiato.png);
-	background-size: cover;
 	
+	background-image:url(../images/kuro.png);
+	background-repeat: repeat-x;
+	background-size: 200px auto; 
+  	animation: walkPaws 15s linear infinite;
+  	
+  	
+}
+@keyframes walkPaws {
+  0% {
+    background-position: 100% 50%;
+  }
+ 
+  100% {
+    background-position: 0% 80%;
+  }
 }
 #logo {
 	text-align: center;

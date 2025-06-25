@@ -1,0 +1,38 @@
+@charset "UTF-8";
+.back_button {
+		width: 40px;
+	}
+	
+	.back_text {
+		font-size: 10px;
+	}	
+	
+	/* ○ページ目 */
+	.page_count {
+		text-align: center;
+	}
+	/*「○○一覧」のCSS*/
+	.page-title {
+		color:#FFA500;
+/* 		font-family: "Meiryo"; */
+	}
+	/*「新規登録ボタン」のCSS*/
+	.regist-link {
+		font-size: 30px;
+	}
+	
+	/*犬の写真のサイズ変更*/
+	.poop-photo {
+  		width: 150px;     /* 横幅 */
+  
+}
+	/*詳細ボタンのサイズ変更*/
+	.detail-button{
+		font-size:40px;
+		
+	}
+	 /* ボタンを中央に寄せる */
+	.button-wrapper {
+ 	 text-align: center; 
+ 	
+}

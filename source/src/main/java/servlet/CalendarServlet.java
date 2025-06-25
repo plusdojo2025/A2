@@ -123,6 +123,9 @@ public class CalendarServlet extends HttpServlet {
 	        
 	        //Dateになおす
 	        LocalDate date = LocalDate.of(year, month, count);
+	        
+	        //
+	        request.setAttribute("selectedDate", date);
 				
 			cDto.setCalendarDate(date);
 			cDto.setTitle(title);

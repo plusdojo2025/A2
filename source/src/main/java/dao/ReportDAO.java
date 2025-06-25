@@ -52,9 +52,9 @@ public class ReportDAO {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				AllDto alldto = new AllDto();
-					alldto.setReportId(rs.getInt("dogPhoto")); 
-					alldto.setFood(rs.getBoolean("dogName"));
-					alldto.setWalk(rs.getInt("name"));
+					alldto.setDogPhoto(rs.getString("dogPhoto")); 
+					alldto.setDogName(rs.getString("dogName"));
+					alldto.setName(rs.getString("name"));
 					alldto.setReportDate(rs.getDate("reportDate").toLocalDate());
 					System.out.println("repot" + alldto);		
 				reportList.add(alldto);

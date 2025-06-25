@@ -28,6 +28,9 @@ public class ReportServlet extends HttpServlet {
 //	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String action = request.getParameter("action");
+		
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") == null) {
@@ -54,6 +57,19 @@ public class ReportServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 				// DAOからユーザー情報とってきて、データベースをもとに報告ｉｄをとってくる
 				
+				//レポート詳細（詳細ボタンを押したときの処理）
+				if ("oreportDtail".equals(action)) {
+					//リクエストパラメータ
+					request.setCharacterEncoding("UTF-8");
+					//詳細表示
+					String detail = request.getParameter("detail");
+					rdao = new ReportDAO();
+					List<AllDto> ord = rdao.oReportDetail(detail);
+					request.setAttribute("ord", ord);
+					dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_detail.jsp");
+					dispatcher.forward(request, response);
+					
+				}
 					
 			}
 		}

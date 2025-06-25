@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,10 @@ import dto.AllDto;
 /**
  * Servlet implementation class RegistServlet
  */
+@MultipartConfig(
+	    fileSizeThreshold = 1024 * 1024,
+	    maxFileSize = 1024 * 1024 * 5, // 5MB
+	    maxRequestSize = 1024 * 1024 * 10) // 10MB
 @WebServlet("/PoopServlet")
 public class PoopServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -98,6 +103,9 @@ public class PoopServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		request.setCharacterEncoding("UTF-8");
+		System.out.println("doPostが呼ばれました");
+		System.out.println("pbutt=" + request.getParameter("pbutt"));
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") == null) {
 			response.sendRedirect(request.getContextPath()+"/LoginServlet");
@@ -106,6 +114,7 @@ public class PoopServlet extends HttpServlet {
 		//登録ボタンが押されたら	
 		if("登録".equals(request.getParameter("pbutt")))	{
 			//うんち写真保存
+			System.out.println("登録ボタン押された");
 			Part photoPart = request.getPart("photo");
 			String photo = null;
 			if (photoPart != null && photoPart.getSize() > 0) {
@@ -128,15 +137,18 @@ public class PoopServlet extends HttpServlet {
 			
 			PoopDAO pdao = new PoopDAO();
 			int ans = pdao.insert(photo, nowTime, date, dogName, color, hardness, abnormal, memo, PoopDogId);
-			
+			System.out.println("登録ボタン押された");
+			System.out.println("ansの値は：" + ans);
 			if(ans == 1) {
 				request.setAttribute("msg","登録完了");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
 				dispatcher.forward(request, response);
+				return;
 			}else {
 				request.setAttribute("msg","登録失敗");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
 				dispatcher.forward(request, response);
+				return;
 		}
 		//値の取得
 		// リクエストパラメータを取得する
@@ -171,16 +183,16 @@ public class PoopServlet extends HttpServlet {
 //		
 //		int ans = bDao.insert(pDto);
 //		
-		if( ans == 1) {
-			request.setAttribute("msg","登録完了");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
-			dispatcher.forward(request, response);
-		}else {
-			request.setAttribute("msg","登録できなかったよ");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
-			dispatcher.forward(request, response);
-		}
-		
+//		if( ans == 1) {
+//			request.setAttribute("msg","登録完了");
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
+//			dispatcher.forward(request, response);
+//		}else {
+//			request.setAttribute("msg","登録できなかったよ");
+//			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
+//			dispatcher.forward(request, response);
+//		}
+//		
 	
 		//検索
 			// 検索処理を行う

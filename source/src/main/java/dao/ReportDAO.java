@@ -255,7 +255,7 @@ public class ReportDAO {
 
 			try {
 				// JDBCドライバを読み込む
-				Class.forName("com.mysql.cj.jdbc.Driver");
+				Class.forName("com.mysql.cj.jdbc.Dzriver");
 
 				// データベースに接続する
 				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
@@ -304,5 +304,70 @@ public class ReportDAO {
 			return rdList;
 		}
 
+		//レポート詳細
+		public List<AllDto> oReportDetail(String detail){
+			Connection conn = null;
+			List<AllDto> ord = new ArrayList<AllDto>();
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+						"root", "password");
+				// SQL文を準備する
+				String sql = "SELECT dogName, food, reportDate, walk, reportState, training, reportMemo "
+						+ "FROM REPORT JOIN WANKO "
+						+ "ON REPORT.reportDogId = WANKO.wankoDogId "
+						+ "WHERE WANKO.wankoDogId=? "
+						+ "ORDER BY WANKO.wankoDogId ";
+			
+				
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				
+				// SQL文を完成させる
+				pStmt.setString(1, detail);
+				
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+				
+				// 結果表をコレクションにコピーする　犬写真と犬名前保存
+				while (rs.next()) {
+					AllDto rp = new  AllDto();
+					rp.setDogName(rs.getString("dogName"));
+					rp.setFood(rs.getBoolean("food"));
+					rp.setReportDate(rs.getDate("reportDate").toLocalDate());
+					rp.setWalk(rs.getInt("walk"));
+					rp.setReportState(rs.getBoolean("reportState"));
+					rp.setTraining(rs.getString("training"));
+					rp.setReportMemo(rs.getString("reportMemo"));
+					
+					System.out.println("aa" + rp);
+					
+					ord.add(rp);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				ord = null;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				ord = null;
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						ord = null;	
+				}
+			}
+		}
+			return ord;
+		}
+
+		
 }
 

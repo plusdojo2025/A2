@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +21,13 @@ import dto.AllDto;
 			Class.forName("com.mysql.cj.jdbc.Driver");
 	
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/webapp2?"
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 	
 			// SQL文を準備する
-			String sql = "INSERT INTO POOP (nowTime, date, dogNmae, color, hardness, abnormal, memo, PoopDogId, photo"
-					+ "VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )";
+			String sql = "INSERT INTO POOP (nowTime, date, tName, color, hardness, abnormal, memo, PoopDogId, photo) "
+			           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を完成させる
@@ -38,7 +39,7 @@ import dto.AllDto;
 			pStmt.setString(5, hardness);
 			pStmt.setString(6, abnormal);
 			pStmt.setString(7, memo);
-			pStmt.setString(8, PoopDogId);
+			pStmt.setInt(8, Integer.parseInt(PoopDogId));
 			pStmt.setString(9, photo);
 			
 			
@@ -158,7 +159,13 @@ import dto.AllDto;
 				AllDto inu = new  AllDto();
 				inu.setWankoDogId(rs.getInt("wankoDogId"));		
 				inu.setDogName(rs.getString("dogName"));
-				inu.setTime(rs.getTime("nowTime").toLocalTime());
+				Time time = rs.getTime("nowTime");
+				if (time != null) {
+				    inu.setTime(time.toLocalTime());
+				} else {
+				    inu.setTime(null);  // nullを許容しているなら。もし許容しないなら適切な初期値を入れる
+				}
+
 				inu.setDate(rs.getDate("date").toLocalDate());
 				inu.setPhoto(rs.getString("photo"));
 				inu.setColor(rs.getInt("color"));

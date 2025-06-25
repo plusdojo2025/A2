@@ -53,19 +53,17 @@ public class HomeServlet extends HttpServlet {
 			
 			
 		}
-		//カレンダーの各タイトル情報を表示
-		AllDto user = (AllDto) session.getAttribute("user");
-		String userNameId = user.getUserNameId();
-		WankoDAO wdao = new WankoDAO();
-		AllDto uDog = wdao.logdog(userNameId);
-		System.out.println("uDog: " + uDog);
-		
-		int dogId = uDog.getWankoDogId();
-		
-//		CalendarDAO cdao = new CalendarDAO();
-//		List<AllDto> calendarList = cdao.selectByDogId(dogId);
-//		request.setAttribute("calendarList", calendarList);
-		
+		/*
+		 * //カレンダーの各タイトル情報を表示 AllDto user = (AllDto) session.getAttribute("user");
+		 * String userNameId = user.getUserNameId(); WankoDAO wdao = new WankoDAO();
+		 * AllDto uDog = wdao.logdog(userNameId); System.out.println("uDog: " + uDog);
+		 * 
+		 * int dogId = uDog.getWankoDogId();
+		 * 
+		 * CalendarDAO cdao = new CalendarDAO(); List<AllDto> calendarList =
+		 * cdao.selectDogIdAndMonth(dogId, year, month);
+		 * request.setAttribute("calendarList", calendarList);
+		 */
 		}
 		}
 	/**

@@ -456,19 +456,7 @@ public class CalendarDAO {
 							dto.setTitle(rs.getString("title"));
 							calendarList.add(dto);
 						}
-					} catch (SQLException | ClassNotFoundException e) {
-						e.printStackTrace();
-						calendarList = null;
-					} finally {
-						// データベースを切断
-						if (conn != null) {
-							try {
-								conn.close();
-							} catch (SQLException e) {
-								e.printStackTrace();
-								calendarList = null;
-							}
 				}
-						return calendarList;
-}}}
+
+}
 

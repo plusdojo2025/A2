@@ -65,7 +65,7 @@ public class HomeServlet extends HttpServlet {
 		int dogId = uDog.getWankoDogId();
 		
 		CalendarDAO cdao = new CalendarDAO();
-		List<AllDto> calendarList = cdao.selectByDogId(dogId);
+		List<AllDto> calendarList = cdao.selectDogIdAndMonth(dogId, year, month);
 		request.setAttribute("calendarList", calendarList);
 		
 		}

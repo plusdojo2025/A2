@@ -223,7 +223,7 @@ public class CalendarServlet extends HttpServlet {
 		
 		if("regist".equals(action)) {
 			if (cDao.insert(cDto)) {
-				request.setAttribute("message", "レポートの登録に成功しました。");
+				
 				//
 				//リクエストパラメータの取得
 		        //String action = request.getParameter("action");
@@ -232,20 +232,22 @@ public class CalendarServlet extends HttpServlet {
 		        int count = Integer.parseInt(request.getParameter("count"));
 		        //リダイレクトする
 		        response.sendRedirect(request.getContextPath() + "/CalendarServlet?year=" + year + "&month=" + month + "&count=" + count);
+		        session.setAttribute("message", "登録に成功しました。");
 		        return;
+		        
+		        
 				/*
 				 * //フォワード RequestDispatcher dispatcher =
 				 * request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
 				 * dispatcher.forward(request, response);
 				 */
 			} else { 
-				request.setAttribute("error", "レポートの登録に失敗しました。");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
 				dispatcher.forward(request, response);
+				session.setAttribute("message", "登録に失敗しました。");
 			}
 		}else if ("update".equals(action)) {
 			if (cDao.update(cDto)) {
-				request.setAttribute("message", "レポートの更新に成功しました。");
 				//リクエストパラメータの取得
 		        //String action = request.getParameter("action");
 		        int year = Integer.parseInt(request.getParameter("year"));
@@ -253,15 +255,17 @@ public class CalendarServlet extends HttpServlet {
 		        int count = Integer.parseInt(request.getParameter("count"));
 		        //リダイレクトする
 		        response.sendRedirect(request.getContextPath() + "/CalendarServlet?year=" + year + "&month=" + month + "&count=" + count);
+		        session.setAttribute("message", "更新に成功しました。");
+				return;
 			} else { 
-				request.setAttribute("error", "レポートの更新に失敗しました。");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
 				dispatcher.forward(request, response);
+				session.setAttribute("message", "更新に失敗しました。");
 			}
 		}else if ("delete".equals(action)) {
 			System.out.println("delete入ったよ");
+			
 			if (cDao.delete(cDto)) {
-				request.setAttribute("message", "レポートの削除に成功しました。");
 				//リクエストパラメータの取得
 		        //String action = request.getParameter("action");
 		        int year = Integer.parseInt(request.getParameter("year"));
@@ -269,11 +273,12 @@ public class CalendarServlet extends HttpServlet {
 		        int count = Integer.parseInt(request.getParameter("count"));
 		        //リダイレクトする
 		        response.sendRedirect(request.getContextPath() + "/CalendarServlet?year=" + year + "&month=" + month + "&count=" + count);
+		        session.setAttribute("message", "削除に成功しました。");
 		        return;
-			} else { 
-				request.setAttribute("error", "レポートの削除に失敗しました。");
+			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
-				dispatcher.forward(request, response);
+				dispatcher.forward(request, response); 
+				session.setAttribute("message", "削除に失敗しました。");
 			}
 		
 		}

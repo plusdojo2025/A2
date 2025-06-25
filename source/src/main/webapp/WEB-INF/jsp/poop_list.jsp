@@ -93,5 +93,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<a>${msg } </a>
 </body>
 </html>

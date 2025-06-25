@@ -51,8 +51,8 @@
 				<li>メモ<input type="text" name="memo" value="${e.memo}"></li>
 			</ul>
 		</div>
-		
-		<input type="submit" value="更新"> <input type="submit" value="削除">
+		 <input type="hidden" name="poopId" value="${e.poopId}">
+		<input type="submit" name="pbutt" value="更新"> <input type="submit" name="pbutt" value="削除">
 	</c:forEach>
 	</form>
 	

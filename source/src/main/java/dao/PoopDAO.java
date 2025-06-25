@@ -141,10 +141,10 @@ import dto.AllDto;
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 			// SQL文を準備する
-			String sql = "SELECT WANKO.wankoDogId, WANKO.dogName, POOP.nowTime, POOP.date, POOP.photo, POOP.color, POOP.hardness, POOP.abnormal, POOP.memo "
+			String sql = "SELECT WANKO.wankoDogId, WANKO.dogName, POOP.nowTime, POOP.date, POOP.photo, POOP.color, POOP.hardness, POOP.abnormal, POOP.memo, PoopId "
 			           + "FROM POOP "
 			           + "JOIN WANKO ON POOP.PoopDogId = WANKO.wankoDogId "
-			           + "WHERE POOP.PoopDogId = ?";
+			           + "WHERE POOP.PoopId = ?";
 			
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
@@ -157,6 +157,7 @@ import dto.AllDto;
 			// 結果表をコレクションにコピーする　犬写真と犬名前保存
 			while (rs.next()) {
 				AllDto inu = new  AllDto();
+				inu.setPoopId(rs.getInt("PoopId"));
 				inu.setWankoDogId(rs.getInt("wankoDogId"));		
 				inu.setDogName(rs.getString("dogName"));
 				Time time = rs.getTime("nowTime");
@@ -165,7 +166,8 @@ import dto.AllDto;
 				} else {
 				    inu.setTime(null);  // nullを許容しているなら。もし許容しないなら適切な初期値を入れる
 				}
-
+				
+				inu.setPoopId(rs.getInt("PoopId"));
 				inu.setDate(rs.getDate("date").toLocalDate());
 				inu.setPhoto(rs.getString("photo"));
 				inu.setColor(rs.getInt("color"));
@@ -192,13 +194,111 @@ import dto.AllDto;
 			}
 		}
 	}
-		
-		
-		
-		
 		return pDogDet;
 	}
+	// 引数cardで指定されたレコードを更新し、成功したらtrueを返す
+			public boolean pupdate(AllDto wanko) {
+				Connection conn = null;
+				boolean result = false;
 
+				try {
+					// JDBCドライバを読み込む
+					Class.forName("com.mysql.cj.jdbc.Driver");
+
+					// データベースに接続する
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+							"root", "password");
+					
+					// SQL文を準備する
+					String sql = "UPDATE AllDto SET dogname=?, dogbreed=?, dogbirth=?, gender=?, state=?, wakuchin=?, wankonameid=?, dogphoto=?, kyosei=?, dogregist=?, remarks1=?, remarks2=?, remarks3=?, remarks4=?, remarks5=?, injection=?, rabies=?";
+					PreparedStatement pStmt = conn.prepareStatement(sql);
+					
+					pStmt.setString(1, wanko.getDogName());
+					pStmt.setString(2, wanko.getDogBreed());
+					pStmt.setDate(3, java.sql.Date.valueOf(wanko.getDogBirth()));
+					pStmt.setBoolean(4, wanko.isGender());
+					pStmt.setString(5, wanko.getState());
+					pStmt.setString(6, wanko.getWakuchin());
+					pStmt.setInt(7, wanko.getWankoDogId());
+					pStmt.setString(8, wanko.getWankoNameId());
+					pStmt.setString(9, wanko.getDogPhoto());
+					pStmt.setBoolean(10, wanko.isKyosei());
+					pStmt.setDate(11, java.sql.Date.valueOf(wanko.getDogRegist()));
+					pStmt.setString(12, wanko.getRemarks1());
+					pStmt.setString(13, wanko.getRemarks2());
+					pStmt.setString(14, wanko.getRemarks3());
+					pStmt.setString(15, wanko.getRemarks4());
+					pStmt.setString(16, wanko.getRemarks5());
+					pStmt.setString(17, wanko.getInjection());
+					pStmt.setString(18, wanko.getRabies());
+					
+					// SQL文を実行する
+					if (pStmt.executeUpdate() == 1) {
+						result = true;
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} finally {
+					// データベースを切断
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+				}
+			}
+				// 結果を返す
+				return result;
+			}
+	// 引数cardで指定された番号のレコードを削除し、成功したらtrueを返す
+			public boolean delete(String id) {
+				Connection conn = null;
+				boolean result = false;
+
+				try {
+					// JDBCドライバを読み込む
+					Class.forName("com.mysql.cj.jdbc.Driver");
+
+					// データベースに接続する
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+							+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+							"root", "password");
+					
+					// SQL文を準備する
+					String sql = "DELETE FROM POOP WHERE poopId=?";
+					PreparedStatement pStmt = conn.prepareStatement(sql);
+					
+					// SQL文を完成させる
+					pStmt.setString(1, id);
+					
+					// SQL文を実行する
+					if (pStmt.executeUpdate() == 1) {
+						result = true;
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} finally {
+					// データベースを切断
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+
+				// 結果を返す
+				return result;
+				}
+			
+	
 	
 	
 	

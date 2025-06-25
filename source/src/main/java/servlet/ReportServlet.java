@@ -29,51 +29,56 @@ public class ReportServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
+		AllDto log = (AllDto)session.getAttribute("user");
+		request.setCharacterEncoding("UTF-8");
 		
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		HttpSession session = request.getSession();
 		if (session.getAttribute("user") == null) {
 			response.sendRedirect(request.getContextPath() +"/LoginServlet");
 			return;
-		} else {
-			AllDto log = (AllDto)session.getAttribute("user");
-			//トレーナー側と飼い主側それぞれ別ページにフォワードする
+		}
+		//ログイン時
+		
+		if("home".equals(action)) {
 			//トレーナー側
 			if(log.isUserUniqueId() == true) {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/report_regi.jsp");
 				dispatcher.forward(request, response);
 				
 			//飼い主側
-			}else if(log.isUserUniqueId() == false) {
+			} else if (log.isUserUniqueId() == false) {
 				// レポート一覧を表示
-					String userNameId = log.getUserNameId();
-					System.out.println("wanko" + userNameId);
-					ReportDAO rdao = new ReportDAO();
-					List<AllDto> reportList = rdao.select(userNameId);
-					request.setAttribute("reportList", reportList);
-					// 後でやるにフォワードする
-					System.out.println("report" + reportList);
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_list.jsp");
-					dispatcher.forward(request, response);
-					// DAOからユーザー情報とってきて、データベースをもとに報告ｉｄをとってくる
-				
-					//レポート詳細（詳細ボタンを押したときの処理）
-				}else if ("oreportDtail".equals(action)) {
-					//リクエストパラメータ
-					request.setCharacterEncoding("UTF-8");
-					//詳細表示
-					String detail = request.getParameter("detail");
-					ReportDAO rdao = new ReportDAO();
-					List<AllDto> ord = rdao.oReportDetail(detail);
-					request.setAttribute("ord", ord);
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_detail.jsp");
-					dispatcher.forward(request, response);
-					
-			}
-					
-			}
+				String userNameId = log.getUserNameId();
+				System.out.println("wanko" + userNameId);
+				ReportDAO rdao = new ReportDAO();
+				List<AllDto> reportList = rdao.select(userNameId);
+				request.setAttribute("reportList", reportList);
+				// 後でやるにフォワードする
+				System.out.println("report" + reportList);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_list.jsp");
+				dispatcher.forward(request, response);
+				// DAOからユーザー情報とってきて、データベースをもとに報告ｉｄをとってくる
+			}	
+			//レポート詳細（詳細ボタンを押したときの処理）
+		} else if ("reportDetail".equals(action)) {
+			//詳細表示
+			//トレーナー側
+			if (log.isUserUniqueId() == true) {
+			
+			//かいぬし
+			} else if (log.isUserUniqueId() == false) {
+				int id = Integer.parseInt(request.getParameter("id"));
+				ReportDAO rdao = new ReportDAO();
+				List<AllDto> ord = rdao.oReportDetail(id);
+				request.setAttribute("ord", ord);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_detail.jsp");
+				System.out.println("フォワードします");
+				dispatcher.forward(request, response);
+			}					
 		}
+	}
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -150,22 +155,9 @@ public class ReportServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/report_regi.jsp");
 				dispatcher.forward(request, response);
 			}
-		}else if (request.getParameter("ぼたん").equals("nakami")) {
-			
 		
-		// 検索処理を行う
-		List<AllDto> rdList = rDao.select(reportId);
-
-		// 検索結果をリクエストスコープに格納する
-		request.setAttribute("oReportDetailList", rdList);
-		
-		// 飼い主報告詳細ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_detail.jsp");
-		dispatcher.forward(request, response);
-	
-		}
 	}}
-	
+}
     /**
      * @see HttpServlet#HttpServlet()
      */

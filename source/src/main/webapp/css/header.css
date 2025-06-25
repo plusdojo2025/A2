@@ -1,0 +1,75 @@
+@charset "UTF-8";
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  border-bottom: 2px solid orange;
+  padding: 10px 20px;
+  color: orange;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.logo {
+  height: 120px;
+  margin-right: 10px;
+}
+
+
+.header-right {
+  display: flex;
+  flex-direction: column;  /* 上下に並べる */
+  align-items: flex-end;   /* 右寄せ */
+  gap: 10px;               /* 上下の隙間 */
+}
+.user-info {
+  display: flex;
+  align-items: flex-end;
+}
+
+.logout-btn {
+  background: none;
+  border: 1px solid orange;
+  color: orange;
+  padding: 4px 8px;
+  margin-left: 20px;
+  margin-right: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.main-nav {
+  display: flex;
+  gap: 120px;
+  list-style: none;
+  margin-top: 20px;
+  padding-left: 0;
+  padding-right: 50px;
+  margin-bottom: 0px;
+  width: 100%;
+  font-size: 40px;
+}
+
+.main-nav li {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon {
+  height: 40px;
+  margin-right: 6px;
+}
+
+.main-nav li:hover{
+	color: orenge;
+}
+	

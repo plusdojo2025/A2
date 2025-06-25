@@ -79,33 +79,33 @@
 	<div class="left-section">
 		時間<input type="time" name="nowTime"><br>
 		日付<input type="date" name="date"><br>
-		写真追加<input type="file" name="dogPhoto" accept="image/*" onchange="previewImage(this);"><br>
+		写真追加<input type="file" name="photo" accept="image/*" onchange="previewImage(this);"><br>
 				<canvas id="preview" style="max-width:200px;"></canvas><br>
 		</div>
 	<div class="right-section">
-		わんこ選択<input type="text" name="dogName"><br>
+		わんこID<input type="text" name="PoopDogId"><br>
 			<!-- 色の選択 -->
 	
 		<p>色を選んでください：</p>
 	  	<div class="color-option">
 		<label>
-	      <input type="radio" name="color" value="black">
+	      <input type="radio" name="color" value="1">
 	      <span class="color-label color-black"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="color" value="yellow">
+	      <input type="radio" name="color" value="2">
 	      <span class="color-label color-yellow"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="color" value="brown">
+	      <input type="radio" name="color" value="3">
 	      <span class="color-label color-brown"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="color" value="brownred">
+	      <input type="radio" name="color" value="4">
 	      <span class="color-label color-brownred"></span>
 	    </label>
 	    <label>
-	     	<input type="radio" name="color" value="red">
+	     	<input type="radio" name="color" value="5">
 	     	<span class="color-label color-red"></span>
 	   	</label>
 	  	</div>
@@ -113,32 +113,33 @@
 		<p>硬さを選んでください：</p>
 	  	<div class="hardness-option">
 	    <label>
-	      <input type="radio" name="hardness" value="hard">硬
+	      <input type="radio" name="hardness" value="1">硬
 	      <span class="hardness-label hardness-硬"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="hardness" value="slightly hard">やや硬
+	      <input type="radio" name="hardness" value="2">やや硬
 	      <span class="hardness-label hardness-やや硬"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="hardness" value="normal">普通
+	      <input type="radio" name="hardness" value="3">普通
 	      <span class="hardness-label hardness-普"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="hardness" value="slightly soft">やや柔
+	      <input type="radio" name="hardness" value="4">やや柔
 	      <span class="hardness-label hardness-やや柔"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="hardness" value="soft">柔
+	      <input type="radio" name="hardness" value="5">柔
 	      <span class="hardness-label hardness-柔"></span>
 	    </label>
 	    </div>
-		異常<input type="checkbox" name="abnormal" value="true"><br>
+		異常<input type="radio" name="abnormal" value="1">あり
+			<input type="radio" name="abnormal" value="0">なし<br>
 		メモ<input type="text" name="memo" value="${e.memo}"><br>
 		<input type="submit" name="pbutt" value="登録"><br>
 		</div>
 	</form>
-	
+	<div>${msg} </div>
 	
 	
 <!-- メインここまで -->
@@ -148,21 +149,7 @@
 <!--  フッターここまで -->
 <!-- JavaScript（ここから） -->
 	<script>
-	/* submitボタンをクリックしたときの処理 */
-	function submitClick() {
-	  /* 確認ダイアログボックスを表示します */
-	  if (!window.confirm('実行します。よろしいですか？')) {
-	    return false;
-	  }
-	}
 	
-	/* HTML要素をオブジェクトとして取得する */
-	let formObjs = document.getElementsByClassName('');
-	
-	/* 取得したすべてのオブジェクトに同じイベントを適用する */
-	for (let item of formObjs) {
-	  item.onsubmit = submitClick;
-	}
 	</script>
 <!-- JavaScript（ここまで） -->
 </body>

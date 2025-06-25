@@ -17,7 +17,7 @@
 <h1><a href="<c:url value='ReserveServlet'/> ">予約登録</a></h1>
    <div class="wrapper">
 	    <!-- xxxx年xx月を表示 -->
-	    <h1 id="header"></h1>
+	    <h2 id="header"></h2>
 
 	    <!-- ボタンクリックで月移動 -->
 	    <div id="next-prev-button">

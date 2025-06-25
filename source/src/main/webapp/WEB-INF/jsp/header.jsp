@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet"  href="<c:url value='/css/header.css' />">
 <head>
 <meta charset="UTF-8">
     <!--　box表示    
@@ -13,7 +14,7 @@
     </style>
 -->
 
-<style>
+<!-- <style>
 
 header {
   display: flex;
@@ -85,7 +86,7 @@ header {
   margin-right: 6px;
 }
 
-</style>
+</style> -->
 
 
 </head>

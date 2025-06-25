@@ -6,6 +6,7 @@
 <head>
 
  <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/>
+ <link rel="stylesheet" href="<c:url value='/css/o_report_list.css' />">
  <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
  <script>
     jQuery(function($){
@@ -22,25 +23,12 @@
  </script>
 <meta charset="UTF-8">
 <title>報告一覧飼い主用</title>
-<style>
-	/* 戻る画像ボタン */
-	.back_button {
-		width: 40px;
-	}
-	.back_text {
-		font-size: 10px;
-	}
-	
-	/* ○ページ目 */
-	.page_count {
-		text-align: center;
-	}
- </style>
+
 </head>
 <body>
 <%@ include file="header.jsp" %>
 	<h1 class=page-title>報告一覧</h1>
-	<a href="<c:url value='/ReportServlet'/> ">新規登録</a>
+	<a class="sin" href="<c:url value='/ReportServlet'/> ">新規登録</a>
 
 
 	<!-- 戻る画像ボタン -->
@@ -62,7 +50,7 @@
 			<!-- 報告一覧 -->
 			<c:forEach var="e" items="${reportList}" varStatus="status">
 				<tr>
-					<td><img src="<c:url value='${e.dogPhoto}' />" width="200" height="200" alt="${e.dogName}の写真"></td>
+					<td><img src="<c:url value='${e.dogPhoto}' />"  width="170" alt="${e.dogName}の写真"></td>
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
 					<td>${e.reportDate}</td>

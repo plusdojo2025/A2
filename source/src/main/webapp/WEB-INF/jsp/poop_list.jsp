@@ -24,30 +24,6 @@
 <meta charset="UTF-8">
 <title>うんち一覧</title>
 
-<style>
-/* 戻る画像ボタンのCSS */
-	.back_button {
-		width: 40px;
-	}
-	
-	.back_text {
-		font-size: 10px;
-	}	
-	
-	/* ○ページ目 */
-	.page_count {
-		text-align: center;
-	}
-	/*「○○一覧」のCSS*/
-	.page-title {
-		color:#FFA500;
-/* 		font-family: "Meiryo"; */
-	}
-	/*「新規登録ボタン」のCSS*/
-	.regist-link {
-		font-size: 30px;
-	}
- </style>
 </head>
 <body>
 
@@ -79,7 +55,7 @@
 			<!-- うんち一覧 -->
 			<c:forEach var="e" items="${poopList}" varStatus="status">
 				<tr>
-					<td><img src="<c:url value='${e.dogPhoto}' />" class="poop-photo" alt="${e.dogName}のうんち写真"></td>
+					<td><img src="<c:url value='${e.dogPhoto}' />"  width="170" class="poop-photo" alt="${e.dogName}のうんち写真"></td>
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
 					<td>${e.hardness}</td>

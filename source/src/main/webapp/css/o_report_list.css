@@ -1,0 +1,27 @@
+@charset "UTF-8";
+.page-title {
+	color:orange;
+}
+.sin {
+	font-size: 30px;
+}
+
+
+	/* 戻る画像ボタン */
+	.back_button {
+		width: 40px;
+		float: right;
+		margin-top:-100px;
+	}
+	.back_text {
+		font-size: 10px;
+		float: right;
+		margin-top:-100px;
+	}
+	/* ○ページ目 */
+	.page_count {
+		text-align: center;
+	}
+	button{
+		font-size:40px;
+	}

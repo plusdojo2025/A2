@@ -15,6 +15,37 @@
  .poopdetailform {
  	color: #FFA500;     /* 文字色指定 */
  }
+ .color-option {
+	    display: flex;
+	    gap: 20px;
+	    margin: 20px 0;
+	  }
+	
+	  .color-option input[type="radio"] {
+	    display: none;
+	  }
+	
+	  .color-label {
+	    width: 30px;
+	    height: 30px;
+	    border-radius: 50%;
+	    display: inline-block;
+	    cursor: pointer;
+	    border: 3px solid transparent;
+	  }
+	
+	  /* 色ごとの背景 */
+		.color-black { background-color: #444443; }
+		.color-yellow { background-color: #EBD469; }
+		.color-brown { background-color: #AD795B; }
+		.color-brownred { background-color: #A44F30; }
+		.color-red { background-color: #A52A2A; } 
+	
+	  /* 選択されたときの枠線 */
+	  input[type="radio"]:checked + .color-label {
+	    border-color: white;
+	    transform: scale(1.5);/*拡大*/
+	  }
 </style>
 </head>
 <body>
@@ -45,9 +76,55 @@
 		<div>
 			<ul>
 				<li>ワンコ選択<input type="text" name="name" value="${e.name}"></li><br>
-				<li>色<input type="radio" name="color" value="${e.color}"></li><br>
-				<li>硬さ<input type="radio" name="hardness" value="${e.hardness}"></li><br>
-				<li>異常<input type="submit" name="abnormal" value="${e.abnormal}"></li><br>
+				<p>色を選んでください：</p>
+	  	<div class="color-option">
+		<label>
+	      <input type="radio" name="color" value="1">
+	      <span class="color-label color-black"></span>
+	    </label>
+	    <label>
+	      <input type="radio" name="color" value="2">
+	      <span class="color-label color-yellow"></span>
+	    </label>
+	    <label>
+	      <input type="radio" name="color" value="3">
+	      <span class="color-label color-brown"></span>
+	    </label>
+	    <label>
+	      <input type="radio" name="color" value="4">
+	      <span class="color-label color-brownred"></span>
+	    </label>
+	    <label>
+	     	<input type="radio" name="color" value="5">
+	     	<span class="color-label color-red"></span>
+	   	</label>
+	  	</div>
+				<!-- 硬さの選択 -->
+		<p>硬さを選んでください：</p>
+	  	<div class="hardness-option">
+	    <label>
+	      <input type="radio" name="hardness" value="1">硬
+	      <span class="hardness-label hardness-硬"></span>
+	    </label>
+	    <label>
+	      <input type="radio" name="hardness" value="2">やや硬
+	      <span class="hardness-label hardness-やや硬"></span>
+	    </label>
+	    <label>
+	      <input type="radio" name="hardness" value="3">普通
+	      <span class="hardness-label hardness-普"></span>
+	    </label>
+	    <label>
+	      <input type="radio" name="hardness" value="4">やや柔
+	      <span class="hardness-label hardness-やや柔"></span>
+	    </label>
+	    <label>
+	      <input type="radio" name="hardness" value="5">柔
+	      <span class="hardness-label hardness-柔"></span>
+	    </label>
+	    </div>
+				異常<input type="radio" name="abnormal" value="1">あり
+				<input type="radio" name="abnormal" value="0">なし<br>
 				<li>メモ<input type="text" name="memo" value="${e.memo}"></li>
 			</ul>
 		</div>

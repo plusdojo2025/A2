@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,66 @@ import dto.AllDto;
 
 public class WankoDAO {
 	
-		
+		//今日のワンコ
+		public List<AllDto> todaywanko(int userSchoolId) {
+			Connection conn = null;
+			List<AllDto> todayWanko = new ArrayList<AllDto>();
+			
+			
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+						"root", "password");
+				String sql = "SELECT wankoDogId, dogName, dogPhoto "
+						+ "FROM `USER` "
+						+ "JOIN WANKO ON `USER`.userNameId = WANKO.wankoNameId "
+						+ "JOIN CALENDAR ON WANKO.wankoDogId = CALENDAR.calendarDogId "
+						+ "WHERE `USER`.userSchoolId=? AND CALENDAR.calendarDate=? "
+						+ "ORDER BY CALENDAR.time";
+				
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				
+				// SQL文を完成させる
+				pStmt.setInt(1, userSchoolId);
+				pStmt.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
+				
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+				
+				// 結果表をコレクションにコピーする
+				while (rs.next()) {
+					
+					AllDto inu = new AllDto();					
+					inu.setWankoDogId(rs.getInt("wankoDogId"));
+					inu.setDogName(rs.getString("dogName"));
+					inu.setDogPhoto(rs.getString("dogPhoto"));
+					
+					todayWanko.add(inu);
+					
+				}
+				
+			}catch (SQLException e) {
+				e.printStackTrace();
+				
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						
+				}
+			}
+		}
+			return todayWanko;
+		}
 	
 		
 		//ログインわんこ表示用

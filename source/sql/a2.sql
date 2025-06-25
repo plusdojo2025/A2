@@ -247,6 +247,26 @@ INSERT INTO CALENDAR(
 )		VALUES(
 		'2025-06-30','プラスくん預かり','10:00','トレーニング内容(~)',4
 );
+INSERT INTO CALENDAR(
+		calendarDate,title,time,calendarMemo,calendarDogId
+)		VALUES(
+		'2025-06-25','さんくん預かり','14:00','トレーニング内容(~)',1
+);
+INSERT INTO CALENDAR(
+		calendarDate,title,time,calendarMemo,calendarDogId
+)		VALUES(
+		'2025-06-25','アンディくん預かり','11:00','トレーニング内容(~)',2
+);
+INSERT INTO CALENDAR(
+		calendarDate,title,time,calendarMemo,calendarDogId
+)		VALUES(
+		'2025-06-25','らんちゃん預かり','13:00','トレーニング内容(~)',3
+);
+INSERT INTO CALENDAR(
+		calendarDate,title,time,calendarMemo,calendarDogId
+)		VALUES(
+		'2025-06-25','プラスくん預かり','10:00','トレーニング内容(~)',4
+);
 
 
 INSERT INTO REPORT(

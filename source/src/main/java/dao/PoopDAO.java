@@ -11,7 +11,7 @@ import dto.AllDto;
 
 	public class PoopDAO{
 	//登録//
-	public int insert(AllDto poop) {
+	public int insert(String photo, String nowTime, String date, String dogName, String color, String hardness, String abnormal, String memo, String PoopDogId) {
 		Connection conn = null;
 		int ans = 0;
 	
@@ -25,30 +25,22 @@ import dto.AllDto;
 					"root", "password");
 	
 			// SQL文を準備する
-			String sql = "INSERT INTO Bc VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO POOP (nowTime, date, dogNmae, color, hardness, abnormal, memo, PoopDogId, photo"
+					+ "VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を完成させる
 			
-			pStmt.setInt(1, poop.getPoopId());
-		
-			pStmt.setString(2, poop.getTlName());
-		
-			pStmt.setTimestamp(3, java.sql.Timestamp.valueOf (poop.getNowTime()));
-		
-			pStmt.setString(4, poop.getPhoto());
+			pStmt.setString(1, nowTime);
+			pStmt.setString(2, date);
+			pStmt.setString(3, dogName);
+			pStmt.setString(4, color);
+			pStmt.setString(5, hardness);
+			pStmt.setString(6, abnormal);
+			pStmt.setString(7, memo);
+			pStmt.setString(8, PoopDogId);
+			pStmt.setString(9, photo);
 			
-			pStmt.setInt(5, poop.getColor());
-		
-			pStmt.setInt(6, poop.getHardness());
-		
-			pStmt.setBoolean(7, poop.isAbnormal());
-		
-			pStmt.setInt(8, poop.getPoopDogId());
-			
-			pStmt.setString(9, poop.getMemo());
-			
-			pStmt.setDate(10, java.sql.Date.valueOf (poop.getDate()));
 			
 		
 			// SQL文を実行する
@@ -87,10 +79,12 @@ import dto.AllDto;
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 			// SQL文を準備する
-			String sql = "SELECT schoolId, nameId, poopId, tlName, nowTime, photo, color, hardness, abnormal, dogId,"
-					+ " memo , date FROM POOP JOIN WANKO ON POOP.dogId=WANKO.dogId "
-			+"WHERE POOP.dogId=? "
-			+"ORDER BY Poop.dogId";
+			String sql = "SELECT poopId, nowTime, photo, color, hardness, PoopDogId, date, dogPhoto, wankoDogId, dogName, wankoNameId, name, userNameId, userSchoolId " 
+					+ "FROM POOP "
+					+ "JOIN WANKO ON POOP.PoopDogId = WANKO.wankoDogId "
+					+ "JOIN `USER` ON WANKO.wankoNameId = `USER`.userNameId "					
+					+ "WHERE `USER`.userNameId=? "
+					+ "ORDER BY POOP.poopId ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を完成させる
@@ -101,18 +95,18 @@ import dto.AllDto;
 			
 			// 結果表をコレクションにコピーする　うんち写真と犬名前保存
 			while (rs.next()) {
-				AllDto poop = new  AllDto();
 				AllDto unchi= new AllDto();
-				unchi.setPhoto(rs.getString("photo"));
-				unchi.setTlName(rs.getString("dogId"));
-				unchi.setTlName(rs.getString("tlName"));
+				unchi.setPoopId(rs.getInt("poopId"));
+				unchi.setDogPhoto(rs.getString("dogPhoto"));
+				unchi.setDogName(rs.getString("dogName"));
+				unchi.setName(rs.getString("name"));
 				unchi.setHardness(rs.getInt("hardness"));
 				unchi.setColor(rs.getInt("color"));
-				unchi.setTlName(rs.getString("date"));
+				unchi.setDate(rs.getDate("date").toLocalDate());
 				
-				poopList.add(poop);
+				poopList.add(unchi);
 			}
-		
+	
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -128,14 +122,81 @@ import dto.AllDto;
 				} catch (SQLException e) {
 					e.printStackTrace();
 					poopList = null;
-					
-					
 			}
 		}
 	}
 		return poopList;
 	}
 
+	public List<AllDto> pDogDet(String id){
+		Connection conn = null;
+		List<AllDto> pDogDet = new ArrayList<AllDto>();
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+					"root", "password");
+			// SQL文を準備する
+			String sql = "SELECT WANKO.wankoDogId, WANKO.dogName, POOP.nowTime, POOP.date, POOP.photo, POOP.color, POOP.hardness, POOP.abnormal, POOP.memo "
+			           + "FROM POOP "
+			           + "JOIN WANKO ON POOP.PoopDogId = WANKO.wankoDogId "
+			           + "WHERE POOP.PoopDogId = ?";
+			
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			// SQL文を完成させる
+			pStmt.setString(1, id);
+			
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+			
+			// 結果表をコレクションにコピーする　犬写真と犬名前保存
+			while (rs.next()) {
+				AllDto inu = new  AllDto();
+				inu.setWankoDogId(rs.getInt("wankoDogId"));		
+				inu.setDogName(rs.getString("dogName"));
+				inu.setTime(rs.getTime("nowTime").toLocalTime());
+				inu.setDate(rs.getDate("date").toLocalDate());
+				inu.setPhoto(rs.getString("photo"));
+				inu.setColor(rs.getInt("color"));
+				inu.setHardness(rs.getInt("hardness"));
+				inu.setAbnormal(rs.getBoolean("abnormal"));
+				inu.setMemo(rs.getString("memo"));
+				
+				pDogDet.add(inu);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			pDogDet = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			pDogDet = null;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					pDogDet = null;	
+			}
+		}
+	}
+		
+		
+		
+		
+		return pDogDet;
+	}
+
+	
+	
+	
+	
+	
 	//検索	
 	// 引数 poop指定された項目で検索して、取得されたデータのリストを返す
 	public List<AllDto> select(AllDto poop) {

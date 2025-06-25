@@ -21,7 +21,7 @@
 	<!-- 登録者の名前も後で表示させる -->
 	<h1 class="headline">
 		<div style="display: flex; justify-content: space-between;">
-  			<div style="text-align: left;">うんち詳細　（名前）さん</div>
+  			<div style="text-align: left;">うんち詳細　<c:out value="${sessionScope.user.name}"/>さん</div>
         	<div style="text-align: right;">
         		<a href="javascript:history.back();">
 				<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
@@ -31,13 +31,15 @@
 		</div>
 	</h1>
 	<!-- 後でDBとひもづけてデータを取ってこれるようにする -->
-	<c:forEach var="poopdetail" items="" >
-	<form class="poopdetailform" method="POST" action="<c:url value='/PoopServlet' />">
+	
+	<form class="poopdetailform" method="POST" action="<c:url value='/PoopServlet' />"enctype="multipart/form-data">
+	<c:forEach var="e" items="${pDogDet}" >
 		<div>
 			<ul>
 				<li>時間<input type="time" name="nowTime" value="${e.nowTime}"></li><br>
 				<li>日付<input type="date" name="date" value="${e.date}"></li><br>
-				<li>写真追加<input type="file" name="photo" value="${e.photo}"></li>
+				<li>写真追加<input type="file" name="photo" value="${e.photo}">
+				<img src="${e.photo}" width="400"  alt="${e.dogName}のうんち写真"><br></li>
 			</ul>
 		</div>
 		<div>
@@ -49,12 +51,11 @@
 				<li>メモ<input type="text" name="memo" value="${e.memo}"></li>
 			</ul>
 		</div>
-		<input type="hidden" name="action" value="update" >
-		<input type="hidden" name="action" value="delete" >
 		
 		<input type="submit" value="更新"> <input type="submit" value="削除">
-	</form>
 	</c:forEach>
+	</form>
+	
 	
 	<!--  フッターここから --
 

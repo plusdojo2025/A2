@@ -17,11 +17,11 @@
 	<h2>登録</h2>													<!-- 登録と一覧は縦に並べて表示する -->
 	<form method="POST" action="<c:url value='/CalendarServlet' />">
 		タイトル<input type="text" name="title"><br>
-		時間<input type="time" name="nowTime" value="${e.nowTime}"><br>
+		時間<input type="time" name="nowTime" value="${e.nowTime}" required><br>
 		メモ<input type="text" name="memo"><br>
-		ワンコID <input type="text" name="calendarDogId">
+		ワンコID <input type="text" name="calendarDogId" required>
+		<!-- ワンコ名<input type="text" name="dogName"><br> -->
 		<input type="hidden" name="calendarDate" value="${selectedDate}">
-		
 		<%-- <select name="selewanko">
   			<c:forEach var="dog" items="${wankoList}">
     			<option value="${dog.wankoDogId}">${dog.dogName}</option>
@@ -38,21 +38,30 @@
 	<h2>一覧</h2>
 	<c:forEach var="e" items="${scheList}">
 		<form method="POST" action="<c:url value='/CalendarServlet' />">
-			タイトル<span>${e.title}</span><br>
-			時間<span>${e.time}</span><br>
-			メモ<span>${e.memo}</span><br>
-			ワンコID <span>${e.calendarDogId}</span><br>
+			タイトル<input type="text" name="title" value="${e.title}"><br>
+			時間<input type="time" name="nowTime" value="${e.time}"><br>
+			メモ<input type="text" name="calendarMemo" value="${e.calendarMemo}"><br>
+			ワンコID <input type="text" name="calendarDogId" value="${e.calendarDogId}"><br>
+			ワンコ名
 			<select name="selewanko">
   				<c:forEach var="dog" items="${wankoList}">
     				<option value="${dog.wankoDogId}">${dog.dogName}</option>
   				</c:forEach>
 			</select>	
+			<input type="hidden" name="calendarId" value="${e.calendarId}">
+			
+			<input type="hidden" name="year" value="${param.year}">
+			<input type="hidden" name="month" value="${param.month}">
+			<input type="hidden" name="count" value="${param.count}">
+			
 			<input type="hidden" name="action" value="update">
 			<input type="submit" name="update" value="更新">
+		</form>
+		<form>
 			<input type="hidden" name="action" value="delete">
 			<input type="submit" name="delete" value="削除">
 		</form>	
-	</c:forEach>
+	</c:forEach><br>
 	
 </body>
 <!-- JavaScript（ここから） -->

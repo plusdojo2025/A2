@@ -45,10 +45,9 @@ public class CalendarServlet extends HttpServlet {
 	        LocalDate date = LocalDate.of(year, month, count);
 	        //
 	        request.setAttribute("selectedDate", date);
-			/*
-			 * //リクエストパラメーター２ request.setCharacterEncoding("UTF-8"); String dogName =
-			 * request.getParameter("dogName");
-			 */
+			//リクエストパラメーター２ request.setCharacterEncoding("UTF-8"); String dogName =
+			 request.getParameter("dogName");
+			 
 	        
 			// 検索処理を行う //カレンダーDAOで作ったscheList
 			CalendarDAO CaleDao = new CalendarDAO();
@@ -58,22 +57,20 @@ public class CalendarServlet extends HttpServlet {
 			// 検索結果をリクエストスコープに格納する
 			request.setAttribute("scheList", scheList);
 			System.out.println(scheList.size()+"bbbbbbbbb");
-			// 結果ページにフォワードする
-		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
-		    dispatcher.forward(request, response);
+
 		    
 			
 			 // ワンコ一覧を取得 
 		    int userSchoolId = log.getUserSchoolId();
 		    List<AllDto> wankoList= CaleDao.selectWanko(userSchoolId);
-			request.setAttribute("wankoList",wankoList); for(AllDto dto : wankoList) {
-			System.out.println(dto.getDogName()+"aaaaa"); }
+			request.setAttribute("wankoList",wankoList); 
+			for(AllDto dto : wankoList) {
+				System.out.println(dto.getDogName()+"aaaaa"); }
 					   //System.out.println("wankoList: "+wankoList); 
 		   
-			
-			 RequestDispatcher rd =
-			 request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
-			 rd.forward(request, response);
+			// 結果ページにフォワードする
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
+		    dispatcher.forward(request, response);
 					}
 
 	}
@@ -126,6 +123,9 @@ public class CalendarServlet extends HttpServlet {
 	        
 	        //Dateになおす
 	        LocalDate date = LocalDate.of(year, month, count);
+	        
+	        //
+	        request.setAttribute("selectedDate", date);
 				
 			cDto.setCalendarDate(date);
 			cDto.setTitle(title);
@@ -137,8 +137,20 @@ public class CalendarServlet extends HttpServlet {
 		if("regist".equals(action)) {
 			if (cDao.insert(cDto)) {
 				request.setAttribute("message", "レポートの登録に成功しました。");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
-				dispatcher.forward(request, response);
+				//
+				//リクエストパラメータの取得
+		        //String action = request.getParameter("action");
+		        int year = Integer.parseInt(request.getParameter("year"));
+		        int month = Integer.parseInt(request.getParameter("month"));
+		        int count = Integer.parseInt(request.getParameter("count"));
+		        //リダイレクトする
+		        response.sendRedirect(request.getContextPath() + "/CalendarServlet?year=" + year + "&month=" + month + "&count=" + count);
+		        return;
+				/*
+				 * //フォワード RequestDispatcher dispatcher =
+				 * request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");
+				 * dispatcher.forward(request, response);
+				 */
 			} else { 
 				request.setAttribute("error", "レポートの登録に失敗しました。");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/schedule_regi.jsp");

@@ -190,6 +190,8 @@ public class CalendarDAO {
 				pStmt.setTime(3, java.sql.Time.valueOf(upCalendar.getTime()));
 				pStmt.setString(4, upCalendar.getCalendarMemo());
 				pStmt.setInt(5, upCalendar.getCalendarDogId());
+				pStmt.setInt(6, upCalendar.getCalendarId()); 
+
 				
 				
 				// SQL文を実行する
@@ -379,7 +381,7 @@ public class CalendarDAO {
 						while (rs.next()) {
 							AllDto dto=new AllDto();
 							dto.setDogName(rs.getString("dogName"));
-							dto.setWankoDogId(rs.getInt("WankoDogId"));
+							dto.setWankoDogId(rs.getInt("wankoDogId"));
 							//addでcardListにbcを入れている　
 							wankoList.add(dto);
 						}

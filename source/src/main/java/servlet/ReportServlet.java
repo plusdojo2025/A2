@@ -49,6 +49,7 @@ public class ReportServlet extends HttpServlet {
 				List<AllDto> reportList = rdao.select(wankoDogId);
 				request.setAttribute("reportList", reportList);
 				// 後でやるにフォワードする
+				System.out.println("report" + reportList);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_list.jsp");
 				dispatcher.forward(request, response);
 				// DAOからユーザー情報とってきて、データベースをもとに報告ｉｄをとってくる

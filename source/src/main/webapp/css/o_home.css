@@ -1,2 +1,18 @@
 @charset "UTF-8";
 
+body {
+	background-image:url(../images/asiato.png);
+	background-size: cover;
+}
+
+h1{
+	color: orange;
+}
+a:hover{
+	color: orenge;
+}
+
+.name{
+	color: orange;
+}
+

@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>新規登録</title>
 </head>
 <body>
-
+<%@ include file="header.jsp" %>
 <h1>わんこ登録</h1>
-<form method="post" action="<c:url value='/WankoServlet'/> ">
+<form method="POST" action="<c:url value='/WankoServlet'/> " enctype="multipart/form-data">
 	<table class="inputFields">
 		<tr> 
 			<td>
@@ -23,7 +23,7 @@
 		<tr>
 			<td>
 				<label>わんこの名前<br>
-				<input type="text" name="dogName">
+				<input type="text" name="dogName" >
 				</label>
 			</td>
 		</tr>
@@ -31,13 +31,14 @@
 			<td>
 				<label>飼い主ID<br>
 				<a>${user.userNameId}</a>
+				<input type="hidden" name="userNameId" value="${user.userNameId}">
 				</label>
 			</td>
 		</tr>
 		<tr>
 			<td>
 				<label>ワクチン歴<br>
-				<input type="file" name="wakuchin">
+				<input type="file" name="wakuchin" accept="image/*">
 				</label>
 			</td>
 		</tr>
@@ -86,7 +87,7 @@
 		</tr>
 	      	<tr>
 		        <td colspan="2">
-		          <input type="submit" id="register" name="submit" value="登録">
+		          <input type="submit" id="register" name="butt" value="登録">
 		          <span id="error_message"></span>
 		        </td>
 	      	</tr>		
@@ -97,6 +98,7 @@
 
 
 </form>
+<p>${msg}</p>
 <script>
 
 function previewImage(obj){

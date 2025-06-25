@@ -23,7 +23,7 @@ create table WANKO (
 		dogBreed varchar(50) NOT NULL,
 		dogBirth date NOT NULL,
 		gender boolean NOT NULL, 
-		state varchar(300) NOT NULL,
+		state varchar(300),
 		wakuchin varchar(300) NOT NULL,
 		wankoDogId int PRIMARY KEY AUTO_INCREMENT,
 		wankoNameId varchar(50),
@@ -44,7 +44,7 @@ create table WANKO (
 
 create table POOP (
 		poopId int PRIMARY KEY AUTO_INCREMENT,
-		tName varchar(50) NOT NULL,
+		tName varchar(50),
 		nowTime datetime default CURRENT_TIMESTAMP,
 		photo  varchar(300),
 		color INT,

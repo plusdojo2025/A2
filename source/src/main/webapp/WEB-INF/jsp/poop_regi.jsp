@@ -59,6 +59,7 @@
 </style>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 	<!-- 1つ前へ戻る -->
 	<div class="back-option">
 	<a href = "javascript:history.back()">
@@ -72,16 +73,17 @@
 	<h2>登録者の名前</h2>
 	<!-- ワンコ選択 -->
 	<!-- メイン -->
-	<form>
 	
-	<form method="POST" action="">
+	
+	<form method="POST" action="<c:url value='/PoopServlet'/> " enctype="multipart/form-data">
 	<div class="left-section">
-		時間<input type="time" name="nowTime" value="${e.nowTime}"><br>
-		日付<input type="date" name="date" value="${e.date}"><br>
-		写真追加<input type = "file" name = "photo">
+		時間<input type="time" name="nowTime"><br>
+		日付<input type="date" name="date"><br>
+		写真追加<input type="file" name="dogPhoto" accept="image/*" onchange="previewImage(this);"><br>
+				<canvas id="preview" style="max-width:200px;"></canvas><br>
 		</div>
 	<div class="right-section">
-		わんこ選択<input type="text" name="name" value="${e.name}"><br>
+		わんこ選択<input type="text" name="dogName"><br>
 			<!-- 色の選択 -->
 	
 		<p>色を選んでください：</p>
@@ -133,7 +135,7 @@
 	    </div>
 		異常<input type="checkbox" name="abnormal" value="true"><br>
 		メモ<input type="text" name="memo" value="${e.memo}"><br>
-		<input type="submit" value="登録"><br>
+		<input type="submit" name="pbutt" value="登録"><br>
 		</div>
 	</form>
 	

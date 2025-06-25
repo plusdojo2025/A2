@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+#inu-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+/* 戻る画像ボタン */
+	.back_button {
+		width: 40px;
+	}
+	.back_text {
+		font-size: 10px;
+	}
+	
+	/* ○ページ目 */
+	.page_count {
+		text-align: center;
+	}

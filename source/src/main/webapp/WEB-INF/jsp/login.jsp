@@ -9,6 +9,10 @@
 <link rel="stylesheet"  href="<c:url value='/css/login.css' />">
 </head>
 <body>
+	<video autoplay muted loop playsinline id="inu-video">
+  		<source src="<c:url value='/images/いぬの足跡s.mp4' />" type="video/mp4">
+	</video>
+    
 
   <!-- ヘッダー（ここから） -->
   <h1 id="logo">

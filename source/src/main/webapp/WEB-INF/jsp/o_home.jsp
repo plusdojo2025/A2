@@ -9,6 +9,9 @@
 <link rel="stylesheet"  href="<c:url value='/css/o_home.css' />">
 </head>
 <body>
+	<video autoplay muted loop playsinline id="inu-video">
+  		<source src="<c:url value='/images/いぬの足跡s.mp4' />" type="video/mp4">
+	</video>
 <%@ include file="header.jsp" %>
 <div>
 	<p class="dogphoto"><img src="${logdog.dogPhoto}" width="400"  alt="${logdog.dogName}の写真">

@@ -58,11 +58,12 @@ public class HomeServlet extends HttpServlet {
 		 * String userNameId = user.getUserNameId(); WankoDAO wdao = new WankoDAO();
 		 * AllDto uDog = wdao.logdog(userNameId); System.out.println("uDog: " + uDog);
 		 * 
-		 * int dogId = uDog.getWankoDogId();
+		 * // LocalDate today = LocalDate.now(); int year = today.getYear(); int month =
+		 * today.getMonthValue();
 		 * 
-		 * CalendarDAO cdao = new CalendarDAO(); List<AllDto> calendarList =
-		 * cdao.selectDogIdAndMonth(dogId, year, month);
-		 * request.setAttribute("calendarList", calendarList);
+		 * // わんこの予定を取得 int dogId = uDog.getWankoDogId(); CalendarDAO cdao = new
+		 * CalendarDAO(); List<AllDto> calendarList = cdao.selectDogIdAndMonth(dogId,
+		 * year, month); request.setAttribute("calendarList", calendarList);
 		 */
 		}
 		}

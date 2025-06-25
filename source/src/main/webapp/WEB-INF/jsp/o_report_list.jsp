@@ -63,9 +63,9 @@
 			<c:forEach var="e" items="${reportList}" varStatus="status">
 				<tr>
 					<td><img src="<c:url value='${e.dogPhoto}' />" width="200" height="200" alt="${e.dogName}の写真"></td>
-					<td>${e.reportDate}</td>
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
+					<td>${e.reportDate}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->
 					  <a href="<c:url value='/ReportServlet?id=${e.reportId}&action=reportDetail' /> ">
 					    <button type="button">詳細</button>

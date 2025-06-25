@@ -65,12 +65,14 @@
 	<table border="1" id="foo-table" class="table table-bordered">
 		<thead>
 			<tr>
+				
 				<th>お写真</th>
 				<th>ワンコのお名前</th>
 				<th>飼い主様</th>
 				<th>硬さ</th>
 				<th>色</th>
 				<th>登録日</th>
+			</tr>	
 		</thead>
 		<tbody>
 			<!-- うんち一覧 -->

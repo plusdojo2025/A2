@@ -171,6 +171,47 @@ public class PoopServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 				return;
 			}
+		}else if("更新".equals(request.getParameter("pbutt"))) {
+			String savePath = "upload/poop";
+			String appPath = request.getServletContext().getRealPath("");
+			String fullSavePath = appPath + File.separator + savePath;
+			File fileSaveDir = new File(fullSavePath);
+			Part part = request.getPart("dogPhoto");
+			String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+
+			String photo = null;
+			// パスとファイル名を結合
+			if (part != null && part.getSize() > 0) {
+			String filePath = fullSavePath + File.separator + fileName;
+
+			// 実際にファイルを保存
+			part.write(filePath);
+			String dFilePath = savePath +"/"+  fileName;
+			
+			photo = dFilePath;
+			
+			}else {
+				photo = request.getParameter("oldPhoto");
+			}
+			
+			String nowTime = request.getParameter("nowTime");
+			String date = request.getParameter("date");
+			String dogName = request.getParameter("dogName");
+			String color = request.getParameter("color");
+			String hardness = request.getParameter("hardness");
+			String abnormal = request.getParameter("abnormal");
+			String memo =request.getParameter("memo");
+			String PoopDogId = request.getParameter("PoopDogId");
+			
+			PoopDAO pdao = new PoopDAO();
+			if(pdao.pupdate(nowTime, date, dogName, color, hardness, abnormal, memo, PoopDogId)) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
+				dispatcher.forward(request, response);
+			}
+		
+		
+		
+		
 		//値の取得
 		// リクエストパラメータを取得する
 		

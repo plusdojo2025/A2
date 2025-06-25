@@ -197,7 +197,7 @@ import dto.AllDto;
 		return pDogDet;
 	}
 	// 引数cardで指定されたレコードを更新し、成功したらtrueを返す
-			public boolean pupdate(AllDto wanko) {
+			public boolean pupdate(String nowTime, String date, String dogName, String color, String hardness, String abnormal, String memo, String PoopId) {
 				Connection conn = null;
 				boolean result = false;
 
@@ -211,27 +211,20 @@ import dto.AllDto;
 							"root", "password");
 					
 					// SQL文を準備する
-					String sql = "UPDATE AllDto SET dogname=?, dogbreed=?, dogbirth=?, gender=?, state=?, wakuchin=?, wankonameid=?, dogphoto=?, kyosei=?, dogregist=?, remarks1=?, remarks2=?, remarks3=?, remarks4=?, remarks5=?, injection=?, rabies=?";
+					String sql = "UPDATE POOP "
+							+ "SET nowTime=? , date=? , dogName=? , color=? , hardness=? , abnormal=? , memo=? , PoopDogId=? ) "
+							+ "WHERE poopId";
 					PreparedStatement pStmt = conn.prepareStatement(sql);
 					
-					pStmt.setString(1, wanko.getDogName());
-					pStmt.setString(2, wanko.getDogBreed());
-					pStmt.setDate(3, java.sql.Date.valueOf(wanko.getDogBirth()));
-					pStmt.setBoolean(4, wanko.isGender());
-					pStmt.setString(5, wanko.getState());
-					pStmt.setString(6, wanko.getWakuchin());
-					pStmt.setInt(7, wanko.getWankoDogId());
-					pStmt.setString(8, wanko.getWankoNameId());
-					pStmt.setString(9, wanko.getDogPhoto());
-					pStmt.setBoolean(10, wanko.isKyosei());
-					pStmt.setDate(11, java.sql.Date.valueOf(wanko.getDogRegist()));
-					pStmt.setString(12, wanko.getRemarks1());
-					pStmt.setString(13, wanko.getRemarks2());
-					pStmt.setString(14, wanko.getRemarks3());
-					pStmt.setString(15, wanko.getRemarks4());
-					pStmt.setString(16, wanko.getRemarks5());
-					pStmt.setString(17, wanko.getInjection());
-					pStmt.setString(18, wanko.getRabies());
+					pStmt.setString(1, nowTime);
+					pStmt.setString(2, date);
+					pStmt.setString(3, dogName);
+					pStmt.setString(4, color);
+					pStmt.setString(5, hardness);
+					pStmt.setString(6, abnormal);
+					pStmt.setString(7, memo);
+					pStmt.setString(8, PoopDogId);
+					
 					
 					// SQL文を実行する
 					if (pStmt.executeUpdate() == 1) {

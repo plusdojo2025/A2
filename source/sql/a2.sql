@@ -44,7 +44,7 @@ create table WANKO (
 
 create table POOP (
 		poopId int PRIMARY KEY AUTO_INCREMENT,
-		tName varchar(50) NOT NULL,
+		tName varchar(50),
 		nowTime datetime default CURRENT_TIMESTAMP,
 		photo  varchar(300),
 		color INT,

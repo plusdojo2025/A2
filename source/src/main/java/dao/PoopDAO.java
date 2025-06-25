@@ -11,7 +11,7 @@ import dto.AllDto;
 
 	public class PoopDAO{
 	//登録//
-	public int insert(AllDto poop) {
+	public int insert(String photo, String nowTime, String date, String dogName, String color, String hardness, String abnormal, String memo, String PoopDogId) {
 		Connection conn = null;
 		int ans = 0;
 	
@@ -25,30 +25,22 @@ import dto.AllDto;
 					"root", "password");
 	
 			// SQL文を準備する
-			String sql = "INSERT INTO Bc VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO POOP (nowTime, date, dogNmae, color, hardness, abnormal, memo, PoopDogId, photo"
+					+ "VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を完成させる
 			
-			pStmt.setInt(1, poop.getPoopId());
-		
-			pStmt.setString(2, poop.getTlName());
-		
-			pStmt.setTimestamp(3, java.sql.Timestamp.valueOf (poop.getNowTime()));
-		
-			pStmt.setString(4, poop.getPhoto());
+			pStmt.setString(1, nowTime);
+			pStmt.setString(2, date);
+			pStmt.setString(3, dogName);
+			pStmt.setString(4, color);
+			pStmt.setString(5, hardness);
+			pStmt.setString(6, abnormal);
+			pStmt.setString(7, memo);
+			pStmt.setString(8, PoopDogId);
+			pStmt.setString(9, photo);
 			
-			pStmt.setInt(5, poop.getColor());
-		
-			pStmt.setInt(6, poop.getHardness());
-		
-			pStmt.setBoolean(7, poop.isAbnormal());
-		
-			pStmt.setInt(8, poop.getPoopDogId());
-			
-			pStmt.setString(9, poop.getMemo());
-			
-			pStmt.setDate(10, java.sql.Date.valueOf (poop.getDate()));
 			
 		
 			// SQL文を実行する
@@ -175,7 +167,7 @@ import dto.AllDto;
 				inu.setMemo(rs.getString("memo"));
 				
 				pDogDet.add(inu);
-			}System.out.println("検索結果：" + pDogDet.size() + " 件");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			pDogDet = null;

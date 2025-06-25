@@ -79,23 +79,23 @@
 				<p>色を選んでください：</p>
 	  	<div class="color-option">
 		<label>
-	      <input type="radio" name="color" value="1">
+	      <input type="radio" name="color" value="1" <c:if test="${e.color == 1}">checked</c:if> >
 	      <span class="color-label color-black"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="color" value="2">
+	      <input type="radio" name="color" value="2"<c:if test="${e.color == 2}">checked</c:if> >
 	      <span class="color-label color-yellow"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="color" value="3">
+	      <input type="radio" name="color" value="3"<c:if test="${e.color == 3}">checked</c:if> >
 	      <span class="color-label color-brown"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="color" value="4">
+	      <input type="radio" name="color" value="4"<c:if test="${e.color == 4}">checked</c:if> >
 	      <span class="color-label color-brownred"></span>
 	    </label>
 	    <label>
-	     	<input type="radio" name="color" value="5">
+	     	<input type="radio" name="color" value="5"<c:if test="${e.color == 5}">checked</c:if> >
 	     	<span class="color-label color-red"></span>
 	   	</label>
 	  	</div>
@@ -103,28 +103,29 @@
 		<p>硬さを選んでください：</p>
 	  	<div class="hardness-option">
 	    <label>
-	      <input type="radio" name="hardness" value="1">硬
+	      <input type="radio" name="hardness" value="1"<c:if test="${e.hardness == '1'}">checked</c:if>>硬
 	      <span class="hardness-label hardness-硬"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="hardness" value="2">やや硬
+	      <input type="radio" name="hardness" value="2"<c:if test="${e.hardness == '2'}">checked</c:if>>やや硬
 	      <span class="hardness-label hardness-やや硬"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="hardness" value="3">普通
+	      <input type="radio" name="hardness" value="3"<c:if test="${e.hardness == '3'}">checked</c:if>>普通
 	      <span class="hardness-label hardness-普"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="hardness" value="4">やや柔
+	      <input type="radio" name="hardness" value="4"<c:if test="${e.hardness == '4'}">checked</c:if>>柔
 	      <span class="hardness-label hardness-やや柔"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="hardness" value="5">柔
+	      <input type="radio" name="hardness" value="5"<c:if test="${e.hardness == '5'}">checked</c:if>> 柔
 	      <span class="hardness-label hardness-柔"></span>
 	    </label>
 	    </div>
-				異常<input type="radio" name="abnormal" value="1">あり
-				<input type="radio" name="abnormal" value="0">なし<br>
+	    
+				異常<input type="radio" name="abnormal" value="1"<c:if test="${e.abnormal == '1'}">checked</c:if>>あり
+					<input type="radio" name="abnormal" value="0"<c:if test="${e.abnormal == '2'}">checked</c:if>>なし<br>
 				<li>メモ<input type="text" name="memo" value="${e.memo}"></li>
 			</ul>
 		</div>

@@ -29,7 +29,7 @@ public class ReportServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String action = request.getParameter("action");
+//		String action = request.getParameter("action");
 		
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
@@ -47,33 +47,33 @@ public class ReportServlet extends HttpServlet {
 			//飼い主側
 			}else if(log.isUserUniqueId() == false) {
 				// レポート一覧を表示
-				int wankoDogId = log.getWankoDogId();
-				ReportDAO rdao = new ReportDAO();
-				List<AllDto> reportList = rdao.select(wankoDogId);
-				request.setAttribute("reportList", reportList);
-				// 後でやるにフォワードする
-				System.out.println("report" + reportList);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_list.jsp");
-				dispatcher.forward(request, response);
-				// DAOからユーザー情報とってきて、データベースをもとに報告ｉｄをとってくる
-				
-				//レポート詳細（詳細ボタンを押したときの処理）
-				if ("oreportDtail".equals(action)) {
-					//リクエストパラメータ
-					request.setCharacterEncoding("UTF-8");
-					//詳細表示
-					String detail = request.getParameter("detail");
-					rdao = new ReportDAO();
-					List<AllDto> ord = rdao.oReportDetail(detail);
-					request.setAttribute("ord", ord);
-					dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_detail.jsp");
+					int wankoDogId = log.getWankoDogId();
+					ReportDAO rdao = new ReportDAO();
+					List<AllDto> reportList = rdao.select(wankoDogId);
+					request.setAttribute("reportList", reportList);
+					// 後でやるにフォワードする
+					System.out.println("report" + reportList);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_list.jsp");
 					dispatcher.forward(request, response);
-					
+					// DAOからユーザー情報とってきて、データベースをもとに報告ｉｄをとってくる
+				
+					//レポート詳細（詳細ボタンを押したときの処理）
+//				}else if ("oreportDtail".equals(action)) {
+//					//リクエストパラメータ
+//					request.setCharacterEncoding("UTF-8");
+//					//詳細表示
+//					String detail = request.getParameter("detail");
+//					ReportDAO rdao = new ReportDAO();
+//					List<AllDto> ord = rdao.oReportDetail(detail);
+//					request.setAttribute("ord", ord);
+//					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_detail.jsp");
+//					dispatcher.forward(request, response);
+//					
 				}
 					
 			}
 		}
-		}
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)

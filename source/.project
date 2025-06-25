@@ -28,11 +28,4 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/main/webapp/images/いぬの足跡s.mp4</name>
-			<type>1</type>
-			<locationURI>PARENT-3-PROJECT_LOC/Users/user/Downloads/%E3%81%84%E3%81%AC%E3%81%AE%E8%B6%B3%E8%B7%A1s.mp4</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>

@@ -49,7 +49,10 @@ public class HomeServlet extends HttpServlet {
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_home.jsp");
 			dispatcher.forward(request, response);
+			
 		}
+		
+		
 		}
 		}
 	/**

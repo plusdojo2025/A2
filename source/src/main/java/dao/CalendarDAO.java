@@ -411,7 +411,64 @@ public class CalendarDAO {
 				}
 		
 				
+				public List<AllDto> selectDogIdAndMonth(int dogId, int year, int month){
+					List<AllDto> calendarList = new ArrayList<>();
+				
+					//どこのデータベースにつなぐかを入れるConn
+					Connection conn = null;
+					List<AllDto> wankoList = new ArrayList<AllDto>();
+					
+					try {
+						// JDBCドライバを読み込む
+						Class.forName("com.mysql.cj.jdbc.Driver");
 
+						// データベースに接続する ([webapp2] [root] [password]がいじるところ)
+						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+								+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+								"root", "password");
+						
+						// 開始日と終了日（その月の1日〜末日）を求める
+						LocalDate startDate = LocalDate.of(year, month, 1);
+						LocalDate endDate = startDate.withDayOfMonth(startDate.lengthOfMonth());
 
-}
+						// SQL文を準備する
+					    String sql = """
+					    	      SELECT calendarDate, calendarId, title
+					    	      FROM CALENDAR
+					    	      WHERE calendarDogId = ?
+					    	      AND calendarDate BETWEEN ? AND ?
+					    	      ORDER BY calendarDate
+					    	    """;
+					    
+					    PreparedStatement pStmt = conn.prepareStatement(sql);
+					    
+					 // パラメータをセット
+					    pStmt.setInt(1,dogId);
+					    pStmt.setDate(2,java.sql.Date.valueOf(startDate));
+					    pStmt.setDate(3,java.sql.Date.valueOf(endDate));
+					    
+						// SQL実行・結果取得
+						ResultSet rs = pStmt.executeQuery();
+						while (rs.next()) {
+							AllDto dto = new AllDto();
+							dto.setCalendarId(rs.getInt("calendarId"));
+							dto.setCalendarDate(rs.getDate("calendarDate").toLocalDate());
+							dto.setTitle(rs.getString("title"));
+							calendarList.add(dto);
+						}
+					} catch (SQLException | ClassNotFoundException e) {
+						e.printStackTrace();
+						calendarList = null;
+					} finally {
+						// データベースを切断
+						if (conn != null) {
+							try {
+								conn.close();
+							} catch (SQLException e) {
+								e.printStackTrace();
+								calendarList = null;
+							}
+				}
+						return calendarList;
+}}}
 

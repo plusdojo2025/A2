@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CalendarDAO;
 import dao.WankoDAO;
 import dto.AllDto;
 /**
@@ -50,8 +52,21 @@ public class HomeServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_home.jsp");
 			dispatcher.forward(request, response);
 			
+			
+			
 		}
+		//カレンダーの各タイトル情報を表示
+		AllDto user = (AllDto) session.getAttribute("user");
+		String userNameId = user.getUserNameId();
+		WankoDAO wdao = new WankoDAO();
+		AllDto uDog = wdao.logdog(userNameId);
+		System.out.println("uDog: " + uDog);
 		
+		int dogId = uDog.getWankoDogId();
+		
+		CalendarDAO cdao = new CalendarDAO();
+		List<AllDto> calendarList = cdao.selectByDogId(dogId);
+		request.setAttribute("calendarList", calendarList);
 		
 		}
 		}

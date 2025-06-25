@@ -136,12 +136,14 @@ public class PoopServlet extends HttpServlet {
 			String PoopDogId = request.getParameter("PoopDogId");
 			
 			PoopDAO pdao = new PoopDAO();
-			int ans = pdao.insert(photo, nowTime, date, dogName, color, hardness, abnormal, memo, PoopDogId);
-			System.out.println("登録ボタン押された");
-			System.out.println("ansの値は：" + ans);
+			int ans = pdao.insert(photo, nowTime, date, dogName, color, hardness, abnormal, memo, PoopDogId);			
 			if(ans == 1) {
 				request.setAttribute("msg","登録完了");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
+				AllDto user = (AllDto) session.getAttribute("user");
+				String userNameId = user.getUserNameId();				
+				List<AllDto> poopList = pdao.pooplistSelect(userNameId);
+				request.setAttribute("poopList", poopList);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp"); 
 				dispatcher.forward(request, response);
 				return;
 			}else {
@@ -149,7 +151,26 @@ public class PoopServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
 				dispatcher.forward(request, response);
 				return;
-		}
+			}
+		}else if("削除".equals(request.getParameter("pbutt"))) {
+			String id = request.getParameter("poopId");
+			System.out.println("poopId"+id);
+			PoopDAO pdao =new PoopDAO();
+			if(pdao.delete(id)) {
+				request.setAttribute("msg","削除完了");
+				AllDto user = (AllDto) session.getAttribute("user");
+				String userNameId = user.getUserNameId();				
+				List<AllDto> poopList = pdao.pooplistSelect(userNameId);
+				request.setAttribute("poopList", poopList);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp"); 
+				dispatcher.forward(request, response);
+				return;
+			}else {
+				request.setAttribute("msg","削除失敗");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
 		//値の取得
 		// リクエストパラメータを取得する
 		

@@ -20,8 +20,8 @@
 		</div>
 	</h1>
 	<!-- 後でDBとひもづけてデータを取ってこれるようにする -->
-	<form method="POST" action="<c:url value='/ReportServlet' />">
-	<c:forEach var="e" items="${ord}" >
+	<form method="POST" action="<c:url value='/ODetailReportServlet' />">
+	<c:forEach var="e" items="" >
 		<ul>
 			<select name="dogName">
 				<!-- ワンコ名をプルダウンで選択できるようにする -->

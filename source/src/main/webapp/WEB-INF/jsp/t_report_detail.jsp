@@ -9,9 +9,7 @@
 <link rel="stylesheet"  href="<c:url value='/css/etc.css' />">
 </head>
 <body>
-	<video autoplay muted loop playsinline id="inu-video">
-  		<source src="<c:url value='/images/いぬの足跡s.mp4' />" type="video/mp4">
-	</video>
+
 	<h1>
 		<div style="display: flex; justify-content: space-between;">
   			<div style="text-align: left;">報告詳細</div>

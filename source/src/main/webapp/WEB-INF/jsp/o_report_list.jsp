@@ -41,7 +41,7 @@
 <%@ include file="header.jsp" %>
 	<h1 class=page-title>報告一覧</h1>
 	<a href="<c:url value='/ReportServlet'/> ">新規登録</a>
->>>>>>> db9d87383a2ccfeaf4b51dddbba8fa9105d91be5
+
 
 	<!-- 戻る画像ボタン -->
 	<div>

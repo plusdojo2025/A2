@@ -6,6 +6,7 @@
 <head>
 
  <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/>
+ <link rel="stylesheet"  href="<c:url value='/css/etc.css' />">
  <script src="<c:url value='https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js' /> "></script>
  <script>
     jQuery(function($){
@@ -22,22 +23,10 @@
  </script>
 <meta charset="UTF-8">
 <title>ワンコ一覧</title>
-<style>
-	/* 戻る画像ボタン */
-	.back_button {
-		width: 40px;
-	}
-	.back_text {
-		font-size: 10px;
-	}
-	
-	/* ○ページ目 */
-	.page_count {
-		text-align: center;
-	}
- </style>
+
 </head>
 <body>
+
 <%@ include file="header.jsp" %>
 	<h1 class=page-title>ワンコ一覧</h1>
 	<a href="<c:url value='/ReportServlet' />">新規登録</a>

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,7 +20,7 @@ import dto.AllDto;
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 			
 		HttpSession session = request.getSession();
@@ -31,6 +32,15 @@ public class HomeServlet extends HttpServlet {
 		// メニューページにフォワードする
 		//トレーナー側
 		if(log.isUserUniqueId() == true ) {
+			
+			//schoolIdをとる
+			AllDto user = (AllDto) session.getAttribute("user");
+			int userSchoolId = user.getUserSchoolId();
+			WankoDAO wdao = new WankoDAO();
+			List<AllDto> todayWanko = wdao.todaywanko(userSchoolId);
+			//今日のワンコセッション入れた
+			session.setAttribute("todaysDog",todayWanko);
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/t_home.jsp");
 			dispatcher.forward(request, response);
 			

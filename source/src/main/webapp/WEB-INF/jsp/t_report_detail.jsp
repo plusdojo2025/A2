@@ -6,8 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>報告詳細（企業用）</title>
+<link rel="stylesheet"  href="<c:url value='/css/etc.css' />">
 </head>
 <body>
+
 	<h1>
 		<div style="display: flex; justify-content: space-between;">
   			<div style="text-align: left;">報告詳細</div>

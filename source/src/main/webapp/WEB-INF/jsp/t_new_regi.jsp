@@ -5,8 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>新規登録</title>
+<link rel="stylesheet"  href="<c:url value='/css/etc.css' />">
 </head>
 <body>
+
 <div>
 <form id="tnewregi_form" method="post" action="<c:url value='/NewRegiServlet'/> "> <!-- サーブレットまだない -->
     <table>

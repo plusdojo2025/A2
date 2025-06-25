@@ -28,11 +28,11 @@
 	    <div id="calendar"></div>
 	</div>
 <h1>今日のわんこ</h1>
-<c:forEach var="e" items="">
+<c:forEach var="e" items="${todaysDog}">
 	<div>
 		<ul>
 			<li>${e.dogName}</li>
-			<li><img src="${e.dogphoto}" alt="${e.dogName}の写真"></li>
+			<li><img src="${e.dogPhoto}" alt="${e.dogName}の写真"></li>
 			<li>うんち記録</li>
 			<li>報告</li>
 		</ul>
@@ -122,6 +122,6 @@ function createProcess(year, month) {
     return calendar;
 }
 </script>
-
+<%@ include file="footer.jsp" %>
 </body>
 </html>

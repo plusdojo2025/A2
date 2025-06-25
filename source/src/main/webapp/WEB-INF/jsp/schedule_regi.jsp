@@ -18,7 +18,8 @@
 	<form method="POST" action="<c:url value='/CalendarServlet' />">
 		タイトル<input type="text" name="title"  placeholder="お名前：予定の内容"><br>
 		時間<input type="time" name="nowTime" value="${e.nowTime}" required><br>
-		メモ<textarea name="memo" rows="5" cols="40"></textarea><br>
+		<label for="memo">メモ</label><br>
+		<textarea name="memo" rows="5" cols="40"></textarea><br>
 		ワンコID <input type="text" name="calendarDogId" required>
 		<!-- ワンコ名<input type="text" name="dogName"><br> -->
 		<input type="hidden" name="calendarDate" value="${selectedDate}">
@@ -48,7 +49,8 @@
 		<form method="POST" action="<c:url value='/CalendarServlet' />">
 			タイトル<input type="text" name="title" value="${e.title}"><br>
 			時間<input type="time" name="nowTime" value="${e.time}"><br>
-			メモ<input type="text" name="memo" value="${e.calendarMemo}"><br>
+			<label for="memo">メモ</label><br>
+			<textarea name="memo" rows="5" cols="40">${e.calendarMemo}"</textarea><br>
 			ワンコID <input type="text" name="calendarDogId" value="${e.calendarDogId}"><br>
 			<%-- ワンコ名
 			<select name="selewanko">

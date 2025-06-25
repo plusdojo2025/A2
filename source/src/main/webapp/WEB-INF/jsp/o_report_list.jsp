@@ -4,16 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<<<<<<< HEAD
- <link rel="stylesheet" href="<c:url value="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css" />"/>
- <script src="<c:url value="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js" />"></script>
-=======
- <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/>
- <link rel="stylesheet" href="<c:url value='/css/o_report_list.css' />">
- <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
->>>>>>> 9b62e8ed3822e535b4da319a565cbe6d6d3f281e
- <script>
+<link rel="stylesheet" href="<c:url value="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css" />"/>
+<script src="<c:url value="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js" />"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/>
+<link rel="stylesheet" href="<c:url value='/css/o_report_list.css' />">
+<script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+<script>
     jQuery(function($){
     	 // デフォルトの設定を変更（日本語化）--------------------
         $.extend( $.fn.dataTable.defaults, {
@@ -25,7 +21,7 @@
     	//データテーブルを使用
         $("#re-table").DataTable();
     });
- </script>
+</script>
 <meta charset="UTF-8">
 <title>報告一覧飼い主用</title>
 
@@ -33,12 +29,7 @@
 <body>
 <%@ include file="header.jsp" %>
 	<h1 class=page-title>報告一覧</h1>
-<<<<<<< HEAD
-=======
 	<a class="sin" href="<c:url value='/ReportServlet'/> ">新規登録</a>
-
->>>>>>> 9b62e8ed3822e535b4da319a565cbe6d6d3f281e
-
 	<!-- 戻る画像ボタン -->
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
@@ -58,11 +49,8 @@
 			<!-- 報告一覧 -->
 			<c:forEach var="e" items="${reportList}" varStatus="status">
 				<tr>
-<<<<<<< HEAD
+
 					<td><img src="<c:url value='${e.dogPhoto}' />" width="170" alt="${e.dogName}の写真"></td>
-=======
-					<td><img src="<c:url value='${e.dogPhoto}' />"  width="170" alt="${e.dogName}の写真"></td>
->>>>>>> 9b62e8ed3822e535b4da319a565cbe6d6d3f281e
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
 					<td>${e.reportDate}</td>

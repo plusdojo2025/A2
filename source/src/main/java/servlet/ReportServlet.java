@@ -47,9 +47,10 @@ public class ReportServlet extends HttpServlet {
 			//飼い主側
 			}else if(log.isUserUniqueId() == false) {
 				// レポート一覧を表示
-					int wankoDogId = log.getWankoDogId();
+					String userNameId = log.getUserNameId();
+					System.out.println("wanko" + userNameId);
 					ReportDAO rdao = new ReportDAO();
-					List<AllDto> reportList = rdao.select(wankoDogId);
+					List<AllDto> reportList = rdao.select(userNameId);
 					request.setAttribute("reportList", reportList);
 					// 後でやるにフォワードする
 					System.out.println("report" + reportList);
@@ -69,7 +70,7 @@ public class ReportServlet extends HttpServlet {
 //					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_detail.jsp");
 //					dispatcher.forward(request, response);
 //					
-				}
+			}
 					
 			}
 		}

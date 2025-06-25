@@ -16,7 +16,7 @@ import dto.AllDto;
 
 public class ReportDAO {
 	// 引数report指定された項目で検索して、取得されたデータのリストを返す  途中
-	public List<AllDto> select(AllDto report) {
+	public List<AllDto> select(String userNameId) {
 		Connection conn = null;
 		List<AllDto> reportList = new ArrayList<AllDto>();
 		try {
@@ -30,47 +30,32 @@ public class ReportDAO {
 
 			// SQL文を準備する
 			
-			String sql = "SELECT dogPhoto, reportDate, dogName, name "
-					+ "FROM USER JOIN WANKO "
-					+ "ON USER.userNameId = WANKO.wankoNameId "
-					+ "WHERE WANKO.wankoNameId=? "
-					+ "ORDER BY USER.userNameId " ;
+			String sql = "SELECT dogPhoto, dogName, USER.name, REPORT.reportDate "
+			           + "FROM USER "
+			           + "JOIN WANKO ON USER.userNameId = WANKO.wankoNameId "
+			           + "JOIN REPORT ON REPORT.reportDogId = WANKO.wankoDogId "
+			           + "WHERE USER.userNameId = ? "
+			           + "ORDER BY WANKO.wankoDogId";
+
+			System.out.println("userNameId: " + userNameId);
+			System.out.println("SQL: " + sql);
+
+
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を完成させる
-			if (report.getState() != null) {
-				pStmt.setString(1, "%" + report.getState() + "%");
-				pStmt.setString(2, "%" + report.getState() + "%");
-				pStmt.setString(3, "%" + report.getState() + "%");
-				pStmt.setString(4, "%" + report.getState() + "%");
-				pStmt.setString(5, "%" + report.getState() + "%");
-				pStmt.setString(6, "%" + report.getState() + "%");
-				pStmt.setString(7, "%" + report.getState() + "%");
-				pStmt.setString(8, "%" + report.getState() + "%");
-			} else {
-				pStmt.setString(1, "%");
-				pStmt.setString(2, "%");
-				pStmt.setString(3, "%");
-				pStmt.setString(4, "%");
-				pStmt.setString(5, "%");
-				pStmt.setString(6, "%");
-				pStmt.setString(7, "%");
-				pStmt.setString(8, "%");
-			}
+			pStmt.setString(1, userNameId);
+		
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				AllDto alldto = new AllDto();
-					alldto.setReportId(rs.getInt("reportId")); 
-					alldto.setFood(rs.getBoolean("food"));
-					alldto.setWalk(rs.getInt("walk"));
-					alldto.setState(rs.getString("state"));
-					alldto.setTraining(rs.getString("training"));
-					alldto.setReportMemo(rs.getString("reportMemo"));
+					alldto.setReportId(rs.getInt("dogPhoto")); 
+					alldto.setFood(rs.getBoolean("dogName"));
+					alldto.setWalk(rs.getInt("name"));
 					alldto.setReportDate(rs.getDate("reportDate").toLocalDate());
-					alldto.setReportDogId(rs.getInt("reportDogId"));
 					System.out.println("repot" + alldto);		
 				reportList.add(alldto);
 			}
@@ -305,68 +290,68 @@ public class ReportDAO {
 		}
 
 		//レポート詳細
-		public List<AllDto> oReportDetail(String id){
-			Connection conn = null;
-			List<AllDto> ord = new ArrayList<AllDto>();
-			try {
-				// JDBCドライバを読み込む
-				Class.forName("com.mysql.cj.jdbc.Driver");
-
-				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
-						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-						"root", "password");
-				// SQL文を準備する
-				String sql = "SELECT dogName, food, reportDate, walk, reportState, training, reportMemo "
-						+ "FROM REPORT JOIN WANKO "
-						+ "ON REPORT.reportDogId = WANKO.wankoDogId "
-						+ "WHERE WANKO.wankoDogId=? "
-						+ "ORDER BY WANKO.wankoDogId ";
-			
-				
-				PreparedStatement pStmt = conn.prepareStatement(sql);
-				
-				// SQL文を完成させる
-				pStmt.setString(1, id);
-				
-				// SQL文を実行し、結果表を取得する
-				ResultSet rs = pStmt.executeQuery();
-				
-				// 結果表をコレクションにコピーする　犬写真と犬名前保存
-				while (rs.next()) {
-					AllDto rp = new  AllDto();
-					rp.setDogName(rs.getString("dogName"));
-					rp.setFood(rs.getBoolean("food"));
-					rp.setReportDate(rs.getDate("reportDate").toLocalDate());
-					rp.setWalk(rs.getInt("walk"));
-					rp.setReportState(rs.getBoolean("reportState"));
-					rp.setTraining(rs.getString("training"));
-					rp.setReportMemo(rs.getString("reportMemo"));
-					
-					System.out.println("aa" + rp);
-					
-					ord.add(rp);
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-				ord = null;
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-				ord = null;
-			} finally {
-				// データベースを切断
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-						ord = null;	
-				}
-			}
-		}
-			return ord;
-		}
+//		public List<AllDto> oReportDetail(String id){
+//			Connection conn = null;
+//			List<AllDto> ord = new ArrayList<AllDto>();
+//			try {
+//				// JDBCドライバを読み込む
+//				Class.forName("com.mysql.cj.jdbc.Driver");
+//
+//				// データベースに接続する
+//				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+//						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+//						"root", "password");
+//				// SQL文を準備する
+//				String sql = "SELECT dogName, food, reportDate, walk, reportState, training, reportMemo "
+//						+ "FROM REPORT JOIN WANKO "
+//						+ "ON REPORT.reportDogId = WANKO.wankoDogId "
+//						+ "WHERE WANKO.wankoDogId=? "
+//						+ "ORDER BY WANKO.wankoDogId ";
+//			
+//				
+//				PreparedStatement pStmt = conn.prepareStatement(sql);
+//				
+//				// SQL文を完成させる
+//				pStmt.setString(1, id);
+//				
+//				// SQL文を実行し、結果表を取得する
+//				ResultSet rs = pStmt.executeQuery();
+//				
+//				// 結果表をコレクションにコピーする　犬写真と犬名前保存
+//				while (rs.next()) {
+//					AllDto rp = new  AllDto();
+//					rp.setDogName(rs.getString("dogName"));
+//					rp.setFood(rs.getBoolean("food"));
+//					rp.setReportDate(rs.getDate("reportDate").toLocalDate());
+//					rp.setWalk(rs.getInt("walk"));
+//					rp.setReportState(rs.getBoolean("reportState"));
+//					rp.setTraining(rs.getString("training"));
+//					rp.setReportMemo(rs.getString("reportMemo"));
+//					
+//					System.out.println("aa" + rp);
+//					
+//					ord.add(rp);
+//				}
+//				
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//				ord = null;
+//			} catch (ClassNotFoundException e) {
+//				e.printStackTrace();
+//				ord = null;
+//			} finally {
+//				// データベースを切断
+//				if (conn != null) {
+//					try {
+//						conn.close();
+//					} catch (SQLException e) {
+//						e.printStackTrace();
+//						ord = null;	
+//				}
+//			}
+//		}
+//			return ord;
+//		}
 
 		
 }

@@ -9,6 +9,9 @@
 <link rel="stylesheet"  href="<c:url value='/css/t_home.css' />">
 </head>
 <body>
+	<video autoplay muted loop playsinline id="inu-video">
+  		<source src="<c:url value='/images/いぬの足跡s.mp4' />" type="video/mp4">
+	</video>
 <%@ include file="header.jsp" %>
 <h1>カレンダー</h1>
    <div class="wrapper">

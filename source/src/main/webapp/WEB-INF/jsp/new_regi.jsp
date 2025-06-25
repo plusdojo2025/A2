@@ -16,6 +16,9 @@
 -->
 </head>
 <body>
+	<video autoplay muted loop playsinline id="inu-video">
+  		<source src="<c:url value='/images/いぬの足跡s.mp4' />" type="video/mp4">
+	</video>
  <h1 id="logo">
    <img src="<c:url value='/images/ぶりログ.png'/> "  height="150" alt="ぶりログ">
   </h1>

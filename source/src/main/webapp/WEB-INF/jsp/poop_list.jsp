@@ -50,6 +50,9 @@
  </style>
 </head>
 <body>
+	<video autoplay muted loop playsinline id="inu-video">
+  		<source src="<c:url value='/images/いぬの足跡s.mp4' />" type="video/mp4">
+	</video>
 <%@ include file="header.jsp" %>
 	<h1 class=page-title>うんち一覧</h1>
 	

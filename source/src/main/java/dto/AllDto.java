@@ -516,7 +516,7 @@ public class AllDto implements Serializable {
 		this.reportDogId = reportDogId;
 	}
 	
-
+	
 	 
 }
 	 

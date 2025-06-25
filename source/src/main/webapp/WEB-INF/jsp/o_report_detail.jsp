@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>報告詳細（ユーザー用）</title>
+<title>報告詳細飼い主用</title>
 </head>
 <body>
 	<h1>
@@ -20,8 +20,8 @@
 		</div>
 	</h1>
 	<!-- 後でDBとひもづけてデータを取ってこれるようにする -->
-	<c:forEach var="e" items="" >
-	<form method="POST" action="<c:url value='/OReportDetailServlet' />">
+	<form method="POST" action="<c:url value='/ReportServlet' />">
+	<c:forEach var="e" items="${ord}" >
 		<ul>
 			<select name="dogName">
 				<!-- ワンコ名をプルダウンで選択できるようにする -->
@@ -34,8 +34,8 @@
 			<li>トレーニング<input type="text" name="training" value="${e.training}"></li>
 			<li>メモ<input type="text" name="reportMemo" value="${e.reportMemo}"></li>
 		</ul>
-	</form>
 	</c:forEach>
+	</form>
 	<!--  フッターここから -->
 
 	<!--  フッターここまで -->

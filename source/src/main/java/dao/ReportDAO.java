@@ -305,7 +305,7 @@ public class ReportDAO {
 		}
 
 		//レポート詳細
-		public List<AllDto> oReportDetail(String detail){
+		public List<AllDto> oReportDetail(String id){
 			Connection conn = null;
 			List<AllDto> ord = new ArrayList<AllDto>();
 			try {
@@ -327,7 +327,7 @@ public class ReportDAO {
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				
 				// SQL文を完成させる
-				pStmt.setString(1, detail);
+				pStmt.setString(1, id);
 				
 				// SQL文を実行し、結果表を取得する
 				ResultSet rs = pStmt.executeQuery();

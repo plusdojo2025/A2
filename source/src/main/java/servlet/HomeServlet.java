@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import dao.WankoDAO;
 import dto.AllDto;
 /**
@@ -74,13 +72,14 @@ public class HomeServlet extends HttpServlet {
 		 
 		 WankoDAO wdao = new WankoDAO();
 		 List <AllDto> scheduleList = wdao.scheduleTitle(userSchoolId);
-		 
-		 ObjectMapper mapper = new ObjectMapper();
-		 String json = mapper.writeValueAsString(scheduleList); // ← JSON文字列に変換
-		 request.setAttribute("scheduleListJson", json);
-		 
 		 System.out.println("★ userSchoolId = " + userSchoolId);
-		 System.out.println(scheduleList.size());
+		 
+//		 ObjectMapper mapper = new ObjectMapper();
+//		 String json = mapper.writeValueAsString(scheduleList); // ← JSON文字列に変換
+//		 request.setAttribute("scheduleList", json);
+//		 
+//		 System.out.println("★ userSchoolId = " + userSchoolId);
+//		 System.out.println(scheduleList.size());
 		 
 		 LocalDate today = LocalDate.now(); int year = today.getYear(); int month =today.getMonthValue();
 		 

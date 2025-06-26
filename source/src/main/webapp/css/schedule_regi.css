@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+.back_button {
+		width: 40px;
+		float: right;
+		margin-top:-90px;
+	}
+	
+	.back_text {
+		font-size: 10px;
+		float: right;
+		margin-top:-90px;
+	}	
+		
+.page-title {
+		color:#FFA500;
+	/* 	font-family: "Meiryo"; */
+		}
+		
+.aho {
+    max-width: 700px;
+    margin: 40px auto;           /* 上下40px、左右中央 */
+    padding: 30px;
+    background-color: #f9f9f9;   /* 少し薄いグレー背景 */
+    border-radius: 12px;         /* 角を丸く */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 影で浮かせる感じ */
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+.button-wrapper{
+	
+}

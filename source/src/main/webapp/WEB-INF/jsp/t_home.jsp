@@ -32,7 +32,7 @@
 	<div>
 		<ul>
 			<li>${e.dogName}</li>
-			<li><img src="${e.dogPhoto}" alt="${e.dogName}の写真"></li>
+			<li><img src="${e.dogPhoto}" width="170" alt="${e.dogName}の写真"></li>
 			<li>うんち記録</li>
 			<li>報告</li>
 		</ul>

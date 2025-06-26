@@ -83,7 +83,15 @@ public class PoopServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
 			dispatcher.forward(request, response);
 			return;
+		}else if("tpoopregi".equals(action)){
+			//今日のワンコから登録への遷移
+			 String wankoDogId = request.getParameter("wankoDogId");
+			 request.setAttribute("wankoDogId", wankoDogId);			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
+			dispatcher.forward(request, response);
+			return; 
 		}else {
+		}
 			if(log.isUserUniqueId() == true ) {
 				//トレーナー
 					
@@ -102,7 +110,7 @@ public class PoopServlet extends HttpServlet {
 	
 
 				
-	}
+	
 	 
 
 

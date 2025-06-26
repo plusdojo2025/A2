@@ -32,10 +32,13 @@
 			</select>
 		<ul>
 			
-			<li>ごはん<input type="submit" name="food" value="${ord.food}"></li>
+			<li>ごはん<input type="radio" name="food" value="1"<c:if test="${ord.food == 'true'}">checked</c:if>>食べた
+					<input type="radio" name="food" value="1"<c:if test="${ord.food == 'false'}">checked</c:if>>食べてない
+			</li>
 			<li>日付<input type="date" name="reportDate" value="${e.date}"></li>
 			<li>散歩<input type="number" name="walk" value="${ord.walk}">分</li>
-			<li>様子<input type="submit" name="state" value="${ord.state}"></li>
+			<li>様子<input type="radio" name="reportState" value="1"<c:if test="${ord.reportState == 'true'}">checked</c:if>>異常なし
+					<input type="radio" name="reportState" value="1"<c:if test="${ord.reportState == 'false'}">checked</c:if>>異常あり</li>
 			<li>トレーニング<input type="text" name="training" value="${ord.training}"></li>
 			<li>メモ<input type="text" name="reportMemo" value="${ord.reportMemo}"></li>
 			

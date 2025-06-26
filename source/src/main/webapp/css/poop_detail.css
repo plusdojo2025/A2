@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+.headline {
+ 	color: #FFA500;     /* 文字色指定 */
+ }
+ 
+ .poopdetailform {
+ 	color: #FFA500;     /* 文字色指定 */
+ }
+ .color-option {
+	    display: flex;
+	    gap: 20px;
+	    margin: 20px 0;
+	  }
+	
+	  .color-option input[type="radio"] {
+	    display: none;
+	  }
+	
+	  .color-label {
+	    width: 30px;
+	    height: 30px;
+	    border-radius: 50%;
+	    display: inline-block;
+	    cursor: pointer;
+	    border: 3px solid transparent;
+	  }
+	
+	  /* 色ごとの背景 */
+		.color-black { background-color: #444443; }
+		.color-yellow { background-color: #EBD469; }
+		.color-brown { background-color: #AD795B; }
+		.color-brownred { background-color: #A44F30; }
+		.color-red { background-color: #A52A2A; } 
+	
+	  /* 選択されたときの枠線 */
+	  input[type="radio"]:checked + .color-label {
+	    border-color: white;
+	    transform: scale(1.5);/*拡大*/
+	  }
+	  
+	  /* 戻る画像ボタン */
+	.back_button {
+		width: 40px;
+		float: right;
+		margin-top:-100px;
+	}
+	.back_text {
+		font-size: 10px;
+		float: right;
+		margin-top:-100px;
+	}
+	/* ○ページ目 */
+	.page_count {
+		text-align: center;
+	}

@@ -23,8 +23,7 @@
 		</a>	
 	</div>
 <!-- エラー表示 -->
-<div>aaa${dogName}</div>
-<div>aaa${wankoDogId}</div>
+
 <form id="report_form" action="<c:url value='/ReportServlet'/>" method="post" onsubmit = "return checkForm()">
 	<input type="hidden" name="action" value="insert">
 	<input type="hidden" name="reportId" value=0>

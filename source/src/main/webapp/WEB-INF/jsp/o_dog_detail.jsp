@@ -11,20 +11,17 @@
 <body>
 <%@ include file="header.jsp" %>
 	<h1>
-<<<<<<< HEAD
+
 		<div style="display: flex; justify-content: space-between;">
   			<div style="text-align: left;">ワンコ詳細　<c:out value="${sessionScope.user.name}" />さん</div>
         	<div style="text-align: right;">
-        		<a href="javascript:history.back();">
-				<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
-				<img src="/A2/images/back.png" alt="戻る">		<!-- 戻る画像ボタン -->
-		    	</a>
+        		
         	</div>
 		</div>
 	</h1>
-=======
+
 		
-  	ワンコ詳細　<c:out value="${sessionScope.user.name}" />さん
+  	
      </h1>   	
         	<span class="back_text">前に戻る</span>	<br>
         		<a href="<c:url value="javascript:history.back();"/>" >
@@ -33,7 +30,7 @@
         	
 		
 	
->>>>>>> a5ff858ddeb8768ba05b56a825b70a98a9b87c91
+
 <form method="POST" action="<c:url value='/WankoServlet'/>" class="dog_datail" enctype="multipart/form-data">
 <c:forEach var="e" items="${oDogDet}" >
 <input type="hidden" name="oldDogPhoto" value="${e.dogPhoto}">

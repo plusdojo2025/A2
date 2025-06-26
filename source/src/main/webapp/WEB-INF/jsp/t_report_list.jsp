@@ -28,8 +28,8 @@
 <body>
 
 <%@ include file="header.jsp" %>
-	<h1 class=page-title>ワンコ一覧</h1>
-	<a href="<c:url value='/ReportServlet' />">新規登録</a>
+	<h1 class=page-title>レポート一覧</h1>
+	<a href="<c:url value='/ReportServlet?action=trepoprtregi' />">新規登録</a>
 	<!-- 戻る画像ボタン -->
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
@@ -47,14 +47,15 @@
 		</thead>
 		<tbody>
 			<!-- ワンコ一覧 -->
-			<c:forEach var="e" items="" varStatus="status">
+			<c:forEach var="e" items="${reportList}" varStatus="status">
 				<tr>
-					<td><img src="${e.dogphoto}"width="170"  alt="${e.dogName}の写真"></td>
-					<td>${e.date}</td>
+					<td><img src="<c:url value='${e.dogPhoto}' />"width="170"  alt="${e.dogName}の写真"></td>
+					
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
+					<td>${e.reportDate}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->
-					  <a href="<c:url value='PoopServlet?id=${e.poopId}'/>">
+					  <a href="<c:url value='ReportServlet?reportId=${e.reportId}&action=reportDetail'/>">
 					    <button type="button">詳細</button>
 					  </a>
 					</td>

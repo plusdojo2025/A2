@@ -9,7 +9,7 @@
 <link rel="stylesheet"  href="<c:url value='/css/etc.css' />">
 </head>
 <body>
-
+<%@ include file="header.jsp" %>
 	<h1>
 		<div style="display: flex; justify-content: space-between;">
   			<div style="text-align: left;">報告詳細</div>
@@ -22,27 +22,28 @@
 		</div>
 	</h1>
 	<!-- 後でDBとひもづけてデータを取ってこれるようにする -->
-	<c:forEach var="e" items="" >
+	
+	
 	<form method="POST" action="<c:url value='/ReportServlet' />">
 	<input type="hidden" name="action" id="action" value="update">
 			<select name="dogName">
 				<!-- ワンコ名をプルダウンで選択できるようにする -->
-				<option value="${e.dogName}" selected>ワンコ選択</option>
+				<option value="${ord.dogName}" selected>ワンコ選択</option>
 			</select>
 		<ul>
 			
-			<li>ごはん<input type="submit" name="food" value="${e.food}"></li>
+			<li>ごはん<input type="submit" name="food" value="${ord.food}"></li>
 			<li>日付<input type="date" name="reportDate" value="${e.date}"></li>
-			<li>散歩<input type="number" name="walk" value="${e.walk}">分</li>
-			<li>様子<input type="submit" name="state" value="${e.state}"></li>
-			<li>トレーニング<input type="text" name="training" value="${e.training}"></li>
-			<li>メモ<input type="text" name="reportMemo" value="${e.reportMemo}"></li>
+			<li>散歩<input type="number" name="walk" value="${ord.walk}">分</li>
+			<li>様子<input type="submit" name="state" value="${ord.state}"></li>
+			<li>トレーニング<input type="text" name="training" value="${ord.training}"></li>
+			<li>メモ<input type="text" name="reportMemo" value="${ord.reportMemo}"></li>
 			
 		</ul>
-		<input type="submit" value="更新" onclick="document.getElementById('action').value='update'"> <input type="submit" value="削除" onclick="document.getElementById('action').value='delete'">
-	</form>
-	</c:forEach>
-
+		<input type="submit" value="更新" onclick="document.getElementById('action').value='update'"> <input type="submit" value="削除" onclick="document.getElementById('action').value='delete'">	
+	</form>	
+	
+	
 	<!--  フッターここから -->
 
 	<!--  フッターここまで -->

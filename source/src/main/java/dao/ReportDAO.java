@@ -357,6 +357,135 @@ public class ReportDAO {
 			return ord;
 		}
 
-		
-}
 
+		public List<AllDto> rList(int userSchoolId) {
+			Connection conn = null;
+			List<AllDto> rList = new ArrayList<AllDto>();
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+						"root", "password");
+
+				// SQL文を準備する
+				
+				String sql = "SELECT reportId, dogPhoto, dogName, USER.name, REPORT.reportDate, reportDogId "
+				           + "FROM USER "
+				           + "JOIN WANKO ON USER.userNameId = WANKO.wankoNameId "
+				           + "JOIN REPORT ON REPORT.reportDogId = WANKO.wankoDogId "
+				           + "WHERE USER.userSchoolId = ? "
+				           + "ORDER BY WANKO.wankoDogId";
+
+
+
+
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				
+				// SQL文を完成させる
+				pStmt.setInt(1, userSchoolId);
+			
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+
+				// 結果表をコレクションにコピーする
+				while (rs.next()) {
+					AllDto alldto = new AllDto();
+					    alldto.setReportId(rs.getInt("reportId")); 
+						alldto.setDogPhoto(rs.getString("dogPhoto")); 
+						alldto.setDogName(rs.getString("dogName"));
+						alldto.setName(rs.getString("name"));
+						alldto.setReportDate(rs.getDate("reportDate").toLocalDate());
+						alldto.setReportDogId(rs.getInt("reportDogId"));
+						System.out.println("repot" + alldto);		
+						rList.add(alldto);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				rList = null;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				rList = null;
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						rList = null;
+					}
+				}
+			}
+			
+			// 結果を返す
+			return rList;
+		}
+
+
+public AllDto tReportDetail(String id){
+	Connection conn = null;
+	AllDto ord = new AllDto();
+	try {
+		// JDBCドライバを読み込む
+	Class.forName("com.mysql.cj.jdbc.Driver");
+
+		// データベースに接続する
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+				+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+				"root", "password");
+		// SQL文を準備する
+		String sql = "SELECT reportId, dogName, food, reportDate, walk, reportState, training, reportMemo "
+				+ "FROM REPORT JOIN WANKO "
+				+ "ON REPORT.reportDogId = WANKO.wankoDogId "
+				+ "WHERE REPORT.reportId=? ";
+	
+		
+		PreparedStatement pStmt = conn.prepareStatement(sql);
+		
+		// SQL文を完成させる
+		pStmt.setString(1, id);
+
+		System.out.println(id);
+		// SQL文を実行し、結果表を取得する
+		ResultSet rs = pStmt.executeQuery();
+		
+		// 結果表をコレクションにコピーする　犬写真と犬名前保存
+		while (rs.next()) {
+			AllDto rp = new  AllDto();
+			ord.setReportId(rs.getInt("reportId"));
+			ord.setDogName(rs.getString("dogName"));
+			ord.setFood(rs.getBoolean("food"));
+			ord.setReportDate(rs.getDate("reportDate").toLocalDate());
+			ord.setWalk(rs.getInt("walk"));
+			ord.setReportState(rs.getBoolean("reportState"));
+			ord.setTraining(rs.getString("training"));
+			ord.setReportMemo(rs.getString("reportMemo"));
+			
+			System.out.println("aa" + rp);
+			
+	
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+		ord = null;
+	} catch (ClassNotFoundException e) {
+		e.printStackTrace();
+		ord = null;
+	} finally {
+		// データベースを切断
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				ord = null;	
+		}
+	}
+}
+	return ord;
+}
+}

@@ -25,8 +25,9 @@
 	</div>
 	<!-- 後でDBとひもづけてデータを取ってこれるようにする -->
 	
-	<form class="poopdetailform" method="POST" action="<c:url value='/PoopServlet' />" enctype="multipart/form-data">
+	
 	<c:forEach var="e" items="${pDogDet}" >
+	<form class="poopdetailform" method="POST" action="<c:url value='/PoopServlet' />" enctype="multipart/form-data">
 		<div>
 		<input type="hidden" name="oldPoopPhoto" value="${e.photo}">
 		
@@ -96,8 +97,9 @@
 		</div>
 		 <input type="hidden" name="poopId" value="${e.poopId}">
 		<input type="submit" name="pbutt" value="更新"> <input type="submit" name="pbutt" value="削除">
-	</c:forEach>
+	
 	</form>
+	</c:forEach>
 	<p>${msg}</p>
 	
 	<!--  フッターここから --

@@ -18,11 +18,11 @@
 	    <!-- xxxx年xx月を表示 -->
 	    <h1 id="header"></h1>
 
-<!-- 	    ボタンクリックで月移動
+<!-- 	    ボタンクリックで月移動-->
 	    <div id="next-prev-button">
 	        <button id="prev" onclick="prev()">‹</button>
 	        <button id="next" onclick="next()">›</button>
-	    </div> -->
+	    </div> 
 
 	    <!-- カレンダー -->
 	    <div id="calendar"></div>
@@ -33,8 +33,9 @@
 		<ul>
 			<li>${e.dogName}</li>
 			<li><img src="${e.dogPhoto}" width="170" alt="${e.dogName}の写真"></li>
-			<li><a href="<c:url value='PoopServlet?action=poopregi'/> ">うんち記録</a></li>
-			<li><a href="<c:url value='ReportServlet'/> ">報告</a>></li>
+			<li><a href="<c:url value='PoopServlet?wankoDogId=${e.wankoDogId}&action=tpoopregi'/> ">うんち記録</a></li>
+			<li><a href="<c:url value='ReportServlet?wankoDogId=${e.wankoDogId}&dogName=${e.dogName}&action=trepoprtregi'/> ">報告</a>></li>
+			
 		</ul>
 	</div>
 </c:forEach>

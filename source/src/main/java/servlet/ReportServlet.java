@@ -44,7 +44,16 @@ public class ReportServlet extends HttpServlet {
 		if("home".equals(action)) {
 			//トレーナー側
 			if(log.isUserUniqueId() == true) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/report_regi.jsp");
+				
+				AllDto user = (AllDto) session.getAttribute("user");
+				int userSchoolId = user.getUserSchoolId();
+				ReportDAO rdao = new ReportDAO();
+				
+				List<AllDto> reportList = rdao.rList(userSchoolId);
+				
+				session.setAttribute("reportList",reportList);
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/t_report_list.jsp");
 				dispatcher.forward(request, response);
 				
 			//飼い主側
@@ -66,17 +75,34 @@ public class ReportServlet extends HttpServlet {
 			//詳細表示
 			//トレーナー側
 			if (log.isUserUniqueId() == true) {
-			
+				request.setCharacterEncoding("UTF-8");
+				
+				String id = request.getParameter("reportId");
+				System.out.println(id);
+				ReportDAO rdao = new ReportDAO();
+				AllDto ord = rdao.tReportDetail(id);
+				request.setAttribute("ord", ord);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/t_report_detail.jsp");
+				System.out.println("フォワードします");
+				dispatcher.forward(request, response);
 			//かいぬし
 			} else if (log.isUserUniqueId() == false) {
+				request.setCharacterEncoding("UTF-8");
+				
 				int id = Integer.parseInt(request.getParameter("id"));
 				ReportDAO rdao = new ReportDAO();
 				List<AllDto> ord = rdao.oReportDetail(id);
 				request.setAttribute("ord", ord);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_report_detail.jsp");
-				System.out.println("フォワードします");
 				dispatcher.forward(request, response);
 			}					
+		}else if("trepoprtregi".equals(action)) {
+			String wankoDogId = request.getParameter("wankoDogId");
+			request.setAttribute("wankoDogId", wankoDogId);
+			String dogName = request.getParameter("dogName");
+			request.setAttribute("dogName", dogName);			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/report_regi.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 	

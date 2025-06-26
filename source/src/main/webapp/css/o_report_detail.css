@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+h1 {
+	color: orange;
+}
+
+
+form {
+	padding: 30px;
+	color: orange;
+	font-size: 2em; 
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	height: 200px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+	border-radius: 30px;
+	border: 2px solid orange;
+	height: 45px;
+	font-size: 18px;
+	
+}
+
+.target {
+	position: relative;
+  	top: -90px; /* 上に70px移動 */
+	transform: scale(0.7); /* 全体を70%に縮小 */
+}

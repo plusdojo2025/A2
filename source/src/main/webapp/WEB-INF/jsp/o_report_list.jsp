@@ -28,14 +28,17 @@
 </head>
 <body>
 <%@ include file="header.jsp" %>
-	<h1 class=page-title>報告一覧</h1>
-	<!-- 戻る画像ボタン -->
-	<div>
-		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
-		<a href="<c:url value='javascript:history.back();'/>" >
- 			<img src="<c:url value='/images/back.png' /> " alt="戻る" class="back_button">
-		</a>	
-	</div>
+<h1 class="page-title">報告一覧</h1>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <div style="text-align: left;"></div>
+  <div class="target" style="text-align: right;">
+    <a href="javascript:history.back();" style="display: flex; flex-direction: column;">
+      <span style="margin: 0;">前に戻る</span>
+      <img src="/A2/images/back.png" alt="戻る" style="height: 60px; width: auto;" />
+    </a>
+  </div>
+</div>
+	
 	<table border="1" id="re-table" class="table table-bordered">
 		<thead>
 			<tr>
@@ -44,7 +47,7 @@
 				<th>飼い主様</th>
 				<th>登録日</th>
 		</thead>
-		<tbody>
+		<stbody>
 			<!-- 報告一覧 -->
 			<c:forEach var="e" items="${reportList}" varStatus="status">
 				<tr>

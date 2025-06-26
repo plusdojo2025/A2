@@ -17,7 +17,7 @@
 	<p class="dogphoto"><img src="${logdog.dogPhoto}" width="170"  alt="${logdog.dogName}の写真">
 	<p class="name"><c:out value="${user.name}"/>さん　ログイン中</p>
 </div>
-<h1><a href="<c:url value='ReserveServlet'/> ">予約登録</a></h1>
+<%-- <h1><a href="<c:url value='ReserveServlet'/> ">予約登録</a></h1> --%>
    <div class="wrapper">
 	    <!-- xxxx年xx月を表示 -->
 	    <h2 id="header"></h2>
@@ -101,11 +101,18 @@ function createProcess(year, month) {
                     calendar += "<td class='today'>" + count + "</td>";
                 } else {
 					//表示したい項目がある場合は、ここでリンクを設定する
+/* 					const dtoList = ${scheduleList};
+					console.log(dtoList);
+					alert(JSON.stringify(dtoList)); */
+					
+/* 					 const dtoList = JSON.parse('${scheduleList}');
+  					console.log(dtoList); // 配列として使えるようになる
+  					alert.log(dtoList) */
                 	calendar += "<td>" + count + "<br>"
                     + "<a href='" + baseUrl + "/CalendarServlet?year=" + year
                     + "&month=" + month
                     + "&count=" + count + "'>"
-                    + "テスト文字列" "</a></td>";
+                    + "予定一覧へ"+"</a></td>";
 
                 }
             }

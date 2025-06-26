@@ -77,7 +77,7 @@ function createProcess(year, month) {
     var endDate = new Date(year, month + 1, 0).getDate();
     var lastMonthEndDate = new Date(year, month, 0).getDate();
     var row = Math.ceil((startDayOfWeek + endDate) / week.length);
-
+    let sMonth =String(month+1).padStart(2,"0");
     // 1行ずつ設定
     for (var i = 0; i < row; i++) {
         calendar += "<tr>";
@@ -105,20 +105,47 @@ function createProcess(year, month) {
 					
 					const scheduleList = ${scheduleListJson};
  
- 					 const dtoList = JSON.stringify(scheduleList);
-  					console.log(dtoList); // 配列として使えるようになる
+ 					 const dto = JSON.stringify(scheduleList);
+ 					 const dtoList = JSON.parse(dto);
   					
   					
                 	calendar += "<td>" + count + "<br>"
                     + "<a href='" + baseUrl + "/CalendarServlet?year=" + year
                     + "&month=" + (month + 1)
-                    + "&count=" + count + "'>"
-                    + 
-                    "予定一覧へ"
+                    + "&count=" + count + "'>";
+                   
+                    if(isNaN(month)){
+                    	sMonth="登録";
+                    }else{
+                    	sMonth =String(month+1).padStart(2,"0");
+                    }
+                    if(isNaN(count)){
+                        count="登録";
+                    }else{
+                    	sCount =String(count).padStart(2,0);
+                    }
                     
-                    +"</a></td>";
-
-                }
+                    
+                    
+                    if(!sCount || !sMonth){
+            			calendar += "登録";
+            		}else{
+            			let found = false;
+            		
+	                    for (let i = 0; i < dtoList.length; i++) {               	 	
+	                    	if(dtoList[i].calendarDate == (year+"-"+(sMonth)+"-"+sCount)){
+	                    		calendar +="★" ; 
+	                    		found = true;
+	                    	}
+	                    	 
+	               		} 
+	                    if(!found){
+	                    	calendar+="登録";
+	                    }
+            		}
+                    
+                    calendar +=+"</a></td>";
+                 }
             }
         }
         calendar += "</tr>";

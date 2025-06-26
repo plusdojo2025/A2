@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ワンコ詳細</title>
-<link rel="stylesheet"  href="<c:url value='/css/etc.css' />">
+<link rel="stylesheet"  href="<c:url value='/css/o_dog_detail.css' />">
 </head>
 <body>
 <%@ include file="header.jsp" %>

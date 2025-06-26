@@ -5,6 +5,17 @@
 	text-align: center;
 	border-bottom: 5px dashed orange;
 }
+/* 戻る画像ボタン */
+.back_button {
+	width: 40px;
+	float: right;
+	margin-top:-80px;
+}
+.back_text {
+	font-size: 10px;
+	float: right;
+	margin-top:-80px;
+}
 #Nregi {
 	text-align: center;
 	color:orange;
@@ -30,3 +41,4 @@ input[type="date"] {
     padding: 6px;
     box-sizing: border-box;
 }
+

@@ -30,7 +30,7 @@ public class ReportDAO {
 
 			// SQL文を準備する
 			
-			String sql = "SELECT dogPhoto, dogName, USER.name, REPORT.reportDate "
+			String sql = "SELECT reportId, dogPhoto, dogName, USER.name, REPORT.reportDate, reportDogId "
 			           + "FROM USER "
 			           + "JOIN WANKO ON USER.userNameId = WANKO.wankoNameId "
 			           + "JOIN REPORT ON REPORT.reportDogId = WANKO.wankoDogId "
@@ -52,10 +52,12 @@ public class ReportDAO {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				AllDto alldto = new AllDto();
+				    alldto.setReportId(rs.getInt("reportId")); 
 					alldto.setDogPhoto(rs.getString("dogPhoto")); 
 					alldto.setDogName(rs.getString("dogName"));
 					alldto.setName(rs.getString("name"));
 					alldto.setReportDate(rs.getDate("reportDate").toLocalDate());
+					alldto.setReportDogId(rs.getInt("reportDogId"));
 					System.out.println("repot" + alldto);		
 				reportList.add(alldto);
 			}
@@ -308,7 +310,7 @@ public class ReportDAO {
 						+ "WHERE WANKO.wankoDogId=? "
 						+ "ORDER BY WANKO.wankoDogId ";
 			
-				
+				System.out.println(sql);
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				
 				// SQL文を完成させる

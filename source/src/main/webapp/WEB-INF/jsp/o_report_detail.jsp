@@ -25,17 +25,14 @@
 	<c:if test="${not empty ord}">
 	<c:forEach var="e" items="${ord}" >
 		<ul>
-			<select name="dogName">
-				<!-- ワンコ名をプルダウンで選択できるようにする -->
-				<option value="${e.dogName}" selected>ワンコ選択</option>
-			</select>
 			<input type="hidden" name="id" value="${e.reportId}">
-			<li>ごはん<input type="submit" name="food" value="1"<c:if test="${e.food == 'true'}">checked</c:if>>食べた
-			        <input type="submit" name="food" value="0"<c:if test="${e.food == 'false'}">checked</c:if>>食べてない</li>
-			<li>日付<input type="date" name="reportDate" value="${e.reportdate}"></li>
+			<li>名前<input type="text" name="dogName" value="${e.dogName}"></li>
+			<li>ごはん<input type="radio" name="food" value="1"<c:if test="${e.food == 'true'}">checked</c:if>>食べた
+			        <input type="radio" name="food" value="0"<c:if test="${e.food == 'false'}">checked</c:if>>食べてない</li>
+			<li>日付<input type="date" name="reportDate" value="${e.reportDate}"></li>
 			<li>散歩<input type="number" name="walk" value="${e.walk}">分</li>
-			<li>様子<input type="submit" name="state" value="1"<c:if test="${e.reportState == 'true'}">checked</c:if>>異常なし
-					<input type="submit" name="state" value="0"<c:if test="${e.reportstate == 'false'}">checked</c:if>>異常あり</li>
+			<li>様子<input type="radio" name="reportState" value="1"<c:if test="${e.reportState == 'true'}">checked</c:if>>異常なし
+					<input type="radio" name="reportState" value="0"<c:if test="${e.reportState == 'false'}">checked</c:if>>異常あり</li>
 			<li>トレーニング<input type="text" name="training" value="${e.training}"></li>
 			<li>メモ<input type="text" name="reportMemo" value="${e.reportMemo}"></li>
 		</ul>

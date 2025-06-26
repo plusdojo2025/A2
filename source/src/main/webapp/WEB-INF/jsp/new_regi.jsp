@@ -7,13 +7,6 @@
 <meta charset="UTF-8">
 <title>ユーザー新規登録</title>
 <link rel="stylesheet"  href="<c:url value='/css/new_regi.css' />">
-    <!--　box表示    
-    <style>
-        *{
-            outline: 1px solid #FF0000
-        }
-    </style>
--->
 </head>
 <body>
 
@@ -21,6 +14,22 @@
    <img src="<c:url value='/images/ぶりログ.png'/> "  height="150" alt="ぶりログ">
   </h1>
 <h2 id=Nregi>ユーザー新規登録</h2>
+<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
+<a href="<c:url value='javascript:history.back();'/>" >
+ 	<img src="<c:url value='/images/back.png' /> " alt="戻る" class="back_button">
+</a>
+<style>
+.back_button {
+	width: 40px;
+	float: right;
+	margin-top:-80px;
+}
+.back_text {
+	font-size: 10px;
+	float: right;
+	margin-top:-80px;
+}
+</style>
 <div>
 <form id="newregi_form" method="post" action="<c:url value='/NewRegiServlet'/>"> <!-- サーブレットまだない -->
     <table>

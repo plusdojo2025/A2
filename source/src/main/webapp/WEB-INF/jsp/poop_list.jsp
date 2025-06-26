@@ -46,8 +46,8 @@
 				<th>お写真</th>
 				<th>ワンコのお名前</th>
 				<th>飼い主様</th>
-				<th>硬さ</th>
 				<th>色</th>
+				<th>硬さ</th>
 				<th>登録日</th>
 			</tr>	
 		</thead>
@@ -57,9 +57,22 @@
 				<tr>
 					<td><img src="<c:url value='${e.dogPhoto}' />"width="170" class="poop-photo" alt="${e.dogName}のうんち写真"></td>
 					<td>${e.dogName}</td>
-					<td>${e.name}</td>
-					<td>${e.hardness}</td>
-					<td>${e.color}</td>
+					<td>${e.name}</td>					
+					
+					<td>
+					<c:if test="${e.color == 1}" ><div style="width:100px; height:100px; background-color:#444443; border-radius:50%;"></div></c:if>
+					<c:if test="${e.color == 2}"><div style="width:100px; height:100px; background-color:#EBD469; border-radius:50%;"></div></c:if>
+					<c:if test="${e.color == 3}"><div style="width:100px; height:100px; background-color:#AD795B; border-radius:50%;"></div></c:if>
+					<c:if test="${e.color == 4}"><div style="width:100px; height:100px; background-color:#A44F30; border-radius:50%;"></div></c:if>
+					<c:if test="${e.color == 5}"><div style="width:100px; height:100px; background-color:#A52A2A; border-radius:50%;"></div></c:if>
+					</td>
+					<td>
+					<c:if test="${e.hardness == 1}"><p>硬</p></c:if>
+					<c:if test="${e.hardness == 2}"><p>やや硬</p></c:if>
+					<c:if test="${e.hardness == 3}"><p>普</p></c:if>
+					<c:if test="${e.hardness == 4}"><p>やや柔</p></c:if>
+					<c:if test="${e.hardness == 5}"><p>柔</p></c:if>
+					</td>
 					<td>${e.date}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->
 					  <a href="<c:url value='/PoopServlet?id=${e.poopId}&action=pooplist' /> ">

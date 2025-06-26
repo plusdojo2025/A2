@@ -14,7 +14,7 @@
 	<!-- ワンコ選択 -->
 	<select name="dogName">
 		<!-- ワンコ名をプルダウンで選択できるようにする -->
-		<option value="${e.dogName}" selected>ワンコ選択</option>
+		<option value="${dogName}" selected>ワンコ選択</option>
 	</select>
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
@@ -37,7 +37,7 @@
 		<input type="datetime-local" name="reportDate">
 	</label><br>
 	<label>・ 散歩
-		<input type="time" name="walk">
+		<input type="number" name="walk">分
 	</label><br>
 	<label>・ 様子
 		<input type="radio" name="reportState" value="true">異常なし

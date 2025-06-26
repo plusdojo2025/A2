@@ -8,13 +8,11 @@
 <title>ホーム画面飼い主用</title>
 <link rel="stylesheet"  href="<c:url value='/css/o_home.css' />">
 </head>
-
 <body>
-
 
 <%@ include file="header.jsp" %>
 <div>
-	<p class="dogphoto"><img src="${logdog.dogPhoto}" width="170"  alt="${logdog.dogName}の写真">
+	<p class="dogphoto"><img src="${logdog.dogPhoto}" width="400"  alt="${logdog.dogName}の写真">
 	<p class="name"><c:out value="${user.name}"/>さん　ログイン中</p>
 </div>
 <%-- <h1><a href="<c:url value='ReserveServlet'/> ">予約登録</a></h1> --%>
@@ -31,7 +29,7 @@
 	    <!-- カレンダー -->
 	    <div id="calendar"></div>
 	</div>
-
+<div></div>
 <script>
 const week = ["日", "月", "火", "水", "木", "金", "土"];
 const today = new Date();
@@ -60,7 +58,7 @@ function showProcess(date) {
     var month = date.getMonth();
     document.querySelector('#header').innerHTML = year + "年 " + (month + 1) + "月";
 
-    var calendar = createProcess(year, month+1);
+    var calendar = createProcess(year, month);
     document.querySelector('#calendar').innerHTML = calendar;
 }
 
@@ -105,14 +103,20 @@ function createProcess(year, month) {
 					console.log(dtoList);
 					alert(JSON.stringify(dtoList)); */
 					
-/* 					 const dtoList = JSON.parse('${scheduleList}');
+					const scheduleList = ${scheduleListJson};
+ 
+ 					 const dtoList = JSON.stringify(scheduleList);
   					console.log(dtoList); // 配列として使えるようになる
-  					alert.log(dtoList) */
+  					
+  					
                 	calendar += "<td>" + count + "<br>"
                     + "<a href='" + baseUrl + "/CalendarServlet?year=" + year
-                    + "&month=" + month
+                    + "&month=" + (month + 1)
                     + "&count=" + count + "'>"
-                    + "予定一覧へ"+"</a></td>";
+                    + 
+                    "予定一覧へ"
+                    
+                    +"</a></td>";
 
                 }
             }

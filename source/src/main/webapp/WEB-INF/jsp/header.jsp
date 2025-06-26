@@ -6,13 +6,17 @@
 <link rel="stylesheet"  href="<c:url value='/css/header.css' />">
 <head>
 <meta charset="UTF-8">
-    <!--　box表示    
+    <!--　box表示  -->  
     <style>
         *{
             outline: 1px solid #FF0000
         }
+        .dogphoto, .dogname, .name {
+    display: inline-block;
+    margin-right: 15px;
+    vertical-align: middle;
+}
     </style>
--->
 
 <!-- <style>
 

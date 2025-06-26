@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,8 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import dao.CalendarDAO;
 import dao.WankoDAO;
 import dto.AllDto;
+import dto.ScDto;
 /**
  * Servlet implementation class HomeServlet
  */
@@ -32,16 +38,48 @@ public class HomeServlet extends HttpServlet {
 		AllDto log = (AllDto)session.getAttribute("user");
 		// メニューページにフォワードする
 		AllDto user = null;
+		
+		//カレンダーの各タイトル情報を表示 
+		 user = (AllDto) session.getAttribute("user");
+		 int userSchoolId = user.getUserSchoolId();
+		 String userNameId = user.getUserNameId(); 
+		 
+		 
+		 
+		 CalendarDAO cdao = new CalendarDAO();
+		 List <AllDto> scheduleList = cdao.scheduleTitle(userSchoolId);
+		 
+		 ArrayList<ScDto> list = new ArrayList<>();
+		 for(AllDto dto : scheduleList) {
+			 ScDto d = new ScDto();
+			 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			 d.setCalendarDate(dto.getCalendarDate().format(formatter));
+			 d.setDogName(dto.getDogName());
+			 d.setTitle(dto.getTitle());
+			 d.setUserSchoolId(dto.getUserSchoolId());
+			 d.setWankoDogId(dto.getWankoDogId());
+			 list.add(d);
+		}
+		 
+		 ObjectMapper mapper = new ObjectMapper();
+		 String json = mapper.writeValueAsString(list); // ← JSON文字列に変換
+		 request.setAttribute("scheduleListJson", json);
+		 
+		 System.out.println("★ userSchoolId = " + userSchoolId);
+		 System.out.println(scheduleList.size());
+
 		//トレーナー側
 		if(log.isUserUniqueId() == true ) {
 			
 			//schoolIdをとる
 			user = (AllDto) session.getAttribute("user");
-			int userSchoolId = user.getUserSchoolId();
 			WankoDAO wdao = new WankoDAO();
+//			int userSchoolId = user.getUserSchoolId();
 			List<AllDto> todayWanko = wdao.todaywanko(userSchoolId);
 			//今日のワンコセッション入れた
 			session.setAttribute("todaysDog",todayWanko);
+			
+			
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/t_home.jsp");
 			dispatcher.forward(request, response);
@@ -52,10 +90,14 @@ public class HomeServlet extends HttpServlet {
 
 			//ログインわんこの表示
 			user = (AllDto) session.getAttribute("user");
-			String userNameId = user.getUserNameId();
+			
 			WankoDAO wdao = new WankoDAO();
+			
+//			String userNameId = user.getUserNameId();
+			
 			AllDto uDog = wdao.logdog(userNameId);
 			System.out.println("uDog: " + uDog);
+			
 			//ログインわんこをセッションスコープに入れとく
 			session.setAttribute("logdog",uDog);
 			
@@ -63,16 +105,8 @@ public class HomeServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 			
 			
-			
 		}
-		//カレンダーの各タイトル情報を表示 
-		 user = (AllDto) session.getAttribute("user");
-		 int userSchoolId = user.getUserSchoolId();
-		 String userNameId = user.getUserNameId(); 
-		 
-		 WankoDAO wdao = new WankoDAO();
-		 List <AllDto> scheduleList = wdao.scheduleTitle(userSchoolId);
-		 System.out.println("★ userSchoolId = " + userSchoolId);
+
 		 
 //		 ObjectMapper mapper = new ObjectMapper();
 //		 String json = mapper.writeValueAsString(scheduleList); // ← JSON文字列に変換
@@ -80,7 +114,7 @@ public class HomeServlet extends HttpServlet {
 //		 
 //		 System.out.println("★ userSchoolId = " + userSchoolId);
 //		 System.out.println(scheduleList.size());
-		 
+
 		 LocalDate today = LocalDate.now(); int year = today.getYear(); int month =today.getMonthValue();
 		 
 //		 // わんこの予定を取得 

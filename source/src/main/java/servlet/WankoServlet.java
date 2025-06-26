@@ -39,8 +39,15 @@ public class WankoServlet extends HttpServlet {
 			
 			if(log.isUserUniqueId() == true ) {
 				//トレーナー側
+				AllDto user = (AllDto) session.getAttribute("user");
+				int userSchoolId = user.getUserSchoolId();
+				WankoDAO wdao = new WankoDAO();
+				List<AllDto> owankoList = wdao.wList(userSchoolId);
 				
+				session.setAttribute("owankoList",owankoList);
 				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/dog_list.jsp");
+				dispatcher.forward(request, response);
 			
 			}else if(log.isUserUniqueId() == false ) {
 				//飼い主用の遷移
@@ -53,22 +60,20 @@ public class WankoServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/dog_list.jsp");
 				dispatcher.forward(request, response);
 			}
-			//犬一覧
+			
 		}else if("list".equals(action)) {
-			if(log.isUserUniqueId() == true ) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/t_dog_regi.jsp");
-				dispatcher.forward(request, response);
-			}else if(log.isUserUniqueId() == false ) {
+			//犬一覧
+
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_dog_regi.jsp");
 				dispatcher.forward(request, response);
-			}
-			//犬詳細
+			
+			
 		}else if("dogDetail".equals(action) ) {
-			
+			//犬詳細
 			if(log.isUserUniqueId() == true ) {
-				
+				//トレーナー
 			}else if(log.isUserUniqueId() == false ) {
-			
+				//飼い主
 				request.setCharacterEncoding("UTF-8");
 				
 				String id = request.getParameter("id");				

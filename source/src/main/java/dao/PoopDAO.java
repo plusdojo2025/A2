@@ -11,6 +11,70 @@ import java.util.List;
 import dto.AllDto;
 
 	public class PoopDAO{
+		
+		//うんちリストを作る　トレーナー
+		public  List<AllDto> tpooplistSelect(int userSchoolId){
+			Connection conn = null;
+			List<AllDto> poopList = new ArrayList<AllDto>();
+			
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
+						+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
+						"root", "password");
+				// SQL文を準備する
+				String sql = "SELECT poopId, color, hardness, date, dogPhoto, wankoDogId, dogName, name " 
+						+ "FROM POOP "
+						+ "JOIN WANKO ON POOP.PoopDogId = WANKO.wankoDogId "
+						+ "JOIN `USER` ON WANKO.wankoNameId = `USER`.userNameId "					
+						+ "WHERE `USER`.userSchoolId=? "
+						+ "ORDER BY POOP.poopId ";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				
+				// SQL文を完成させる
+				pStmt.setInt(1, userSchoolId);
+				
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+				
+				// 結果表をコレクションにコピーする　うんち写真と犬名前保存
+				while (rs.next()) {
+					AllDto unchi= new AllDto();
+					unchi.setPoopId(rs.getInt("poopId"));
+					unchi.setDogPhoto(rs.getString("dogPhoto"));
+					unchi.setDogName(rs.getString("dogName"));
+					unchi.setName(rs.getString("name"));
+					unchi.setHardness(rs.getInt("hardness"));
+					unchi.setColor(rs.getInt("color"));
+					unchi.setDate(rs.getDate("date").toLocalDate());
+					
+					poopList.add(unchi);
+				}
+		
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				poopList = null;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				poopList = null;
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						poopList = null;
+				}
+			}
+		}
+			return poopList;
+		}	
+		
 	//登録//
 	public int insert(String photo, String nowTime, String date, String dogName, String color, String hardness, String abnormal, String memo, String PoopDogId) {
 		Connection conn = null;
@@ -66,7 +130,7 @@ import dto.AllDto;
 		return ans;
 	}
 	
-	//うんちリストを作る
+	//うんちリストを作る　飼い主
 	public  List<AllDto> pooplistSelect(String userNameId){
 		Connection conn = null;
 		List<AllDto> poopList = new ArrayList<AllDto>();
@@ -128,7 +192,8 @@ import dto.AllDto;
 	}
 		return poopList;
 	}
-
+	
+	//ウンチ詳細
 	public List<AllDto> pDogDet(String id){
 		Connection conn = null;
 		List<AllDto> pDogDet = new ArrayList<AllDto>();
@@ -223,7 +288,7 @@ import dto.AllDto;
 					pStmt.setString(5, hardness);
 					pStmt.setString(6, abnormal);
 					pStmt.setString(7, memo);
-					pStmt.setString(8, PoopDogId);
+					pStmt.setString(8, PoopId);
 					
 					
 					// SQL文を実行する

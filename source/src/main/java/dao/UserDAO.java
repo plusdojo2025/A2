@@ -11,6 +11,9 @@ import java.util.List;
 import dto.AllDto;
 
 public class UserDAO {
+	
+
+	
 	// 引数userで指定された項目で検索して、取得されたデータのリストを返す
 	public List<AllDto> select(AllDto user) {
 	Connection conn = null;
@@ -163,9 +166,9 @@ public class UserDAO {
 		return contactList;
 	}
 	// 引数userで指定されたレコードを登録し、成功したらtrueを返す
-	public boolean insert(AllDto user) {
-	Connection conn = null;
-	boolean result = false;
+	public boolean insert(String userNameId, String ruby, String birth, String name, String pw, String uPhone, String uPhone2, int userSchoolId, Boolean userUniqueId) {
+		Connection conn = null;
+		boolean result = false;
 	
 		try {
 			// JDBCドライバを読み込む
@@ -174,63 +177,23 @@ public class UserDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/a2?"
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
-					"root", "USER");
+					"root", "password");
 			
 			// SQL文を準備する
-			String sql = "INSERT INTO AllDto VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO USER (userNameId, ruby, birth, name, pw, uPhone, uPhone2, userSchoolId ,userUniqueId) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			// SQL文を完成させる
-			if (user.getUserNameId() != null) {
-				pStmt.setString(1, user.getUserNameId());
-			} else {
-				pStmt.setString(1, "");
-			}
-			if (user.getRuby() != null) {
-				pStmt.setString(2, user.getRuby());
-			} else {
-				pStmt.setString(2, "");
-			}
-			if (user.getBirth() != null) {
-				pStmt.setDate(3, java.sql.Date.valueOf(user.getBirth()));
-			} else {
-				pStmt.setString(3, "");
-			}
-			if (user.getName() != null) {
-				pStmt.setString(4, user.getName());
-			} else {
-				pStmt.setString(4, "");
-			}
-			if (user.getPw() != null) {
-				pStmt.setString(5, user.getPw());
-			} else {
-				pStmt.setString(5, "");
-			}
-			if (user.getuPhone() != null) {
-				pStmt.setString(6, user.getuPhone());
-			} else {
-				pStmt.setString(6, "");
-			}
-			if (user.getuPhone2() != null) {
-				pStmt.setString(7, user.getuPhone2());
-			} else {
-				pStmt.setString(7, "");
-			}
-			if (user.getAddress() != null) {
-				pStmt.setString(8, user.getAddress());
-			} else {
-				pStmt.setString(8, "");
-			}
-			if (user.isUserUniqueId()) {
-				pStmt.setBoolean(9, user.isUserUniqueId());
-			} else {
-				pStmt.setString(9, "");
-			}
-			if (user.getUserSchoolId() != 0) {
-				pStmt.setInt(10, user.getUserSchoolId());
-			} else {
-				pStmt.setString(10, "");
-			}
+			pStmt.setString(1, userNameId);
+			pStmt.setString(2, ruby);
+			pStmt.setString(3, birth);
+			pStmt.setString(4, name);
+			pStmt.setString(5, pw);
+			pStmt.setString(6, uPhone);
+			pStmt.setString(7, uPhone2);
+			pStmt.setInt(8, userSchoolId);
+			pStmt.setBoolean(9, userUniqueId);
 			
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {

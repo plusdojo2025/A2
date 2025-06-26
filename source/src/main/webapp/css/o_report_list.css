@@ -11,12 +11,12 @@
 	.back_button {
 		width: 40px;
 		float: right;
-		margin-top:-100px;
+		margin-top:-80x;
 	}
 	.back_text {
 		font-size: 10px;
 		float: right;
-		margin-top:-100px;
+		margin-top:-80px;
 	}
 	/* ○ページ目 */
 	.page_count {

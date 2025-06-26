@@ -6,64 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>うんち登録</title>
-<style>
-/* 戻る画像ボタン */
-	.back-option {
-  position: absolute;      /* 画面上の位置を絶対指定 */
-  top: 10px;               /* 上から10px */
-  right: 10px;             /* 右から10px */
-  font-size: 12px;         /* テキストを小さく */
-  display: flex;
-  align-items: center;
-  gap: 5px;                /* 画像との間に隙間 */
-  z-index: 1000;           /* 上に表示されるようにする */
-}
-
-.back-option img {
-  width: 40px;             /* 小さめサイズに変更 */
-  height: 40px;
-}
-
-
-	  .color-option {
-	    display: flex;
-	    gap: 20px;
-	    margin: 20px 0;
-	  }
-	
-	  .color-option input[type="radio"] {
-	    display: none;
-	  }
-	
-	  .color-label {
-	    width: 30px;
-	    height: 30px;
-	    border-radius: 50%;
-	    display: inline-block;
-	    cursor: pointer;
-	    border: 3px solid transparent;
-	  }
-	
-	  /* 色ごとの背景 */
-		.color-black { background-color: #444443; }
-		.color-yellow { background-color: #EBD469; }
-		.color-brown { background-color: #AD795B; }
-		.color-brownred { background-color: #A44F30; }
-		.color-red { background-color: #A52A2A; } 
-	
-	  /* 選択されたときの枠線 */
-	  input[type="radio"]:checked + .color-label {
-	    border-color: white;
-	    transform: scale(1.5);/*拡大*/
-	  }
-</style>
+<link rel="stylesheet" href="<c:url value='/css/poop_regi.css' />">
 </head>
 <body>
 <%@ include file="header.jsp" %>
 	<!-- 1つ前へ戻る -->
 	<div class="back-option">
 	<a href = "javascript:history.back()">
-		<span>ひとつ前に戻る
+		<span>ひとつ前に戻る<br>
 		<img src="<c:url value='/images/back.png'/>" alt= "戻る">
 	</span></a>
 	</div>

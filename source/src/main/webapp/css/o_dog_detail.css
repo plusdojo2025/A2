@@ -1,6 +1,13 @@
 @charset "UTF-8";
+<<<<<<< HEAD
 .back_button{
 		width: 40px;
 		float: right;
 		margin-top:-100px;
 	}
+=======
+
+h1 {
+	color: #FFA500;
+}
+>>>>>>> 8f4881fbc9e09ee3b169afb0174f1dc6285a9ba1

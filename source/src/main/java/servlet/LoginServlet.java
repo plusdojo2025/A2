@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 		// 入力データの取得（文字コードの指定も忘れずに）
 		request.setCharacterEncoding("UTF-8");
 		
-		if(request.getParameter("logbut").equals("ログイン")) {
+		if ("ログイン".equals(request.getParameter("logbut")))  {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.UserDAO;
-import dto.AllDto;
 
 /**
  * Servlet implementation class NewRegiServlet
@@ -39,35 +38,30 @@ public class NewRegiServlet extends HttpServlet {
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		 
-		String nameId = request.getParameter("nameId");
+		String userNameId = request.getParameter("nameId");
 		String ruby = request.getParameter("ruby");
 		String birth = request.getParameter("birth");
 		String name = request.getParameter("name");
 		String pw = request.getParameter("pw");
 		String uPhone = request.getParameter("uPhone");
 		String uPhone2 = request.getParameter("uPhone2");
-		int userSchoolId = Integer.parseInt(request.getParameter("userSchoolId"));
+		int userSchoolId = Integer.parseInt(request.getParameter("schoolId"));
+		boolean userUniqueId = "true".equals(request.getParameter("userUniqueId"));
 		
 		UserDAO uDao = new UserDAO();
-		AllDto uDto =new AllDto();
 		
-		uDto.setUserNameId(nameId);
-		uDto.setRuby(ruby);
-		//uDto.setBirth(birth);
-		uDto.setName(name);
-		uDto.setPw(pw);
-		uDto.setuPhone(uPhone);
-		uDto.setuPhone2(uPhone2);
-		uDto.setUserSchoolId(userSchoolId);
-		
-		if(uDao.insert(uDto)) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/A2/LoginServlet");
+
+		if(uDao.insert(userNameId, ruby, birth, name, pw, uPhone, uPhone2, userSchoolId, userUniqueId)) {
+			request.setAttribute("errMsg","登録完了 ログインしてください");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 			dispatcher.forward(request, response);
 		} else { // 登録失敗
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/A2/t_home.jsp");
+			request.setAttribute("msg","メールアドレスは使用されています");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/new_regi.jsp");
 			dispatcher.forward(request, response);
 		}
 
-	}
 
+	}
 }
+		

@@ -9,10 +9,16 @@ h2{
 	color:orange;
 }
 a:hover{
-	color: blue;
+	color: orange;
 }
 
 .name{
 	color: orange;
+}
+
+.dogphoto, .dogname, .name {
+    display: inline-block;
+    margin-right: 15px;
+    vertical-align: middle;
 }
 

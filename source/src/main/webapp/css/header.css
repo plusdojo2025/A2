@@ -45,6 +45,9 @@ header {
   cursor: pointer;
   font-size: 20px;
 }
+.logout-btn:hover {
+	color: blue;
+}
 
 .main-nav {
   display: flex;

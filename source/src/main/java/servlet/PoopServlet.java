@@ -46,7 +46,15 @@ public class PoopServlet extends HttpServlet {
 			
 			if(log.isUserUniqueId() == true ) {
 			//トレーナー
-				
+			AllDto user = (AllDto) session.getAttribute("user");
+			int userSchoolId = user.getUserSchoolId();	
+			PoopDAO pdao = new PoopDAO();
+			List<AllDto> poopList = pdao.tpooplistSelect(userSchoolId);	
+			request.setAttribute("poopList", poopList);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_list.jsp"); 
+			dispatcher.forward(request, response);
+			
+			
 			}else if(log.isUserUniqueId() == false ) {
 			//飼い主用の遷移
 				
@@ -60,10 +68,7 @@ public class PoopServlet extends HttpServlet {
 			}
 		//リストから詳細へ
 		}else if("pooplist".equals(action)) {
-			if(log.isUserUniqueId() == true ) {
-				//トレーナー
-			}else if(log.isUserUniqueId() == false){
-				//飼い主
+			
 				request.setCharacterEncoding("UTF-8");
 				
 				String id = request.getParameter("id");	
@@ -72,7 +77,7 @@ public class PoopServlet extends HttpServlet {
 				request.setAttribute("pDogDet", pDogDet);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
 				dispatcher.forward(request, response);
-			}
+			
 		//登録へ
 		}else if("poopregi".equals(action)) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_regi.jsp");
@@ -175,8 +180,8 @@ public class PoopServlet extends HttpServlet {
 			String savePath = "upload/poop";
 			String appPath = request.getServletContext().getRealPath("");
 			String fullSavePath = appPath + File.separator + savePath;
-			File fileSaveDir = new File(fullSavePath);
-			Part part = request.getPart("dogPhoto");
+			
+			Part part = request.getPart("photo");
 			String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 
 			String photo = null;
@@ -191,20 +196,27 @@ public class PoopServlet extends HttpServlet {
 			photo = dFilePath;
 			
 			}else {
-				photo = request.getParameter("oldPhoto");
+				photo = request.getParameter("oldPoopPhoto");
 			}
 			
 			String nowTime = request.getParameter("nowTime");
 			String date = request.getParameter("date");
-			String dogName = request.getParameter("dogName");
+			int poopDogId = Integer.parseInt(request.getParameter("poopDogId"));
 			String color = request.getParameter("color");
 			String hardness = request.getParameter("hardness");
 			String abnormal = request.getParameter("abnormal");
 			String memo =request.getParameter("memo");
-			String PoopDogId = request.getParameter("PoopDogId");
+			String poopId = request.getParameter("poopId");
+			
+			
 			
 			PoopDAO pdao = new PoopDAO();
-			if(pdao.pupdate(nowTime, date, dogName, color, hardness, abnormal, memo, PoopDogId)) {
+			if(pdao.pupdate(nowTime, date, poopDogId, color, hardness, abnormal, memo, poopId, photo)) {
+				request.setAttribute("msg","更新完了");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
+				dispatcher.forward(request, response);
+			}else {
+				request.setAttribute("msg","更新失敗");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
 				dispatcher.forward(request, response);
 			}

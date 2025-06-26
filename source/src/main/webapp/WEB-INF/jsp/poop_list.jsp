@@ -55,7 +55,7 @@
 			<!-- うんち一覧 -->
 			<c:forEach var="e" items="${poopList}" varStatus="status">
 				<tr>
-					<td><img src="<c:url value='${e.dogPhoto}' />"  width="170" class="poop-photo" alt="${e.dogName}のうんち写真"></td>
+					<td><img src="<c:url value='${e.dogPhoto}' />"width="170" class="poop-photo" alt="${e.dogName}のうんち写真"></td>
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
 					<td>${e.hardness}</td>

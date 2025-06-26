@@ -41,7 +41,6 @@
 				<th>お写真</th>
 				<th>ワンコのお名前</th>
 				<th>飼い主様</th>
-				<th>登録日</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -51,7 +50,6 @@
 					<td><img src="<c:url value='${e.dogPhoto}' />" width="170" alt="${e.dogName}の写真"></td>
 					<td>${e.dogName}</td>
 					<td>${e.name}</td>
-					<td>${e.date}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->
 					  <a href="<c:url value='/WankoServlet?id=${e.wankoDogId}&action=dogDetail' />">
 					    <button type="button">詳細</button>

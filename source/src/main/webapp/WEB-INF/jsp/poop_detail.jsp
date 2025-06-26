@@ -49,6 +49,7 @@
 </style>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 	<!-- 登録者の名前も後で表示させる -->
 	<h1 class="headline">
 		<div style="display: flex; justify-content: space-between;">
@@ -63,20 +64,23 @@
 	</h1>
 	<!-- 後でDBとひもづけてデータを取ってこれるようにする -->
 	
-	<form class="poopdetailform" method="POST" action="<c:url value='/PoopServlet' />"enctype="multipart/form-data">
+	<form class="poopdetailform" method="POST" action="<c:url value='/PoopServlet' />" enctype="multipart/form-data">
 	<c:forEach var="e" items="${pDogDet}" >
 		<div>
+		<input type="hidden" name="oldPoopPhoto" value="${e.photo}">
+		
 			<ul>
-				<li>時間<input type="time" name="nowTime" value="${e.nowTime}"></li><br>
-				<li>日付<input type="date" name="date" value="${e.date}"></li><br>
+				<li>時間<input type="time" name="nowTime" value="${e.nowTime}"></li>
+				<li>日付<input type="date" name="date" value="${e.date}"></li>				
 				<li>写真追加<input type="file" name="photo" value="${e.photo}">
 				<img src="${e.photo}" width="400"  alt="${e.dogName}のうんち写真"><br></li>
+				
 			</ul>
 		</div>
 		<div>
 			<ul>
-				<li>ワンコ選択<input type="text" name="name" value="${e.name}"></li><br>
-				<p>色を選んでください：</p>
+				<li>わんこID<input type="text" name="poopDogId" value="${e.poopDogId}"></li>
+				<li>色を選んでください：</li>
 	  	<div class="color-option">
 		<label>
 	      <input type="radio" name="color" value="1" <c:if test="${e.color == 1}">checked</c:if> >
@@ -133,7 +137,7 @@
 		<input type="submit" name="pbutt" value="更新"> <input type="submit" name="pbutt" value="削除">
 	</c:forEach>
 	</form>
-	
+	<p>${msg}</p>
 	
 	<!--  フッターここから --
 

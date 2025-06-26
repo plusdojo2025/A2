@@ -100,7 +100,7 @@ header {
   <div class="header-right">
     <div class="user-info">
       <span class="welcome">ようこそ<c:out value="${sessionScope.user.name}"/>さん</span>
-      <a href="<c:url value='LoginServlet'/>" class="logout-btn">ログアウト</a>
+      <a href="<c:url value='LoginServlet'/>" class="logout-btn" onclick="return confirmLogout()">ログアウト</a>
     </div>
 
     <nav>
@@ -113,6 +113,12 @@ header {
     </nav>
   </div>
 </header>
+<script>
+function confirmLogout() {
+    return confirm("本当にログアウトしますか？");
+}
+</script>
 	<!-- ヘッダーここまで -->
 </body>
+
 </html>

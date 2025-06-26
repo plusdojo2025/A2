@@ -33,8 +33,8 @@
 		<ul>
 			<li>${e.dogName}</li>
 			<li><img src="${e.dogPhoto}" width="170" alt="${e.dogName}の写真"></li>
-			<li>うんち記録</li>
-			<li>報告</li>
+			<li><a href="<c:url value='PoopServlet?action=poopregi'/> ">うんち記録</a></li>
+			<li><a href="<c:url value='ReportServlet'/> ">報告</a>></li>
 		</ul>
 	</div>
 </c:forEach>

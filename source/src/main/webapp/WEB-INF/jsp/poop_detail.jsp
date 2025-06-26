@@ -5,62 +5,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet"  href="<c:url value='/css/poop_detail.css' />">
 <title>うんち詳細</title>
-<style>
-  /* 見出しとひとつ前に戻るの色指定 */
- .headline {
- 	color: #FFA500;     /* 文字色指定 */
- }
- 
- .poopdetailform {
- 	color: #FFA500;     /* 文字色指定 */
- }
- .color-option {
-	    display: flex;
-	    gap: 20px;
-	    margin: 20px 0;
-	  }
-	
-	  .color-option input[type="radio"] {
-	    display: none;
-	  }
-	
-	  .color-label {
-	    width: 30px;
-	    height: 30px;
-	    border-radius: 50%;
-	    display: inline-block;
-	    cursor: pointer;
-	    border: 3px solid transparent;
-	  }
-	
-	  /* 色ごとの背景 */
-		.color-black { background-color: #444443; }
-		.color-yellow { background-color: #EBD469; }
-		.color-brown { background-color: #AD795B; }
-		.color-brownred { background-color: #A44F30; }
-		.color-red { background-color: #A52A2A; } 
-	
-	  /* 選択されたときの枠線 */
-	  input[type="radio"]:checked + .color-label {
-	    border-color: white;
-	    transform: scale(1.5);/*拡大*/
-	  }
-</style>
+
 </head>
 <body>
 <%@ include file="header.jsp" %>
 	<!-- 登録者の名前も後で表示させる -->
 	<h1 class="headline">
-		<div style="display: flex; justify-content: space-between;">
-  			<div style="text-align: left;">うんち詳細　<c:out value="${sessionScope.user.name}"/>さん</div>
-        	<div style="text-align: right;">
+		
+  			うんち詳細　<c:out value="${sessionScope.user.name}"/>さん
+        	
         		<a href="javascript:history.back();">
 				<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
 				<img src="<c:url value='/images/back.png' />" alt="戻る">	<!-- 戻る画像ボタン -->
 		    	</a>
-        	</div>
-		</div>
+        	
 	</h1>
 	<!-- 後でDBとひもづけてデータを取ってこれるようにする -->
 	
@@ -73,7 +33,7 @@
 				<li>時間<input type="time" name="nowTime" value="${e.nowTime}"></li>
 				<li>日付<input type="date" name="date" value="${e.date}"></li>				
 				<li>写真追加<input type="file" name="photo" value="${e.photo}">
-				<img src="${e.photo}" width="400"  alt="${e.dogName}のうんち写真"><br></li>
+				<img src="${e.photo}" width="170"  alt="${e.dogName}のうんち写真"><br></li>
 				
 			</ul>
 		</div>

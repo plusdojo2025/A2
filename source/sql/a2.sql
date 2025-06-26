@@ -139,6 +139,19 @@ INSERT INTO USER(
 		'東京都千代田区',FALSE,1
 );
 
+INSERT INTO USER(
+		userNameId,ruby,birth,name,pw,uPhone,uPhone2,address,userUniqueId,userSchoolId
+)  		VALUES(
+		'asariri@a','あさだ　りりか',NULL,'浅田　梨々香','asariri','000-4444-5555','',
+		'東京都千代田区',FALSE,1
+);
+INSERT INTO USER(
+		userNameId,ruby,birth,name,pw,uPhone,uPhone2,address,userUniqueId,userSchoolId
+)  		VALUES(
+		'higu@kou','ひぐちこうし',NULL,'樋口講師','kousi','000-5555-6666','',
+		'東京都千代田区',FALSE,1
+);
+
 
 
 INSERT INTO WANKO(
@@ -182,7 +195,26 @@ INSERT INTO WANKO(
 		'upload/dogphoto/pome.webp',FALSE,'2025-06-27','ぷらすだよ',
 		'','','','','upload/injection/inje.png',''
 );
-
+INSERT INTO WANKO(
+		dogName,dogBreed,dogBirth,gender,state,
+		wakuchin,wankoNameId,dogPhoto,kyosei,dogRegist,
+		remarks1,remarks2,remarks3,remarks4,remarks5,injection,rabies
+)		VALUES(
+		'はぴ','チワワ','2016-11-22',FALSE,'おとなしい性格',
+		'upload/wakuchin/waku.webp','asariri@a',
+		'upload/dogphoto/hapi.jpg',FALSE,'2025-06-27','はぴだよ',
+		'','','','','upload/injection/inje.png',''
+);
+INSERT INTO WANKO(
+		dogName,dogBreed,dogBirth,gender,state,
+		wakuchin,wankoNameId,dogPhoto,kyosei,dogRegist,
+		remarks1,remarks2,remarks3,remarks4,remarks5,injection,rabies
+)		VALUES(
+		'もなか','パグ','2016-11-22',FALSE,'おとなしい性格',
+		'upload/wakuchin/waku.webp','higu@kou',
+		'upload/dogphoto/monaka.jpg',FALSE,'2025-06-27','もなかだよ',
+		'','','','','upload/injection/inje.png',''
+);
 
 INSERT INTO POOP(
 		tName,photo,color,hardness,abnormal,PoopDogId,memo
@@ -246,6 +278,16 @@ INSERT INTO CALENDAR(
 		calendarDate,title,time,calendarMemo,calendarDogId
 )		VALUES(
 		'2025-06-30','プラスくん預かり','10:00','トレーニング内容(~)',4
+);
+INSERT INTO CALENDAR(
+		calendarDate,title,time,calendarMemo,calendarDogId
+)		VALUES(
+		'2025-06-30','はぴちゃん預かり','14:00','トレーニング内容(~)',5
+);
+INSERT INTO CALENDAR(
+		calendarDate,title,time,calendarMemo,calendarDogId
+)		VALUES(
+		'2025-06-30','モナカちゃん預かり','09:00','トレーニング内容(~)',6
 );
 INSERT INTO CALENDAR(
 		calendarDate,title,time,calendarMemo,calendarDogId

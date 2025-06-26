@@ -37,7 +37,7 @@
 		<input type="datetime-local" name="reportDate">
 	</label><br>
 	<label>・ 散歩
-		<input type="time" name="walk">
+		<input type="number" name="walk">分
 	</label><br>
 	<label>・ 様子
 		<input type="radio" name="reportState" value="true">異常なし

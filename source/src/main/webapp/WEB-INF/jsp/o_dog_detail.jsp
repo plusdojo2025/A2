@@ -13,11 +13,13 @@
 		<div style="display: flex; justify-content: space-between;">
   			<div style="text-align: left;">ワンコ詳細　<c:out value="${sessionScope.user.name}" />さん</div>
         	<div style="text-align: right;">
-        		<a href="javascript:history.back();">	
-			<span class="back_text">前に戻る</span>	<br>
-        	<a href="<c:url value="javascript:history.back();"/>" >
- 				<img src="<c:url value='/images/back.png' />" alt="戻る" class="back_button">
-			</a>
+        		<a href="javascript:history.back();"></a>	
+				<span class="back_text">前に戻る</span>	<br>
+        		<a href="<c:url value="javascript:history.back();"/>" >
+ 					<img src="<c:url value='/images/back.png' />"  alt="戻る" class="back_button">
+				</a>
+			</div>
+		</div>	
 	</h1>	
 <form method="POST" action="<c:url value='/WankoServlet'/>" class="dog_datail" enctype="multipart/form-data">
 <c:forEach var="e" items="${oDogDet}" >

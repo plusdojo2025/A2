@@ -8,7 +8,9 @@
 <title>ホーム画面飼い主用</title>
 <link rel="stylesheet"  href="<c:url value='/css/o_home.css' />">
 </head>
+
 <body>
+
 
 <%@ include file="header.jsp" %>
 <div>

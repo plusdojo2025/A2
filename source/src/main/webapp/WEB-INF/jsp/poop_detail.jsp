@@ -15,13 +15,14 @@
 	<h1 class="headline">
 		
   			うんち詳細　<c:out value="${sessionScope.user.name}"/>さん
-        	
-        		<a href="javascript:history.back();">
-				<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
-				<img src="<c:url value='/images/back.png' />" alt="戻る">	<!-- 戻る画像ボタン -->
-		    	</a>
-        	
+
 	</h1>
+	<div>
+		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
+		<a href="javascript:history.back();">
+ 			<img src="<c:url value='/images/back.png' />" alt="戻る" class="back_button">
+		</a>	
+	</div>
 	<!-- 後でDBとひもづけてデータを取ってこれるようにする -->
 	
 	<form class="poopdetailform" method="POST" action="<c:url value='/PoopServlet' />" enctype="multipart/form-data">
@@ -33,7 +34,7 @@
 				<li>時間<input type="time" name="nowTime" value="${e.nowTime}"></li>
 				<li>日付<input type="date" name="date" value="${e.date}"></li>				
 				<li>写真追加<input type="file" name="photo" value="${e.photo}">
-				<img src="${e.photo}" width="170"  alt="${e.dogName}のうんち写真"><br></li>
+				<img src="${e.photo}" width="300"  alt="${e.dogName}のうんち写真"><br></li>
 				
 			</ul>
 		</div>

@@ -436,16 +436,16 @@ public class CalendarDAO {
 					    	      SELECT calendarDate, calendarId, title
 					    	      FROM CALENDAR
 					    	      WHERE calendarDogId = ?
-					    	      AND calendarDate BETWEEN ? AND ?
-					    	      ORDER BY calendarDate
+
 					    	    """;
-					    
+//						  AND calendarDate BETWEEN ? AND ?
+//						  ORDER BY calendarDate
 					    PreparedStatement pStmt = conn.prepareStatement(sql);
 					    
 					 // パラメータをセット
 					    pStmt.setInt(1,dogId);
-					    pStmt.setDate(2,java.sql.Date.valueOf(startDate));
-					    pStmt.setDate(3,java.sql.Date.valueOf(endDate));
+//					    pStmt.setDate(2,java.sql.Date.valueOf(startDate));
+//					    pStmt.setDate(3,java.sql.Date.valueOf(endDate));
 					    
 						// SQL実行・結果取得
 						ResultSet rs = pStmt.executeQuery();

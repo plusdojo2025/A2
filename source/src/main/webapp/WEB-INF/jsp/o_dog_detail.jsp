@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ワンコ詳細</title>
-<link rel="stylesheet"  href="<c:url value='/css/o_dog_detail.css' />">
+<link rel="stylesheet"  href="<c:url value='/css/etc.css' />">
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -43,16 +43,17 @@
 			<input type="radio" name="kyosei" value="0"<c:if test="${e.kyosei == 'false'}">checked</c:if>>なし<br><br>
 		犬種<input type="text" name="dogBreed" value="${e.dogBreed}"><br>
 		誕生日<input type="date" name="dogBirth" value="${e.dogBirth}"><br>
-		備考<input type="text" name="remarks1" placeholder="備考" value="${e.remarks1}"><br>
-			<input type="text" name="remarks2" placeholder="備考" value="${e.remarks2}"><br>
-			<input type="text" name="remarks3" placeholder="備考" value="${e.remarks3}"><br>
-			<input type="text" name="remarks4" placeholder="備考" value="${e.remarks4}"><br>
-			<input type="text" name="remarks5" placeholder="備考" value="${e.remarks5}"><br>
 		<table class="inputFields">
-       
+        <tr class="inputField">
+            <th>
+                <input type="text" name="content[]" placeholder="備考"></th>
+            <td>
+                <!--input要素を削除するボタン-->
+                <button class="deleteFieldBtn">入力欄を削除</button></td>
+        </tr>
     </table>
-   
-   
+    <!--input要素を追加するボタン-->
+    <button class="addFieldBtn">入力欄を追加</button>
   
   
 		<input type="submit" name="butt" value="更新">

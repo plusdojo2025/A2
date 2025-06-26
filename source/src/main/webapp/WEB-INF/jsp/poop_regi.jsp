@@ -20,10 +20,10 @@
 	<!-- ウンチ管理の文字表示 -->
 	<h1>うんち管理</h1>
 	<!-- 登録者の名前も後で表示させる -->
-	<h2>登録者の名前</h2>
+
 	<!-- ワンコ選択 -->
 	<!-- メイン -->
-	
+	<div>${wankoDogId}</div>
 	
 	<form method="POST" action="<c:url value='/PoopServlet'/> " enctype="multipart/form-data">
 	<div class="left-section">
@@ -33,7 +33,8 @@
 				<canvas id="preview" style="max-width:200px;"></canvas><br>
 		</div>
 	<div class="right-section">
-		わんこID<input type="text" name="PoopDogId"><br>
+		わんこID<input type="text" name="PoopDogId" value="${wankoDogId}"><br>
+		
 			<!-- 色の選択 -->
 	
 		<p>色を選んでください：</p>

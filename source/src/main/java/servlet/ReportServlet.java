@@ -77,6 +77,13 @@ public class ReportServlet extends HttpServlet {
 				System.out.println("フォワードします");
 				dispatcher.forward(request, response);
 			}					
+		}else if("trepoprtregi".equals(action)) {
+			String wankoDogId = request.getParameter("wankoDogId");
+			request.setAttribute("wankoDogId", wankoDogId);
+			String dogName = request.getParameter("dogName");
+			request.setAttribute("dogName", dogName);			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/report_regi.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 	

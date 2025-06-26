@@ -14,7 +14,7 @@
 	<!-- ワンコ選択 -->
 	<select name="dogName">
 		<!-- ワンコ名をプルダウンで選択できるようにする -->
-		<option value="${e.dogName}" selected>ワンコ選択</option>
+		<option value="${dogName}" selected>ワンコ選択</option>
 	</select>
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
@@ -23,7 +23,8 @@
 		</a>	
 	</div>
 <!-- エラー表示 -->
-
+<div>aaa${dogName}</div>
+<div>aaa${wankoDogId}</div>
 <form id="report_form" action="<c:url value='/ReportServlet'/>" method="post" onsubmit = "return checkForm()">
 	<input type="hidden" name="action" value="insert">
 	<input type="hidden" name="reportId" value=0>

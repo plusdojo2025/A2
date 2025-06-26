@@ -29,7 +29,6 @@
 <body>
 <%@ include file="header.jsp" %>
 	<h1 class=page-title>報告一覧</h1>
-	<a class="sin" href="<c:url value='/ReportServlet'/> ">新規登録</a>
 	<!-- 戻る画像ボタン -->
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
@@ -55,7 +54,7 @@
 					<td>${e.name}</td>
 					<td>${e.reportDate}</td>
 					<td>	<!-- 詳細に飛ぶボタン -->
-					  <a href="<c:url value='/ReportServlet?id=${e.reportId}&action=reportDetail' />">
+					  <a href="<c:url value='/ReportServlet?id=${e.reportDogId}&action=reportDetail' />">
     					<button type="button">詳細</button>
 						</a>
 					</td>

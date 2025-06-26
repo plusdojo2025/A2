@@ -5,13 +5,13 @@ use a2;
 
 create table USER(
 		userNameId varchar(50) PRIMARY KEY,
-		ruby varchar(50) NOT NULL ,
+		ruby varchar(50),
 		birth date ,
 		name varchar(50) NOT NULL ,
 		pw varchar(50) NOT NULL ,
 		uPhone varchar(50) NOT NULL ,
 		uPhone2 varchar(50)  ,
-		address varchar(50) NOT NULL ,
+		address varchar(50) ,
 		UserUniqueId boolean NOT NULL ,
 		userSchoolId INT NOT NULL
 		);
@@ -266,6 +266,26 @@ INSERT INTO CALENDAR(
 		calendarDate,title,time,calendarMemo,calendarDogId
 )		VALUES(
 		'2025-06-25','プラスくん預かり','10:00','トレーニング内容(~)',4
+);
+INSERT INTO CALENDAR(
+		calendarDate,title,time,calendarMemo,calendarDogId
+)		VALUES(
+		'2025-06-26','さんくん預かり','14:00','トレーニング内容(~)',1
+);
+INSERT INTO CALENDAR(
+		calendarDate,title,time,calendarMemo,calendarDogId
+)		VALUES(
+		'2025-06-26','アンディくん預かり','11:00','トレーニング内容(~)',2
+);
+INSERT INTO CALENDAR(
+		calendarDate,title,time,calendarMemo,calendarDogId
+)		VALUES(
+		'2025-06-26','らんちゃん預かり','13:00','トレーニング内容(~)',3
+);
+INSERT INTO CALENDAR(
+		calendarDate,title,time,calendarMemo,calendarDogId
+)		VALUES(
+		'2025-06-26','プラスくん預かり','10:00','トレーニング内容(~)',4
 );
 
 

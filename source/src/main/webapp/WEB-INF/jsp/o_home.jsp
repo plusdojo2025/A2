@@ -8,11 +8,13 @@
 <title>ホーム画面飼い主用</title>
 <link rel="stylesheet"  href="<c:url value='/css/o_home.css' />">
 </head>
+
 <body>
+
 
 <%@ include file="header.jsp" %>
 <div>
-	<p class="dogphoto"><img src="${logdog.dogPhoto}" width="400"  alt="${logdog.dogName}の写真">
+	<p class="dogphoto"><img src="${logdog.dogPhoto}" width="170"  alt="${logdog.dogName}の写真">
 	<p class="name"><c:out value="${user.name}"/>さん　ログイン中</p>
 </div>
 <%-- <h1><a href="<c:url value='ReserveServlet'/> ">予約登録</a></h1> --%>

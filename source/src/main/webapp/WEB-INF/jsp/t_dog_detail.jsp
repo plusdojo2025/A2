@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ワンコ詳細</title>
+<link rel="stylesheet"  href="<c:url value='/css/t_dog_detail.css' />">
 </head>
 <body>
 	<h1>
@@ -14,7 +15,7 @@
         	<div style="text-align: right;">
         		<a href="javascript:history.back();">
 				<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
-				<img src="<c:url value='/images/back.png' />" alt="戻る">		<!-- 戻る画像ボタン -->
+				<img src="<c:url value='/images/back.png' />" alt="戻る" class="back_button">		<!-- 戻る画像ボタン -->
 		    	</a>
         	</div>
 		</div>

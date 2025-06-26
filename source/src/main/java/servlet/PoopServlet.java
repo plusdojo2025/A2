@@ -181,7 +181,7 @@ public class PoopServlet extends HttpServlet {
 			String appPath = request.getServletContext().getRealPath("");
 			String fullSavePath = appPath + File.separator + savePath;
 			
-			Part part = request.getPart("dogPhoto");
+			Part part = request.getPart("photo");
 			String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 
 			String photo = null;
@@ -196,20 +196,27 @@ public class PoopServlet extends HttpServlet {
 			photo = dFilePath;
 			
 			}else {
-				photo = request.getParameter("oldPhoto");
+				photo = request.getParameter("oldPoopPhoto");
 			}
 			
 			String nowTime = request.getParameter("nowTime");
 			String date = request.getParameter("date");
-			String dogName = request.getParameter("dogName");
+			int poopDogId = Integer.parseInt(request.getParameter("poopDogId"));
 			String color = request.getParameter("color");
 			String hardness = request.getParameter("hardness");
 			String abnormal = request.getParameter("abnormal");
 			String memo =request.getParameter("memo");
-			String PoopDogId = request.getParameter("PoopDogId");
+			String poopId = request.getParameter("poopId");
+			
+			
 			
 			PoopDAO pdao = new PoopDAO();
-			if(pdao.pupdate(nowTime, date, dogName, color, hardness, abnormal, memo, PoopDogId)) {
+			if(pdao.pupdate(nowTime, date, poopDogId, color, hardness, abnormal, memo, poopId, photo)) {
+				request.setAttribute("msg","更新完了");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
+				dispatcher.forward(request, response);
+			}else {
+				request.setAttribute("msg","更新失敗");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/poop_detail.jsp");
 				dispatcher.forward(request, response);
 			}

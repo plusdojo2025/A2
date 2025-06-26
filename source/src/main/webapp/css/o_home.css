@@ -1,10 +1,6 @@
 @charset "UTF-8";
 
 
-body {
-	background-image:url(../images/asiato.png);
-	background-size: cover;
-}
 
 h1 a{
 	color: orange;

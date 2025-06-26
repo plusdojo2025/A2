@@ -5,78 +5,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet"  href="<c:url value='/css/poop_detail.css' />">
 <title>うんち詳細</title>
-<style>
-  /* 見出しとひとつ前に戻るの色指定 */
- .headline {
- 	color: #FFA500;     /* 文字色指定 */
- }
- 
- .poopdetailform {
- 	color: #FFA500;     /* 文字色指定 */
- }
- .color-option {
-	    display: flex;
-	    gap: 20px;
-	    margin: 20px 0;
-	  }
-	
-	  .color-option input[type="radio"] {
-	    display: none;
-	  }
-	
-	  .color-label {
-	    width: 30px;
-	    height: 30px;
-	    border-radius: 50%;
-	    display: inline-block;
-	    cursor: pointer;
-	    border: 3px solid transparent;
-	  }
-	
-	  /* 色ごとの背景 */
-		.color-black { background-color: #444443; }
-		.color-yellow { background-color: #EBD469; }
-		.color-brown { background-color: #AD795B; }
-		.color-brownred { background-color: #A44F30; }
-		.color-red { background-color: #A52A2A; } 
-	
-	  /* 選択されたときの枠線 */
-	  input[type="radio"]:checked + .color-label {
-	    border-color: white;
-	    transform: scale(1.5);/*拡大*/
-	  }
-</style>
+
 </head>
 <body>
+<%@ include file="header.jsp" %>
 	<!-- 登録者の名前も後で表示させる -->
 	<h1 class="headline">
-		<div style="display: flex; justify-content: space-between;">
-  			<div style="text-align: left;">うんち詳細　<c:out value="${sessionScope.user.name}"/>さん</div>
-        	<div style="text-align: right;">
-        		<a href="javascript:history.back();">
-				<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
-				<img src="<c:url value='/images/back.png' />" alt="戻る">	<!-- 戻る画像ボタン -->
-		    	</a>
-        	</div>
-		</div>
+		
+  			うんち詳細　<c:out value="${sessionScope.user.name}"/>さん
+
 	</h1>
+	<div>
+		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
+		<a href="javascript:history.back();">
+ 			<img src="<c:url value='/images/back.png' />" alt="戻る" class="back_button">
+		</a>	
+	</div>
 	<!-- 後でDBとひもづけてデータを取ってこれるようにする -->
 	
-	<form class="poopdetailform" method="POST" action="<c:url value='/PoopServlet' />"enctype="multipart/form-data">
+	<form class="poopdetailform" method="POST" action="<c:url value='/PoopServlet' />" enctype="multipart/form-data">
 	<c:forEach var="e" items="${pDogDet}" >
 		<div>
+		<input type="hidden" name="oldPoopPhoto" value="${e.photo}">
+		
 			<ul>
-				<li>時間<input type="time" name="nowTime" value="${e.nowTime}"></li><br>
-				<li>日付<input type="date" name="date" value="${e.date}"></li><br>
+				<li>時間<input type="time" name="nowTime" value="${e.nowTime}"></li>
+				<li>日付<input type="date" name="date" value="${e.date}"></li>				
 				<li>写真追加<input type="file" name="photo" value="${e.photo}">
-				<img src="${e.photo}" width="400"  alt="${e.dogName}のうんち写真"><br></li>
+				<img src="${e.photo}" width="300"  alt="${e.dogName}のうんち写真"><br></li>
+				
 			</ul>
 		</div>
 		<div>
 			<ul>
-				<li>ワンコ選択<input type="text" name="name" value="${e.name}"></li><br>
-				<p>色を選んでください：</p>
+				<li>わんこID<input type="text" name="poopDogId" value="${e.poopDogId}"></li>
+				<li>色を選んでください：</li>
 	  	<div class="color-option">
 		<label>
 	      <input type="radio" name="color" value="1" <c:if test="${e.color == 1}">checked</c:if> >
@@ -133,7 +98,7 @@
 		<input type="submit" name="pbutt" value="更新"> <input type="submit" name="pbutt" value="削除">
 	</c:forEach>
 	</form>
-	
+	<p>${msg}</p>
 	
 	<!--  フッターここから --
 

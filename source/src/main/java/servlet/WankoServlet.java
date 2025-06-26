@@ -70,10 +70,7 @@ public class WankoServlet extends HttpServlet {
 			
 		}else if("dogDetail".equals(action) ) {
 			//犬詳細
-			if(log.isUserUniqueId() == true ) {
-				//トレーナー
-			}else if(log.isUserUniqueId() == false ) {
-				//飼い主
+
 				request.setCharacterEncoding("UTF-8");
 				
 				String id = request.getParameter("id");				
@@ -82,7 +79,7 @@ public class WankoServlet extends HttpServlet {
 				request.setAttribute("oDogDet", oDogDet);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/o_dog_detail.jsp");
 				dispatcher.forward(request, response);
-			}
+			
 		}else {
 			if(log.isUserUniqueId() == true ) {
 				

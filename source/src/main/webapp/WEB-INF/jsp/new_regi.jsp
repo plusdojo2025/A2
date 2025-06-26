@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ユーザー新規登録</title>
 <link rel="stylesheet"  href="<c:url value='/css/new_regi.css' />">
     <!--　box表示    
     <style>
@@ -32,7 +32,7 @@
         </td>
         <td>
           <label>フリガナ<br>
-          <input type="text" name="rudy" placeholder="必須" required>
+          <input type="text" name="ruby" placeholder="必須" required>
           </label>
         </td>
       </tr>
@@ -70,6 +70,7 @@
         <td>
         	<label>スクールID<br>
         	<input type="text" name="schoolId" placeholder="必須" required>
+        	<input type="hidden" name="UserUniqueId" value="FALSE">
         	</label>
         </td>
       </tr>
@@ -78,6 +79,7 @@
           <input type="submit" id="register" name="submit" value="登録">
           <input type="reset" name="reset" value="リセット">
           <span id="error_message"></span>
+          <div>${msg}</div>
         </td>
       </tr>
     </table>

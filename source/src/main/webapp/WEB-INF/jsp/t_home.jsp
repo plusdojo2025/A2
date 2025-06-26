@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +10,8 @@
 <title>トレーナー用ホーム画面</title>
 <link rel="stylesheet"  href="<c:url value='/css/t_home.css' />">
 </head>
+
 <body>
-	<video autoplay muted loop playsinline id="inu-video">
-  		<source src="<c:url value='/images/いぬの足跡s.mp4' />" type="video/mp4">
-	</video>
 <%@ include file="header.jsp" %>
 <h1>カレンダー</h1>
    <div class="wrapper">

@@ -206,7 +206,7 @@ import dto.AllDto;
 					+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 					"root", "password");
 			// SQL文を準備する
-			String sql = "SELECT WANKO.wankoDogId, WANKO.dogName, POOP.nowTime, POOP.date, POOP.photo, POOP.color, POOP.hardness, POOP.abnormal, POOP.memo, PoopId "
+			String sql = "SELECT WANKO.wankoDogId, WANKO.dogName, POOP.nowTime, POOP.date, POOP.photo, POOP.color, POOP.hardness, POOP.abnormal, POOP.memo, PoopId, POOP.poopDogId "
 			           + "FROM POOP "
 			           + "JOIN WANKO ON POOP.PoopDogId = WANKO.wankoDogId "
 			           + "WHERE POOP.PoopId = ?";
@@ -239,6 +239,7 @@ import dto.AllDto;
 				inu.setHardness(rs.getInt("hardness"));
 				inu.setAbnormal(rs.getBoolean("abnormal"));
 				inu.setMemo(rs.getString("memo"));
+				inu.setPoopDogId(Integer.parseInt(rs.getString("poopDogId")));
 				
 				pDogDet.add(inu);
 			}
@@ -262,7 +263,7 @@ import dto.AllDto;
 		return pDogDet;
 	}
 	// 引数cardで指定されたレコードを更新し、成功したらtrueを返す
-			public boolean pupdate(String nowTime, String date, String dogName, String color, String hardness, String abnormal, String memo, String PoopId) {
+			public boolean pupdate(String nowTime, String date, int poopDogId, String color, String hardness, String abnormal, String memo, String PoopId, String photo) {
 				Connection conn = null;
 				boolean result = false;
 
@@ -277,24 +278,26 @@ import dto.AllDto;
 					
 					// SQL文を準備する
 					String sql = "UPDATE POOP "
-							+ "SET nowTime=? , date=? , dogName=? , color=? , hardness=? , abnormal=? , memo=? , PoopDogId=? ) "
-							+ "WHERE poopId";
+							+ "SET nowTime=? , date=? , poopDogId=? , color=? , hardness=? , abnormal=? , memo=? , photo=? "
+							+ "WHERE poopId=?";
 					PreparedStatement pStmt = conn.prepareStatement(sql);
 					
 					pStmt.setString(1, nowTime);
 					pStmt.setString(2, date);
-					pStmt.setString(3, dogName);
+					pStmt.setInt(3, poopDogId);
 					pStmt.setString(4, color);
 					pStmt.setString(5, hardness);
 					pStmt.setString(6, abnormal);
-					pStmt.setString(7, memo);
-					pStmt.setString(8, PoopId);
+					pStmt.setString(7, memo);					
+					pStmt.setString(8, photo);
+					pStmt.setString(9, PoopId);
 					
 					
 					// SQL文を実行する
 					if (pStmt.executeUpdate() == 1) {
 						result = true;
 					}
+
 				} catch (SQLException e) {
 					e.printStackTrace();
 				} catch (ClassNotFoundException e) {

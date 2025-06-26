@@ -230,6 +230,7 @@ public class WankoDAO {
 					inu.setName(rs.getString("name"));
 					inu.setDogName(rs.getString("dogName"));
 					inu.setDogPhoto(rs.getString("dogPhoto"));
+
 					Date sqlDate = rs.getDate("dogRegist");
 					if (sqlDate != null) {
 					    inu.setDogRegist(sqlDate.toLocalDate());
@@ -306,7 +307,7 @@ public class WankoDAO {
 					inu.setRemarks4(rs.getString("remarks4"));
 					inu.setRemarks5(rs.getString("remarks5"));
 					
-					System.out.println("aa" +inu);
+			
 					
 					oDogDet.add(inu);
 				}

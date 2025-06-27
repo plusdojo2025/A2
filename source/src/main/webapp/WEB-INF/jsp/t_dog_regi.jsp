@@ -192,5 +192,3 @@ function renumberBikou() {
 </script>
 </body>
 </html>
-
-

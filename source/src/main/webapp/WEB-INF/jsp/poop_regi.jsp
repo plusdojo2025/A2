@@ -27,22 +27,22 @@
 	
 	<form method="POST" action="<c:url value='/PoopServlet'/> " enctype="multipart/form-data">
 	<div class="left-section">
-		時間<input type="time" name="nowTime"><br>
-		日付<input type="date" name="date"><br>
+		時間<input type="time" name="nowTime" required><br>
+		日付<input type="date" name="date" required><br>
 		<label>
-		写真追加<input type="file" name="photo" accept="image/*" onchange="previewImage(this);"><br>
+		写真追加<input type="file" name="photo" accept="image/*" onchange="previewImage(this);" required><br>
 				<canvas id="preview" style="max-width:200px;"></canvas><br>
 		</label>
 		</div>
 	<div class="right-section">
-		わんこID<input type="text" name="PoopDogId" value="${wankoDogId}"><br>
+		わんこID<input type="text" name="PoopDogId" value="${wankoDogId}" required><br>
 		
 			<!-- 色の選択 -->
 	
 		<p>色を選んでください：</p>
 	  	<div class="color-option">
 		<label>
-	      <input type="radio" name="color" value="1">
+	      <input type="radio" name="color" value="1" >
 	      <span class="color-label color-black"></span>
 	    </label>
 	    <label>
@@ -50,7 +50,7 @@
 	      <span class="color-label color-yellow"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="color" value="3">
+	      <input type="radio" name="color" value="3"checked>
 	      <span class="color-label color-brown"></span>
 	    </label>
 	    <label>
@@ -74,7 +74,7 @@
 	      <span class="hardness-label hardness-やや硬"></span>
 	    </label>
 	    <label>
-	      <input type="radio" name="hardness" value="3">普通
+	      <input type="radio" name="hardness" value="3"checked>普通
 	      <span class="hardness-label hardness-普"></span>
 	    </label>
 	    <label>
@@ -86,9 +86,9 @@
 	      <span class="hardness-label hardness-柔"></span>
 	    </label>
 	    </div>
-		異常<input type="radio" name="abnormal" value="1">あり
-			<input type="radio" name="abnormal" value="0">なし<br>
-		メモ<input type="text" name="memo" value="${e.memo}"><br>
+		異常<input type="radio" name="abnormal" value="1" required>あり
+			<input type="radio" name="abnormal" value="0"checked>なし<br>
+		メモ<input type="text" name="memo" value="${e.memo}" required><br>
 		<input type="submit" name="pbutt" value="登録"><br>
 		</div>
 	</form>

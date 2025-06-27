@@ -6,17 +6,37 @@
 <head>
 <meta charset="UTF-8">
 <title>報告詳細（企業用）</title>
-<link rel="stylesheet"  href="<c:url value='/css/etc.css' />">
+<%-- <link rel="stylesheet"  href="<c:url value='/css/etc.css' />"> --%>
+<style>
+.back_text {
+	font-size: 10px;
+	float: right;
+	margin-top:-20px;
+	}
+/* 戻る画像ボタン */
+.back_button {
+	width: 40px;
+	float: right;
+	margin-top:0px;
+}
+.container {
+	width: 80%;
+	max-width: 800px;
+	margin: 0 auto;
+	text-align: left;
+}
+</style>
 </head>
 <body>
 <%@ include file="header.jsp" %>
+
 	<h1>
 		<div style="display: flex; justify-content: space-between;">
   			<div style="text-align: left;">報告詳細</div>
         	<div style="text-align: right;">
+        		<span class="back_text">前に戻る</span>							<!-- cssでmargin0にする？ -->
         		<a href="javascript:history.back();">
-				<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
-				<img src="<c:url value='/images/back.png' />" alt="戻る"/> 		<!-- 戻る画像ボタン -->
+				<img src="<c:url value='/images/back.png' />" alt="戻る"/ class="back_button"> 		<!-- 戻る画像ボタン -->
 		    	</a>
         	</div>
 		</div>

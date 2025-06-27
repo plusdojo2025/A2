@@ -73,3 +73,84 @@ a:hover{
 #calendar {
     margin-top: 20px;
 }
+
+#calendar {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 500px;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#calendar table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#calendar th {
+    background-color: orange;
+    color: white;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+#calendar td {
+    width: 14.2%;
+    height: 80px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+    position: relative;
+    cursor: pointer;
+}
+
+#calendar td.disabled {
+    background-color: #f0f0f0;
+    color: #bbb;
+}
+
+#calendar td.today {
+    background-color: #ffe4b2;
+    border: 2px solid orange;
+    font-weight: bold;
+}
+
+#calendar td a {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 12px;
+    text-decoration: none;
+    color: #007BFF;
+}
+
+#calendar td a:hover {
+    text-decoration: underline;
+}
+
+#header-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#header-area h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+#header-area button {
+    padding: 5px 10px;
+    font-size: 18px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+#header-area button:hover {
+    background-color: #f0f0f0;
+}

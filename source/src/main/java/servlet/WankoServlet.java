@@ -240,10 +240,14 @@ public class WankoServlet extends HttpServlet {
 			WankoDAO wdao = new WankoDAO();
 			if(wdao.delete(id)) {
 				request.setAttribute("msg","削除完了");
-				response.sendRedirect(request.getContextPath() + "/WankoServlet");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/dog_list.jsp"); 
+				dispatcher.forward(request, response);
+				return;
 			}else {
 				request.setAttribute("msg","削除失敗");
-				response.sendRedirect(request.getContextPath() + "/WankoServlet");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/dog_list.jsp"); 
+				dispatcher.forward(request, response);
+				return;
 			}
 			
 		}

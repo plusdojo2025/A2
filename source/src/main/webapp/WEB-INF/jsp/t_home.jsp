@@ -30,18 +30,21 @@
 	    <div id="calendar"></div>
 	</div>
 <h1>今日のわんこ</h1>
+
+<div id="todays-dog-container">
 <c:forEach var="e" items="${todaysDog}">
-<div class="dog-card">
-  <img src="${e.dogPhoto}" width="170" alt="${e.dogName}の写真">
-  
-  <div class="dogname">${e.dogName}</div>
-  
-  <div class="dog-buttons">
-    <a href="<c:url value='PoopServlet?wankoDogId=${e.wankoDogId}&action=tpoopregi'/>">うんち記録</a>
-    <a href="<c:url value='ReportServlet?wankoDogId=${e.wankoDogId}&dogName=${e.dogName}&action=trepoprtregi'/>">報告</a>
-  </div>
-</div>
+    <div class="dog-card">
+        <img src="${e.dogPhoto}" width="170" alt="${e.dogName}の写真">
+        
+        <div class="dogname">${e.dogName}</div>
+        
+        <div class="dog-buttons">
+            <a href="<c:url value='PoopServlet?wankoDogId=${e.wankoDogId}&action=tpoopregi'/>">うんち記録</a>
+            <a href="<c:url value='ReportServlet?wankoDogId=${e.wankoDogId}&dogName=${e.dogName}&action=trepoprtregi'/>">報告</a>
+        </div>
+    </div>
 </c:forEach>
+</div>
 
 
   

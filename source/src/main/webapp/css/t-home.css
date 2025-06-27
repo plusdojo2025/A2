@@ -1,93 +1,164 @@
 @charset "UTF-8";
 
-
+/* 全体共通スタイル */
 h1 {
-	color:orange;
+	font-size: 50px;
+    color: orange;
+    display: flex;
+    justify-content: center;
 }
 
-a:hover{
-	color: orange;
+a:hover {
+    color: orange;
 }
 
-.name{
-	color: orange;
+.name {
+    color: orange;
 }
-
-
 
 .wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center; /* 横方向中央揃え */
+    align-items: center;
 }
 
-
-#next-prev-button {
-    margin-bottom: 15px;
-}
-
+/* カレンダー関連 */
 #header-area {
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 15px; /* ボタンと文字の間隔 */
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-#header {
+#header-area h1 {
     margin: 0;
     font-size: 24px;
 }
 
-#calendar {
-    margin-top: 20px;
+#header-area button {
+    padding: 5px 10px;
+    font-size: 18px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
+#header-area button:hover {
+    background-color: #f0f0f0;
+}
+
+#calendar {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 500px;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#calendar table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#calendar th {
+    background-color: orange;
+    color: white;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+#calendar td {
+    width: 14.2%;
+    height: 80px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+    position: relative;
+    cursor: pointer;
+}
+
+#calendar td.disabled {
+    background-color: #f0f0f0;
+    color: #bbb;
+}
+
+#calendar td.today {
+    background-color: #ffe4b2;
+    border: 2px solid orange;
+    font-weight: bold;
+}
+
+#calendar td a {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 12px;
+    text-decoration: none;
+    color: #007BFF;
+}
+
+#calendar td a:hover {
+    text-decoration: underline;
+}
+
+/* ワンちゃんカード横並び */
+#todays-dog-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* 犬カードデザイン */
 .dog-card {
-  border: 2px solid #ffcc80;
-  border-radius: 12px;
-  padding: 15px;
-  margin: 15px;
-  background-color: #fffaf0;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  max-width: 250px;
+    border: 2px solid #ffcc80;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 15px;
+    background-color: #fffaf0;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    max-width: 250px;
 }
 
 .dog-card img {
-  border-radius: 8px;
+    border-radius: 8px;
 }
 
 .dogname {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
 }
 
 .dog-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    align-items: center;
 }
 
 .dog-buttons a {
-  display: inline-block;
-  padding: 8px 16px;
-  background-color: orange;
-  color: white;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 14px;
-  text-align: center;
-  width: 120px;
-  transition: background-color 0.3s;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: orange;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+    width: 120px;
+    transition: background-color 0.3s;
 }
 
 .dog-buttons a:hover {
-  background-color: #e67600;
+    background-color: #e67600;
 }

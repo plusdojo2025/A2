@@ -29,6 +29,7 @@
     	<!-- A2の後に何サーブレットを指定するか -->
         <input type="hidden" name="id" value="${e.wankoDogId}">
 		名前<input type="text" name="dogName" value="${e.dogName}"><br>
+		ワンコID<input type="text" name="wankoDogId" value="${e.wankoDogId}"><br>
 		性別	<input type="radio" name="gender" value="1"<c:if test="${e.gender == 'true'}">checked</c:if>>オス
 			<input type="radio" name="gender" value="0"<c:if test="${e.gender == 'false'}">checked</c:if>>メス<br>
 		ワクチン歴<input type="text" name="wakuchin" value="${e.wakuchin }"><br>
@@ -36,17 +37,14 @@
 			<input type="radio" name="kyosei" value="0"<c:if test="${e.kyosei == 'false'}">checked</c:if>>なし<br><br>
 		犬種<input type="text" name="dogBreed" value="${e.dogBreed}"><br>
 		誕生日<input type="date" name="dogBirth" value="${e.dogBirth}"><br>
-		<table class="inputFields">
-        <tr class="inputField">
-            <th>
-                <input type="text" name="content[]" placeholder="備考"></th>
-            <td>
-                <!--input要素を削除するボタン-->
-                <button class="deleteFieldBtn">入力欄を削除</button></td>
-        </tr>
-    </table>
-    <!--input要素を追加するボタン-->
-    <button class="addFieldBtn">入力欄を追加</button>
+		
+       	備考1<input type="text" name="remarks1" placeholder="備考" value="${e.remarks1 }"><br>
+       	備考2<input type="text" name="remarks2" placeholder="備考" value="${e.remarks2 }"><br>
+       	備考3<input type="text" name="remarks3" placeholder="備考" value="${e.remarks3 }"><br>
+       	備考4<input type="text" name="remarks4" placeholder="備考" value="${e.remarks4 }"><br>
+       	備考5<input type="text" name="remarks5" placeholder="備考" value="${e.remarks5 }"><br>
+    
+	
   
   
 		<input type="submit" name="butt" value="更新">

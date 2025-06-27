@@ -32,7 +32,7 @@
 		<input type="hidden" name="oldPoopPhoto" value="${e.photo}">
 		
 			<ul>
-				<li>時間<input type="time" name="nowTime" value="${e.nowTime}"></li>
+				<li>時間<input type="time" name="nowTime" value="${e.time}"></li>
 				<li>日付<input type="date" name="date" value="${e.date}"></li>				
 				<li>写真追加<input type="file" name="photo" value="${e.photo}">
 				<img src="${e.photo}" width="300"  alt="${e.dogName}のうんち写真"><br></li>

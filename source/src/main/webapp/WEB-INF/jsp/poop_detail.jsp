@@ -26,8 +26,9 @@
 	<!-- 後でDBとひもづけてデータを取ってこれるようにする -->
 	
 	
-	<c:forEach var="e" items="${pDogDet}" >
+	
 	<form class="poopdetailform" method="POST" action="<c:url value='/PoopServlet' />" enctype="multipart/form-data">
+	<c:forEach var="e" items="${pDogDet}" >
 		<div>
 		<input type="hidden" name="oldPoopPhoto" value="${e.photo}">
 		
@@ -99,14 +100,17 @@
 				<input type="radio" name="abnormal" value="false"<c:if test="${e.abnormal == 'false'}">checked</c:if>>なし<br>
 		</label>
 		</div>
+		<div>
+			<ul>
 				<li>メモ<input type="text" name="memo" value="${e.memo}"></li>
 			</ul>
 		</div>
 		 <input type="hidden" name="poopId" value="${e.poopId}">
 		<input type="submit" name="pbutt" value="更新"> <input type="submit" name="pbutt" value="削除">
 	
-	</form>
+	
 	</c:forEach>
+	</form>
 	<p>${msg}</p>
 	
 	<!--  フッターここから --

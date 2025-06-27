@@ -29,8 +29,10 @@
 	<div class="left-section">
 		時間<input type="time" name="nowTime"><br>
 		日付<input type="date" name="date"><br>
+		<label>
 		写真追加<input type="file" name="photo" accept="image/*" onchange="previewImage(this);"><br>
 				<canvas id="preview" style="max-width:200px;"></canvas><br>
+		</label>
 		</div>
 	<div class="right-section">
 		わんこID<input type="text" name="PoopDogId" value="${wankoDogId}"><br>
@@ -99,9 +101,32 @@
 </footer>
 <!--  フッターここまで -->
 <!-- JavaScript（ここから） -->
-	<script>
-	
-	</script>
+<script>
+
+function previewImage(input) {
+    const file = input.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+            const canvas = document.getElementById('preview');
+            const ctx = canvas.getContext('2d');
+            
+            // キャンバスのサイズを画像に合わせる（または固定サイズ）
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0);
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+</script>
 <!-- JavaScript（ここまで） -->
 </body>
 </html>

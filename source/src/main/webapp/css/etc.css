@@ -16,3 +16,35 @@
 	.page_count {
 		text-align: center;
 	}
+	  body {
+    font-family: sans-serif;
+    padding: 20px;
+    background: #f9f9f9;
+    color: #333;
+  }
+  form {
+    background: white;
+    padding: 15px;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  label, ul li {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  input[type="text"], input[type="date"], input[type="number"], select {
+    width: 100%;
+    padding: 6px;
+    box-sizing: border-box;
+    margin-top: 4px;
+  }
+  input[type="radio"] {
+    margin-left: 10px;
+  }
+  input[type="submit"] {
+    padding: 8px 14px;
+    margin-right: 10px;
+    cursor: pointer;
+  }

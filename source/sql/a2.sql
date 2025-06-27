@@ -159,7 +159,7 @@ INSERT INTO WANKO(
 		wakuchin,wankoNameId,dogPhoto,kyosei,dogRegist,
 		remarks1,remarks2,remarks3,remarks4,remarks5,injection,rabies
 )		VALUES(
-		'さん','コーギー','2010-10-10',TRUE,'元気いっぱい走り回っている',
+		'マイナス','コーギー','2010-10-10',TRUE,'元気いっぱい走り回っている',
 		'upload/wakuchin/ワクチン歴.png','sample0000.co.jp',
 		'upload/dogphoto/sampleわんこ.jpg',TRUE,'2015-10-10','コーギーだよ',
 		'','','','','upload/injection/sample.png',''
@@ -241,7 +241,7 @@ INSERT INTO POOP(
 INSERT INTO CALENDAR(
 		calendarDate,title,time,calendarMemo,calendarDogId
 )		VALUES(
-		'2025-06-16','さんくん預かり','14:00','トレーニング内容(~)',1
+		'2025-06-16','マイナスくん預かり','14:00','トレーニング内容(~)',1
 );
 INSERT INTO CALENDAR(
 		calendarDate,title,time,calendarMemo,calendarDogId
@@ -262,7 +262,7 @@ INSERT INTO CALENDAR(
 INSERT INTO CALENDAR(
 		calendarDate,title,time,calendarMemo,calendarDogId
 )		VALUES(
-		'2025-06-30','さんくん預かり','14:00','トレーニング内容(~)',1
+		'2025-06-30','マイナスくん預かり','14:00','トレーニング内容(~)',1
 );
 INSERT INTO CALENDAR(
 		calendarDate,title,time,calendarMemo,calendarDogId
@@ -292,7 +292,7 @@ INSERT INTO CALENDAR(
 INSERT INTO CALENDAR(
 		calendarDate,title,time,calendarMemo,calendarDogId
 )		VALUES(
-		'2025-06-25','さんくん預かり','14:00','トレーニング内容(~)',1
+		'2025-06-25','マイナスくん預かり','14:00','トレーニング内容(~)',1
 );
 INSERT INTO CALENDAR(
 		calendarDate,title,time,calendarMemo,calendarDogId
@@ -312,7 +312,7 @@ INSERT INTO CALENDAR(
 INSERT INTO CALENDAR(
 		calendarDate,title,time,calendarMemo,calendarDogId
 )		VALUES(
-		'2025-06-26','さんくん預かり','14:00','トレーニング内容(~)',1
+		'2025-06-26','マイナスくん預かり','14:00','トレーニング内容(~)',1
 );
 INSERT INTO CALENDAR(
 		calendarDate,title,time,calendarMemo,calendarDogId

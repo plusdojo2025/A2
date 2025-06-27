@@ -19,10 +19,12 @@
 	    <h1 id="header"></h1>
 
 <!-- 	    ボタンクリックで月移動-->
-	    <div id="next-prev-button">
-	        <button id="prev" onclick="prev()">‹</button>
-	        <button id="next" onclick="next()">›</button>
-	    </div> 
+	   <div id="header-area">
+        <button id="prev" onclick="prev()">‹</button>
+        <h2 id="header">2025年6月</h2>
+        <button id="next" onclick="next()">›</button>
+    </div>
+
 
 	    <!-- カレンダー -->
 	    <div id="calendar"></div>

@@ -6,6 +6,104 @@
 <head>
 <meta charset="UTF-8">
 <title>新規登録</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+    text-align: center; /* 中央寄せ */
+  }
+
+  h1 {
+    margin-bottom: 30px;
+    color:orange;
+  }
+
+  form {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  table.inputFields {
+    width: 100%;
+  }
+
+  td {
+    padding: 10px 0;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="file"],
+  select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type="radio"] {
+    margin-right: 5px;
+  }
+
+  .bikou-input {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 5px;
+  }
+
+  .bikou-input input[type="text"] {
+    flex: 1;
+  }
+
+  button {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    background-color: #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #ccc;
+  }
+
+  #register {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+  }
+
+  #error_message {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  canvas#preview {
+    display: block;
+    margin: 10px auto;
+    max-width: 200px;
+  }
+</style>
 </head>
 <body>
 <%@ include file="header.jsp" %>

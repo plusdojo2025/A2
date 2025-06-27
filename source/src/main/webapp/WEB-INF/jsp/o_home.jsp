@@ -23,7 +23,7 @@
    <div class="wrapper">
 	   <div id="header-area">
         <button id="prev" onclick="prev()">‹</button>
-        <h2 id="header">2025年6月</h2>
+        <h1 id="header"></h1>
         <button id="next" onclick="next()">›</button>
     </div>
 

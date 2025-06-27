@@ -16,12 +16,12 @@
 <h1>カレンダー</h1>
    <div class="wrapper">
 	    <!-- xxxx年xx月を表示 -->
-	    <h1 id="header"></h1>
+	    
 
 <!-- 	    ボタンクリックで月移動-->
 	   <div id="header-area">
         <button id="prev" onclick="prev()">‹</button>
-        <h2 id="header">2025年6月</h2>
+        <h1 id="header"></h1>
         <button id="next" onclick="next()">›</button>
     </div>
 

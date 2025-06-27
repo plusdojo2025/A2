@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,10 @@ import dto.AllDto;
  * Servlet implementation class ReportServlet
  */
 @WebServlet("/ReportServlet")
+@MultipartConfig(
+		  fileSizeThreshold = 1024 * 1024 * 10,   // 10MB
+		    maxFileSize = 1024 * 1024 * 50,         // 50MB
+		    maxRequestSize = 1024 * 1024 * 100) // 10MB
 public class ReportServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       

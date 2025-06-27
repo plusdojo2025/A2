@@ -99,7 +99,8 @@ public class ReportDAO {
 						"root", "password");
 
 				// SQL文を準備する
-				String sql = "INSERT INTO Report VALUES (0, ?, ?, ?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO REPORT (food, walk, reportState, training, reportMemo, reportDate, reportDogId) "
+						+ "VALUES ( ?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 				
 				// SQL文を完成させる

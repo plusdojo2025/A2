@@ -90,8 +90,15 @@
 	    </label>
 	    </div>
 	    
-				異常<input type="radio" name="abnormal" value="1"<c:if test="${e.abnormal == '1'}">checked</c:if>>あり
-					<input type="radio" name="abnormal" value="0"<c:if test="${e.abnormal == '2'}">checked</c:if>>なし<br>
+	    <div>
+	    <p>異常</p>
+	    <label>	    
+				<input type="radio" name="abnormal" value="true"<c:if test="${e.abnormal == 'true'}">checked</c:if>>あり
+		</label>
+		<label>
+				<input type="radio" name="abnormal" value="false"<c:if test="${e.abnormal == 'false'}">checked</c:if>>なし<br>
+		</label>
+		</div>
 				<li>メモ<input type="text" name="memo" value="${e.memo}"></li>
 			</ul>
 		</div>

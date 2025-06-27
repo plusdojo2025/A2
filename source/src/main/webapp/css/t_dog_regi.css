@@ -1,5 +1,8 @@
 @charset "UTF-8";
-
+h1 {
+	color:orange;
+		font-size: 80px;
+}
 .back_button {
 		width: 40px;
 		float: right;
@@ -11,6 +14,7 @@
 		float: right;
 		margin-top:-90px;
 	}	
+		
 		
 .page-title {
 		color:#FFA500;

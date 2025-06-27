@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h1 class="page-title">わんこ登録</h1>
+<h1>わんこ登録</h1>
 <form method="post" action="<c:url value='/WankoServlet'/>">
 	
 	写真<input type="file" name="dogPhoto" accept="image/*" onchange="previewImage(this);"><br>

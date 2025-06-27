@@ -9,17 +9,15 @@
 <link rel="stylesheet"  href="<c:url value='/css/t_dog_detail.css' />">
 </head>
 <body>
-	<h1>
-		<div style="display: flex; justify-content: space-between;">
-  			<div style="text-align: left;">ワンコ詳細　（名前）さん</div>
-        	<div style="text-align: right;">
-        		<a href="javascript:history.back();">
-				<span>ひとつ前に戻る</span>							<!-- cssでmargin0にする？ -->
-				<img src="<c:url value='/images/back.png' />" alt="戻る" class="back_button">		<!-- 戻る画像ボタン -->
-		    	</a>
-        	</div>
-		</div>
-	</h1>
+	<h1>ワンコ詳細　（名前）さん</h1>
+        	<div>
+				<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
+				<a href="<c:url value='javascript:history.back();'/>" >
+ 					<img src="<c:url value='/images/back.png' />" alt="戻る" class="back_button">
+				</a>	
+			</div>
+		
+	
 <form>
 写真追加 <input type="text"><br>
  <p class="dog_deta">

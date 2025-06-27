@@ -26,7 +26,6 @@
 	<!-- 後でDBとひもづけてデータを取ってこれるようにする -->
 	
 	
-	
 	<form class="poopdetailform" method="POST" action="<c:url value='/PoopServlet' />" enctype="multipart/form-data">
 	<c:forEach var="e" items="${pDogDet}" >
 		<div>
@@ -44,7 +43,9 @@
 			<ul>
 				<li>わんこID<input type="text" name="poopDogId" value="${e.poopDogId}"></li>
 				<li>色を選んでください：</li>
-	  	<div class="color-option">
+			</ul>
+		</div>
+	  	<div class="color-option" style="text-align: center;">
 		<label>
 	      <input type="radio" name="color" value="1" <c:if test="${e.color == 1}">checked</c:if> >
 	      <span class="color-label color-black"></span>

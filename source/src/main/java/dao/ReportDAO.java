@@ -438,7 +438,7 @@ public AllDto tReportDetail(String id){
 				+ "characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B9&rewriteBatchedStatements=true",
 				"root", "password");
 		// SQL文を準備する
-		String sql = "SELECT reportId, dogName, food, reportDate, walk, reportState, training, reportMemo "
+		String sql = "SELECT reportId, dogName, food, reportDate, walk, reportState, training, reportMemo, reportDogId "
 				+ "FROM REPORT JOIN WANKO "
 				+ "ON REPORT.reportDogId = WANKO.wankoDogId "
 				+ "WHERE REPORT.reportId=? ";
@@ -464,6 +464,7 @@ public AllDto tReportDetail(String id){
 			ord.setReportState(rs.getBoolean("reportState"));
 			ord.setTraining(rs.getString("training"));
 			ord.setReportMemo(rs.getString("reportMemo"));
+			ord.setReportDogId(rs.getInt("reportDogId"));
 			
 			System.out.println("aa" + rp);
 			

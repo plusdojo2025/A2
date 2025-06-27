@@ -90,6 +90,7 @@
 	    </label>
 	    </div>
 	    
+			
 	    <div>
 	    <p>異常</p>
 	    <label>	    

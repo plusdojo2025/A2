@@ -5,16 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>わんこ登録</title>
-<link rel="stylesheet"  href="<c:url value='/css/t_dog_regi.css' />">
+<link rel="stylesheet"  href="<c:url value='/css/t_dog_regi.css' />" >
 </head>
 <body>
 
 <h1>わんこ登録</h1>
-<form method="post" action="<c:url value='/WankoServlet'/>">
+<form method="post" action="<c:url value='/WankoServlet'/>" enctype="multipart/form-data">
 	
 	写真<input type="file" name="dogPhoto" accept="image/*" onchange="previewImage(this);"><br>
+				<canvas id="preview" style="max-width:200px;"></canvas><br>
 	わんこの名前<input type="text" name="dogName"><br>
-	飼い主ID<input type="text" name="name"><br>
+	飼い主ID<input type="text" name="userNameId"><br>
 	ワクチン歴<input type="file" name="wakuchin"><br>
 	去勢歴<input type="radio" name="kyosei" value="true">あり
 				<input type="radio" name="kyosei" value="false">なし<br>

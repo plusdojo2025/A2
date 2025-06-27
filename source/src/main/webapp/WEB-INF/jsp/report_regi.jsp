@@ -12,10 +12,7 @@
 <%@ include file="header.jsp" %>
 	<h1>報告登録</h1>
 	<!-- ワンコ選択 -->
-	<select name="dogName">
-		<!-- ワンコ名をプルダウンで選択できるようにする -->
-		<option value="${dogName}" selected>ワンコ選択</option>
-	</select>
+	
 	<div>
 		<span class="back_text">前に戻る</span>	<br>												<!-- cssでmargin0にする？ -->
 		<a href="<c:url value="javascript:history.back();"/>" >
@@ -27,14 +24,14 @@
 <form id="report_form" action="<c:url value='/ReportServlet'/>" method="post" onsubmit = "return checkForm()">
 	<input type="hidden" name="action" value="insert">
 	<input type="hidden" name="reportId" value=0>
-	<input type="hidden" name="reportDogId" value="${reportDog.id}">
+	<input type="text" name="reportDogId" value="${reportDog.id}"><br>
 
 	<label>・ ごはん<br>
 		<input type="radio" name="food" value="true">食べた
 		<input type="radio" name="food" value="false">食べてない
 	</label><br>
 	<label>・ 日付
-		<input type="datetime-local" name="reportDate">
+		<input type="date" name="reportDate">
 	</label><br>
 	<label>・ 散歩
 		<input type="number" name="walk">分

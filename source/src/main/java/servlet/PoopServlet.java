@@ -24,9 +24,9 @@ import dto.AllDto;
  * Servlet implementation class RegistServlet
  */
 @MultipartConfig(
-	    fileSizeThreshold = 1024 * 1024,
-	    maxFileSize = 1024 * 1024 * 5, // 5MB
-	    maxRequestSize = 1024 * 1024 * 10) // 10MB
+		  fileSizeThreshold = 1024 * 1024 * 10,   // 10MB
+		    maxFileSize = 1024 * 1024 * 50,         // 50MB
+		    maxRequestSize = 1024 * 1024 * 100) // 10MB
 @WebServlet("/PoopServlet")
 public class PoopServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -212,7 +212,8 @@ public class PoopServlet extends HttpServlet {
 			int poopDogId = Integer.parseInt(request.getParameter("poopDogId"));
 			String color = request.getParameter("color");
 			String hardness = request.getParameter("hardness");
-			String abnormal = request.getParameter("abnormal");
+			String abnormalParam = request.getParameter("abnormal");
+			boolean abnormal = "true".equalsIgnoreCase(abnormalParam);
 			String memo =request.getParameter("memo");
 			String poopId = request.getParameter("poopId");
 			

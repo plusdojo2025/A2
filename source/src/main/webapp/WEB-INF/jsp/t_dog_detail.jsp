@@ -6,6 +6,94 @@
 <head>
 <meta charset="UTF-8">
 <title>ワンコ詳細</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+  }
+
+  h1, h2 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .back_text {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+  }
+
+  .back_button {
+    width: 30px;
+    height: auto;
+    cursor: pointer;
+  }
+
+  form {
+    background: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+
+  input[type="text"],
+  input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type="submit"] {
+    padding: 8px 15px;
+    margin-right: 10px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+  table.inputFields {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .inputField th,
+  .inputField td {
+    padding: 5px;
+  }
+
+  button.addFieldBtn,
+  button.deleteFieldBtn {
+    background-color: #ccc;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  button.addFieldBtn:hover,
+  button.deleteFieldBtn:hover {
+    background-color: #bbb;
+  }
+</style>
+<!-- ▲ CSSここまで ▲ -->
+
+</head>
 <link rel="stylesheet"  href="<c:url value='/css/t_dog_detail.css' />">
 </head>
 <body>

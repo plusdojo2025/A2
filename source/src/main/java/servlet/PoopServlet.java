@@ -212,7 +212,8 @@ public class PoopServlet extends HttpServlet {
 			int poopDogId = Integer.parseInt(request.getParameter("poopDogId"));
 			String color = request.getParameter("color");
 			String hardness = request.getParameter("hardness");
-			String abnormal = request.getParameter("abnormal");
+			String abnormalParam = request.getParameter("abnormal");
+			boolean abnormal = "true".equalsIgnoreCase(abnormalParam);
 			String memo =request.getParameter("memo");
 			String poopId = request.getParameter("poopId");
 			

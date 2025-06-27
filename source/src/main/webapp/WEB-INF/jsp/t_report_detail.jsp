@@ -26,11 +26,7 @@
 	
 	<form method="POST" action="<c:url value='/ReportServlet' />">
 	<input type="hidden" name="action" id="action" value="update">
-			<select name="dogName">
-				<!-- ワンコ名をプルダウンで選択できるようにする -->
-				<option value="${ord.dogName}" selected>ワンコ選択</option>
-			</select>
-		<ul>
+			<input type="text" name="reportDogId" value="${ord.reportDogId}"><br>
 			
 			<li>ごはん<input type="radio" name="food" value="1"<c:if test="${ord.food == 'true'}">checked</c:if>>食べた
 					<input type="radio" name="food" value="1"<c:if test="${ord.food == 'false'}">checked</c:if>>食べてない

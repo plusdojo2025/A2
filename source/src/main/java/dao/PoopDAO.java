@@ -263,7 +263,7 @@ import dto.AllDto;
 		return pDogDet;
 	}
 	// 引数cardで指定されたレコードを更新し、成功したらtrueを返す
-			public boolean pupdate(String nowTime, String date, int poopDogId, String color, String hardness, String abnormal, String memo, String PoopId, String photo) {
+			public boolean pupdate(String nowTime, String date, int poopDogId, String color, String hardness, boolean abnormal, String memo, String PoopId, String photo) {
 				Connection conn = null;
 				boolean result = false;
 
@@ -287,7 +287,7 @@ import dto.AllDto;
 					pStmt.setInt(3, poopDogId);
 					pStmt.setString(4, color);
 					pStmt.setString(5, hardness);
-					pStmt.setString(6, abnormal);
+					pStmt.setBoolean(6, abnormal);
 					pStmt.setString(7, memo);					
 					pStmt.setString(8, photo);
 					pStmt.setString(9, PoopId);

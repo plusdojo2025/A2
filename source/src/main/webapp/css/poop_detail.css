@@ -6,6 +6,7 @@
  
  .poopdetailform {
  	color: #FFA500;     /* 文字色指定 */
+ 	text-align: center;
  }
  .color-option {
 	    display: flex;
@@ -54,3 +55,9 @@
 	.page_count {
 		text-align: center;
 	}
+	
+ul {
+  list-style: none;
+  padding: 0; /* インデントも消したい場合は追加 */
+}
+	

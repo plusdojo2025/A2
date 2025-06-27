@@ -13,36 +13,7 @@ a:hover{
 	color: orange;
 }
 
-.dogphoto {
-  /* 写真はそのままinline-blockかflexでOK */
-  display: inline-block;
-  margin-right: 15px;
-  vertical-align: middle;
-}
 
-.doginfo {
-  display: flex;
-  flex-direction: column; /* 縦並びに */
-  justify-content: center; /* 縦方向中央揃え */
-}
-
-.dogname {
-  font-size: 50px;
-  margin: 0 0 8px 0; /* 下に少しスペース */
-}
-
-.name {
-  font-size: 30px;
-  margin: 0;
-}
-
-.homedog{	
-    display: flex;
-    justify-content: center; 
-    align-items: center; /* 縦位置を中央に揃える */
-    gap: 15px;           /* 要素間の間隔 */
-    color: orange;
-}
 
 .wrapper {
     display: flex;
@@ -71,3 +42,52 @@ a:hover{
     margin-top: 20px;
 }
 
+.dog-card {
+  border: 2px solid #ffcc80;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 15px;
+  background-color: #fffaf0;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 250px;
+}
+
+.dog-card img {
+  border-radius: 8px;
+}
+
+.dogname {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+.dog-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  align-items: center;
+}
+
+.dog-buttons a {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: orange;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  text-align: center;
+  width: 120px;
+  transition: background-color 0.3s;
+}
+
+.dog-buttons a:hover {
+  background-color: #e67600;
+}

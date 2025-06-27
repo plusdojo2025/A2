@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>トレーナー用ホーム画面</title>
-<link rel="stylesheet"  href="<c:url value='/css/t_home.css' />">
+<link rel="stylesheet" href="<c:url value='/css/t-home.css' />">
 </head>
 
 <body>
@@ -31,16 +31,18 @@
 	</div>
 <h1>今日のわんこ</h1>
 <c:forEach var="e" items="${todaysDog}">
-	<div>
-		<ul>
-			<li>${e.dogName}</li>
-			<li><img src="${e.dogPhoto}" width="170" alt="${e.dogName}の写真"></li>
-			<li><a href="<c:url value='PoopServlet?wankoDogId=${e.wankoDogId}&action=tpoopregi'/> ">うんち記録</a></li>
-			<li><a href="<c:url value='ReportServlet?wankoDogId=${e.wankoDogId}&dogName=${e.dogName}&action=trepoprtregi'/> ">報告</a>></li>
-			
-		</ul>
-	</div>
+<div class="dog-card">
+  <img src="${e.dogPhoto}" width="170" alt="${e.dogName}の写真">
+  
+  <div class="dogname">${e.dogName}</div>
+  
+  <div class="dog-buttons">
+    <a href="<c:url value='PoopServlet?wankoDogId=${e.wankoDogId}&action=tpoopregi'/>">うんち記録</a>
+    <a href="<c:url value='ReportServlet?wankoDogId=${e.wankoDogId}&dogName=${e.dogName}&action=trepoprtregi'/>">報告</a>
+  </div>
+</div>
 </c:forEach>
+
 
   
 
